@@ -1,5 +1,7 @@
 #pragma once
 
+//yaya
+
 namespace A2ProjetBloc2 {
 
 	using namespace System;
