@@ -10,12 +10,12 @@ namespace A2ProjetBloc2 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de MyForm
+	/// Description résumée de Menu
 	/// </summary>
-	public ref class MyForm : public System::Windows::Forms::Form
+	public ref class Menu : public System::Windows::Forms::Form
 	{
 	public:
-		MyForm(void)
+		Menu(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~MyForm()
+		~Menu()
 		{
 			if (components)
 			{
@@ -113,8 +113,8 @@ namespace A2ProjetBloc2 {
 			this->dgvCatalog->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvCatalog->Size = System::Drawing::Size(634, 351);
 			this->dgvCatalog->TabIndex = 3;
-			this->dgvCatalog->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dgvCatalog_CellContentClick);
-			this->dgvCatalog->CellMouseClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &MyForm::dgvCatalog_CellMouseClick);
+			this->dgvCatalog->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Menu::dgvCatalog_CellContentClick);
+			this->dgvCatalog->CellMouseClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &Menu::dgvCatalog_CellMouseClick);
 			// 
 			// MyForm
 			// 
