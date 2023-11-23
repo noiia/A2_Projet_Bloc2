@@ -34,6 +34,15 @@ namespace A2ProjetBloc2 {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Label^ Title;
+	protected:
+
+	private: System::Windows::Forms::Button^ BtnEquipeList;
+	private: System::Windows::Forms::Button^ BtnBuyerList;
+	private: System::Windows::Forms::DataGridView^ dgvCatalog;
+
+
+	protected:
 
 	private:
 		/// <summary>
@@ -48,12 +57,87 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"Turbostock";
-			this->Padding = System::Windows::Forms::Padding(0);
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			this->Title = (gcnew System::Windows::Forms::Label());
+			this->BtnEquipeList = (gcnew System::Windows::Forms::Button());
+			this->BtnBuyerList = (gcnew System::Windows::Forms::Button());
+			this->dgvCatalog = (gcnew System::Windows::Forms::DataGridView());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCatalog))->BeginInit();
+			this->SuspendLayout();
+			// 
+			// Title
+			// 
+			this->Title->AutoSize = true;
+			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Title->Location = System::Drawing::Point(362, 23);
+			this->Title->Name = L"Title";
+			this->Title->Size = System::Drawing::Size(162, 32);
+			this->Title->TabIndex = 0;
+			this->Title->Text = L"TurboStock";
+			// 
+			// BtnEquipeList
+			// 
+			this->BtnEquipeList->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->BtnEquipeList->Location = System::Drawing::Point(26, 176);
+			this->BtnEquipeList->Name = L"BtnEquipeList";
+			this->BtnEquipeList->Size = System::Drawing::Size(184, 61);
+			this->BtnEquipeList->TabIndex = 1;
+			this->BtnEquipeList->Text = L"Liste des employés";
+			this->BtnEquipeList->UseVisualStyleBackColor = true;
+			// 
+			// BtnBuyerList
+			// 
+			this->BtnBuyerList->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->BtnBuyerList->Location = System::Drawing::Point(26, 257);
+			this->BtnBuyerList->Name = L"BtnBuyerList";
+			this->BtnBuyerList->Size = System::Drawing::Size(184, 61);
+			this->BtnBuyerList->TabIndex = 2;
+			this->BtnBuyerList->Text = L"Liste des acheteurs";
+			this->BtnBuyerList->UseVisualStyleBackColor = true;
+			// 
+			// dgvCatalog
+			// 
+			this->dgvCatalog->AllowUserToAddRows = false;
+			this->dgvCatalog->AllowUserToDeleteRows = false;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->dgvCatalog->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this->dgvCatalog->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dgvCatalog->Location = System::Drawing::Point(242, 81);
+			this->dgvCatalog->MultiSelect = false;
+			this->dgvCatalog->Name = L"dgvCatalog";
+			this->dgvCatalog->ReadOnly = true;
+			this->dgvCatalog->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			this->dgvCatalog->Size = System::Drawing::Size(634, 351);
+			this->dgvCatalog->TabIndex = 3;
+			this->dgvCatalog->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dgvCatalog_CellContentClick);
+			this->dgvCatalog->CellMouseClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &MyForm::dgvCatalog_CellMouseClick);
+			// 
+			// MyForm
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(917, 468);
+			this->Controls->Add(this->dgvCatalog);
+			this->Controls->Add(this->BtnBuyerList);
+			this->Controls->Add(this->BtnEquipeList);
+			this->Controls->Add(this->Title);
+			this->Name = L"MyForm";
+			this->Text = L"Turbostock";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCatalog))->EndInit();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
-#pragma endregion
+	private: System::Void dgvCatalog_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		}
+	private: System::Void dgvCatalog_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+		DataGridViewRow^ dgvr = this->dgvCatalog->Rows[e->RowIndex];
+		DataGridViewTextBoxCell^ cell = (DataGridViewTextBoxCell^)dgvr->Cells[0];
+		System::Diagnostics::Debug::WriteLine("Cliqué sur " + cell->Value);
+		}
 	};
 }

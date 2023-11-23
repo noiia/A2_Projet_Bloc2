@@ -113,10 +113,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BDD.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BDD.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
@@ -131,6 +133,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
