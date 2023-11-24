@@ -1,5 +1,7 @@
 #pragma once
-// edwin
+#include <windows.h>
+#include "BDD.h"
+
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -14,13 +16,51 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class Menu : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		Menu(void)
+		Menu(BDD^ mabdd)
 		{
+			this->mabdd = mabdd;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
+			DataGridViewTextBoxColumn^ dgvtbc = gcnew DataGridViewTextBoxColumn();
+			dgvtbc->Name = "ID";
+			this->dgvCatalog->Columns->Add(dgvtbc);
+			DataGridViewTextBoxColumn^ dgvtbc2 = gcnew DataGridViewTextBoxColumn();
+			dgvtbc2->Name = "Nom";
+			this->dgvCatalog->Columns->Add(dgvtbc2);
+			DataGridViewTextBoxColumn^ dgvtbc3 = gcnew DataGridViewTextBoxColumn();
+			dgvtbc3->Name = "Adresse mail";
+			this->dgvCatalog->Columns->Add(dgvtbc3);
+
+			DataSet^ ds = mabdd->executeQuery("SELECT * FROM utilisateur");
+
+			for each (DataRow ^ row in ds->Tables[0]->Rows)
+			{
+
+				int id = (int)row[0];
+				System::Diagnostics::Debug::WriteLine("id " + id);
+				String^ nom = (String^)row[1];
+				System::Diagnostics::Debug::WriteLine("nom " + nom);
+				String^ MailAdress = (String^)row[2];
+				System::Diagnostics::Debug::WriteLine("adresse mail " + MailAdress);
+
+				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+				DataGridViewTextBoxCell^ dgvc = gcnew DataGridViewTextBoxCell();
+				dgvc->Value = Convert::ToString(id);
+				dgvr->Cells->Add(dgvc);
+				DataGridViewTextBoxCell^ dgvc2 = gcnew DataGridViewTextBoxCell();
+				dgvc2->Value = nom;
+				dgvr->Cells->Add(dgvc2);
+				DataGridViewTextBoxCell^ dgvc3 = gcnew DataGridViewTextBoxCell();
+				dgvc3->Value = MailAdress;
+				dgvr->Cells->Add(dgvc3);
+				this->dgvCatalog->Rows->Add(dgvr);
+
+
+			}
 		}
 
 	protected:
