@@ -116,17 +116,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BDD.cpp" />
+    <ClCompile Include="cartReminder.cpp" />
+    <ClCompile Include="fastCatalog.cpp" />
+    <ClCompile Include="fastClientCatalog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="Payment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BDD.h" />
+    <ClInclude Include="cartReminder.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="fastCatalog.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="fastClientCatalog.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Order.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Payment.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -141,11 +157,23 @@
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="cartReminder.resx">
+      <DependentUpon>cartReminder.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fastCatalog.resx">
+      <DependentUpon>fastCatalog.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fastClientCatalog.resx">
+      <DependentUpon>fastClientCatalog.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Order.resx">
       <DependentUpon>Order.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payment.resx">
+      <DependentUpon>Payment.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

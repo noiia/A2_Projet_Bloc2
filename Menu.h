@@ -83,9 +83,10 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::TextBox^ TBReference;
 	private: System::Windows::Forms::TextBox^ TBIdArticle;
+	private: System::Windows::Forms::Label^ LbSearchingZone;
 
 
-	private: System::Windows::Forms::Label^ TxtSearchingZone;
+
 
 
 
@@ -104,7 +105,7 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->BtnEquipeList = (gcnew System::Windows::Forms::Button());
 			this->BtnBuyerList = (gcnew System::Windows::Forms::Button());
@@ -114,7 +115,7 @@ namespace A2ProjetBloc2 {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->TBReference = (gcnew System::Windows::Forms::TextBox());
 			this->TBIdArticle = (gcnew System::Windows::Forms::TextBox());
-			this->TxtSearchingZone = (gcnew System::Windows::Forms::Label());
+			this->LbSearchingZone = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCatalog))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -157,9 +158,9 @@ namespace A2ProjetBloc2 {
 			// 
 			this->dgvCatalog->AllowUserToAddRows = false;
 			this->dgvCatalog->AllowUserToDeleteRows = false;
-			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->dgvCatalog->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+			this->dgvCatalog->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
 			this->dgvCatalog->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvCatalog->Location = System::Drawing::Point(242, 81);
 			this->dgvCatalog->MultiSelect = false;
@@ -224,23 +225,23 @@ namespace A2ProjetBloc2 {
 			this->TBIdArticle->Size = System::Drawing::Size(212, 30);
 			this->TBIdArticle->TabIndex = 8;
 			// 
-			// TxtSearchingZone
+			// LbSearchingZone
 			// 
-			this->TxtSearchingZone->AutoSize = true;
-			this->TxtSearchingZone->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 16.25F, System::Drawing::FontStyle::Bold));
-			this->TxtSearchingZone->Location = System::Drawing::Point(992, 127);
-			this->TxtSearchingZone->Name = L"TxtSearchingZone";
-			this->TxtSearchingZone->Size = System::Drawing::Size(187, 52);
-			this->TxtSearchingZone->TabIndex = 9;
-			this->TxtSearchingZone->Text = L"Rechercher dans\nle stock";
-			this->TxtSearchingZone->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->LbSearchingZone->AutoSize = true;
+			this->LbSearchingZone->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 16.25F, System::Drawing::FontStyle::Bold));
+			this->LbSearchingZone->Location = System::Drawing::Point(992, 127);
+			this->LbSearchingZone->Name = L"LbSearchingZone";
+			this->LbSearchingZone->Size = System::Drawing::Size(187, 52);
+			this->LbSearchingZone->TabIndex = 9;
+			this->LbSearchingZone->Text = L"Rechercher dans\nle stock";
+			this->LbSearchingZone->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// Menu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1226, 615);
-			this->Controls->Add(this->TxtSearchingZone);
+			this->Controls->Add(this->LbSearchingZone);
 			this->Controls->Add(this->TBIdArticle);
 			this->Controls->Add(this->TBReference);
 			this->Controls->Add(this->button1);

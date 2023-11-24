@@ -43,24 +43,38 @@ namespace A2ProjetBloc2 {
 
 
 	private: System::Windows::Forms::TextBox^ TbDelivery;
+	private: System::Windows::Forms::Label^ LbOrder;
+	private: System::Windows::Forms::Label^ LbDeliveryAddress;
+	private: System::Windows::Forms::Label^ LbBillingAddress;
+	private: System::Windows::Forms::Label^ LbPriceTaxesFree;
+	private: System::Windows::Forms::Label^ LbVAT;
 
-	private: System::Windows::Forms::Label^ TxtOrder;
-	private: System::Windows::Forms::Label^ TxtDeliveryAddress;
-	private: System::Windows::Forms::Label^ TxtBillingAddress;
+	private: System::Windows::Forms::Label^ LbPriceWithTaxes;
 
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::Label^ label6;
+
+
+
+
+
+
+
 	private: System::Windows::Forms::DomainUpDown^ DudQuantity;
 	private: System::Windows::Forms::Button^ BtnValidate;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ TxtPriceValue;
-	private: System::Windows::Forms::Label^ TxtVatValue;
-	private: System::Windows::Forms::Label^ TxtAllTaxesIncludedValue;
+	private: System::Windows::Forms::Label^ LbQuantity;
+	private: System::Windows::Forms::Label^ LbPriceValue;
+	private: System::Windows::Forms::Label^ LbVatValue;
+	private: System::Windows::Forms::Label^ LbPriceWithTaxesValue;
+
+
+
+
 	private: System::Windows::Forms::Button^ Btn;
-	private: System::Windows::Forms::Label^ TxtIdUserValue;
-	private: System::Windows::Forms::Label^ TxtNameValue;
-	private: System::Windows::Forms::Label^ TxtSurnameValue;
+	private: System::Windows::Forms::Label^ LbIdUserValue;
+
+	private: System::Windows::Forms::Label^ LbNameValue;
+
+	private: System::Windows::Forms::Label^ LbSurnameValue;
+
 
 	private:
 		/// <summary>
@@ -81,22 +95,22 @@ namespace A2ProjetBloc2 {
 			this->TbOrder = (gcnew System::Windows::Forms::TextBox());
 			this->TbBilling = (gcnew System::Windows::Forms::TextBox());
 			this->TbDelivery = (gcnew System::Windows::Forms::TextBox());
-			this->TxtOrder = (gcnew System::Windows::Forms::Label());
-			this->TxtDeliveryAddress = (gcnew System::Windows::Forms::Label());
-			this->TxtBillingAddress = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->LbOrder = (gcnew System::Windows::Forms::Label());
+			this->LbDeliveryAddress = (gcnew System::Windows::Forms::Label());
+			this->LbBillingAddress = (gcnew System::Windows::Forms::Label());
+			this->LbPriceTaxesFree = (gcnew System::Windows::Forms::Label());
+			this->LbVAT = (gcnew System::Windows::Forms::Label());
+			this->LbPriceWithTaxes = (gcnew System::Windows::Forms::Label());
 			this->DudQuantity = (gcnew System::Windows::Forms::DomainUpDown());
 			this->BtnValidate = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->TxtPriceValue = (gcnew System::Windows::Forms::Label());
-			this->TxtVatValue = (gcnew System::Windows::Forms::Label());
-			this->TxtAllTaxesIncludedValue = (gcnew System::Windows::Forms::Label());
+			this->LbQuantity = (gcnew System::Windows::Forms::Label());
+			this->LbPriceValue = (gcnew System::Windows::Forms::Label());
+			this->LbVatValue = (gcnew System::Windows::Forms::Label());
+			this->LbPriceWithTaxesValue = (gcnew System::Windows::Forms::Label());
 			this->Btn = (gcnew System::Windows::Forms::Button());
-			this->TxtIdUserValue = (gcnew System::Windows::Forms::Label());
-			this->TxtNameValue = (gcnew System::Windows::Forms::Label());
-			this->TxtSurnameValue = (gcnew System::Windows::Forms::Label());
+			this->LbIdUserValue = (gcnew System::Windows::Forms::Label());
+			this->LbNameValue = (gcnew System::Windows::Forms::Label());
+			this->LbSurnameValue = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// Title
@@ -158,71 +172,71 @@ namespace A2ProjetBloc2 {
 			this->TbDelivery->Size = System::Drawing::Size(192, 26);
 			this->TbDelivery->TabIndex = 5;
 			// 
-			// TxtOrder
+			// LbOrder
 			// 
-			this->TxtOrder->AutoSize = true;
-			this->TxtOrder->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbOrder->AutoSize = true;
+			this->LbOrder->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtOrder->Location = System::Drawing::Point(24, 125);
-			this->TxtOrder->Name = L"TxtOrder";
-			this->TxtOrder->Size = System::Drawing::Size(152, 19);
-			this->TxtOrder->TabIndex = 6;
-			this->TxtOrder->Text = L"Date de commande";
+			this->LbOrder->Location = System::Drawing::Point(24, 125);
+			this->LbOrder->Name = L"LbOrder";
+			this->LbOrder->Size = System::Drawing::Size(152, 19);
+			this->LbOrder->TabIndex = 6;
+			this->LbOrder->Text = L"Date de commande";
 			// 
-			// TxtDeliveryAddress
+			// LbDeliveryAddress
 			// 
-			this->TxtDeliveryAddress->AutoSize = true;
-			this->TxtDeliveryAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbDeliveryAddress->AutoSize = true;
+			this->LbDeliveryAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtDeliveryAddress->Location = System::Drawing::Point(24, 276);
-			this->TxtDeliveryAddress->Name = L"TxtDeliveryAddress";
-			this->TxtDeliveryAddress->Size = System::Drawing::Size(160, 19);
-			this->TxtDeliveryAddress->TabIndex = 7;
-			this->TxtDeliveryAddress->Text = L"Adresse de livraison";
+			this->LbDeliveryAddress->Location = System::Drawing::Point(24, 276);
+			this->LbDeliveryAddress->Name = L"LbDeliveryAddress";
+			this->LbDeliveryAddress->Size = System::Drawing::Size(160, 19);
+			this->LbDeliveryAddress->TabIndex = 7;
+			this->LbDeliveryAddress->Text = L"Adresse de livraison";
 			// 
-			// TxtBillingAddress
+			// LbBillingAddress
 			// 
-			this->TxtBillingAddress->AutoSize = true;
-			this->TxtBillingAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbBillingAddress->AutoSize = true;
+			this->LbBillingAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtBillingAddress->Location = System::Drawing::Point(24, 304);
-			this->TxtBillingAddress->Name = L"TxtBillingAddress";
-			this->TxtBillingAddress->Size = System::Drawing::Size(179, 19);
-			this->TxtBillingAddress->TabIndex = 8;
-			this->TxtBillingAddress->Text = L"Adresse de facturation";
+			this->LbBillingAddress->Location = System::Drawing::Point(24, 304);
+			this->LbBillingAddress->Name = L"LbBillingAddress";
+			this->LbBillingAddress->Size = System::Drawing::Size(179, 19);
+			this->LbBillingAddress->TabIndex = 8;
+			this->LbBillingAddress->Text = L"Adresse de facturation";
 			// 
-			// label4
+			// LbPriceTaxesFree
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbPriceTaxesFree->AutoSize = true;
+			this->LbPriceTaxesFree->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(29, 397);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(61, 19);
-			this->label4->TabIndex = 9;
-			this->label4->Text = L"Prix HT";
+			this->LbPriceTaxesFree->Location = System::Drawing::Point(29, 397);
+			this->LbPriceTaxesFree->Name = L"LbPriceTaxesFree";
+			this->LbPriceTaxesFree->Size = System::Drawing::Size(61, 19);
+			this->LbPriceTaxesFree->TabIndex = 9;
+			this->LbPriceTaxesFree->Text = L"Prix HT";
 			// 
-			// label5
+			// LbVAT
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbVAT->AutoSize = true;
+			this->LbVAT->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label5->Location = System::Drawing::Point(29, 433);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(92, 19);
-			this->label5->TabIndex = 10;
-			this->label5->Text = L"Valeur TVA";
+			this->LbVAT->Location = System::Drawing::Point(29, 433);
+			this->LbVAT->Name = L"LbVAT";
+			this->LbVAT->Size = System::Drawing::Size(92, 19);
+			this->LbVAT->TabIndex = 10;
+			this->LbVAT->Text = L"Valeur TVA";
 			// 
-			// label6
+			// LbPriceWithTaxes
 			// 
-			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbPriceWithTaxes->AutoSize = true;
+			this->LbPriceWithTaxes->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label6->Location = System::Drawing::Point(29, 470);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(68, 19);
-			this->label6->TabIndex = 11;
-			this->label6->Text = L"Prix TTC";
+			this->LbPriceWithTaxes->Location = System::Drawing::Point(29, 470);
+			this->LbPriceWithTaxes->Name = L"LbPriceWithTaxes";
+			this->LbPriceWithTaxes->Size = System::Drawing::Size(68, 19);
+			this->LbPriceWithTaxes->TabIndex = 11;
+			this->LbPriceWithTaxes->Text = L"Prix TTC";
 			// 
 			// DudQuantity
 			// 
@@ -244,49 +258,49 @@ namespace A2ProjetBloc2 {
 			this->BtnValidate->Text = L"Valider";
 			this->BtnValidate->UseVisualStyleBackColor = true;
 			// 
-			// label1
+			// LbQuantity
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbQuantity->AutoSize = true;
+			this->LbQuantity->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(24, 349);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(75, 19);
-			this->label1->TabIndex = 14;
-			this->label1->Text = L"Quantité";
+			this->LbQuantity->Location = System::Drawing::Point(24, 349);
+			this->LbQuantity->Name = L"LbQuantity";
+			this->LbQuantity->Size = System::Drawing::Size(75, 19);
+			this->LbQuantity->TabIndex = 14;
+			this->LbQuantity->Text = L"Quantité";
 			// 
-			// TxtPriceValue
+			// LbPriceValue
 			// 
-			this->TxtPriceValue->AutoSize = true;
-			this->TxtPriceValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbPriceValue->AutoSize = true;
+			this->LbPriceValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtPriceValue->Location = System::Drawing::Point(284, 397);
-			this->TxtPriceValue->Name = L"TxtPriceValue";
-			this->TxtPriceValue->Size = System::Drawing::Size(47, 19);
-			this->TxtPriceValue->TabIndex = 15;
-			this->TxtPriceValue->Text = L"P_Ht";
+			this->LbPriceValue->Location = System::Drawing::Point(284, 397);
+			this->LbPriceValue->Name = L"LbPriceValue";
+			this->LbPriceValue->Size = System::Drawing::Size(47, 19);
+			this->LbPriceValue->TabIndex = 15;
+			this->LbPriceValue->Text = L"P_Ht";
 			// 
-			// TxtVatValue
+			// LbVatValue
 			// 
-			this->TxtVatValue->AutoSize = true;
-			this->TxtVatValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbVatValue->AutoSize = true;
+			this->LbVatValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtVatValue->Location = System::Drawing::Point(284, 433);
-			this->TxtVatValue->Name = L"TxtVatValue";
-			this->TxtVatValue->Size = System::Drawing::Size(57, 19);
-			this->TxtVatValue->TabIndex = 16;
-			this->TxtVatValue->Text = L"P_VAT";
+			this->LbVatValue->Location = System::Drawing::Point(284, 433);
+			this->LbVatValue->Name = L"LbVatValue";
+			this->LbVatValue->Size = System::Drawing::Size(57, 19);
+			this->LbVatValue->TabIndex = 16;
+			this->LbVatValue->Text = L"P_VAT";
 			// 
-			// TxtAllTaxesIncludedValue
+			// LbPriceWithTaxesValue
 			// 
-			this->TxtAllTaxesIncludedValue->AutoSize = true;
-			this->TxtAllTaxesIncludedValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbPriceWithTaxesValue->AutoSize = true;
+			this->LbPriceWithTaxesValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtAllTaxesIncludedValue->Location = System::Drawing::Point(284, 470);
-			this->TxtAllTaxesIncludedValue->Name = L"TxtAllTaxesIncludedValue";
-			this->TxtAllTaxesIncludedValue->Size = System::Drawing::Size(57, 19);
-			this->TxtAllTaxesIncludedValue->TabIndex = 17;
-			this->TxtAllTaxesIncludedValue->Text = L"P_TTC";
+			this->LbPriceWithTaxesValue->Location = System::Drawing::Point(284, 470);
+			this->LbPriceWithTaxesValue->Name = L"LbPriceWithTaxesValue";
+			this->LbPriceWithTaxesValue->Size = System::Drawing::Size(57, 19);
+			this->LbPriceWithTaxesValue->TabIndex = 17;
+			this->LbPriceWithTaxesValue->Text = L"P_TTC";
 			// 
 			// Btn
 			// 
@@ -299,60 +313,60 @@ namespace A2ProjetBloc2 {
 			this->Btn->Text = L"Recherche client";
 			this->Btn->UseVisualStyleBackColor = true;
 			// 
-			// TxtIdUserValue
+			// LbIdUserValue
 			// 
-			this->TxtIdUserValue->AutoSize = true;
-			this->TxtIdUserValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbIdUserValue->AutoSize = true;
+			this->LbIdUserValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtIdUserValue->Location = System::Drawing::Point(56, 234);
-			this->TxtIdUserValue->Name = L"TxtIdUserValue";
-			this->TxtIdUserValue->Size = System::Drawing::Size(114, 19);
-			this->TxtIdUserValue->TabIndex = 21;
-			this->TxtIdUserValue->Text = L"ID_Utilisateur";
+			this->LbIdUserValue->Location = System::Drawing::Point(56, 234);
+			this->LbIdUserValue->Name = L"LbIdUserValue";
+			this->LbIdUserValue->Size = System::Drawing::Size(114, 19);
+			this->LbIdUserValue->TabIndex = 21;
+			this->LbIdUserValue->Text = L"ID_Utilisateur";
 			// 
-			// TxtNameValue
+			// LbNameValue
 			// 
-			this->TxtNameValue->AutoSize = true;
-			this->TxtNameValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbNameValue->AutoSize = true;
+			this->LbNameValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtNameValue->Location = System::Drawing::Point(56, 197);
-			this->TxtNameValue->Name = L"TxtNameValue";
-			this->TxtNameValue->Size = System::Drawing::Size(65, 19);
-			this->TxtNameValue->TabIndex = 20;
-			this->TxtNameValue->Text = L"Prénom";
+			this->LbNameValue->Location = System::Drawing::Point(56, 197);
+			this->LbNameValue->Name = L"LbNameValue";
+			this->LbNameValue->Size = System::Drawing::Size(65, 19);
+			this->LbNameValue->TabIndex = 20;
+			this->LbNameValue->Text = L"Prénom";
 			// 
-			// TxtSurnameValue
+			// LbSurnameValue
 			// 
-			this->TxtSurnameValue->AutoSize = true;
-			this->TxtSurnameValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbSurnameValue->AutoSize = true;
+			this->LbSurnameValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TxtSurnameValue->Location = System::Drawing::Point(56, 161);
-			this->TxtSurnameValue->Name = L"TxtSurnameValue";
-			this->TxtSurnameValue->Size = System::Drawing::Size(44, 19);
-			this->TxtSurnameValue->TabIndex = 19;
-			this->TxtSurnameValue->Text = L"Nom";
+			this->LbSurnameValue->Location = System::Drawing::Point(56, 161);
+			this->LbSurnameValue->Name = L"LbSurnameValue";
+			this->LbSurnameValue->Size = System::Drawing::Size(44, 19);
+			this->LbSurnameValue->TabIndex = 19;
+			this->LbSurnameValue->Text = L"Nom";
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(469, 613);
-			this->Controls->Add(this->TxtIdUserValue);
-			this->Controls->Add(this->TxtNameValue);
-			this->Controls->Add(this->TxtSurnameValue);
+			this->Controls->Add(this->LbIdUserValue);
+			this->Controls->Add(this->LbNameValue);
+			this->Controls->Add(this->LbSurnameValue);
 			this->Controls->Add(this->Btn);
-			this->Controls->Add(this->TxtAllTaxesIncludedValue);
-			this->Controls->Add(this->TxtVatValue);
-			this->Controls->Add(this->TxtPriceValue);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->LbPriceWithTaxesValue);
+			this->Controls->Add(this->LbVatValue);
+			this->Controls->Add(this->LbPriceValue);
+			this->Controls->Add(this->LbQuantity);
 			this->Controls->Add(this->BtnValidate);
 			this->Controls->Add(this->DudQuantity);
-			this->Controls->Add(this->label6);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->TxtBillingAddress);
-			this->Controls->Add(this->TxtDeliveryAddress);
-			this->Controls->Add(this->TxtOrder);
+			this->Controls->Add(this->LbPriceWithTaxes);
+			this->Controls->Add(this->LbVAT);
+			this->Controls->Add(this->LbPriceTaxesFree);
+			this->Controls->Add(this->LbBillingAddress);
+			this->Controls->Add(this->LbDeliveryAddress);
+			this->Controls->Add(this->LbOrder);
 			this->Controls->Add(this->TbDelivery);
 			this->Controls->Add(this->TbBilling);
 			this->Controls->Add(this->TbOrder);
@@ -361,10 +375,13 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->Title);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }
