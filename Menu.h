@@ -1,5 +1,4 @@
 #pragma once
-#include <windows.h>
 #include "BDD.h"
 
 namespace A2ProjetBloc2 {
@@ -25,38 +24,37 @@ namespace A2ProjetBloc2 {
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
-			DataGridViewTextBoxColumn^ dgvtbc = gcnew DataGridViewTextBoxColumn();
-			dgvtbc->Name = "ID";
-			this->dgvCatalog->Columns->Add(dgvtbc);
-			DataGridViewTextBoxColumn^ dgvtbc2 = gcnew DataGridViewTextBoxColumn();
-			dgvtbc2->Name = "Nom";
-			this->dgvCatalog->Columns->Add(dgvtbc2);
-			DataGridViewTextBoxColumn^ dgvtbc3 = gcnew DataGridViewTextBoxColumn();
-			dgvtbc3->Name = "Adresse mail";
-			this->dgvCatalog->Columns->Add(dgvtbc3);
+			DataGridViewTextBoxColumn^ dgvtbcReferences = gcnew DataGridViewTextBoxColumn();
+			dgvtbcReferences->Name = "Référence";
+			this->dgvCatalog->Columns->Add(dgvtbcReferences);
+			DataGridViewTextBoxColumn^ dgvtbcQuantity = gcnew DataGridViewTextBoxColumn();
+			dgvtbcQuantity->Name = "Quantité";
+			this->dgvCatalog->Columns->Add(dgvtbcQuantity);
+			DataGridViewTextBoxColumn^ dgvtbcRestock = gcnew DataGridViewTextBoxColumn();
+			dgvtbcRestock->Name = "Date de restock";
+			this->dgvCatalog->Columns->Add(dgvtbcRestock);
 
-			DataSet^ ds = mabdd->executeQuery("SELECT * FROM utilisateur");
+			DataSet^ ds = mabdd->executeQuery("SELECT * FROM Stock");
 
 			for each (DataRow ^ row in ds->Tables[0]->Rows)
 			{
-
-				int id = (int)row[0];
-				System::Diagnostics::Debug::WriteLine("id " + id);
-				String^ nom = (String^)row[1];
-				System::Diagnostics::Debug::WriteLine("nom " + nom);
-				String^ MailAdress = (String^)row[2];
-				System::Diagnostics::Debug::WriteLine("adresse mail " + MailAdress);
+				String^ references = (String^)row[0];
+				System::Diagnostics::Debug::WriteLine("nom " + references);
+				String^ quantity = (String^)row[1];
+				System::Diagnostics::Debug::WriteLine("quantity " + quantity);
+				String^ restock = (String^)row[2];
+				System::Diagnostics::Debug::WriteLine("restock date " + restock);
 
 				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-				DataGridViewTextBoxCell^ dgvc = gcnew DataGridViewTextBoxCell();
-				dgvc->Value = Convert::ToString(id);
-				dgvr->Cells->Add(dgvc);
-				DataGridViewTextBoxCell^ dgvc2 = gcnew DataGridViewTextBoxCell();
-				dgvc2->Value = nom;
-				dgvr->Cells->Add(dgvc2);
-				DataGridViewTextBoxCell^ dgvc3 = gcnew DataGridViewTextBoxCell();
-				dgvc3->Value = MailAdress;
-				dgvr->Cells->Add(dgvc3);
+				DataGridViewTextBoxCell^ dgvcReferences = gcnew DataGridViewTextBoxCell();
+				dgvcReferences->Value = references;
+				dgvr->Cells->Add(dgvcReferences);
+				DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
+				dgvcQuantity->Value = quantity;
+				dgvr->Cells->Add(dgvcQuantity);
+				DataGridViewTextBoxCell^ dgvcRestock = gcnew DataGridViewTextBoxCell();
+				dgvcRestock->Value = restock;
+				dgvr->Cells->Add(dgvcRestock);
 				this->dgvCatalog->Rows->Add(dgvr);
 
 
