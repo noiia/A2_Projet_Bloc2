@@ -123,6 +123,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Payment.cpp" />
+    <ClCompile Include="Recap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BDD.h" />
@@ -143,6 +144,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Payment.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Recap.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Payment.resx">
       <DependentUpon>Payment.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recap.resx">
+      <DependentUpon>Recap.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

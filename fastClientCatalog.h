@@ -42,6 +42,9 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Button^ BtnValidation;
 	private: System::Windows::Forms::Label^ Title;
 	private: System::Windows::Forms::Label^ LbIdClient;
+	private: System::Windows::Forms::Label^ LbPostalCode;
+	private: System::Windows::Forms::Label^ LbName;
+	private: System::Windows::Forms::Label^ LbSurname;
 
 	private:
 		/// <summary>
@@ -63,13 +66,16 @@ namespace A2ProjetBloc2 {
 			this->BtnValidation = (gcnew System::Windows::Forms::Button());
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->LbIdClient = (gcnew System::Windows::Forms::Label());
+			this->LbPostalCode = (gcnew System::Windows::Forms::Label());
+			this->LbName = (gcnew System::Windows::Forms::Label());
+			this->LbSurname = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// TbSurname
 			// 
 			this->TbSurname->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbSurname->Location = System::Drawing::Point(94, 112);
+			this->TbSurname->Location = System::Drawing::Point(171, 106);
 			this->TbSurname->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->TbSurname->Name = L"TbSurname";
 			this->TbSurname->Size = System::Drawing::Size(254, 26);
@@ -79,7 +85,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->TbPostalCode->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbPostalCode->Location = System::Drawing::Point(94, 242);
+			this->TbPostalCode->Location = System::Drawing::Point(171, 236);
 			this->TbPostalCode->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->TbPostalCode->Name = L"TbPostalCode";
 			this->TbPostalCode->Size = System::Drawing::Size(254, 26);
@@ -89,7 +95,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->TbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbName->Location = System::Drawing::Point(94, 178);
+			this->TbName->Location = System::Drawing::Point(171, 172);
 			this->TbName->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->TbName->Name = L"TbName";
 			this->TbName->Size = System::Drawing::Size(254, 26);
@@ -140,11 +146,41 @@ namespace A2ProjetBloc2 {
 			this->LbIdClient->TabIndex = 6;
 			this->LbIdClient->Text = L"ID";
 			// 
+			// LbPostalCode
+			// 
+			this->LbPostalCode->AutoSize = true;
+			this->LbPostalCode->Location = System::Drawing::Point(46, 243);
+			this->LbPostalCode->Name = L"LbPostalCode";
+			this->LbPostalCode->Size = System::Drawing::Size(99, 19);
+			this->LbPostalCode->TabIndex = 7;
+			this->LbPostalCode->Text = L"Code postal";
+			// 
+			// LbName
+			// 
+			this->LbName->AutoSize = true;
+			this->LbName->Location = System::Drawing::Point(46, 179);
+			this->LbName->Name = L"LbName";
+			this->LbName->Size = System::Drawing::Size(65, 19);
+			this->LbName->TabIndex = 8;
+			this->LbName->Text = L"Prénom";
+			// 
+			// LbSurname
+			// 
+			this->LbSurname->AutoSize = true;
+			this->LbSurname->Location = System::Drawing::Point(46, 113);
+			this->LbSurname->Name = L"LbSurname";
+			this->LbSurname->Size = System::Drawing::Size(44, 19);
+			this->LbSurname->TabIndex = 9;
+			this->LbSurname->Text = L"Nom";
+			// 
 			// fastClientCatalog
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 19);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(451, 445);
+			this->Controls->Add(this->LbSurname);
+			this->Controls->Add(this->LbName);
+			this->Controls->Add(this->LbPostalCode);
 			this->Controls->Add(this->LbIdClient);
 			this->Controls->Add(this->Title);
 			this->Controls->Add(this->BtnValidation);

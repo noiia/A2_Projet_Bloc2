@@ -99,7 +99,7 @@ namespace A2ProjetBloc2 {
 			this->LbPriceValue->AutoSize = true;
 			this->LbPriceValue->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbPriceValue->Location = System::Drawing::Point(257, 125);
+			this->LbPriceValue->Location = System::Drawing::Point(257, 119);
 			this->LbPriceValue->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbPriceValue->Name = L"LbPriceValue";
 			this->LbPriceValue->Size = System::Drawing::Size(18, 19);

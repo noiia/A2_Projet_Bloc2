@@ -10,12 +10,12 @@ namespace A2ProjetBloc2 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de MyForm
+	/// Description résumée de Order
 	/// </summary>
-	public ref class MyForm : public System::Windows::Forms::Form
+	public ref class Order : public System::Windows::Forms::Form
 	{
 	public:
-		MyForm(void)
+		Order(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~MyForm()
+		~Order()
 		{
 			if (components)
 			{
@@ -346,8 +346,8 @@ namespace A2ProjetBloc2 {
 			this->LbSurnameValue->TabIndex = 19;
 			this->LbSurnameValue->Text = L"Nom";
 			// 
-			// MyForm
-			// 
+			// Order
+			// 			
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(469, 613);
@@ -373,15 +373,15 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->TxtArticleReference);
 			this->Controls->Add(this->BtnCatalogForm);
 			this->Controls->Add(this->Title);
-			this->Name = L"MyForm";
-			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->Name = L"Order";
+			this->Text = L"Order";
+			this->Load += gcnew System::EventHandler(this, &Order::Order_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void Order_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 };
 }
