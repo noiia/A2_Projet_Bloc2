@@ -81,7 +81,6 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <NoEntryPoint>false</NoEntryPoint>
       <EntryPointSymbol>WinMain</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
     </Link>

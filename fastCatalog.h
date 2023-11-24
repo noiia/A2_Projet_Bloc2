@@ -47,6 +47,7 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Label^ LbQuantityValue;
 	private: System::Windows::Forms::Label^ LbDateRestockValue;
 	private: System::Windows::Forms::Button^ BtnValidation;
+	private: System::Windows::Forms::Label^ LbRef;
 
 	protected:
 
@@ -72,13 +73,14 @@ namespace A2ProjetBloc2 {
 			this->LbQuantityValue = (gcnew System::Windows::Forms::Label());
 			this->LbDateRestockValue = (gcnew System::Windows::Forms::Label());
 			this->BtnValidation = (gcnew System::Windows::Forms::Button());
+			this->LbRef = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// TbReference
 			// 
 			this->TbReference->Font = (gcnew System::Drawing::Font(L"Orkney", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbReference->Location = System::Drawing::Point(114, 97);
+			this->TbReference->Location = System::Drawing::Point(161, 92);
 			this->TbReference->Name = L"TbReference";
 			this->TbReference->Size = System::Drawing::Size(284, 29);
 			this->TbReference->TabIndex = 0;
@@ -171,11 +173,23 @@ namespace A2ProjetBloc2 {
 			this->BtnValidation->Text = L"Valider";
 			this->BtnValidation->UseVisualStyleBackColor = true;
 			// 
+			// LbRef
+			// 
+			this->LbRef->AutoSize = true;
+			this->LbRef->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbRef->Location = System::Drawing::Point(47, 98);
+			this->LbRef->Name = L"LbRef";
+			this->LbRef->Size = System::Drawing::Size(91, 19);
+			this->LbRef->TabIndex = 9;
+			this->LbRef->Text = L"Référence :";
+			// 
 			// fastCatalog
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(500, 366);
+			this->Controls->Add(this->LbRef);
 			this->Controls->Add(this->BtnValidation);
 			this->Controls->Add(this->LbDateRestockValue);
 			this->Controls->Add(this->LbQuantityValue);
