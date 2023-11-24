@@ -118,11 +118,15 @@
     <ClCompile Include="BDD.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Order.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BDD.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Order.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -139,6 +143,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order.resx">
+      <DependentUpon>Order.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
