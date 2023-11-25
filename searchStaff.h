@@ -24,10 +24,10 @@ namespace A2ProjetBloc2 {
 			//TODO: ajoutez ici le code du constructeur
 			//
 			DataGridViewTextBoxColumn^ dgvtbcReferences = gcnew DataGridViewTextBoxColumn();
-			dgvtbcReferences->Name = "R�f�rence";
+			dgvtbcReferences->Name = "Référence";
 			this->DGVSearchStaff->Columns->Add(dgvtbcReferences);
 			DataGridViewTextBoxColumn^ dgvtbcQuantity = gcnew DataGridViewTextBoxColumn();
-			dgvtbcQuantity->Name = "Quantit�";
+			dgvtbcQuantity->Name = "Quantité";
 			this->DGVSearchStaff->Columns->Add(dgvtbcQuantity);
 			DataGridViewTextBoxColumn^ dgvtbcRestock = gcnew DataGridViewTextBoxColumn();
 			dgvtbcRestock->Name = "Date de restock";

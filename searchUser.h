@@ -1,5 +1,5 @@
-ï»¿#pragma once
-#include "BDD.h"
+#pragma once
+
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -10,248 +10,204 @@ namespace A2ProjetBloc2 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description rï¿½sumï¿½e de searchUser
+	/// Description résumée de searchUser1
 	/// </summary>
-	public ref class searchUser : public System::Windows::Forms::Form
+	public ref class searchUser1 : public System::Windows::Forms::Form
 	{
-		BDD^ mabdd;
 	public:
-		searchUser(BDD^ mabdd)
+		searchUser1(void)
 		{
-			this->mabdd = mabdd;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
-			DataGridViewTextBoxColumn^ dgvtbcReferences = gcnew DataGridViewTextBoxColumn();
-			dgvtbcReferences->Name = "RÃ©fÃ©rence";
-			this->DGVSearchUser->Columns->Add(dgvtbcReferences);
-			DataGridViewTextBoxColumn^ dgvtbcQuantity = gcnew DataGridViewTextBoxColumn();
-			dgvtbcQuantity->Name = "QuantitÃ©";
-			this->DGVSearchUser->Columns->Add(dgvtbcQuantity);
-			DataGridViewTextBoxColumn^ dgvtbcRestock = gcnew DataGridViewTextBoxColumn();
-			dgvtbcRestock->Name = "Date de restock";
-			this->DGVSearchUser->Columns->Add(dgvtbcRestock);
-
-			DataSet^ ds = mabdd->executeQuery("SELECT * FROM Stock");
-
-			for each (DataRow ^ row in ds->Tables[0]->Rows)
-			{
-				String^ references = (String^)row[0];
-				System::Diagnostics::Debug::WriteLine("nom " + references);
-				String^ quantity = (String^)row[1];
-				System::Diagnostics::Debug::WriteLine("quantity " + quantity);
-				String^ restock = (String^)row[2];
-				System::Diagnostics::Debug::WriteLine("restock date " + restock);
-
-				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-				DataGridViewTextBoxCell^ dgvcReferences = gcnew DataGridViewTextBoxCell();
-				dgvcReferences->Value = references;
-				dgvr->Cells->Add(dgvcReferences);
-				DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
-				dgvcQuantity->Value = quantity;
-				dgvr->Cells->Add(dgvcQuantity);
-				DataGridViewTextBoxCell^ dgvcRestock = gcnew DataGridViewTextBoxCell();
-				dgvcRestock->Value = restock;
-				dgvr->Cells->Add(dgvcRestock);
-				this->DGVSearchUser->Rows->Add(dgvr);
-			}
 		}
+
 	protected:
 		/// <summary>
-		/// Nettoyage des ressources utilisï¿½es.
+		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~searchUser()
+		~searchUser1()
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ LbSearchUser;
-	private: System::Windows::Forms::Label^ LbName;
-	private: System::Windows::Forms::Label^ LbPostalCode;
+	private: System::Windows::Forms::Button^ BtnNewClient;
+	protected:
 
-	private: System::Windows::Forms::Label^ LbFirstName;
-	private: System::Windows::Forms::Label^ LbCity;
-	private: System::Windows::Forms::TextBox^ TbName;
-
-
-
-
-	private: System::Windows::Forms::TextBox^ TbFirstName;
-
-	private: System::Windows::Forms::TextBox^ TbPostalCode;
-
-
-	private: System::Windows::Forms::TextBox^ TbCity;
-
-	private: System::Windows::Forms::DataGridView^ DGVSearchUser;
-	private: System::Windows::Forms::Button^ BtnNewCustomer;
+	protected:
 	private: System::Windows::Forms::Button^ BtnValidate;
+	private: System::Windows::Forms::DataGridView^ DGVSearchStaff;
+	private: System::Windows::Forms::TextBox^ TbCity;
+	private: System::Windows::Forms::TextBox^ TbPostalCode;
+	private: System::Windows::Forms::TextBox^ TbFirstName;
+	private: System::Windows::Forms::TextBox^ TbName;
+	private: System::Windows::Forms::Label^ LbCity;
+	private: System::Windows::Forms::Label^ LbFirstName;
+	private: System::Windows::Forms::Label^ LbPostalCode;
+	private: System::Windows::Forms::Label^ LbName;
+	private: System::Windows::Forms::Label^ Title;
 
-
-	protected:
-
-	protected:
 
 	private:
 		/// <summary>
-		/// Variable nï¿½cessaire au concepteur.
+		/// Variable nécessaire au concepteur.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Mï¿½thode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette mï¿½thode avec l'ï¿½diteur de code.
+		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
+		/// le contenu de cette méthode avec l'éditeur de code.
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->LbSearchUser = (gcnew System::Windows::Forms::Label());
-			this->LbName = (gcnew System::Windows::Forms::Label());
-			this->LbPostalCode = (gcnew System::Windows::Forms::Label());
-			this->LbFirstName = (gcnew System::Windows::Forms::Label());
-			this->LbCity = (gcnew System::Windows::Forms::Label());
-			this->TbName = (gcnew System::Windows::Forms::TextBox());
-			this->TbFirstName = (gcnew System::Windows::Forms::TextBox());
-			this->TbPostalCode = (gcnew System::Windows::Forms::TextBox());
-			this->TbCity = (gcnew System::Windows::Forms::TextBox());
-			this->DGVSearchUser = (gcnew System::Windows::Forms::DataGridView());
-			this->BtnNewCustomer = (gcnew System::Windows::Forms::Button());
+			this->BtnNewClient = (gcnew System::Windows::Forms::Button());
 			this->BtnValidate = (gcnew System::Windows::Forms::Button());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchUser))->BeginInit();
+			this->DGVSearchStaff = (gcnew System::Windows::Forms::DataGridView());
+			this->TbCity = (gcnew System::Windows::Forms::TextBox());
+			this->TbPostalCode = (gcnew System::Windows::Forms::TextBox());
+			this->TbFirstName = (gcnew System::Windows::Forms::TextBox());
+			this->TbName = (gcnew System::Windows::Forms::TextBox());
+			this->LbCity = (gcnew System::Windows::Forms::Label());
+			this->LbFirstName = (gcnew System::Windows::Forms::Label());
+			this->LbPostalCode = (gcnew System::Windows::Forms::Label());
+			this->LbName = (gcnew System::Windows::Forms::Label());
+			this->Title = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// LbSearchUser
+			// BtnNewClient
 			// 
-			this->LbSearchUser->AutoSize = true;
-			this->LbSearchUser->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->BtnNewClient->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbSearchUser->Location = System::Drawing::Point(174, 9);
-			this->LbSearchUser->Name = L"LbSearchUser";
-			this->LbSearchUser->Size = System::Drawing::Size(310, 28);
-			this->LbSearchUser->TabIndex = 0;
-			this->LbSearchUser->Text = L"Recherche d\'un utilisateur";
+			this->BtnNewClient->Location = System::Drawing::Point(295, 530);
+			this->BtnNewClient->Name = L"BtnNewClient";
+			this->BtnNewClient->Size = System::Drawing::Size(378, 48);
+			this->BtnNewClient->TabIndex = 23;
+			this->BtnNewClient->Text = L"Enregistrer un nouveau client";
+			this->BtnNewClient->UseVisualStyleBackColor = true;
 			// 
-			// LbName
+			// BtnValidate
 			// 
-			this->LbName->AutoSize = true;
-			this->LbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnValidate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbName->Location = System::Drawing::Point(21, 78);
-			this->LbName->Name = L"LbName";
-			this->LbName->Size = System::Drawing::Size(44, 19);
-			this->LbName->TabIndex = 1;
-			this->LbName->Text = L"Nom";
+			this->BtnValidate->Location = System::Drawing::Point(71, 403);
+			this->BtnValidate->Name = L"BtnValidate";
+			this->BtnValidate->Size = System::Drawing::Size(135, 48);
+			this->BtnValidate->TabIndex = 22;
+			this->BtnValidate->Text = L"Valider";
+			this->BtnValidate->UseVisualStyleBackColor = true;
 			// 
-			// LbPostalCode
+			// DGVSearchStaff
 			// 
-			this->LbPostalCode->AutoSize = true;
-			this->LbPostalCode->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->DGVSearchStaff->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->DGVSearchStaff->Location = System::Drawing::Point(295, 122);
+			this->DGVSearchStaff->Name = L"DGVSearchStaff";
+			this->DGVSearchStaff->Size = System::Drawing::Size(378, 365);
+			this->DGVSearchStaff->TabIndex = 21;
+			// 
+			// TbCity
+			// 
+			this->TbCity->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbPostalCode->Location = System::Drawing::Point(21, 221);
-			this->LbPostalCode->Name = L"LbPostalCode";
-			this->LbPostalCode->Size = System::Drawing::Size(97, 19);
-			this->LbPostalCode->TabIndex = 2;
-			this->LbPostalCode->Text = L"Code Postal";
+			this->TbCity->Location = System::Drawing::Point(37, 335);
+			this->TbCity->Name = L"TbCity";
+			this->TbCity->Size = System::Drawing::Size(211, 26);
+			this->TbCity->TabIndex = 20;
 			// 
-			// LbFirstName
+			// TbPostalCode
 			// 
-			this->LbFirstName->AutoSize = true;
-			this->LbFirstName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TbPostalCode->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbFirstName->Location = System::Drawing::Point(21, 152);
-			this->LbFirstName->Name = L"LbFirstName";
-			this->LbFirstName->Size = System::Drawing::Size(65, 19);
-			this->LbFirstName->TabIndex = 3;
-			this->LbFirstName->Text = L"PrÃ©nom";
+			this->TbPostalCode->Location = System::Drawing::Point(37, 265);
+			this->TbPostalCode->Name = L"TbPostalCode";
+			this->TbPostalCode->Size = System::Drawing::Size(211, 26);
+			this->TbPostalCode->TabIndex = 19;
+			// 
+			// TbFirstName
+			// 
+			this->TbFirstName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TbFirstName->Location = System::Drawing::Point(37, 196);
+			this->TbFirstName->Name = L"TbFirstName";
+			this->TbFirstName->Size = System::Drawing::Size(211, 26);
+			this->TbFirstName->TabIndex = 18;
+			// 
+			// TbName
+			// 
+			this->TbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TbName->Location = System::Drawing::Point(37, 122);
+			this->TbName->Name = L"TbName";
+			this->TbName->Size = System::Drawing::Size(211, 26);
+			this->TbName->TabIndex = 17;
 			// 
 			// LbCity
 			// 
 			this->LbCity->AutoSize = true;
 			this->LbCity->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbCity->Location = System::Drawing::Point(21, 291);
+			this->LbCity->Location = System::Drawing::Point(33, 313);
 			this->LbCity->Name = L"LbCity";
 			this->LbCity->Size = System::Drawing::Size(43, 19);
-			this->LbCity->TabIndex = 4;
+			this->LbCity->TabIndex = 16;
 			this->LbCity->Text = L"Ville";
 			// 
-			// TbName
+			// LbFirstName
 			// 
-			this->TbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbFirstName->AutoSize = true;
+			this->LbFirstName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbName->Location = System::Drawing::Point(25, 100);
-			this->TbName->Name = L"TbName";
-			this->TbName->Size = System::Drawing::Size(211, 27);
-			this->TbName->TabIndex = 5;
+			this->LbFirstName->Location = System::Drawing::Point(33, 174);
+			this->LbFirstName->Name = L"LbFirstName";
+			this->LbFirstName->Size = System::Drawing::Size(65, 19);
+			this->LbFirstName->TabIndex = 15;
+			this->LbFirstName->Text = L"Prénom";
 			// 
-			// TbFirstName
+			// LbPostalCode
 			// 
-			this->TbFirstName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbPostalCode->AutoSize = true;
+			this->LbPostalCode->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbFirstName->Location = System::Drawing::Point(25, 174);
-			this->TbFirstName->Name = L"TbFirstName";
-			this->TbFirstName->Size = System::Drawing::Size(211, 27);
-			this->TbFirstName->TabIndex = 6;
+			this->LbPostalCode->Location = System::Drawing::Point(33, 243);
+			this->LbPostalCode->Name = L"LbPostalCode";
+			this->LbPostalCode->Size = System::Drawing::Size(97, 19);
+			this->LbPostalCode->TabIndex = 14;
+			this->LbPostalCode->Text = L"Code Postal";
 			// 
-			// TbPostalCode
+			// LbName
 			// 
-			this->TbPostalCode->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbName->AutoSize = true;
+			this->LbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbPostalCode->Location = System::Drawing::Point(25, 243);
-			this->TbPostalCode->Name = L"TbPostalCode";
-			this->TbPostalCode->Size = System::Drawing::Size(211, 27);
-			this->TbPostalCode->TabIndex = 7;
+			this->LbName->Location = System::Drawing::Point(33, 100);
+			this->LbName->Name = L"LbName";
+			this->LbName->Size = System::Drawing::Size(44, 19);
+			this->LbName->TabIndex = 13;
+			this->LbName->Text = L"Nom";
 			// 
-			// TbCity
+			// Title
 			// 
-			this->TbCity->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->Title->AutoSize = true;
+			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbCity->Location = System::Drawing::Point(25, 313);
-			this->TbCity->Name = L"TbCity";
-			this->TbCity->Size = System::Drawing::Size(211, 27);
-			this->TbCity->TabIndex = 8;
+			this->Title->Location = System::Drawing::Point(218, 40);
+			this->Title->Name = L"Title";
+			this->Title->Size = System::Drawing::Size(253, 28);
+			this->Title->TabIndex = 12;
+			this->Title->Text = L"Recherche d\'un client";
 			// 
-			// DGVSearchUser
-			// 
-			this->DGVSearchUser->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVSearchUser->Location = System::Drawing::Point(283, 100);
-			this->DGVSearchUser->Name = L"DGVSearchUser";
-			this->DGVSearchUser->Size = System::Drawing::Size(378, 365);
-			this->DGVSearchUser->TabIndex = 9;
-			// 
-			// BtnNewCustomer
-			// 
-			this->BtnNewCustomer->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->BtnNewCustomer->Location = System::Drawing::Point(283, 507);
-			this->BtnNewCustomer->Name = L"BtnNewCustomer";
-			this->BtnNewCustomer->Size = System::Drawing::Size(378, 48);
-			this->BtnNewCustomer->TabIndex = 12;
-			this->BtnNewCustomer->Text = L"Enregistrer un nouveau client";
-			this->BtnNewCustomer->UseVisualStyleBackColor = true;
-			// 
-			// BtnValidate
-			// 
-			this->BtnValidate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->BtnValidate->Location = System::Drawing::Point(60, 380);
-			this->BtnValidate->Name = L"BtnValidate";
-			this->BtnValidate->Size = System::Drawing::Size(135, 48);
-			this->BtnValidate->TabIndex = 13;
-			this->BtnValidate->Text = L"Valider";
-			this->BtnValidate->UseVisualStyleBackColor = true;
-			// 
-			// searchUser
+			// searchUser1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(686, 582);
+			this->ClientSize = System::Drawing::Size(718, 600);
+			this->Controls->Add(this->BtnNewClient);
 			this->Controls->Add(this->BtnValidate);
-			this->Controls->Add(this->BtnNewCustomer);
-			this->Controls->Add(this->DGVSearchUser);
+			this->Controls->Add(this->DGVSearchStaff);
 			this->Controls->Add(this->TbCity);
 			this->Controls->Add(this->TbPostalCode);
 			this->Controls->Add(this->TbFirstName);
@@ -260,14 +216,14 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbFirstName);
 			this->Controls->Add(this->LbPostalCode);
 			this->Controls->Add(this->LbName);
-			this->Controls->Add(this->LbSearchUser);
-			this->Name = L"searchUser";
-			this->Text = L"searchUser";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchUser))->EndInit();
+			this->Controls->Add(this->Title);
+			this->Name = L"searchUser1";
+			this->Text = L"searchUser1";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
-
+#pragma endregion
 	};
 }

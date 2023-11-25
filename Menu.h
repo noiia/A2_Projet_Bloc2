@@ -73,24 +73,16 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Label^ Title;
-	protected:
-
 	private: System::Windows::Forms::Button^ BtnEquipeList;
 	private: System::Windows::Forms::Button^ BtnBuyerList;
 	private: System::Windows::Forms::DataGridView^ dgvCatalog;
 	private: System::Windows::Forms::Button^ BtnOrderForm;
 	private: System::Windows::Forms::Button^ BtnNewArticleForm;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ BtnResearch;
+
 	private: System::Windows::Forms::TextBox^ TBReference;
 	private: System::Windows::Forms::TextBox^ TBIdArticle;
 	private: System::Windows::Forms::Label^ LbSearchingZone;
-
-
-
-
-
-
-	protected:
 
 	private:
 		/// <summary>
@@ -105,14 +97,14 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->BtnEquipeList = (gcnew System::Windows::Forms::Button());
 			this->BtnBuyerList = (gcnew System::Windows::Forms::Button());
 			this->dgvCatalog = (gcnew System::Windows::Forms::DataGridView());
 			this->BtnOrderForm = (gcnew System::Windows::Forms::Button());
 			this->BtnNewArticleForm = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->BtnResearch = (gcnew System::Windows::Forms::Button());
 			this->TBReference = (gcnew System::Windows::Forms::TextBox());
 			this->TBIdArticle = (gcnew System::Windows::Forms::TextBox());
 			this->LbSearchingZone = (gcnew System::Windows::Forms::Label());
@@ -158,9 +150,9 @@ namespace A2ProjetBloc2 {
 			// 
 			this->dgvCatalog->AllowUserToAddRows = false;
 			this->dgvCatalog->AllowUserToDeleteRows = false;
-			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->dgvCatalog->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+			this->dgvCatalog->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
 			this->dgvCatalog->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvCatalog->Location = System::Drawing::Point(242, 81);
 			this->dgvCatalog->MultiSelect = false;
@@ -196,16 +188,16 @@ namespace A2ProjetBloc2 {
 			this->BtnNewArticleForm->UseVisualStyleBackColor = true;
 			this->BtnNewArticleForm->Click += gcnew System::EventHandler(this, &Menu::BtnNewArticleForm_Click);
 			// 
-			// button1
+			// BtnResearch
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->BtnResearch->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(1021, 333);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(135, 51);
-			this->button1->TabIndex = 6;
-			this->button1->Text = L"Rechercher";
-			this->button1->UseVisualStyleBackColor = true;
+			this->BtnResearch->Location = System::Drawing::Point(1021, 333);
+			this->BtnResearch->Name = L"BtnResearch";
+			this->BtnResearch->Size = System::Drawing::Size(135, 51);
+			this->BtnResearch->TabIndex = 6;
+			this->BtnResearch->Text = L"Rechercher";
+			this->BtnResearch->UseVisualStyleBackColor = true;
 			// 
 			// TBReference
 			// 
@@ -244,7 +236,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbSearchingZone);
 			this->Controls->Add(this->TBIdArticle);
 			this->Controls->Add(this->TBReference);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->BtnResearch);
 			this->Controls->Add(this->BtnNewArticleForm);
 			this->Controls->Add(this->BtnOrderForm);
 			this->Controls->Add(this->dgvCatalog);

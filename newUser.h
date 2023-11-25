@@ -12,10 +12,10 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description r�sum�e de modifUser
 	/// </summary>
-	public ref class modifUser : public System::Windows::Forms::Form
+	public ref class newUser : public System::Windows::Forms::Form
 	{
 	public:
-		modifUser(void)
+		newUser(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilis�es.
 		/// </summary>
-		~modifUser()
+		~newUser()
 		{
 			if (components)
 			{
@@ -37,27 +37,12 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Label^ LbUserInfo;
 	private: System::Windows::Forms::Label^ LbName;
 	private: System::Windows::Forms::Label^ LbFirstName;
-	protected:
-
-
-	protected:
-
-
-
 	private: System::Windows::Forms::TextBox^ TbName;
 	private: System::Windows::Forms::TextBox^ TbFirstName;
 	private: System::Windows::Forms::Label^ LbDeliveryAdress;
-
-
-
-
-
 	private: System::Windows::Forms::Label^ LbBirthDate;
 	private: System::Windows::Forms::Label^ LbNCompany;
-
-
 	private: System::Windows::Forms::TextBox^ TbAdress;
-
 	private: System::Windows::Forms::TextBox^ TbBirthDate;
 	private: System::Windows::Forms::TextBox^ TbNEntreprise;
 	private: System::Windows::Forms::Button^ BtValidate;
@@ -65,16 +50,8 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Label^ LbPersonalAdress;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::CheckBox^ CboxCompany;
-
-
 	private: System::Windows::Forms::Label^ LbLogo;
 	private: System::Windows::Forms::TextBox^ TbLogo;
-
-
-
-
-
-	protected:
 
 	private:
 		/// <summary>
@@ -152,7 +129,7 @@ namespace A2ProjetBloc2 {
 			this->TbName->Location = System::Drawing::Point(24, 136);
 			this->TbName->Margin = System::Windows::Forms::Padding(4);
 			this->TbName->Name = L"TbName";
-			this->TbName->Size = System::Drawing::Size(352, 27);
+			this->TbName->Size = System::Drawing::Size(352, 26);
 			this->TbName->TabIndex = 3;
 			// 
 			// TbFirstName
@@ -162,7 +139,7 @@ namespace A2ProjetBloc2 {
 			this->TbFirstName->Location = System::Drawing::Point(24, 232);
 			this->TbFirstName->Margin = System::Windows::Forms::Padding(4);
 			this->TbFirstName->Name = L"TbFirstName";
-			this->TbFirstName->Size = System::Drawing::Size(352, 27);
+			this->TbFirstName->Size = System::Drawing::Size(352, 26);
 			this->TbFirstName->TabIndex = 4;
 			// 
 			// LbDeliveryAdress
@@ -208,7 +185,7 @@ namespace A2ProjetBloc2 {
 			this->TbAdress->Location = System::Drawing::Point(24, 412);
 			this->TbAdress->Margin = System::Windows::Forms::Padding(4);
 			this->TbAdress->Name = L"TbAdress";
-			this->TbAdress->Size = System::Drawing::Size(352, 27);
+			this->TbAdress->Size = System::Drawing::Size(352, 26);
 			this->TbAdress->TabIndex = 8;
 			// 
 			// TbBirthDate
@@ -218,7 +195,7 @@ namespace A2ProjetBloc2 {
 			this->TbBirthDate->Location = System::Drawing::Point(24, 326);
 			this->TbBirthDate->Margin = System::Windows::Forms::Padding(4);
 			this->TbBirthDate->Name = L"TbBirthDate";
-			this->TbBirthDate->Size = System::Drawing::Size(352, 27);
+			this->TbBirthDate->Size = System::Drawing::Size(352, 26);
 			this->TbBirthDate->TabIndex = 9;
 			// 
 			// TbNEntreprise
@@ -228,14 +205,14 @@ namespace A2ProjetBloc2 {
 			this->TbNEntreprise->Location = System::Drawing::Point(24, 675);
 			this->TbNEntreprise->Margin = System::Windows::Forms::Padding(4);
 			this->TbNEntreprise->Name = L"TbNEntreprise";
-			this->TbNEntreprise->Size = System::Drawing::Size(352, 27);
+			this->TbNEntreprise->Size = System::Drawing::Size(352, 26);
 			this->TbNEntreprise->TabIndex = 10;
 			// 
 			// BtValidate
 			// 
 			this->BtValidate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtValidate->Location = System::Drawing::Point(30, 877);
+			this->BtValidate->Location = System::Drawing::Point(39, 836);
 			this->BtValidate->Margin = System::Windows::Forms::Padding(4);
 			this->BtValidate->Name = L"BtValidate";
 			this->BtValidate->Size = System::Drawing::Size(148, 51);
@@ -247,7 +224,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtReturn->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtReturn->Location = System::Drawing::Point(210, 877);
+			this->BtReturn->Location = System::Drawing::Point(219, 836);
 			this->BtReturn->Margin = System::Windows::Forms::Padding(4);
 			this->BtReturn->Name = L"BtReturn";
 			this->BtReturn->Size = System::Drawing::Size(148, 51);
@@ -274,7 +251,7 @@ namespace A2ProjetBloc2 {
 			this->textBox1->Location = System::Drawing::Point(24, 504);
 			this->textBox1->Margin = System::Windows::Forms::Padding(4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(352, 27);
+			this->textBox1->Size = System::Drawing::Size(352, 26);
 			this->textBox1->TabIndex = 14;
 			// 
 			// CboxCompany
@@ -309,7 +286,7 @@ namespace A2ProjetBloc2 {
 			this->TbLogo->Location = System::Drawing::Point(24, 766);
 			this->TbLogo->Margin = System::Windows::Forms::Padding(4);
 			this->TbLogo->Name = L"TbLogo";
-			this->TbLogo->Size = System::Drawing::Size(352, 27);
+			this->TbLogo->Size = System::Drawing::Size(352, 26);
 			this->TbLogo->TabIndex = 17;
 			// 
 			// modifUser
@@ -318,7 +295,7 @@ namespace A2ProjetBloc2 {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->ClientSize = System::Drawing::Size(420, 946);
+			this->ClientSize = System::Drawing::Size(420, 895);
 			this->Controls->Add(this->TbLogo);
 			this->Controls->Add(this->LbLogo);
 			this->Controls->Add(this->CboxCompany);

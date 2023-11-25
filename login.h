@@ -10,7 +10,7 @@ namespace A2ProjetBloc2 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description r�sum�e de login
+	/// Description résumée de login
 	/// </summary>
 	public ref class login : public System::Windows::Forms::Form
 	{
@@ -37,29 +37,13 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::PictureBox^ PicBoxSignIn;
-	protected:
-
-
-
-
-
 	private: System::Windows::Forms::Label^ LbSignIn;
-
 	private: System::Windows::Forms::Label^ LbUsername;
 	private: System::Windows::Forms::Label^ LbPassword;
-
-
 	private: System::Windows::Forms::TextBox^ TbUsername;
 	private: System::Windows::Forms::TextBox^ TbPassword;
 	private: System::Windows::Forms::Button^ BtValidate;
 	private: System::Windows::Forms::Button^ BtCancel;
-
-
-
-
-
-
-	protected:
 
 	private:
 		/// <summary>
@@ -69,7 +53,7 @@ namespace A2ProjetBloc2 {
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// M�thode requise pour la prise en charge du concepteur - ne modifiez pas
+		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
 		/// le contenu de cette m�thode avec l'�diteur de code.
 		/// </summary>
 		void InitializeComponent(void)
@@ -203,7 +187,7 @@ namespace A2ProjetBloc2 {
 	private: System::Void BtnValidate_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (TbUsername->Text == "test" && TbPassword->Text == "test")
 		{
-			MessageBox::Show("Connexion r�ussie");
+			MessageBox::Show("Connexion réussie");
 		}
 		else
 		{
