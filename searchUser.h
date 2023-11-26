@@ -192,11 +192,11 @@ namespace A2ProjetBloc2 {
 			// Title
 			// 
 			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Title->Location = System::Drawing::Point(218, 40);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(253, 28);
+			this->Title->Size = System::Drawing::Size(264, 28);
 			this->Title->TabIndex = 12;
 			this->Title->Text = L"Recherche d\'un client";
 			// 
@@ -218,7 +218,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbName);
 			this->Controls->Add(this->Title);
 			this->Name = L"searchUser1";
-			this->Text = L"searchUser1";
+			this->Text = L"searchUser";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();

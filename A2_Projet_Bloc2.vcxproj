@@ -118,7 +118,6 @@
     <ClCompile Include="cartReminder.cpp" />
     <ClCompile Include="fastCatalog.cpp" />
     <ClCompile Include="fastClientCatalog.cpp" />
-    <ClCompile Include="login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="modifUser.cpp" />
@@ -139,9 +138,6 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="fastClientCatalog.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="login.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="main.h" />

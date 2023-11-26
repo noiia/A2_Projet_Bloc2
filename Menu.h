@@ -1,5 +1,6 @@
 #pragma once
 #include "BDD.h"
+#include "Order.h"
 
 namespace A2ProjetBloc2 {
 
@@ -257,13 +258,16 @@ namespace A2ProjetBloc2 {
 		DataGridViewTextBoxCell^ cell = (DataGridViewTextBoxCell^)dgvr->Cells[0];
 		System::Diagnostics::Debug::WriteLine("Cliqué sur " + cell->Value);
 		}
+#pragma endregion
 	private: System::Void BtnNewArticleForm_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void BtnOrderForm_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void BtnBuyerList_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void BtnEquipeList_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-};
+		Order^ orderForm = gcnew Order(mabdd);
+		orderForm->ShowDialog();
+		}
+	private: System::Void BtnOrderForm_Click(System::Object^ sender, System::EventArgs^ e) {
+		}
+	private: System::Void BtnBuyerList_Click(System::Object^ sender, System::EventArgs^ e) {
+		}
+	private: System::Void BtnEquipeList_Click(System::Object^ sender, System::EventArgs^ e) {
+		}
+	};
 }

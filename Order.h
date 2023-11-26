@@ -1,5 +1,7 @@
 #pragma once
 
+#include "BDD.h"
+
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -14,8 +16,9 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class Order : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		Order(void)
+		Order(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
