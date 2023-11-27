@@ -15,6 +15,9 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description résumée de Order
 	/// </summary>
+
+	ref class fastCatalog;
+
 	public ref class Order : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
@@ -65,7 +68,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -370,13 +373,13 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void Order_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void BtnCatalogForm_Click(System::Object^ sender, System::EventArgs^ e) {
-	fastCatalog^ fastCatalogForm = gcnew fastCatalog(this, mabdd);
-	fastCatalogForm->ShowDialog();
-}
-private: System::Void Btn_Click(System::Object^ sender, System::EventArgs^ e) {
-	//fastClientCatalog^ fastClientCatalogForm = gcnew fastClientCatalog(mabdd);
-	//fastClientCatalogForm->ShowDialog();
-}
-};
+	private: System::Void BtnCatalogForm_Click(System::Object^ sender, System::EventArgs^ e) {
+		//fastCatalog^ fastCatalogForm = gcnew fastCatalog(mabdd);
+		//fastCatalogForm->ShowDialog();
+	}
+	private: System::Void Btn_Click(System::Object^ sender, System::EventArgs^ e) {
+		//fastClientCatalog^ fastClientCatalogForm = gcnew fastClientCatalog(mabdd);
+		//fastClientCatalogForm->ShowDialog();
+	}
+	};
 }

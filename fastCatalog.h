@@ -16,15 +16,14 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class fastCatalog : public System::Windows::Forms::Form
 	{
+	private:
 		BDD^ mabdd;
 	public:
+		// Constructeur prenant BDD en paramètre
 		fastCatalog(BDD^ mabdd)
 		{
 			this->mabdd = mabdd;
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
 		}
 
 	protected:

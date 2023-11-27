@@ -198,9 +198,6 @@
     <EmbeddedResource Include="newUser.resx">
       <DependentUpon>newUser.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Order.resx">
-      <DependentUpon>Order.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Payment.resx">
       <DependentUpon>Payment.h</DependentUpon>
     </EmbeddedResource>
