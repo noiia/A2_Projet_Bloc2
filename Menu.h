@@ -1,5 +1,4 @@
 #pragma once
-//matthis
 namespace A2ProjetBloc2 {
 
 	using namespace System;
