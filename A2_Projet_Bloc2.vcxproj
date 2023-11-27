@@ -121,6 +121,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="modifUser.cpp" />
+    <ClCompile Include="NewArticle.cpp" />
     <ClCompile Include="newUser.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Payment.cpp" />
@@ -145,6 +146,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="modifUser.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="NewArticle.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="newUser.h">
@@ -194,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="modifUser.resx">
       <DependentUpon>modifUser.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewArticle.resx">
+      <DependentUpon>NewArticle.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="newUser.resx">
       <DependentUpon>newUser.h</DependentUpon>
