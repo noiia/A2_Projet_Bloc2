@@ -54,6 +54,8 @@ namespace A2ProjetBloc2 {
 
 
 	private: System::Windows::Forms::ComboBox^ CbbVAT;
+	private: System::Windows::Forms::Button^ BtnNewArticle;
+	private: System::Windows::Forms::Button^ BtnCancel;
 
 
 	private:
@@ -82,6 +84,8 @@ namespace A2ProjetBloc2 {
 			this->TbQuantity = (gcnew System::Windows::Forms::TextBox());
 			this->TbTresholdDate = (gcnew System::Windows::Forms::TextBox());
 			this->CbbVAT = (gcnew System::Windows::Forms::ComboBox());
+			this->BtnNewArticle = (gcnew System::Windows::Forms::Button());
+			this->BtnCancel = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// LbNewArticle
@@ -214,11 +218,35 @@ namespace A2ProjetBloc2 {
 			this->CbbVAT->Size = System::Drawing::Size(316, 21);
 			this->CbbVAT->TabIndex = 12;
 			// 
+			// BtnNewArticle
+			// 
+			this->BtnNewArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->BtnNewArticle->Location = System::Drawing::Point(79, 520);
+			this->BtnNewArticle->Name = L"BtnNewArticle";
+			this->BtnNewArticle->Size = System::Drawing::Size(111, 42);
+			this->BtnNewArticle->TabIndex = 13;
+			this->BtnNewArticle->Text = L"Ajouter";
+			this->BtnNewArticle->UseVisualStyleBackColor = true;
+			// 
+			// BtnCancel
+			// 
+			this->BtnCancel->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->BtnCancel->Location = System::Drawing::Point(259, 520);
+			this->BtnCancel->Name = L"BtnCancel";
+			this->BtnCancel->Size = System::Drawing::Size(111, 42);
+			this->BtnCancel->TabIndex = 14;
+			this->BtnCancel->Text = L"Annuler";
+			this->BtnCancel->UseVisualStyleBackColor = true;
+			// 
 			// newArticle
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(482, 571);
+			this->ClientSize = System::Drawing::Size(482, 585);
+			this->Controls->Add(this->BtnCancel);
+			this->Controls->Add(this->BtnNewArticle);
 			this->Controls->Add(this->CbbVAT);
 			this->Controls->Add(this->TbTresholdDate);
 			this->Controls->Add(this->TbQuantity);
