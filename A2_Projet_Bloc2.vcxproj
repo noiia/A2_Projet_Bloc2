@@ -115,11 +115,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BDD.cpp" />
-    <ClCompile Include="cartReminder.cpp" />
-    <ClCompile Include="fastCatalog.cpp" />
-    <ClCompile Include="fastClientCatalog.cpp" />
+    <ClCompile Include="ListClient.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="modifUser.cpp" />
     <ClCompile Include="NewArticle.cpp" />
     <ClCompile Include="newUser.cpp" />
@@ -129,22 +128,19 @@
     <ClCompile Include="Recap.cpp" />
     <ClCompile Include="searchStaff.cpp" />
     <ClCompile Include="searchUser.cpp" />
+=======
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BDD.h" />
-    <ClInclude Include="cartReminder.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="fastCatalog.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="fastClientCatalog.h">
+    <ClInclude Include="ListArticles.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="modifUser.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -172,6 +168,8 @@
     <ClInclude Include="searchUser.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+=======
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -184,18 +182,13 @@
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="cartReminder.resx">
-      <DependentUpon>cartReminder.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fastCatalog.resx">
-      <DependentUpon>fastCatalog.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fastClientCatalog.resx">
-      <DependentUpon>fastClientCatalog.h</DependentUpon>
+    <EmbeddedResource Include="ListArticles.resx">
+      <DependentUpon>ListArticles.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.h</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="modifUser.resx">
       <DependentUpon>modifUser.h</DependentUpon>
     </EmbeddedResource>
@@ -223,6 +216,11 @@
     <EmbeddedResource Include="searchUser.resx">
       <DependentUpon>searchUser.h</DependentUpon>
     </EmbeddedResource>
+=======
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BDDCreations.sql" />
+>>>>>>> master
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
