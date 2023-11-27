@@ -18,7 +18,7 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 	public:
-		fastCatalog(BDD^ mabdd)
+		fastCatalog(Order^ order)
 		{
 			this->mabdd = mabdd;
 			InitializeComponent();

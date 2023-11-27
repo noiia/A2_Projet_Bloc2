@@ -1,4 +1,6 @@
 #pragma once
+#include "BDD.h"
+#include "Order.h"
 
 namespace A2ProjetBloc2 {
 
@@ -14,8 +16,9 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class fastClientCatalog : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		fastClientCatalog(void)
+		fastClientCatalog(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -76,7 +79,7 @@ namespace A2ProjetBloc2 {
 			this->TbSurname->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->TbSurname->Location = System::Drawing::Point(171, 106);
-			this->TbSurname->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->TbSurname->Margin = System::Windows::Forms::Padding(4);
 			this->TbSurname->Name = L"TbSurname";
 			this->TbSurname->Size = System::Drawing::Size(254, 26);
 			this->TbSurname->TabIndex = 0;
@@ -86,7 +89,7 @@ namespace A2ProjetBloc2 {
 			this->TbPostalCode->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->TbPostalCode->Location = System::Drawing::Point(171, 236);
-			this->TbPostalCode->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->TbPostalCode->Margin = System::Windows::Forms::Padding(4);
 			this->TbPostalCode->Name = L"TbPostalCode";
 			this->TbPostalCode->Size = System::Drawing::Size(254, 26);
 			this->TbPostalCode->TabIndex = 1;
@@ -96,7 +99,7 @@ namespace A2ProjetBloc2 {
 			this->TbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->TbName->Location = System::Drawing::Point(171, 172);
-			this->TbName->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->TbName->Margin = System::Windows::Forms::Padding(4);
 			this->TbName->Name = L"TbName";
 			this->TbName->Size = System::Drawing::Size(254, 26);
 			this->TbName->TabIndex = 2;
@@ -106,24 +109,26 @@ namespace A2ProjetBloc2 {
 			this->BtnReturn->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnReturn->Location = System::Drawing::Point(50, 384);
-			this->BtnReturn->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->BtnReturn->Margin = System::Windows::Forms::Padding(4);
 			this->BtnReturn->Name = L"BtnReturn";
 			this->BtnReturn->Size = System::Drawing::Size(93, 34);
 			this->BtnReturn->TabIndex = 3;
 			this->BtnReturn->Text = L"Retour";
 			this->BtnReturn->UseVisualStyleBackColor = true;
+			this->BtnReturn->Click += gcnew System::EventHandler(this, &fastClientCatalog::BtnReturn_Click);
 			// 
 			// BtnValidation
 			// 
 			this->BtnValidation->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnValidation->Location = System::Drawing::Point(309, 384);
-			this->BtnValidation->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->BtnValidation->Margin = System::Windows::Forms::Padding(4);
 			this->BtnValidation->Name = L"BtnValidation";
 			this->BtnValidation->Size = System::Drawing::Size(93, 34);
 			this->BtnValidation->TabIndex = 4;
 			this->BtnValidation->Text = L"Valider";
 			this->BtnValidation->UseVisualStyleBackColor = true;
+			this->BtnValidation->Click += gcnew System::EventHandler(this, &fastClientCatalog::BtnValidation_Click);
 			// 
 			// Title
 			// 
@@ -190,7 +195,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->TbSurname);
 			this->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"fastClientCatalog";
 			this->Text = L"fastClientCatalog";
 			this->ResumeLayout(false);
@@ -198,5 +203,12 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
-	};
+
+	private: System::Void BtnValidation_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+	private: System::Void BtnReturn_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+}
+};
 }

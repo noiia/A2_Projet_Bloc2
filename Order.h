@@ -298,6 +298,7 @@ namespace A2ProjetBloc2 {
 			this->Btn->TabIndex = 18;
 			this->Btn->Text = L"Recherche client";
 			this->Btn->UseVisualStyleBackColor = true;
+			this->Btn->Click += gcnew System::EventHandler(this, &Order::Btn_Click);
 			// 
 			// LbIdUserValue
 			// 
@@ -370,8 +371,12 @@ namespace A2ProjetBloc2 {
 	private: System::Void Order_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void BtnCatalogForm_Click(System::Object^ sender, System::EventArgs^ e) {
-	//fastCatalog^ fastCatalogForm = gcnew fastCatalog(mabdd);
-	//fastCatalogForm->ShowDialog();
+	fastCatalog^ fastCatalogForm = gcnew fastCatalog(this, mabdd);
+	fastCatalogForm->ShowDialog();
+}
+private: System::Void Btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	//fastClientCatalog^ fastClientCatalogForm = gcnew fastClientCatalog(mabdd);
+	//fastClientCatalogForm->ShowDialog();
 }
 };
 }
