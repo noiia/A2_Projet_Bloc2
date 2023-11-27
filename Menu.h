@@ -5,6 +5,7 @@
 #include "Order.h"
 #include "SearchStaff.h"
 #include "SearchUser.h"
+#include "NewUser.h"
 
 namespace A2ProjetBloc2 {
 
@@ -264,6 +265,8 @@ namespace A2ProjetBloc2 {
 		}
 #pragma endregion
 	private: System::Void BtnNewArticleForm_Click(System::Object^ sender, System::EventArgs^ e) {
+		NewUser^ newUserForm = gcnew NewUser(mabdd);
+		newUserForm->ShowDialog();
 		}
 	private: System::Void BtnOrderForm_Click(System::Object^ sender, System::EventArgs^ e) {
 		Order^ orderForm = gcnew Order(mabdd);
