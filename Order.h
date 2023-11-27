@@ -1,6 +1,7 @@
 #pragma once
-
-#include "BDD.h"
+#include "fastCatalog.h"
+#include "fastClientCatalog.h"
+#include "cartReminder.h"
 
 namespace A2ProjetBloc2 {
 
@@ -20,6 +21,7 @@ namespace A2ProjetBloc2 {
 	public:
 		Order(BDD^ mabdd)
 		{
+			this->mabdd = mabdd;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -38,47 +40,27 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Label^ Title;
-	protected:
 	private: System::Windows::Forms::Button^ BtnCatalogForm;
 	private: System::Windows::Forms::Label^ TxtArticleReference;
 	private: System::Windows::Forms::TextBox^ TbOrder;
 	private: System::Windows::Forms::TextBox^ TbBilling;
-
-
 	private: System::Windows::Forms::TextBox^ TbDelivery;
 	private: System::Windows::Forms::Label^ LbOrder;
 	private: System::Windows::Forms::Label^ LbDeliveryAddress;
 	private: System::Windows::Forms::Label^ LbBillingAddress;
 	private: System::Windows::Forms::Label^ LbPriceTaxesFree;
 	private: System::Windows::Forms::Label^ LbVAT;
-
 	private: System::Windows::Forms::Label^ LbPriceWithTaxes;
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::DomainUpDown^ DudQuantity;
 	private: System::Windows::Forms::Button^ BtnValidate;
 	private: System::Windows::Forms::Label^ LbQuantity;
 	private: System::Windows::Forms::Label^ LbPriceValue;
 	private: System::Windows::Forms::Label^ LbVatValue;
 	private: System::Windows::Forms::Label^ LbPriceWithTaxesValue;
-
-
-
-
 	private: System::Windows::Forms::Button^ Btn;
 	private: System::Windows::Forms::Label^ LbIdUserValue;
-
 	private: System::Windows::Forms::Label^ LbNameValue;
-
 	private: System::Windows::Forms::Label^ LbSurnameValue;
-
-
 	private:
 		/// <summary>
 		/// Variable nécessaire au concepteur.
@@ -137,6 +119,7 @@ namespace A2ProjetBloc2 {
 			this->BtnCatalogForm->TabIndex = 1;
 			this->BtnCatalogForm->Text = L"Catalogue";
 			this->BtnCatalogForm->UseVisualStyleBackColor = true;
+			this->BtnCatalogForm->Click += gcnew System::EventHandler(this, &Order::BtnCatalogForm_Click);
 			// 
 			// TxtArticleReference
 			// 
@@ -350,7 +333,7 @@ namespace A2ProjetBloc2 {
 			this->LbSurnameValue->Text = L"Nom";
 			// 
 			// Order
-			// 			
+			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(469, 613);
@@ -386,5 +369,9 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void Order_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void BtnCatalogForm_Click(System::Object^ sender, System::EventArgs^ e) {
+	//fastCatalog^ fastCatalogForm = gcnew fastCatalog(mabdd);
+	//fastCatalogForm->ShowDialog();
+}
 };
 }

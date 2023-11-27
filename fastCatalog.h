@@ -1,4 +1,6 @@
 #pragma once
+#include "BDD.h"
+#include "Order.h"
 
 namespace A2ProjetBloc2 {
 
@@ -14,9 +16,11 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class fastCatalog : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		fastCatalog(void)
+		fastCatalog(BDD^ mabdd)
 		{
+			this->mabdd = mabdd;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -201,10 +205,14 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->TbReference);
 			this->Name = L"fastCatalog";
 			this->Text = L"fastCatalog";
+			this->Load += gcnew System::EventHandler(this, &fastCatalog::fastCatalog_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+	private: System::Void fastCatalog_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	
 	};
 }

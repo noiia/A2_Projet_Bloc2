@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <ctime>
 #include "BDD.h"
 #include "Order.h"
 
@@ -41,8 +43,8 @@ namespace A2ProjetBloc2 {
 			{
 				String^ references = (String^)row[0];
 				System::Diagnostics::Debug::WriteLine("nom " + references);
-				String^ quantity = (String^)row[1];
-				System::Diagnostics::Debug::WriteLine("quantity " + quantity);
+				int quantity = (int)row[1];
+				System::Diagnostics::Debug::WriteLine("quantity " + quantity);;
 				String^ restock = (String^)row[2];
 				System::Diagnostics::Debug::WriteLine("restock date " + restock);
 
@@ -51,7 +53,7 @@ namespace A2ProjetBloc2 {
 				dgvcReferences->Value = references;
 				dgvr->Cells->Add(dgvcReferences);
 				DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
-				dgvcQuantity->Value = quantity;
+				dgvcQuantity->Value = Convert::ToString(quantity);
 				dgvr->Cells->Add(dgvcQuantity);
 				DataGridViewTextBoxCell^ dgvcRestock = gcnew DataGridViewTextBoxCell();
 				dgvcRestock->Value = restock;
@@ -260,10 +262,10 @@ namespace A2ProjetBloc2 {
 		}
 #pragma endregion
 	private: System::Void BtnNewArticleForm_Click(System::Object^ sender, System::EventArgs^ e) {
-		Order^ orderForm = gcnew Order(mabdd);
-		orderForm->ShowDialog();
 		}
 	private: System::Void BtnOrderForm_Click(System::Object^ sender, System::EventArgs^ e) {
+		Order^ orderForm = gcnew Order(mabdd);
+		orderForm->ShowDialog();
 		}
 	private: System::Void BtnBuyerList_Click(System::Object^ sender, System::EventArgs^ e) {
 		}
