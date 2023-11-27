@@ -92,7 +92,7 @@ namespace A2ProjetBloc2 {
 			this->BtnNewClient->TabIndex = 23;
 			this->BtnNewClient->Text = L"Enregistrer un nouveau client";
 			this->BtnNewClient->UseVisualStyleBackColor = true;
-			this->BtnNewClient->Click += gcnew System::EventHandler(this, &searchUser1::BtnNewClient_Click);
+			this->BtnNewClient->Click += gcnew System::EventHandler(this, &SearchUser::BtnNewClient_Click);
 			// 
 			// BtnValidate
 			// 

@@ -376,16 +376,16 @@ namespace A2ProjetBloc2 {
 	}
 	private: System::Void BtnCatalogForm_Click(System::Object^ sender, System::EventArgs^ e) {
 		
-		fastCatalog^ fastCatalogForm = gcnew fastCatalog(mabdd);
+		FastCatalog^ fastCatalogForm = gcnew FastCatalog(mabdd);
 		fastCatalogForm->ShowDialog();
 	}
 
 	private: System::Void BtnFastClientCatalog_Click(System::Object^ sender, System::EventArgs^ e) {
-		fastClientCatalog^ fastClientCatalogForm = gcnew fastClientCatalog(mabdd);
+		FastClientCatalog^ fastClientCatalogForm = gcnew FastClientCatalog(mabdd);
 		fastClientCatalogForm->ShowDialog();
 	}
 private: System::Void BtnValidate_Click(System::Object^ sender, System::EventArgs^ e) {
-	cartReminder^ cartReminderForm = gcnew cartReminder(mabdd);
+	CartReminder^ cartReminderForm = gcnew CartReminder(mabdd);
 	cartReminderForm->ShowDialog();
 	this->Close();
 }
