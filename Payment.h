@@ -1,5 +1,6 @@
 #pragma once
-
+#include "BDD.h"
+#include "Recap.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -14,8 +15,9 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class Payment : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		Payment(void)
+		Payment(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -112,7 +114,7 @@ namespace A2ProjetBloc2 {
 			this->RbtnBlueCard->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->RbtnBlueCard->Location = System::Drawing::Point(24, 178);
-			this->RbtnBlueCard->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->RbtnBlueCard->Margin = System::Windows::Forms::Padding(4);
 			this->RbtnBlueCard->Name = L"RbtnBlueCard";
 			this->RbtnBlueCard->Size = System::Drawing::Size(106, 23);
 			this->RbtnBlueCard->TabIndex = 3;
@@ -127,7 +129,7 @@ namespace A2ProjetBloc2 {
 			this->RbtnBankTransfer->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->RbtnBankTransfer->Location = System::Drawing::Point(180, 178);
-			this->RbtnBankTransfer->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->RbtnBankTransfer->Margin = System::Windows::Forms::Padding(4);
 			this->RbtnBankTransfer->Name = L"RbtnBankTransfer";
 			this->RbtnBankTransfer->Size = System::Drawing::Size(162, 23);
 			this->RbtnBankTransfer->TabIndex = 4;
@@ -142,7 +144,7 @@ namespace A2ProjetBloc2 {
 			this->RbtnBankCheck->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->RbtnBankCheck->Location = System::Drawing::Point(395, 178);
-			this->RbtnBankCheck->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->RbtnBankCheck->Margin = System::Windows::Forms::Padding(4);
 			this->RbtnBankCheck->Name = L"RbtnBankCheck";
 			this->RbtnBankCheck->Size = System::Drawing::Size(85, 23);
 			this->RbtnBankCheck->TabIndex = 5;
@@ -169,7 +171,7 @@ namespace A2ProjetBloc2 {
 			this->CboxDividedPayment->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->CboxDividedPayment->Location = System::Drawing::Point(57, 224);
-			this->CboxDividedPayment->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->CboxDividedPayment->Margin = System::Windows::Forms::Padding(4);
 			this->CboxDividedPayment->Name = L"CboxDividedPayment";
 			this->CboxDividedPayment->Size = System::Drawing::Size(215, 23);
 			this->CboxDividedPayment->TabIndex = 7;
@@ -192,6 +194,7 @@ namespace A2ProjetBloc2 {
 			this->BtnValidation->TabIndex = 9;
 			this->BtnValidation->Text = L"Valider";
 			this->BtnValidation->UseVisualStyleBackColor = true;
+			this->BtnValidation->Click += gcnew System::EventHandler(this, &Payment::BtnValidation_Click);
 			// 
 			// BtnReturn
 			// 
@@ -201,6 +204,7 @@ namespace A2ProjetBloc2 {
 			this->BtnReturn->TabIndex = 10;
 			this->BtnReturn->Text = L"Retour";
 			this->BtnReturn->UseVisualStyleBackColor = true;
+			this->BtnReturn->Click += gcnew System::EventHandler(this, &Payment::BtnReturn_Click);
 			// 
 			// Payment
 			// 
@@ -219,7 +223,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LBIdOrder);
 			this->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Payment";
 			this->Text = L"Payment";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
@@ -234,5 +238,13 @@ private: System::Void RbtnBlueCard_CheckedChanged(System::Object^ sender, System
 	}
 private: System::Void RbtnBankCheck_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void BtnReturn_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
+}
+private: System::Void BtnValidation_Click(System::Object^ sender, System::EventArgs^ e) {
+	Recap^ recapForm = gcnew Recap(mabdd);
+	recapForm->ShowDialog();
+	this->Close();
+}
 };
 }

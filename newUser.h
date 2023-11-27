@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "BDD.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -12,10 +12,11 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description r�sum�e de modifUser
 	/// </summary>
-	public ref class newUser : public System::Windows::Forms::Form
+	public ref class NewUser : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		newUser(void)
+		NewUser(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +28,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilis�es.
 		/// </summary>
-		~newUser()
+		~NewUser()
 		{
 			if (components)
 			{

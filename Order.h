@@ -1,7 +1,8 @@
 #pragma once
-#include "fastCatalog.h"
-#include "fastClientCatalog.h"
-#include "cartReminder.h"
+#include "BDD.h"
+#include "FastCatalog.h"
+#include "FastClientCatalog.h"
+#include "CartReminder.h"
 
 namespace A2ProjetBloc2 {
 
@@ -15,8 +16,6 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description résumée de Order
 	/// </summary>
-
-	ref class fastCatalog;
 
 	public ref class Order : public System::Windows::Forms::Form
 	{
@@ -60,7 +59,8 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Label^ LbPriceValue;
 	private: System::Windows::Forms::Label^ LbVatValue;
 	private: System::Windows::Forms::Label^ LbPriceWithTaxesValue;
-	private: System::Windows::Forms::Button^ Btn;
+	private: System::Windows::Forms::Button^ BtnFastClientCatalog;
+
 	private: System::Windows::Forms::Label^ LbIdUserValue;
 	private: System::Windows::Forms::Label^ LbNameValue;
 	private: System::Windows::Forms::Label^ LbSurnameValue;
@@ -95,7 +95,7 @@ namespace A2ProjetBloc2 {
 			this->LbPriceValue = (gcnew System::Windows::Forms::Label());
 			this->LbVatValue = (gcnew System::Windows::Forms::Label());
 			this->LbPriceWithTaxesValue = (gcnew System::Windows::Forms::Label());
-			this->Btn = (gcnew System::Windows::Forms::Button());
+			this->BtnFastClientCatalog = (gcnew System::Windows::Forms::Button());
 			this->LbIdUserValue = (gcnew System::Windows::Forms::Label());
 			this->LbNameValue = (gcnew System::Windows::Forms::Label());
 			this->LbSurnameValue = (gcnew System::Windows::Forms::Label());
@@ -246,6 +246,7 @@ namespace A2ProjetBloc2 {
 			this->BtnValidate->TabIndex = 13;
 			this->BtnValidate->Text = L"Valider";
 			this->BtnValidate->UseVisualStyleBackColor = true;
+			this->BtnValidate->Click += gcnew System::EventHandler(this, &Order::BtnValidate_Click);
 			// 
 			// LbQuantity
 			// 
@@ -291,17 +292,17 @@ namespace A2ProjetBloc2 {
 			this->LbPriceWithTaxesValue->TabIndex = 17;
 			this->LbPriceWithTaxesValue->Text = L"P_TTC";
 			// 
-			// Btn
+			// BtnFastClientCatalog
 			// 
-			this->Btn->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnFastClientCatalog->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Btn->Location = System::Drawing::Point(305, 182);
-			this->Btn->Name = L"Btn";
-			this->Btn->Size = System::Drawing::Size(104, 49);
-			this->Btn->TabIndex = 18;
-			this->Btn->Text = L"Recherche client";
-			this->Btn->UseVisualStyleBackColor = true;
-			this->Btn->Click += gcnew System::EventHandler(this, &Order::Btn_Click);
+			this->BtnFastClientCatalog->Location = System::Drawing::Point(305, 182);
+			this->BtnFastClientCatalog->Name = L"BtnFastClientCatalog";
+			this->BtnFastClientCatalog->Size = System::Drawing::Size(104, 49);
+			this->BtnFastClientCatalog->TabIndex = 18;
+			this->BtnFastClientCatalog->Text = L"Recherche client";
+			this->BtnFastClientCatalog->UseVisualStyleBackColor = true;
+			this->BtnFastClientCatalog->Click += gcnew System::EventHandler(this, &Order::BtnFastClientCatalog_Click);
 			// 
 			// LbIdUserValue
 			// 
@@ -344,7 +345,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbIdUserValue);
 			this->Controls->Add(this->LbNameValue);
 			this->Controls->Add(this->LbSurnameValue);
-			this->Controls->Add(this->Btn);
+			this->Controls->Add(this->BtnFastClientCatalog);
 			this->Controls->Add(this->LbPriceWithTaxesValue);
 			this->Controls->Add(this->LbVatValue);
 			this->Controls->Add(this->LbPriceValue);
@@ -374,12 +375,19 @@ namespace A2ProjetBloc2 {
 	private: System::Void Order_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void BtnCatalogForm_Click(System::Object^ sender, System::EventArgs^ e) {
-		//fastCatalog^ fastCatalogForm = gcnew fastCatalog(mabdd);
-		//fastCatalogForm->ShowDialog();
+		
+		fastCatalog^ fastCatalogForm = gcnew fastCatalog(mabdd);
+		fastCatalogForm->ShowDialog();
 	}
-	private: System::Void Btn_Click(System::Object^ sender, System::EventArgs^ e) {
-		//fastClientCatalog^ fastClientCatalogForm = gcnew fastClientCatalog(mabdd);
-		//fastClientCatalogForm->ShowDialog();
+
+	private: System::Void BtnFastClientCatalog_Click(System::Object^ sender, System::EventArgs^ e) {
+		fastClientCatalog^ fastClientCatalogForm = gcnew fastClientCatalog(mabdd);
+		fastClientCatalogForm->ShowDialog();
 	}
-	};
+private: System::Void BtnValidate_Click(System::Object^ sender, System::EventArgs^ e) {
+	cartReminder^ cartReminderForm = gcnew cartReminder(mabdd);
+	cartReminderForm->ShowDialog();
+	this->Close();
+}
+};
 }

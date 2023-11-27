@@ -1,5 +1,5 @@
 #pragma once
-
+#include "BDD.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -14,8 +14,9 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class Recap : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		Recap(void)
+		Recap(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -242,6 +243,7 @@ namespace A2ProjetBloc2 {
 			this->BtnClose->TabIndex = 13;
 			this->BtnClose->Text = L"Fermer";
 			this->BtnClose->UseVisualStyleBackColor = true;
+			this->BtnClose->Click += gcnew System::EventHandler(this, &Recap::BtnClose_Click);
 			// 
 			// Recap
 			// 
@@ -269,5 +271,8 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
-	};
+	private: System::Void BtnClose_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+};
 }

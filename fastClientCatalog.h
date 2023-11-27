@@ -1,6 +1,6 @@
 #pragma once
 #include "BDD.h"
-#include "Order.h"
+
 
 namespace A2ProjetBloc2 {
 
@@ -14,11 +14,11 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description résumée de fastClientCatalog
 	/// </summary>
-	public ref class fastClientCatalog : public System::Windows::Forms::Form
+	public ref class FastClientCatalog : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
 	public:
-		fastClientCatalog(BDD^ mabdd)
+		FastClientCatalog(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -30,7 +30,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~fastClientCatalog()
+		~FastClientCatalog()
 		{
 			if (components)
 			{
@@ -115,7 +115,7 @@ namespace A2ProjetBloc2 {
 			this->BtnReturn->TabIndex = 3;
 			this->BtnReturn->Text = L"Retour";
 			this->BtnReturn->UseVisualStyleBackColor = true;
-			this->BtnReturn->Click += gcnew System::EventHandler(this, &fastClientCatalog::BtnReturn_Click);
+			this->BtnReturn->Click += gcnew System::EventHandler(this, &FastClientCatalog::BtnReturn_Click);
 			// 
 			// BtnValidation
 			// 
@@ -128,7 +128,7 @@ namespace A2ProjetBloc2 {
 			this->BtnValidation->TabIndex = 4;
 			this->BtnValidation->Text = L"Valider";
 			this->BtnValidation->UseVisualStyleBackColor = true;
-			this->BtnValidation->Click += gcnew System::EventHandler(this, &fastClientCatalog::BtnValidation_Click);
+			this->BtnValidation->Click += gcnew System::EventHandler(this, &FastClientCatalog::BtnValidation_Click);
 			// 
 			// Title
 			// 

@@ -3,6 +3,8 @@
 #include <ctime>
 #include "BDD.h"
 #include "Order.h"
+#include "SearchStaff.h"
+#include "SearchUser.h"
 
 namespace A2ProjetBloc2 {
 
@@ -268,8 +270,12 @@ namespace A2ProjetBloc2 {
 		orderForm->ShowDialog();
 		}
 	private: System::Void BtnBuyerList_Click(System::Object^ sender, System::EventArgs^ e) {
+		SearchUser^ searchUserForm = gcnew SearchUser(mabdd);
+		searchUserForm->ShowDialog();
 		}
 	private: System::Void BtnEquipeList_Click(System::Object^ sender, System::EventArgs^ e) {
+		SearchStaff^ searchStaffForm = gcnew SearchStaff(mabdd);
+		searchStaffForm->ShowDialog();
 		}
 	};
 }

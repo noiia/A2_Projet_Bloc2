@@ -1,6 +1,6 @@
 #pragma once
 #include "BDD.h"
-#include "Order.h"
+
 
 namespace A2ProjetBloc2 {
 
@@ -14,13 +14,13 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description résumée de fastCatalog
 	/// </summary>
-	public ref class fastCatalog : public System::Windows::Forms::Form
+	public ref class FastCatalog : public System::Windows::Forms::Form
 	{
 	private:
 		BDD^ mabdd;
 	public:
 		// Constructeur prenant BDD en paramètre
-		fastCatalog(BDD^ mabdd)
+		FastCatalog(BDD^ mabdd)
 		{
 			this->mabdd = mabdd;
 			InitializeComponent();
@@ -30,7 +30,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~fastCatalog()
+		~FastCatalog()
 		{
 			if (components)
 			{
@@ -87,6 +87,7 @@ namespace A2ProjetBloc2 {
 			this->TbReference->Name = L"TbReference";
 			this->TbReference->Size = System::Drawing::Size(284, 29);
 			this->TbReference->TabIndex = 0;
+			this->TbReference->TextChanged += gcnew System::EventHandler(this, &FastCatalog::TbReference_TextChanged);
 			// 
 			// LbPrice
 			// 
@@ -204,7 +205,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->TbReference);
 			this->Name = L"fastCatalog";
 			this->Text = L"fastCatalog";
-			this->Load += gcnew System::EventHandler(this, &fastCatalog::fastCatalog_Load);
+			this->Load += gcnew System::EventHandler(this, &FastCatalog::fastCatalog_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -213,5 +214,8 @@ namespace A2ProjetBloc2 {
 	private: System::Void fastCatalog_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	
-	};
+
+private: System::Void TbReference_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+};
 }

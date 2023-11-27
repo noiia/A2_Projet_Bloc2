@@ -10,13 +10,13 @@ namespace A2ProjetBloc2 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description r�sum�e de searchUser
+	/// Description r�sum�e de searchStaff
 	/// </summary>
-	public ref class searchUser : public System::Windows::Forms::Form
+	public ref class SearchStaff : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
 	public:
-		searchUser(BDD^ mabdd)
+		SearchStaff(BDD^ mabdd)
 		{
 			this->mabdd = mabdd;
 			InitializeComponent();
@@ -39,7 +39,7 @@ namespace A2ProjetBloc2 {
 			{
 				String^ references = (String^)row[0];
 				System::Diagnostics::Debug::WriteLine("nom " + references);
-				String^ quantity = (String^)row[1];
+				int quantity = (int)row[1];
 				System::Diagnostics::Debug::WriteLine("quantity " + quantity);
 				String^ restock = (String^)row[2];
 				System::Diagnostics::Debug::WriteLine("restock date " + restock);
@@ -49,7 +49,7 @@ namespace A2ProjetBloc2 {
 				dgvcReferences->Value = references;
 				dgvr->Cells->Add(dgvcReferences);
 				DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
-				dgvcQuantity->Value = quantity;
+				dgvcQuantity->Value = Convert::ToString(quantity);
 				dgvr->Cells->Add(dgvcQuantity);
 				DataGridViewTextBoxCell^ dgvcRestock = gcnew DataGridViewTextBoxCell();
 				dgvcRestock->Value = restock;
@@ -61,14 +61,14 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilis�es.
 		/// </summary>
-		~searchUser()
+	~SearchStaff()
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ LbSearchUser;
+	private: System::Windows::Forms::Label^ LbSearchStaff;
 	private: System::Windows::Forms::Label^ LbName;
 	private: System::Windows::Forms::Label^ LbPostalCode;
 
@@ -108,7 +108,7 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->LbSearchUser = (gcnew System::Windows::Forms::Label());
+			this->LbSearchStaff = (gcnew System::Windows::Forms::Label());
 			this->LbName = (gcnew System::Windows::Forms::Label());
 			this->LbPostalCode = (gcnew System::Windows::Forms::Label());
 			this->LbFirstName = (gcnew System::Windows::Forms::Label());
@@ -123,16 +123,16 @@ namespace A2ProjetBloc2 {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// LbSearchUser
+			// LbSearchStaff
 			// 
-			this->LbSearchUser->AutoSize = true;
-			this->LbSearchUser->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->LbSearchStaff->AutoSize = true;
+			this->LbSearchStaff->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbSearchUser->Location = System::Drawing::Point(194, 9);
-			this->LbSearchUser->Name = L"LbSearchUser";
-			this->LbSearchUser->Size = System::Drawing::Size(290, 28);
-			this->LbSearchUser->TabIndex = 0;
-			this->LbSearchUser->Text = L"Recherche d\'un employé";
+			this->LbSearchStaff->Location = System::Drawing::Point(194, 9);
+			this->LbSearchStaff->Name = L"LbSearchStaff";
+			this->LbSearchStaff->Size = System::Drawing::Size(290, 28);
+			this->LbSearchStaff->TabIndex = 0;
+			this->LbSearchStaff->Text = L"Recherche d\'un employé";
 			// 
 			// LbName
 			// 
@@ -184,7 +184,7 @@ namespace A2ProjetBloc2 {
 				static_cast<System::Byte>(0)));
 			this->TbName->Location = System::Drawing::Point(25, 100);
 			this->TbName->Name = L"TbName";
-			this->TbName->Size = System::Drawing::Size(211, 27);
+			this->TbName->Size = System::Drawing::Size(211, 26);
 			this->TbName->TabIndex = 5;
 			// 
 			// TbFirstName
@@ -193,7 +193,7 @@ namespace A2ProjetBloc2 {
 				static_cast<System::Byte>(0)));
 			this->TbFirstName->Location = System::Drawing::Point(25, 174);
 			this->TbFirstName->Name = L"TbFirstName";
-			this->TbFirstName->Size = System::Drawing::Size(211, 27);
+			this->TbFirstName->Size = System::Drawing::Size(211, 26);
 			this->TbFirstName->TabIndex = 6;
 			// 
 			// TbPostalCode
@@ -202,7 +202,7 @@ namespace A2ProjetBloc2 {
 				static_cast<System::Byte>(0)));
 			this->TbPostalCode->Location = System::Drawing::Point(25, 243);
 			this->TbPostalCode->Name = L"TbPostalCode";
-			this->TbPostalCode->Size = System::Drawing::Size(211, 27);
+			this->TbPostalCode->Size = System::Drawing::Size(211, 26);
 			this->TbPostalCode->TabIndex = 7;
 			// 
 			// TbCity
@@ -211,7 +211,7 @@ namespace A2ProjetBloc2 {
 				static_cast<System::Byte>(0)));
 			this->TbCity->Location = System::Drawing::Point(25, 313);
 			this->TbCity->Name = L"TbCity";
-			this->TbCity->Size = System::Drawing::Size(211, 27);
+			this->TbCity->Size = System::Drawing::Size(211, 26);
 			this->TbCity->TabIndex = 8;
 			// 
 			// DGVSearchStaff
@@ -221,6 +221,7 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchStaff->Name = L"DGVSearchStaff";
 			this->DGVSearchStaff->Size = System::Drawing::Size(378, 365);
 			this->DGVSearchStaff->TabIndex = 9;
+			this->DGVSearchStaff->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &SearchStaff::DGVSearchStaff_CellContentClick);
 			// 
 			// BtnValidate
 			// 
@@ -244,7 +245,7 @@ namespace A2ProjetBloc2 {
 			this->BtnNewStaff->Text = L"Enregistrer un nouvel employé";
 			this->BtnNewStaff->UseVisualStyleBackColor = true;
 			// 
-			// searchUser
+			// SearchStaff
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -260,13 +261,15 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbFirstName);
 			this->Controls->Add(this->LbPostalCode);
 			this->Controls->Add(this->LbName);
-			this->Controls->Add(this->LbSearchUser);
-			this->Name = L"searchUser";
+			this->Controls->Add(this->LbSearchStaff);
+			this->Name = L"SearchStaff";
 			this->Text = L"SearchStaff";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
-	};
+	private: System::Void DGVSearchStaff_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	}
+};
 }

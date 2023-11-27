@@ -1,5 +1,6 @@
 #pragma once
-
+#include "BDD.h"
+#include "Payment.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -12,11 +13,13 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description résumée de cartReminder
 	/// </summary>
-	public ref class cartReminder : public System::Windows::Forms::Form
+	public ref class CartReminder : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		cartReminder(void)
+		CartReminder(BDD^ mabdd)
 		{
+			this->mabdd = mabdd;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -27,7 +30,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~cartReminder()
+		~CartReminder()
 		{
 			if (components)
 			{
@@ -89,6 +92,7 @@ namespace A2ProjetBloc2 {
 			this->BtnReturn->TabIndex = 2;
 			this->BtnReturn->Text = L"Retour";
 			this->BtnReturn->UseVisualStyleBackColor = true;
+			this->BtnReturn->Click += gcnew System::EventHandler(this, &CartReminder::BtnReturn_Click);
 			// 
 			// BtnValidation
 			// 
@@ -100,6 +104,7 @@ namespace A2ProjetBloc2 {
 			this->BtnValidation->TabIndex = 3;
 			this->BtnValidation->Text = L"Valider";
 			this->BtnValidation->UseVisualStyleBackColor = true;
+			this->BtnValidation->Click += gcnew System::EventHandler(this, &CartReminder::BtnValidation_Click);
 			// 
 			// cartReminder
 			// 
@@ -118,5 +123,13 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
-	};
+	private: System::Void BtnReturn_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+private: System::Void BtnValidation_Click(System::Object^ sender, System::EventArgs^ e) {
+	Payment^ paymentForm = gcnew Payment(mabdd);
+	paymentForm->ShowDialog();
+	this->Close();
+}
+};
 }

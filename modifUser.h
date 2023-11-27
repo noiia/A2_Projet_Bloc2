@@ -12,10 +12,10 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description r�sum�e de modifUser
 	/// </summary>
-	public ref class modifUser : public System::Windows::Forms::Form
+	public ref class ModifUser : public System::Windows::Forms::Form
 	{
 	public:
-		modifUser(void)
+		ModifUser(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilis�es.
 		/// </summary>
-		~modifUser()
+		~ModifUser()
 		{
 			if (components)
 			{

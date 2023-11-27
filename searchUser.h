@@ -1,4 +1,6 @@
 #pragma once
+#include "BDD.h"
+#include "NewUser.h"
 
 namespace A2ProjetBloc2 {
 
@@ -12,10 +14,11 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description résumée de searchUser1
 	/// </summary>
-	public ref class searchUser1 : public System::Windows::Forms::Form
+	public ref class SearchUser : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		searchUser1(void)
+		SearchUser(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +30,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~searchUser1()
+		~SearchUser()
 		{
 			if (components)
 			{
@@ -89,6 +92,7 @@ namespace A2ProjetBloc2 {
 			this->BtnNewClient->TabIndex = 23;
 			this->BtnNewClient->Text = L"Enregistrer un nouveau client";
 			this->BtnNewClient->UseVisualStyleBackColor = true;
+			this->BtnNewClient->Click += gcnew System::EventHandler(this, &searchUser1::BtnNewClient_Click);
 			// 
 			// BtnValidate
 			// 
@@ -225,5 +229,9 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
-	};
+	private: System::Void BtnNewClient_Click(System::Object^ sender, System::EventArgs^ e) {
+		NewUser^ newUserForm = gcnew NewUser(mabdd);
+		newUserForm->ShowDialog();
+	}
+};
 }
