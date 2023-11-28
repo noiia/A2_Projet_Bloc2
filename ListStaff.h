@@ -1,6 +1,6 @@
 #pragma once
 #include "BDD.h"
-#include "AddArticle.h"
+#include "AddStaff.h"
 
 namespace A2ProjetBloc2 {
 
@@ -12,13 +12,13 @@ namespace A2ProjetBloc2 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de ListClient
+	/// Description résumée de ListStaff
 	/// </summary>
-	public ref class ListArticles : public System::Windows::Forms::Form
+	public ref class ListStaff : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
 	public:
-		ListArticles(BDD^ mabdd)
+		ListStaff(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -30,7 +30,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~ListArticles()
+		~ListStaff()
 		{
 			if (components)
 			{
@@ -38,8 +38,11 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Button^ BtnModify;
+	private: System::Windows::Forms::Button^ BtnAddStaff;
+
+
 	protected:
-	private: System::Windows::Forms::Button^ BtnAddArticle;
+
 	private: System::Windows::Forms::DataGridView^ DGVSearchStaff;
 	private: System::Windows::Forms::Label^ Title;
 
@@ -47,7 +50,7 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -57,7 +60,7 @@ namespace A2ProjetBloc2 {
 		void InitializeComponent(void)
 		{
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
-			this->BtnAddArticle = (gcnew System::Windows::Forms::Button());
+			this->BtnAddStaff = (gcnew System::Windows::Forms::Button());
 			this->DGVSearchStaff = (gcnew System::Windows::Forms::DataGridView());
 			this->Title = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->BeginInit();
@@ -74,17 +77,17 @@ namespace A2ProjetBloc2 {
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
 			// 
-			// BtnAddArticle
+			// BtnAddStaff
 			// 
-			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnAddStaff->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddArticle->Location = System::Drawing::Point(691, 81);
-			this->BtnAddArticle->Name = L"BtnAddArticle";
-			this->BtnAddArticle->Size = System::Drawing::Size(135, 48);
-			this->BtnAddArticle->TabIndex = 26;
-			this->BtnAddArticle->Text = L"Ajouter";
-			this->BtnAddArticle->UseVisualStyleBackColor = true;
-			this->BtnAddArticle->Click += gcnew System::EventHandler(this, &ListArticles::BtnAddArticle_Click);
+			this->BtnAddStaff->Location = System::Drawing::Point(691, 81);
+			this->BtnAddStaff->Name = L"BtnAddStaff";
+			this->BtnAddStaff->Size = System::Drawing::Size(135, 48);
+			this->BtnAddStaff->TabIndex = 26;
+			this->BtnAddStaff->Text = L"Ajouter";
+			this->BtnAddStaff->UseVisualStyleBackColor = true;
+			this->BtnAddStaff->Click += gcnew System::EventHandler(this, &ListStaff::BtnAddStaff_Click);
 			// 
 			// DGVSearchStaff
 			// 
@@ -99,32 +102,32 @@ namespace A2ProjetBloc2 {
 			this->Title->AutoSize = true;
 			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(351, 9);
+			this->Title->Location = System::Drawing::Point(317, 9);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(211, 28);
+			this->Title->Size = System::Drawing::Size(238, 28);
 			this->Title->TabIndex = 24;
-			this->Title->Text = L"Liste des articles";
+			this->Title->Text = L"Liste des employés";
 			// 
-			// ListArticles
+			// ListStaff
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(889, 623);
 			this->Controls->Add(this->BtnModify);
-			this->Controls->Add(this->BtnAddArticle);
+			this->Controls->Add(this->BtnAddStaff);
 			this->Controls->Add(this->DGVSearchStaff);
 			this->Controls->Add(this->Title);
-			this->Name = L"ListArticles";
-			this->Text = L"ListClient";
+			this->Name = L"ListStaff";
+			this->Text = L"ListStaff";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddArticle^ addArticleForm = gcnew AddArticle(mabdd);
-		addArticleForm->ShowDialog();
+	private: System::Void BtnAddStaff_Click(System::Object^ sender, System::EventArgs^ e) {
+		AddStaff^ addStaffForm = gcnew AddStaff(mabdd);
+		addStaffForm->ShowDialog();
 	}
 };
 }

@@ -3,6 +3,9 @@
 #include <ctime>
 #include "BDD.h"
 #include "ListArticles.h"
+#include "ListCommand.h"
+#include "ListClient.h"
+#include "ListStaff.h"
 
 namespace A2ProjetBloc2 {
 
@@ -90,7 +93,7 @@ namespace A2ProjetBloc2 {
 			this->BtnEquipeList->Name = L"BtnEquipeList";
 			this->BtnEquipeList->Size = System::Drawing::Size(184, 61);
 			this->BtnEquipeList->TabIndex = 1;
-			this->BtnEquipeList->Text = L"Liste des employés";
+			this->BtnEquipeList->Text = L"Liste des Employés";
 			this->BtnEquipeList->UseVisualStyleBackColor = true;
 			this->BtnEquipeList->Click += gcnew System::EventHandler(this, &Menu::BtnEquipeList_Click);
 			// 
@@ -102,7 +105,7 @@ namespace A2ProjetBloc2 {
 			this->BtnBuyerList->Name = L"BtnBuyerList";
 			this->BtnBuyerList->Size = System::Drawing::Size(184, 61);
 			this->BtnBuyerList->TabIndex = 2;
-			this->BtnBuyerList->Text = L"Liste des acheteurs";
+			this->BtnBuyerList->Text = L"Liste des Clients";
 			this->BtnBuyerList->UseVisualStyleBackColor = true;
 			this->BtnBuyerList->Click += gcnew System::EventHandler(this, &Menu::BtnBuyerList_Click);
 			// 
@@ -114,7 +117,7 @@ namespace A2ProjetBloc2 {
 			this->BtnOrderForm->Name = L"BtnOrderForm";
 			this->BtnOrderForm->Size = System::Drawing::Size(184, 61);
 			this->BtnOrderForm->TabIndex = 4;
-			this->BtnOrderForm->Text = L"Nouvelle commande";
+			this->BtnOrderForm->Text = L"Nouvelle Commande";
 			this->BtnOrderForm->UseVisualStyleBackColor = true;
 			this->BtnOrderForm->Click += gcnew System::EventHandler(this, &Menu::BtnOrderForm_Click);
 			// 
@@ -164,13 +167,16 @@ namespace A2ProjetBloc2 {
 		listArticlesForm->ShowDialog();
 		}
 	private: System::Void BtnOrderForm_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		ListCommand^ listCommandForm = gcnew ListCommand(mabdd);
+		listCommandForm->ShowDialog();
 		}
 	private: System::Void BtnBuyerList_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		ListClient^ listClientForm = gcnew ListClient(mabdd);
+		listClientForm->ShowDialog();
 		}
 	private: System::Void BtnEquipeList_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		ListStaff^ listStaffForm = gcnew ListStaff(mabdd);
+		listStaffForm->ShowDialog();
 		}
 	};
 }
