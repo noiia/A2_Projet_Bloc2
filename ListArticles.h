@@ -1,6 +1,7 @@
 #pragma once
 #include "BDD.h"
 #include "AddArticle.h"
+#include "ArticleRepository.h"
 
 namespace A2ProjetBloc2 {
 
@@ -17,6 +18,7 @@ namespace A2ProjetBloc2 {
 	public ref class ListArticles : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
+		ArticleRepository^ articleRepository;
 	public:
 		ListArticles(BDD^ mabdd)
 		{
@@ -24,8 +26,37 @@ namespace A2ProjetBloc2 {
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
+		DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
+		dgvtbcIdArticle->Name = "Références";
+		this->DGVSearchStaff->Columns->Add(dgvtbcIdArticle);
+		DataGridViewTextBoxColumn^ dgvtbcName = gcnew DataGridViewTextBoxColumn();
+		dgvtbcName->Name = "Nom";
+		this->DGVSearchStaff->Columns->Add(dgvtbcName);
+		DataGridViewTextBoxColumn^ dgvtbcPriceWT = gcnew DataGridViewTextBoxColumn();
+		dgvtbcPriceWT->Name = "Prix HT";
+		this->DGVSearchStaff->Columns->Add(dgvtbcPriceWT);
+		articleRepository = gcnew ArticleRepository(mabdd);
+		this->reload();
+			
 		}
-
+		void reload() {
+			System::Collections::Generic::List<Article^>^ articles = articleRepository->getArticle();
+			this->DGVSearchStaff->Rows->Clear();
+			for each (Article^ a in articles) {
+				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+				DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
+				dgvcIdArticle->Value = a->getIdArticle();
+				dgvr->Cells->Add(dgvcIdArticle);
+				DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
+				dgvcName->Value = a->getName() ;
+				dgvr->Cells->Add(dgvcName);
+				DataGridViewTextBoxCell^ dgvcPriceWT = gcnew DataGridViewTextBoxCell();
+				dgvcPriceWT->Value = Convert::ToString(a->getPriceWT());
+				dgvr->Cells->Add(dgvcPriceWT);
+				dgvr->Tag = a;
+				this->DGVSearchStaff->Rows->Add(dgvr);
+			}
+		}
 	protected:
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
@@ -38,12 +69,9 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Button^ BtnModify;
-	protected:
-	private: System::Windows::Forms::Button^ BtnAddArticle;
-	private: System::Windows::Forms::DataGridView^ DGVSearchStaff;
-	private: System::Windows::Forms::Label^ Title;
-
-	private:
+			 System::Windows::Forms::Button^ BtnAddArticle;
+			 System::Windows::Forms::DataGridView^ DGVSearchStaff;
+			 System::Windows::Forms::Label^ Title;			
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
@@ -123,8 +151,12 @@ namespace A2ProjetBloc2 {
 		}
 #pragma endregion
 	private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddArticle^ addArticleForm = gcnew AddArticle(mabdd);
+		Article^ newArticle = gcnew Article();
+		AddArticle^ addArticleForm = gcnew AddArticle(newArticle);
 		addArticleForm->ShowDialog();
+		System::Diagnostics::Debug::WriteLine(newArticle->ToString());
+		articleRepository->insertArticle(newArticle);
+		this->reload();
 	}
 };
 }

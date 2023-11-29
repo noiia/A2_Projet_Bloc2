@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "BDD.h"
+#include "Article.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -14,11 +14,19 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class AddArticle : public System::Windows::Forms::Form
 	{
-		BDD^ mabdd;
+		 System::Windows::Forms::NumericUpDown^ NudPriceVAT;
+		 System::Windows::Forms::NumericUpDown^ NudPriceWT;
+		 System::Windows::Forms::NumericUpDown^ NudPriceATI;
+		 System::Windows::Forms::DateTimePicker^ DtpTreshold;
+		 System::Windows::Forms::NumericUpDown^ NudStock;
+		 System::Windows::Forms::TextBox^ TboxIDReference;
+		 System::Windows::Forms::Label^ LbIdArticle;
+
+		 Article^ article;
 	public:
-		AddArticle(BDD^ mabdd)
+		AddArticle(Article^ article)
 		{
-			this->mabdd = mabdd;
+			this->article = article;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -37,32 +45,19 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Label^ Title;
-	protected:
+			 System::Windows::Forms::Label^ LbName;
+			 System::Windows::Forms::Label^ LbTresholdDate;
+			 System::Windows::Forms::Label^ LbQuantity;			
+			 System::Windows::Forms::Label^ LbVAT;
+			 System::Windows::Forms::Label^ LbPriceWithoutTax;
+			 System::Windows::Forms::Label^ LbPriceWithTaxes;
+			 System::Windows::Forms::TextBox^ TboxName;
 
-	protected:
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ LbTresholdDate;
-
-	private: System::Windows::Forms::Label^ LbQuantity;
-
-	private: System::Windows::Forms::Label^ LbVAT;
-	private: System::Windows::Forms::Label^ LbPriceWithoutTax;
-	private: System::Windows::Forms::Label^ LbPriceWithTaxes;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::TextBox^ TbPriceWithoutTax;
-	private: System::Windows::Forms::TextBox^ TbPriceWithTaxes;
-	private: System::Windows::Forms::TextBox^ TbQuantity;
-	private: System::Windows::Forms::TextBox^ TbTresholdDate;
-
-
-
-
-	private: System::Windows::Forms::ComboBox^ CbbVAT;
-	private: System::Windows::Forms::Button^ BtnAddArticle;
-	private: System::Windows::Forms::Button^ BtnCancel;
-
-
-	private:
+			 System::Windows::Forms::Button^ BtnAddArticle;
+			 System::Windows::Forms::Button^ BtnCancel;
+			
+			
+			
 		/// <summary>
 		/// Variable n�cessaire au concepteur.
 		/// </summary>
@@ -76,20 +71,26 @@ namespace A2ProjetBloc2 {
 		void InitializeComponent(void)
 		{
 			this->Title = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->LbName = (gcnew System::Windows::Forms::Label());
 			this->LbTresholdDate = (gcnew System::Windows::Forms::Label());
 			this->LbQuantity = (gcnew System::Windows::Forms::Label());
 			this->LbVAT = (gcnew System::Windows::Forms::Label());
 			this->LbPriceWithoutTax = (gcnew System::Windows::Forms::Label());
 			this->LbPriceWithTaxes = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->TbPriceWithoutTax = (gcnew System::Windows::Forms::TextBox());
-			this->TbPriceWithTaxes = (gcnew System::Windows::Forms::TextBox());
-			this->TbQuantity = (gcnew System::Windows::Forms::TextBox());
-			this->TbTresholdDate = (gcnew System::Windows::Forms::TextBox());
-			this->CbbVAT = (gcnew System::Windows::Forms::ComboBox());
+			this->TboxName = (gcnew System::Windows::Forms::TextBox());
 			this->BtnAddArticle = (gcnew System::Windows::Forms::Button());
 			this->BtnCancel = (gcnew System::Windows::Forms::Button());
+			this->NudPriceVAT = (gcnew System::Windows::Forms::NumericUpDown());
+			this->NudPriceWT = (gcnew System::Windows::Forms::NumericUpDown());
+			this->NudPriceATI = (gcnew System::Windows::Forms::NumericUpDown());
+			this->DtpTreshold = (gcnew System::Windows::Forms::DateTimePicker());
+			this->NudStock = (gcnew System::Windows::Forms::NumericUpDown());
+			this->TboxIDReference = (gcnew System::Windows::Forms::TextBox());
+			this->LbIdArticle = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceVAT))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceWT))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceATI))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudStock))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// Title
@@ -97,29 +98,32 @@ namespace A2ProjetBloc2 {
 			this->Title->AutoSize = true;
 			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(32, 19);
+			this->Title->Location = System::Drawing::Point(19, 26);
+			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Title->Name = L"Title";
 			this->Title->Size = System::Drawing::Size(299, 28);
 			this->Title->TabIndex = 0;
 			this->Title->Text = L"Ajouter un nouvel article";
 			// 
-			// label1
+			// LbName
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbName->AutoSize = true;
+			this->LbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(12, 69);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(44, 19);
-			this->label1->TabIndex = 1;
-			this->label1->Text = L"Nom";
+			this->LbName->Location = System::Drawing::Point(20, 139);
+			this->LbName->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbName->Name = L"LbName";
+			this->LbName->Size = System::Drawing::Size(44, 19);
+			this->LbName->TabIndex = 1;
+			this->LbName->Text = L"Nom";
 			// 
 			// LbTresholdDate
 			// 
 			this->LbTresholdDate->AutoSize = true;
 			this->LbTresholdDate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbTresholdDate->Location = System::Drawing::Point(12, 432);
+			this->LbTresholdDate->Location = System::Drawing::Point(20, 518);
+			this->LbTresholdDate->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbTresholdDate->Name = L"LbTresholdDate";
 			this->LbTresholdDate->Size = System::Drawing::Size(228, 19);
 			this->LbTresholdDate->TabIndex = 2;
@@ -130,7 +134,8 @@ namespace A2ProjetBloc2 {
 			this->LbQuantity->AutoSize = true;
 			this->LbQuantity->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbQuantity->Location = System::Drawing::Point(12, 359);
+			this->LbQuantity->Location = System::Drawing::Point(22, 438);
+			this->LbQuantity->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbQuantity->Name = L"LbQuantity";
 			this->LbQuantity->Size = System::Drawing::Size(75, 19);
 			this->LbQuantity->TabIndex = 3;
@@ -141,7 +146,8 @@ namespace A2ProjetBloc2 {
 			this->LbVAT->AutoSize = true;
 			this->LbVAT->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbVAT->Location = System::Drawing::Point(12, 215);
+			this->LbVAT->Location = System::Drawing::Point(20, 284);
+			this->LbVAT->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbVAT->Name = L"LbVAT";
 			this->LbVAT->Size = System::Drawing::Size(39, 19);
 			this->LbVAT->TabIndex = 4;
@@ -152,7 +158,8 @@ namespace A2ProjetBloc2 {
 			this->LbPriceWithoutTax->AutoSize = true;
 			this->LbPriceWithoutTax->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbPriceWithoutTax->Location = System::Drawing::Point(12, 141);
+			this->LbPriceWithoutTax->Location = System::Drawing::Point(18, 208);
+			this->LbPriceWithoutTax->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbPriceWithoutTax->Name = L"LbPriceWithoutTax";
 			this->LbPriceWithoutTax->Size = System::Drawing::Size(61, 19);
 			this->LbPriceWithoutTax->TabIndex = 5;
@@ -163,111 +170,157 @@ namespace A2ProjetBloc2 {
 			this->LbPriceWithTaxes->AutoSize = true;
 			this->LbPriceWithTaxes->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbPriceWithTaxes->Location = System::Drawing::Point(12, 295);
+			this->LbPriceWithTaxes->Location = System::Drawing::Point(18, 358);
+			this->LbPriceWithTaxes->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbPriceWithTaxes->Name = L"LbPriceWithTaxes";
 			this->LbPriceWithTaxes->Size = System::Drawing::Size(68, 19);
 			this->LbPriceWithTaxes->TabIndex = 6;
 			this->LbPriceWithTaxes->Text = L"Prix TTC";
 			// 
-			// textBox1
+			// TboxName
 			// 
-			this->textBox1->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TboxName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->textBox1->Location = System::Drawing::Point(16, 91);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(315, 26);
-			this->textBox1->TabIndex = 7;
-			// 
-			// TbPriceWithoutTax
-			// 
-			this->TbPriceWithoutTax->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->TbPriceWithoutTax->Location = System::Drawing::Point(16, 163);
-			this->TbPriceWithoutTax->Name = L"TbPriceWithoutTax";
-			this->TbPriceWithoutTax->Size = System::Drawing::Size(315, 26);
-			this->TbPriceWithoutTax->TabIndex = 8;
-			// 
-			// TbPriceWithTaxes
-			// 
-			this->TbPriceWithTaxes->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->TbPriceWithTaxes->Location = System::Drawing::Point(16, 317);
-			this->TbPriceWithTaxes->Name = L"TbPriceWithTaxes";
-			this->TbPriceWithTaxes->Size = System::Drawing::Size(315, 26);
-			this->TbPriceWithTaxes->TabIndex = 9;
-			// 
-			// TbQuantity
-			// 
-			this->TbQuantity->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->TbQuantity->Location = System::Drawing::Point(16, 381);
-			this->TbQuantity->Name = L"TbQuantity";
-			this->TbQuantity->Size = System::Drawing::Size(315, 26);
-			this->TbQuantity->TabIndex = 10;
-			// 
-			// TbTresholdDate
-			// 
-			this->TbTresholdDate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->TbTresholdDate->Location = System::Drawing::Point(16, 454);
-			this->TbTresholdDate->Name = L"TbTresholdDate";
-			this->TbTresholdDate->Size = System::Drawing::Size(315, 26);
-			this->TbTresholdDate->TabIndex = 11;
-			// 
-			// CbbVAT
-			// 
-			this->CbbVAT->FormattingEnabled = true;
-			this->CbbVAT->Location = System::Drawing::Point(16, 237);
-			this->CbbVAT->Name = L"CbbVAT";
-			this->CbbVAT->Size = System::Drawing::Size(316, 21);
-			this->CbbVAT->TabIndex = 12;
-			this->CbbVAT->SelectedIndexChanged += gcnew System::EventHandler(this, &AddArticle::CbbVAT_SelectedIndexChanged);
+			this->TboxName->Location = System::Drawing::Point(24, 162);
+			this->TboxName->Margin = System::Windows::Forms::Padding(4);
+			this->TboxName->Name = L"TboxName";
+			this->TboxName->Size = System::Drawing::Size(270, 26);
+			this->TboxName->TabIndex = 7;
 			// 
 			// BtnAddArticle
 			// 
 			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddArticle->Location = System::Drawing::Point(52, 520);
+			this->BtnAddArticle->Location = System::Drawing::Point(15, 606);
+			this->BtnAddArticle->Margin = System::Windows::Forms::Padding(4);
 			this->BtnAddArticle->Name = L"BtnAddArticle";
-			this->BtnAddArticle->Size = System::Drawing::Size(111, 42);
+			this->BtnAddArticle->Size = System::Drawing::Size(120, 44);
 			this->BtnAddArticle->TabIndex = 13;
 			this->BtnAddArticle->Text = L"Ajouter";
 			this->BtnAddArticle->UseVisualStyleBackColor = true;
+			this->BtnAddArticle->Click += gcnew System::EventHandler(this, &AddArticle::BtnAddArticle_Click);
 			// 
 			// BtnCancel
 			// 
 			this->BtnCancel->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnCancel->Location = System::Drawing::Point(232, 520);
+			this->BtnCancel->Location = System::Drawing::Point(186, 606);
+			this->BtnCancel->Margin = System::Windows::Forms::Padding(4);
 			this->BtnCancel->Name = L"BtnCancel";
-			this->BtnCancel->Size = System::Drawing::Size(111, 42);
+			this->BtnCancel->Size = System::Drawing::Size(120, 44);
 			this->BtnCancel->TabIndex = 14;
 			this->BtnCancel->Text = L"Annuler";
 			this->BtnCancel->UseVisualStyleBackColor = true;
 			this->BtnCancel->Click += gcnew System::EventHandler(this, &AddArticle::BtnCancel_Click);
 			// 
+			// NudPriceVAT
+			// 
+			this->NudPriceVAT->DecimalPlaces = 2;
+			this->NudPriceVAT->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->NudPriceVAT->Location = System::Drawing::Point(24, 319);
+			this->NudPriceVAT->Margin = System::Windows::Forms::Padding(4);
+			this->NudPriceVAT->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
+			this->NudPriceVAT->Name = L"NudPriceVAT";
+			this->NudPriceVAT->Size = System::Drawing::Size(272, 25);
+			this->NudPriceVAT->TabIndex = 16;
+			// 
+			// NudPriceWT
+			// 
+			this->NudPriceWT->DecimalPlaces = 2;
+			this->NudPriceWT->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->NudPriceWT->Location = System::Drawing::Point(24, 240);
+			this->NudPriceWT->Margin = System::Windows::Forms::Padding(4);
+			this->NudPriceWT->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
+			this->NudPriceWT->Name = L"NudPriceWT";
+			this->NudPriceWT->Size = System::Drawing::Size(272, 25);
+			this->NudPriceWT->TabIndex = 17;
+			// 
+			// NudPriceATI
+			// 
+			this->NudPriceATI->DecimalPlaces = 2;
+			this->NudPriceATI->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->NudPriceATI->Location = System::Drawing::Point(24, 395);
+			this->NudPriceATI->Margin = System::Windows::Forms::Padding(4);
+			this->NudPriceATI->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
+			this->NudPriceATI->Name = L"NudPriceATI";
+			this->NudPriceATI->Size = System::Drawing::Size(272, 25);
+			this->NudPriceATI->TabIndex = 18;
+			// 
+			// DtpTreshold
+			// 
+			this->DtpTreshold->Location = System::Drawing::Point(24, 555);
+			this->DtpTreshold->Margin = System::Windows::Forms::Padding(4);
+			this->DtpTreshold->Name = L"DtpTreshold";
+			this->DtpTreshold->Size = System::Drawing::Size(298, 25);
+			this->DtpTreshold->TabIndex = 19;
+			this->DtpTreshold->Value = System::DateTime(2023, 11, 28);
+			// 
+			// NudStock
+			// 
+			this->NudStock->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->NudStock->Location = System::Drawing::Point(24, 476);
+			this->NudStock->Margin = System::Windows::Forms::Padding(4);
+			this->NudStock->Name = L"NudStock";
+			this->NudStock->Size = System::Drawing::Size(272, 25);
+			this->NudStock->TabIndex = 20;
+			// 
+			// TboxIDReference
+			// 
+			this->TboxIDReference->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TboxIDReference->Location = System::Drawing::Point(22, 99);
+			this->TboxIDReference->Margin = System::Windows::Forms::Padding(4);
+			this->TboxIDReference->Name = L"TboxIDReference";
+			this->TboxIDReference->Size = System::Drawing::Size(270, 26);
+			this->TboxIDReference->TabIndex = 21;
+			// 
+			// LbIdArticle
+			// 
+			this->LbIdArticle->AutoSize = true;
+			this->LbIdArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbIdArticle->Location = System::Drawing::Point(22, 76);
+			this->LbIdArticle->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbIdArticle->Name = L"LbIdArticle";
+			this->LbIdArticle->Size = System::Drawing::Size(160, 19);
+			this->LbIdArticle->TabIndex = 22;
+			this->LbIdArticle->Text = L"Référence catalogue";
+			// 
 			// AddArticle
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(377, 585);
+			this->ClientSize = System::Drawing::Size(354, 735);
+			this->Controls->Add(this->LbIdArticle);
+			this->Controls->Add(this->TboxIDReference);
+			this->Controls->Add(this->NudStock);
+			this->Controls->Add(this->DtpTreshold);
+			this->Controls->Add(this->NudPriceATI);
+			this->Controls->Add(this->NudPriceWT);
+			this->Controls->Add(this->NudPriceVAT);
 			this->Controls->Add(this->BtnCancel);
 			this->Controls->Add(this->BtnAddArticle);
-			this->Controls->Add(this->CbbVAT);
-			this->Controls->Add(this->TbTresholdDate);
-			this->Controls->Add(this->TbQuantity);
-			this->Controls->Add(this->TbPriceWithTaxes);
-			this->Controls->Add(this->TbPriceWithoutTax);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->TboxName);
 			this->Controls->Add(this->LbPriceWithTaxes);
 			this->Controls->Add(this->LbPriceWithoutTax);
 			this->Controls->Add(this->LbVAT);
 			this->Controls->Add(this->LbQuantity);
 			this->Controls->Add(this->LbTresholdDate);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->LbName);
 			this->Controls->Add(this->Title);
+			this->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"AddArticle";
 			this->Text = L"AddArticle";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceVAT))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceWT))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceATI))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudStock))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -276,6 +329,16 @@ namespace A2ProjetBloc2 {
 	private: System::Void CbbVAT_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
+}
+private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->article->setIdArticle(this->TboxIDReference->Text);
+	this->article->setName(this->TboxName->Text);
+	this->article->setPriceWT((Decimal^)this->NudPriceWT->Value);
+	this->article->setVAT((Decimal^)this->NudPriceVAT->Value);
+	this->article->setPriceATI((Decimal^)this->NudPriceATI->Value);
+	this->article->setStock((int)this->NudStock->Value);
+	this->article->setTresholdDate(this->DtpTreshold->Value);
 	this->Close();
 }
 };

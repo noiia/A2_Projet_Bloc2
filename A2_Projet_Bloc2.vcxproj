@@ -115,12 +115,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AddArticle.cpp" />
+    <ClCompile Include="AddArticleToCommand.cpp" />
     <ClCompile Include="AddClient.cpp" />
-    <ClCompile Include="AddCommand.cpp" />
+    <ClCompile Include="Cart.cpp" />
     <ClCompile Include="AddStaff.cpp" />
     <ClCompile Include="BDD.cpp" />
     <ClCompile Include="ListClient.cpp" />
-    <ClCompile Include="ListCommand.cpp" />
+    <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="ListStaff.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -129,10 +130,15 @@
     <ClInclude Include="AddArticle.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="AddArticleToCommand.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="AddClient.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="AddCommand.h">
+    <ClInclude Include="Article.h" />
+    <ClInclude Include="ArticleRepository.h" />
+    <ClInclude Include="Cart.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="AddStaff.h">
@@ -145,7 +151,7 @@
     <ClInclude Include="ListClient.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="ListCommand.h">
+    <ClInclude Include="CommandHistory.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ListStaff.h">
@@ -170,11 +176,14 @@
     <EmbeddedResource Include="AddArticle.resx">
       <DependentUpon>AddArticle.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddArticleToCommand.resx">
+      <DependentUpon>AddArticleToCommand.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddClient.resx">
       <DependentUpon>AddClient.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddCommand.resx">
-      <DependentUpon>AddCommand.h</DependentUpon>
+    <EmbeddedResource Include="Cart.resx">
+      <DependentUpon>Cart.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddStaff.resx">
       <DependentUpon>AddStaff.h</DependentUpon>
@@ -185,8 +194,8 @@
     <EmbeddedResource Include="ListClient.resx">
       <DependentUpon>ListClient.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListCommand.resx">
-      <DependentUpon>ListCommand.h</DependentUpon>
+    <EmbeddedResource Include="CommandHistory.resx">
+      <DependentUpon>CommandHistory.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListStaff.resx">
       <DependentUpon>ListStaff.h</DependentUpon>

@@ -1,6 +1,6 @@
 #pragma once
 #include "BDD.h"
-#include "AddCommand.h"
+#include "Cart.h"
 
 namespace A2ProjetBloc2 {
 
@@ -12,25 +12,76 @@ namespace A2ProjetBloc2 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Description résumée de ListCommand
+	/// Description résumée de CommandHistory
 	/// </summary>
-	public ref class ListCommand : public System::Windows::Forms::Form
+	public ref class CommandHistory : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
 	public:
-		ListCommand(BDD^ mabdd)
+		CommandHistory(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
+			DataGridViewTextBoxColumn^ dgvtbcReference = gcnew DataGridViewTextBoxColumn();
+			dgvtbcReference->Name = "Référence";
+			this->DGVOrderHistory->Columns->Add(dgvtbcReference);
+			DataGridViewTextBoxColumn^ dgvtbcClient = gcnew DataGridViewTextBoxColumn();
+			dgvtbcClient->Name = "Client";
+			this->DGVOrderHistory->Columns->Add(dgvtbcClient);
+			DataGridViewTextBoxColumn^ dgvtbcPriceATI = gcnew DataGridViewTextBoxColumn();
+			dgvtbcPriceATI->Name = "Prix T.T.C.";
+			this->DGVOrderHistory->Columns->Add(dgvtbcPriceATI);
+
+			DataSet^ ds = mabdd->executeQuery("SELECT * FROM Ordering");
+
+			for each (DataRow ^ row in ds->Tables[0]->Rows)
+			{
+
+				String^ Name = (String^)row[0];
+				//System::Diagnostics::Debug::WriteLine("Nom " + Name);
+				int Hp = (int)row[1];
+				//System::Diagnostics::Debug::WriteLine("Pv " + Hp);
+				int Atk = (int)row[2];
+				//System::Diagnostics::Debug::WriteLine("Atk " + Atk);
+				int Lv = (int)row[3];
+				//System::Diagnostics::Debug::WriteLine("Lv " + Lv);
+				int ID = (int)row[4];
+				//System::Diagnostics::Debug::WriteLine("ID " + ID);
+
+				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+				DataGridViewTextBoxCell^ dgvtbcName = gcnew DataGridViewTextBoxCell();
+				dgvtbcName->Value = Name;
+				dgvr->Cells->Add(dgvtbcName);
+
+				DataGridViewTextBoxCell^ dgvtbcHp = gcnew DataGridViewTextBoxCell();
+				dgvtbcHp->Value = Hp;
+				dgvr->Cells->Add(dgvtbcHp);
+
+				DataGridViewTextBoxCell^ dgvtbcAtk = gcnew DataGridViewTextBoxCell();
+				dgvtbcAtk->Value = Atk;
+				dgvr->Cells->Add(dgvtbcAtk);
+
+				DataGridViewTextBoxCell^ dgvtbcLv = gcnew DataGridViewTextBoxCell();
+				dgvtbcLv->Value = Lv;
+				dgvr->Cells->Add(dgvtbcLv);
+
+				DataGridViewTextBoxCell^ dgvtbcID = gcnew DataGridViewTextBoxCell();
+				dgvtbcID->Value = ID;
+				dgvr->Cells->Add(dgvtbcID);
+
+				this->DGVOrderHistory->Rows->Add(dgvr);
+
+
+			}
 		}
 
 	protected:
 		/// <summary>
 		/// Nettoyage des ressources utilisées.
 		/// </summary>
-		~ListCommand()
+		~CommandHistory()
 		{
 			if (components)
 			{
@@ -41,7 +92,7 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Button^ BtnAddCommand;
 	protected:
 
-	private: System::Windows::Forms::DataGridView^ DGVSearchStaff;
+	private: System::Windows::Forms::DataGridView^ DGVOrderHistory;
 	private: System::Windows::Forms::Label^ Title;
 
 	private:
@@ -59,9 +110,9 @@ namespace A2ProjetBloc2 {
 		{
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
 			this->BtnAddCommand = (gcnew System::Windows::Forms::Button());
-			this->DGVSearchStaff = (gcnew System::Windows::Forms::DataGridView());
+			this->DGVOrderHistory = (gcnew System::Windows::Forms::DataGridView());
 			this->Title = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVOrderHistory))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// BtnModify
@@ -85,15 +136,15 @@ namespace A2ProjetBloc2 {
 			this->BtnAddCommand->TabIndex = 26;
 			this->BtnAddCommand->Text = L"Ajouter";
 			this->BtnAddCommand->UseVisualStyleBackColor = true;
-			this->BtnAddCommand->Click += gcnew System::EventHandler(this, &ListCommand::BtnAddCommand_Click);
+			this->BtnAddCommand->Click += gcnew System::EventHandler(this, &CommandHistory::BtnAddCommand_Click);
 			// 
 			// DGVSearchStaff
 			// 
-			this->DGVSearchStaff->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVSearchStaff->Location = System::Drawing::Point(26, 56);
-			this->DGVSearchStaff->Name = L"DGVSearchStaff";
-			this->DGVSearchStaff->Size = System::Drawing::Size(603, 526);
-			this->DGVSearchStaff->TabIndex = 25;
+			this->DGVOrderHistory->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->DGVOrderHistory->Location = System::Drawing::Point(26, 56);
+			this->DGVOrderHistory->Name = L"DGVSearchStaff";
+			this->DGVOrderHistory->Size = System::Drawing::Size(603, 526);
+			this->DGVOrderHistory->TabIndex = 25;
 			// 
 			// Title
 			// 
@@ -113,19 +164,19 @@ namespace A2ProjetBloc2 {
 			this->ClientSize = System::Drawing::Size(889, 623);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->BtnAddCommand);
-			this->Controls->Add(this->DGVSearchStaff);
+			this->Controls->Add(this->DGVOrderHistory);
 			this->Controls->Add(this->Title);
 			this->Name = L"ListCommand";
 			this->Text = L"ListCommand";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVOrderHistory))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddCommand^ addCommandForm = gcnew AddCommand(mabdd);
-		addCommandForm->ShowDialog();
+		Cart^ cartForm = gcnew Cart(mabdd);
+		cartForm->ShowDialog();
 	}
 };
 }

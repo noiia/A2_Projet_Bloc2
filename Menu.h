@@ -3,7 +3,7 @@
 #include <ctime>
 #include "BDD.h"
 #include "ListArticles.h"
-#include "ListCommand.h"
+#include "CommandHistory.h"
 #include "ListClient.h"
 #include "ListStaff.h"
 
@@ -44,16 +44,16 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Label^ Title;
-	private: System::Windows::Forms::Button^ BtnEquipeList;
-	private: System::Windows::Forms::Button^ BtnBuyerList;
-
-	private: System::Windows::Forms::Button^ BtnOrderForm;
-	private: System::Windows::Forms::Button^ BtnArticleForm;
-
-
-	private: System::Windows::Forms::Button^ BtnStats;
-
-	private:
+			 System::Windows::Forms::Button^ BtnEquipeList;
+			 System::Windows::Forms::Button^ BtnBuyerList;
+			
+			 System::Windows::Forms::Button^ BtnOrderForm;
+			 System::Windows::Forms::Button^ BtnArticleForm;
+			
+			
+			 System::Windows::Forms::Button^ BtnStats;
+			
+			
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
@@ -167,8 +167,8 @@ namespace A2ProjetBloc2 {
 		listArticlesForm->ShowDialog();
 		}
 	private: System::Void BtnOrderForm_Click(System::Object^ sender, System::EventArgs^ e) {
-		ListCommand^ listCommandForm = gcnew ListCommand(mabdd);
-		listCommandForm->ShowDialog();
+		CommandHistory^ CommandHistoryForm = gcnew CommandHistory(mabdd);
+		CommandHistoryForm->ShowDialog();
 		}
 	private: System::Void BtnBuyerList_Click(System::Object^ sender, System::EventArgs^ e) {
 		ListClient^ listClientForm = gcnew ListClient(mabdd);
