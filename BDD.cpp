@@ -51,6 +51,21 @@ int BDD::executeInsert(String^ sql)
     System::Diagnostics::Debug::WriteLine("REQSQL: " + sql);
     SqlCommand^ command = gcnew SqlCommand(sql + ";SELECT @@IDENTITY", this->connection);
     // Execution
-    int idGenere = Decimal::ToInt32((Decimal)command->ExecuteScalar());
-    return idGenere;
+    try {
+        Object^ result = command->ExecuteScalar();
+        if (result != nullptr){
+            try{
+                return Convert::ToInt32(result);
+            }catch (InvalidCastException^){
+                System::Diagnostics::Debug::WriteLine("La conversion en int a échoué.");
+                return -1;
+            }
+        } else {
+            System::Diagnostics::Debug::WriteLine("Le résultat est null.");
+            return -1;
+        }
+    } catch (Exception^ ex) {
+        System::Diagnostics::Debug::WriteLine("Erreur lors de l'exécution de la requête : " + ex->Message);
+        return -1;
+    }
 }

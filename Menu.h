@@ -66,6 +66,7 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Menu::typeid));
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->BtnEquipeList = (gcnew System::Windows::Forms::Button());
 			this->BtnBuyerList = (gcnew System::Windows::Forms::Button());
@@ -155,6 +156,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->BtnBuyerList);
 			this->Controls->Add(this->BtnEquipeList);
 			this->Controls->Add(this->Title);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Menu";
 			this->Text = L"Turbostock";
 			this->ResumeLayout(false);

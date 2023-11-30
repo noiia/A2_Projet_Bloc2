@@ -97,6 +97,9 @@
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg">
       <Filter>Fichiers de ressources</Filter>
     </Image>
+    <Image Include="Assets\1486504331-burn-fire-flame-danger-burning-hot_81317.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="BDDCreations.sql" />

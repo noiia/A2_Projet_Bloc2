@@ -89,6 +89,7 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddClient::typeid));
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->LbSurname = (gcnew System::Windows::Forms::Label());
 			this->LbCompagnyPhone = (gcnew System::Windows::Forms::Label());
@@ -318,6 +319,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbCompagnyPhone);
 			this->Controls->Add(this->LbSurname);
 			this->Controls->Add(this->Title);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"AddClient";
 			this->Text = L"AddClient";
 			this->ResumeLayout(false);

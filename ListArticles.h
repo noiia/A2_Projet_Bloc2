@@ -35,6 +35,19 @@ namespace A2ProjetBloc2 {
 		DataGridViewTextBoxColumn^ dgvtbcPriceWT = gcnew DataGridViewTextBoxColumn();
 		dgvtbcPriceWT->Name = "Prix HT";
 		this->DGVSearchStaff->Columns->Add(dgvtbcPriceWT);
+		DataGridViewTextBoxColumn^ dgvtbcVAT = gcnew DataGridViewTextBoxColumn();
+		dgvtbcVAT->Name = "TVA";
+		this->DGVSearchStaff->Columns->Add(dgvtbcVAT);
+		DataGridViewTextBoxColumn^ dgvtbcPriceATI = gcnew DataGridViewTextBoxColumn();
+		dgvtbcPriceATI->Name = "Prix TTC";
+		this->DGVSearchStaff->Columns->Add(dgvtbcPriceATI);
+		DataGridViewTextBoxColumn^ dgvtbcTresholdLimit = gcnew DataGridViewTextBoxColumn();
+		dgvtbcTresholdLimit->Name = "Limite avant réapprovisionnement";
+		this->DGVSearchStaff->Columns->Add(dgvtbcTresholdLimit);
+		DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
+		dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
+		this->DGVSearchStaff->Columns->Add(dgvtbcTresholdDate);
+
 		articleRepository = gcnew ArticleRepository(mabdd);
 		this->reload();
 			
@@ -53,6 +66,19 @@ namespace A2ProjetBloc2 {
 				DataGridViewTextBoxCell^ dgvcPriceWT = gcnew DataGridViewTextBoxCell();
 				dgvcPriceWT->Value = Convert::ToString(a->getPriceWT());
 				dgvr->Cells->Add(dgvcPriceWT);
+				DataGridViewTextBoxCell^ dgvcVAT = gcnew DataGridViewTextBoxCell();
+				dgvcVAT->Value = Convert::ToString(a->getVAT());
+				dgvr->Cells->Add(dgvcVAT);
+				DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
+				dgvcPriceATI->Value = Convert::ToString(a->getPriceATI());
+				dgvr->Cells->Add(dgvcPriceATI);
+				DataGridViewTextBoxCell^ dgvcRestockingLimit = gcnew DataGridViewTextBoxCell();
+				dgvcRestockingLimit->Value = Convert::ToString(a->getRestockingLimit());
+				dgvr->Cells->Add(dgvcRestockingLimit);
+				DataGridViewTextBoxCell^ dgvcRestockingDate = gcnew DataGridViewTextBoxCell();
+				dgvcRestockingDate->Value = a->getRestockingDate();
+				dgvr->Cells->Add(dgvcRestockingDate);
+
 				dgvr->Tag = a;
 				this->DGVSearchStaff->Rows->Add(dgvr);
 			}
@@ -143,7 +169,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->DGVSearchStaff);
 			this->Controls->Add(this->Title);
 			this->Name = L"ListArticles";
-			this->Text = L"ListClient";
+			this->Text = L"TurboStock";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();

@@ -12,7 +12,7 @@ private:
 	Decimal^ priceWT;
 	Decimal^ VAT;
 	Decimal^ priceATI;
-	DateTime^ tresholdDate; 
+	String^ restockingDate; 
 
 public:
 	void setIdArticle(String^ idArticle) {
@@ -63,11 +63,11 @@ public:
 	int getRestockingLimit() {
 		return this->restockLimit;
 	}
-	void setTresholdDate(DateTime^ tresholdDate) {
-		this->tresholdDate = tresholdDate;
+	void setRestockingDate(String^ restockingDate) {
+		this->restockingDate = restockingDate;
 	}
-	DateTime^ getTresholdDate() {
-		return this->tresholdDate;
+	String^ getRestockingDate() {
+		return this->restockingDate;
 	}
 
 
