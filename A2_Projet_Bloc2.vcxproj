@@ -81,8 +81,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>WinMain</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -92,6 +92,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,10 +114,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddArticle.cpp" />
+    <ClCompile Include="AddArticleToCommand.cpp" />
+    <ClCompile Include="AddClient.cpp" />
+    <ClCompile Include="Cart.cpp" />
+    <ClCompile Include="AddStaff.cpp" />
+    <ClCompile Include="BDD.cpp" />
+    <ClCompile Include="ListClient.cpp" />
+    <ClCompile Include="CommandHistory.cpp" />
+    <ClCompile Include="ListStaff.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddArticle.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddArticleToCommand.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddClient.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Article.h" />
+    <ClInclude Include="ArticleRepository.h" />
+    <ClInclude Include="Cart.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddStaff.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="BDD.h" />
+    <ClInclude Include="ListArticles.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ListClient.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="CommandHistory.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ListStaff.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
@@ -131,6 +171,42 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg" />
+    <Image Include="Assets\1486504331-burn-fire-flame-danger-burning-hot_81317.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AddArticle.resx">
+      <DependentUpon>AddArticle.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddArticleToCommand.resx">
+      <DependentUpon>AddArticleToCommand.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddClient.resx">
+      <DependentUpon>AddClient.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cart.resx">
+      <DependentUpon>Cart.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddStaff.resx">
+      <DependentUpon>AddStaff.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListArticles.resx">
+      <DependentUpon>ListArticles.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListClient.resx">
+      <DependentUpon>ListClient.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommandHistory.resx">
+      <DependentUpon>CommandHistory.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListStaff.resx">
+      <DependentUpon>ListStaff.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BDDCreations.sql" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
