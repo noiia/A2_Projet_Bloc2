@@ -18,7 +18,9 @@ namespace A2ProjetBloc2 {
 	public ref class ListArticles : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
-		ArticleRepository^ articleRepository;
+		DataGridViewRow^ sharedDgvrRow;
+	private: System::Windows::Forms::Button^ BtnDelete;
+		   ArticleRepository^ articleRepository;
 	public:
 		ListArticles(BDD^ mabdd)
 		{
@@ -114,6 +116,7 @@ namespace A2ProjetBloc2 {
 			this->BtnAddArticle = (gcnew System::Windows::Forms::Button());
 			this->DGVSearchStaff = (gcnew System::Windows::Forms::DataGridView());
 			this->Title = (gcnew System::Windows::Forms::Label());
+			this->BtnDelete = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -121,7 +124,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(691, 456);
+			this->BtnModify->Location = System::Drawing::Point(691, 418);
 			this->BtnModify->Name = L"BtnModify";
 			this->BtnModify->Size = System::Drawing::Size(135, 48);
 			this->BtnModify->TabIndex = 27;
@@ -147,6 +150,7 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchStaff->Name = L"DGVSearchStaff";
 			this->DGVSearchStaff->Size = System::Drawing::Size(603, 526);
 			this->DGVSearchStaff->TabIndex = 25;
+			this->DGVSearchStaff->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchStaff_CellMouseClick);
 			// 
 			// Title
 			// 
@@ -159,11 +163,24 @@ namespace A2ProjetBloc2 {
 			this->Title->TabIndex = 24;
 			this->Title->Text = L"Liste des articles";
 			// 
+			// BtnDelete
+			// 
+			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->BtnDelete->Location = System::Drawing::Point(691, 510);
+			this->BtnDelete->Name = L"BtnDelete";
+			this->BtnDelete->Size = System::Drawing::Size(135, 48);
+			this->BtnDelete->TabIndex = 28;
+			this->BtnDelete->Text = L"Supprimer";
+			this->BtnDelete->UseVisualStyleBackColor = true;
+			this->BtnDelete->Click += gcnew System::EventHandler(this, &ListArticles::BtnDelete_Click);
+			// 
 			// ListArticles
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(889, 623);
+			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->BtnAddArticle);
 			this->Controls->Add(this->DGVSearchStaff);
@@ -184,5 +201,19 @@ namespace A2ProjetBloc2 {
 		articleRepository->insertArticle(newArticle);
 		this->reload();
 	}
+	
+	private: System::Void DGVSearchStaff_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		sharedDgvrRow = this->DGVSearchStaff->Rows[e->RowIndex];
+		System::Diagnostics::Debug::WriteLine(sharedDgvrRow);
+
+	}
+private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+	sharedDgvrRow;
+	System::Diagnostics::Debug::WriteLine(sharedDgvrRow);
+	Article^ a = (Article^)sharedDgvrRow->Tag;
+	articleRepository->deleteArticle(a);
+	this->reload();
+}
+
 };
 }

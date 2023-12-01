@@ -260,6 +260,7 @@ namespace A2ProjetBloc2 {
 			this->NudPriceATI->Location = System::Drawing::Point(28, 467);
 			this->NudPriceATI->Margin = System::Windows::Forms::Padding(4);
 			this->NudPriceATI->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
+			 this->NudPriceATI->Value = NudPriceWT->Value * (NudPriceVAT->Value/100);
 			this->NudPriceATI->Name = L"NudPriceATI";
 			this->NudPriceATI->Size = System::Drawing::Size(272, 25);
 			this->NudPriceATI->TabIndex = 18;
