@@ -105,7 +105,7 @@ namespace A2ProjetBloc2 {
 			this->LbLastName->Size = System::Drawing::Size(42, 20);
 			this->LbLastName->TabIndex = 1;
 			this->LbLastName->Text = L"Nom";
-			
+
 			// 
 			// LbAddress
 			// 
@@ -140,7 +140,7 @@ namespace A2ProjetBloc2 {
 			this->TbLastName->Name = L"TbLastName";
 			this->TbLastName->Size = System::Drawing::Size(419, 26);
 			this->TbLastName->TabIndex = 7;
-		
+
 			// 
 			// TbFirstName
 			// 
@@ -239,21 +239,22 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void LbTresholdDate_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void TbTresholdDate_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void TbTresholdDate_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
+	private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
 
-private: System::Void BtnAddStaff_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->staff->setLastName(this->TbLastName->Text);	this->staff->setFirstName(this->TbFirstName->Text);
-	this->staff->setAddress(this->Tbaddress->Text);
-	//this->staff->setSupervisor(this->TbSupervisor->Text);
-	this->Close();
+	private: System::Void BtnAddStaff_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->staff->setLastName(this->TbLastName->Text);
+		this->staff->setFirstName(this->TbFirstName->Text);
+		this->staff->setAddress(this->Tbaddress->Text);
+		//this->staff->setSupervisor(this->TbSupervisor->Text);
+		this->Close();
 
-}
+	}
 
-private: System::Void AddStaff_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	private: System::Void AddStaff_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	};
 }

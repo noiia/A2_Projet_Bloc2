@@ -177,7 +177,7 @@ namespace A2ProjetBloc2 {
 		staffRepository->insertStaff(newStaff);
 		this->reload();
 	}
-private: System::Void ListStaff_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	private: System::Void ListStaff_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	};
 }

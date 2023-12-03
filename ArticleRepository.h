@@ -24,12 +24,13 @@ public:
 		for each (DataRow ^ row in ds->Tables[0]->Rows)
 		{
 			Article^ article = gcnew Article();
+			article->setDel((bool)row[9]);
 			article->setIdArticle((String^)row[0]);
 			article->setName((String^)row[1]);
 			article->setPriceWT((Decimal^)row[6]);
-			article->setVAT((Decimal^)row[8]);
+			article->setVAT((int)row[8]);
 			article->setPriceATI((Decimal^)row[7]);
-			article->setRestockingLimit((int)row[4]);
+			article->setRestockingLimit((long long)row[4]);
 			article->setRestockingDate(((DateTime^)row[5])->ToString());
 			list->Add(article);
 		}
@@ -38,15 +39,15 @@ public:
 	}
 
 	void editArticle(Article^ article) {
-		bdd->executeNonQuery("UPDATE [Article] SET nameArticle = '" + article->getName() + "' WHERE [ID_Article] = " + article->getIdArticle());
+		bdd->executeNonQuery("UPDATE [Article] SET (ID_Article, NameArticle, Kind, Quantity_Stock, RestockingTreshold, DateRestocking, PriceWT, PriceATI, VATValue, Del)  = '('" + article->getIdArticle() + "', '" + article->getName() + "', '" + article->getKind() + "', '" + article->getStock() + "', '" + article->getRestockingLimit() + "', '" + article->getRestockingDate() + "', '" + article->getPriceWT() + "', '" + article->getPriceATI() + "', '" + article->getVAT() + "', '" + false + "')' WHERE [ID_Article] = '" + article->getIdArticle()) + "'";
 	}
 
 	void deleteArticle(Article^ article) {
-		bdd->executeNonQuery("UPDATE [Article] SET del = true WHERE [ID_Article] = " + article->getIdArticle());
+		bdd->executeNonQuery("UPDATE [Article] SET Del = 1 WHERE [ID_Article] = '" + article->getIdArticle() + "'");
 	}
 
 	void insertArticle(Article^ article) {
-		bdd->executeInsert("INSERT INTO [Article] (ID_Article, nameArticle, kind, quantity_Stock, restockingTreshold, dateRestocking, PriceWT, PriceVAT, PriceATI, del) VALUES ('" + article->getIdArticle() + "', '" + article->getName() + "', '" + article->getKind() + "', '" + article->getStock() + "', '" + article->getRestockingLimit() + "', '" + article->getRestockingDate() + "', '" + article->getPriceWT() + "', '" + article->getVAT() + "', '" + article->getPriceATI() + "', '" + false + "')");
+		bdd->executeInsert("INSERT INTO [Article] (ID_Article, NameArticle, Kind, Quantity_Stock, RestockingTreshold, DateRestocking, PriceWT, PriceATI, VATValue, Del) VALUES ('" + article->getIdArticle() + "', '" + article->getName() + "', '" + article->getKind() + "', '" + article->getStock() + "', '" + article->getRestockingLimit() + "', '" + article->getRestockingDate() + "', '" + article->getPriceWT() + "', '" + article->getPriceATI() + "', '" + article->getVAT() + "', '" + false + "')",0);
 		//Enregistrer ses adresses
 		//AdresseRepo ar=  ...
 			//boucler sur les adresses a

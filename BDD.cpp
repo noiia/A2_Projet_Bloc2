@@ -46,26 +46,37 @@ int BDD::executeNonQuery(String^ sql)
     return affectedrows;
 }
 
-int BDD::executeInsert(String^ sql)
+int BDD::executeInsert(String^ sql, bool geneID)
 {
     System::Diagnostics::Debug::WriteLine("REQSQL: " + sql);
     SqlCommand^ command = gcnew SqlCommand(sql + ";SELECT @@IDENTITY", this->connection);
     // Execution
-    try {
-        Object^ result = command->ExecuteScalar();
-        if (result != nullptr){
-            try{
+    if (geneID) {
+        try {
+            Object^ result = command->ExecuteScalar();
+            if (result != nullptr) {
                 return Convert::ToInt32(result);
-            }catch (InvalidCastException^){
-                System::Diagnostics::Debug::WriteLine("La conversion en int a échoué.");
+
+                try {
+                    return Convert::ToInt32(result);
+                }
+                catch (InvalidCastException^) {
+                    System::Diagnostics::Debug::WriteLine("La conversion en int a échoué.");
+                    return -1;
+                }
+            }
+            else {
+                System::Diagnostics::Debug::WriteLine("Le résultat est null.");
                 return -1;
             }
-        } else {
-            System::Diagnostics::Debug::WriteLine("Le résultat est null.");
+
+        }
+        catch (Exception^ ex) {
+            System::Diagnostics::Debug::WriteLine("Erreur lors de l'exécution de la requête : " + ex->Message);
             return -1;
         }
-    } catch (Exception^ ex) {
-        System::Diagnostics::Debug::WriteLine("Erreur lors de l'exécution de la requête : " + ex->Message);
-        return -1;
+    }
+    else {
+        return 0;
     }
 }

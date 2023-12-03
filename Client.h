@@ -112,5 +112,4 @@ public:
 	String^ getTypeClient() {
 		return this->TypeClient;
 	}
-
 };

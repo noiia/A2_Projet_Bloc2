@@ -46,7 +46,7 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Label^ Title;
-			 System::Windows::Forms::Button^ BtnEquipeList;
+			 System::Windows::Forms::Button^ BtnStaffList;
 			 System::Windows::Forms::Button^ BtnBuyerList;
 			
 			 System::Windows::Forms::Button^ BtnOrderForm;
@@ -70,7 +70,7 @@ namespace A2ProjetBloc2 {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Menu::typeid));
 			this->Title = (gcnew System::Windows::Forms::Label());
-			this->BtnEquipeList = (gcnew System::Windows::Forms::Button());
+			this->BtnStaffList = (gcnew System::Windows::Forms::Button());
 			this->BtnBuyerList = (gcnew System::Windows::Forms::Button());
 			this->BtnOrderForm = (gcnew System::Windows::Forms::Button());
 			this->BtnArticleForm = (gcnew System::Windows::Forms::Button());
@@ -88,17 +88,17 @@ namespace A2ProjetBloc2 {
 			this->Title->TabIndex = 0;
 			this->Title->Text = L"TurboStock";
 			// 
-			// BtnEquipeList
+			// BtnStaffList
 			// 
-			this->BtnEquipeList->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->BtnStaffList->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnEquipeList->Location = System::Drawing::Point(74, 115);
-			this->BtnEquipeList->Name = L"BtnEquipeList";
-			this->BtnEquipeList->Size = System::Drawing::Size(184, 61);
-			this->BtnEquipeList->TabIndex = 1;
-			this->BtnEquipeList->Text = L"Liste des Employés";
-			this->BtnEquipeList->UseVisualStyleBackColor = true;
-			this->BtnEquipeList->Click += gcnew System::EventHandler(this, &Menu::BtnEquipeList_Click);
+			this->BtnStaffList->Location = System::Drawing::Point(74, 115);
+			this->BtnStaffList->Name = L"BtnEquipeList";
+			this->BtnStaffList->Size = System::Drawing::Size(184, 61);
+			this->BtnStaffList->TabIndex = 1;
+			this->BtnStaffList->Text = L"Liste des Employés";
+			this->BtnStaffList->UseVisualStyleBackColor = true;
+			this->BtnStaffList->Click += gcnew System::EventHandler(this, &Menu::BtnStaffList_Click);
 			// 
 			// BtnBuyerList
 			// 
@@ -156,7 +156,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->BtnArticleForm);
 			this->Controls->Add(this->BtnOrderForm);
 			this->Controls->Add(this->BtnBuyerList);
-			this->Controls->Add(this->BtnEquipeList);
+			this->Controls->Add(this->BtnStaffList);
 			this->Controls->Add(this->Title);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Menu";
@@ -178,7 +178,7 @@ namespace A2ProjetBloc2 {
 		ListClient^ listClientForm = gcnew ListClient(mabdd);
 		listClientForm->ShowDialog();
 		}
-	private: System::Void BtnEquipeList_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void BtnStaffList_Click(System::Object^ sender, System::EventArgs^ e) {
 		ListStaff^ listStaffForm = gcnew ListStaff(mabdd);
 		listStaffForm->ShowDialog();
 		}
