@@ -164,6 +164,8 @@
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Staff.h" />
+    <ClInclude Include="StaffRepository.h" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

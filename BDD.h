@@ -10,7 +10,7 @@ public:
     ~BDD();
     System::Data::DataSet^ executeQuery(String^ sql);
     int executeNonQuery(String^ sql);
-    int executeInsert(String^ sql);
+    int executeInsert(String^ sql, bool geneId);
     SqlConnection^ connection;
 
 };

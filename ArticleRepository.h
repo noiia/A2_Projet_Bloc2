@@ -47,7 +47,7 @@ public:
 	}
 
 	void insertArticle(Article^ article) {
-		bdd->executeInsert("INSERT INTO [Article] (ID_Article, NameArticle, Kind, Quantity_Stock, RestockingTreshold, DateRestocking, PriceWT, PriceATI, VATValue, Del) VALUES ('" + article->getIdArticle() + "', '" + article->getName() + "', '" + article->getKind() + "', '" + article->getStock() + "', '" + article->getRestockingLimit() + "', '" + article->getRestockingDate() + "', '" + article->getPriceWT() + "', '" + article->getPriceATI() + "', '" + article->getVAT() + "', '" + false + "')");
+		bdd->executeInsert("INSERT INTO [Article] (ID_Article, NameArticle, Kind, Quantity_Stock, RestockingTreshold, DateRestocking, PriceWT, PriceATI, VATValue, Del) VALUES ('" + article->getIdArticle() + "', '" + article->getName() + "', '" + article->getKind() + "', '" + article->getStock() + "', '" + article->getRestockingLimit() + "', '" + article->getRestockingDate() + "', '" + article->getPriceWT() + "', '" + article->getPriceATI() + "', '" + article->getVAT() + "', '" + false + "')",0);
 		//Enregistrer ses adresses
 		//AdresseRepo ar=  ...
 			//boucler sur les adresses a

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "BDD.h"
+#include "Staff.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -14,11 +14,11 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class AddStaff : public System::Windows::Forms::Form
 	{
-		BDD^ mabdd;
+		Staff^ staff;
 	public:
-		AddStaff(BDD^ mabdd)
+		AddStaff(Staff^ staff)
 		{
-			this->mabdd = mabdd;
+			this->staff = staff;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -37,36 +37,20 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Label^ Title;
-	protected:
-
-	protected:
-	private: System::Windows::Forms::Label^ label1;
-
+	private: System::Windows::Forms::Label^ LbLastName;
 
 
 	private: System::Windows::Forms::Label^ LbAddress;
-	private: System::Windows::Forms::Label^ LbName;
+	private: System::Windows::Forms::Label^ LbFirstName;
 
-
-
-	private: System::Windows::Forms::TextBox^ TbSurname;
-	private: System::Windows::Forms::TextBox^ TbName;
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::TextBox^ TbLastName;
+	private: System::Windows::Forms::TextBox^ TbFirstName;
 
 
 	private: System::Windows::Forms::Button^ BtnAddStaff;
 	private: System::Windows::Forms::Button^ BtnCancel;
 	private: System::Windows::Forms::TextBox^ Tbaddress;
 	private: System::Windows::Forms::TextBox^ TbSupervisor;
-
 	private: System::Windows::Forms::Label^ LbSupervisor;
 
 
@@ -86,11 +70,11 @@ namespace A2ProjetBloc2 {
 		void InitializeComponent(void)
 		{
 			this->Title = (gcnew System::Windows::Forms::Label());
-			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->LbLastName = (gcnew System::Windows::Forms::Label());
 			this->LbAddress = (gcnew System::Windows::Forms::Label());
-			this->LbName = (gcnew System::Windows::Forms::Label());
-			this->TbSurname = (gcnew System::Windows::Forms::TextBox());
-			this->TbName = (gcnew System::Windows::Forms::TextBox());
+			this->LbFirstName = (gcnew System::Windows::Forms::Label());
+			this->TbLastName = (gcnew System::Windows::Forms::TextBox());
+			this->TbFirstName = (gcnew System::Windows::Forms::TextBox());
 			this->BtnAddStaff = (gcnew System::Windows::Forms::Button());
 			this->BtnCancel = (gcnew System::Windows::Forms::Button());
 			this->Tbaddress = (gcnew System::Windows::Forms::TextBox());
@@ -101,83 +85,94 @@ namespace A2ProjetBloc2 {
 			// Title
 			// 
 			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(12, 22);
+			this->Title->Location = System::Drawing::Point(16, 27);
+			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(327, 28);
+			this->Title->Size = System::Drawing::Size(322, 29);
 			this->Title->TabIndex = 0;
 			this->Title->Text = L"Ajouter un nouvel employé";
 			// 
-			// label1
+			// LbLastName
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbLastName->AutoSize = true;
+			this->LbLastName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(12, 69);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(44, 19);
-			this->label1->TabIndex = 1;
-			this->label1->Text = L"Nom";
+			this->LbLastName->Location = System::Drawing::Point(16, 85);
+			this->LbLastName->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbLastName->Name = L"LbLastName";
+			this->LbLastName->Size = System::Drawing::Size(42, 20);
+			this->LbLastName->TabIndex = 1;
+			this->LbLastName->Text = L"Nom";
+
 			// 
 			// LbAddress
 			// 
 			this->LbAddress->AutoSize = true;
-			this->LbAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbAddress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbAddress->Location = System::Drawing::Point(12, 215);
+			this->LbAddress->Location = System::Drawing::Point(16, 265);
+			this->LbAddress->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbAddress->Name = L"LbAddress";
-			this->LbAddress->Size = System::Drawing::Size(71, 19);
+			this->LbAddress->Size = System::Drawing::Size(68, 20);
 			this->LbAddress->TabIndex = 4;
 			this->LbAddress->Text = L"Adresse";
 			// 
-			// LbName
+			// LbFirstName
 			// 
-			this->LbName->AutoSize = true;
-			this->LbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbFirstName->AutoSize = true;
+			this->LbFirstName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbName->Location = System::Drawing::Point(12, 141);
-			this->LbName->Name = L"LbName";
-			this->LbName->Size = System::Drawing::Size(65, 19);
-			this->LbName->TabIndex = 5;
-			this->LbName->Text = L"Prénom";
+			this->LbFirstName->Location = System::Drawing::Point(16, 174);
+			this->LbFirstName->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbFirstName->Name = L"LbFirstName";
+			this->LbFirstName->Size = System::Drawing::Size(64, 20);
+			this->LbFirstName->TabIndex = 5;
+			this->LbFirstName->Text = L"Prénom";
 			// 
-			// TbSurname
+			// TbLastName
 			// 
-			this->TbSurname->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TbLastName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbSurname->Location = System::Drawing::Point(16, 91);
-			this->TbSurname->Name = L"TbSurname";
-			this->TbSurname->Size = System::Drawing::Size(315, 26);
-			this->TbSurname->TabIndex = 7;
+			this->TbLastName->Location = System::Drawing::Point(21, 112);
+			this->TbLastName->Margin = System::Windows::Forms::Padding(4);
+			this->TbLastName->Name = L"TbLastName";
+			this->TbLastName->Size = System::Drawing::Size(419, 26);
+			this->TbLastName->TabIndex = 7;
+
 			// 
-			// TbName
+			// TbFirstName
 			// 
-			this->TbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TbFirstName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbName->Location = System::Drawing::Point(16, 163);
-			this->TbName->Name = L"TbName";
-			this->TbName->Size = System::Drawing::Size(315, 26);
-			this->TbName->TabIndex = 8;
+			this->TbFirstName->Location = System::Drawing::Point(21, 201);
+			this->TbFirstName->Margin = System::Windows::Forms::Padding(4);
+			this->TbFirstName->Name = L"TbFirstName";
+			this->TbFirstName->Size = System::Drawing::Size(419, 26);
+			this->TbFirstName->TabIndex = 8;
 			// 
 			// BtnAddStaff
 			// 
-			this->BtnAddStaff->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnAddStaff->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddStaff->Location = System::Drawing::Point(43, 403);
+			this->BtnAddStaff->Location = System::Drawing::Point(57, 496);
+			this->BtnAddStaff->Margin = System::Windows::Forms::Padding(4);
 			this->BtnAddStaff->Name = L"BtnAddStaff";
-			this->BtnAddStaff->Size = System::Drawing::Size(111, 42);
+			this->BtnAddStaff->Size = System::Drawing::Size(148, 52);
 			this->BtnAddStaff->TabIndex = 13;
 			this->BtnAddStaff->Text = L"Ajouter";
 			this->BtnAddStaff->UseVisualStyleBackColor = true;
+			this->BtnAddStaff->Click += gcnew System::EventHandler(this, &AddStaff::BtnAddStaff_Click);
 			// 
 			// BtnCancel
 			// 
-			this->BtnCancel->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnCancel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnCancel->Location = System::Drawing::Point(202, 403);
+			this->BtnCancel->Location = System::Drawing::Point(269, 496);
+			this->BtnCancel->Margin = System::Windows::Forms::Padding(4);
 			this->BtnCancel->Name = L"BtnCancel";
-			this->BtnCancel->Size = System::Drawing::Size(111, 42);
+			this->BtnCancel->Size = System::Drawing::Size(148, 52);
 			this->BtnCancel->TabIndex = 14;
 			this->BtnCancel->Text = L"Annuler";
 			this->BtnCancel->UseVisualStyleBackColor = true;
@@ -185,53 +180,58 @@ namespace A2ProjetBloc2 {
 			// 
 			// Tbaddress
 			// 
-			this->Tbaddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->Tbaddress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Tbaddress->Location = System::Drawing::Point(16, 248);
+			this->Tbaddress->Location = System::Drawing::Point(21, 305);
+			this->Tbaddress->Margin = System::Windows::Forms::Padding(4);
 			this->Tbaddress->Name = L"Tbaddress";
-			this->Tbaddress->Size = System::Drawing::Size(315, 26);
+			this->Tbaddress->Size = System::Drawing::Size(419, 26);
 			this->Tbaddress->TabIndex = 15;
 			// 
 			// TbSupervisor
 			// 
-			this->TbSupervisor->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TbSupervisor->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbSupervisor->Location = System::Drawing::Point(16, 332);
+			this->TbSupervisor->Location = System::Drawing::Point(21, 409);
+			this->TbSupervisor->Margin = System::Windows::Forms::Padding(4);
 			this->TbSupervisor->Name = L"TbSupervisor";
-			this->TbSupervisor->Size = System::Drawing::Size(315, 26);
+			this->TbSupervisor->Size = System::Drawing::Size(419, 26);
 			this->TbSupervisor->TabIndex = 17;
 			this->TbSupervisor->TextChanged += gcnew System::EventHandler(this, &AddStaff::TbTresholdDate_TextChanged);
 			// 
 			// LbSupervisor
 			// 
 			this->LbSupervisor->AutoSize = true;
-			this->LbSupervisor->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbSupervisor->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbSupervisor->Location = System::Drawing::Point(12, 310);
+			this->LbSupervisor->Location = System::Drawing::Point(16, 382);
+			this->LbSupervisor->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbSupervisor->Name = L"LbSupervisor";
-			this->LbSupervisor->Size = System::Drawing::Size(179, 19);
+			this->LbSupervisor->Size = System::Drawing::Size(169, 20);
 			this->LbSupervisor->TabIndex = 16;
 			this->LbSupervisor->Text = L"Supérieur hiérarchique";
 			this->LbSupervisor->Click += gcnew System::EventHandler(this, &AddStaff::LbTresholdDate_Click);
 			// 
 			// AddStaff
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(375, 486);
+			this->ClientSize = System::Drawing::Size(500, 598);
 			this->Controls->Add(this->TbSupervisor);
 			this->Controls->Add(this->LbSupervisor);
 			this->Controls->Add(this->Tbaddress);
 			this->Controls->Add(this->BtnCancel);
 			this->Controls->Add(this->BtnAddStaff);
-			this->Controls->Add(this->TbName);
-			this->Controls->Add(this->TbSurname);
-			this->Controls->Add(this->LbName);
+			this->Controls->Add(this->TbFirstName);
+			this->Controls->Add(this->TbLastName);
+			this->Controls->Add(this->LbFirstName);
 			this->Controls->Add(this->LbAddress);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->LbLastName);
 			this->Controls->Add(this->Title);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"AddStaff";
 			this->Text = L"AddStaff";
+			this->Load += gcnew System::EventHandler(this, &AddStaff::AddStaff_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -239,10 +239,22 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void LbTresholdDate_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void TbTresholdDate_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void TbTresholdDate_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close();
-}
-};
+	private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Close();
+	}
+
+	private: System::Void BtnAddStaff_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->staff->setLastName(this->TbLastName->Text);
+		this->staff->setFirstName(this->TbFirstName->Text);
+		this->staff->setAddress(this->Tbaddress->Text);
+		//this->staff->setSupervisor(this->TbSupervisor->Text);
+		this->Close();
+
+	}
+
+	private: System::Void AddStaff_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	};
 }
