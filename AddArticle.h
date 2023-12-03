@@ -109,90 +109,90 @@ namespace A2ProjetBloc2 {
 			// Title
 			// 
 			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Title->Location = System::Drawing::Point(19, 26);
 			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(299, 28);
+			this->Title->Size = System::Drawing::Size(294, 29);
 			this->Title->TabIndex = 0;
 			this->Title->Text = L"Ajouter un nouvel article";
 			// 
 			// LbName
 			// 
 			this->LbName->AutoSize = true;
-			this->LbName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbName->Location = System::Drawing::Point(20, 139);
 			this->LbName->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbName->Name = L"LbName";
-			this->LbName->Size = System::Drawing::Size(44, 19);
+			this->LbName->Size = System::Drawing::Size(42, 20);
 			this->LbName->TabIndex = 1;
 			this->LbName->Text = L"Nom";
 			// 
 			// LbTresholdDate
 			// 
 			this->LbTresholdDate->AutoSize = true;
-			this->LbTresholdDate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbTresholdDate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbTresholdDate->Location = System::Drawing::Point(24, 590);
 			this->LbTresholdDate->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbTresholdDate->Name = L"LbTresholdDate";
-			this->LbTresholdDate->Size = System::Drawing::Size(228, 19);
+			this->LbTresholdDate->Size = System::Drawing::Size(219, 20);
 			this->LbTresholdDate->TabIndex = 2;
 			this->LbTresholdDate->Text = L"Date de r�approvisionnement";
 			// 
 			// LbQuantity
 			// 
 			this->LbQuantity->AutoSize = true;
-			this->LbQuantity->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbQuantity->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbQuantity->Location = System::Drawing::Point(26, 510);
 			this->LbQuantity->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbQuantity->Name = L"LbQuantity";
-			this->LbQuantity->Size = System::Drawing::Size(75, 19);
+			this->LbQuantity->Size = System::Drawing::Size(71, 20);
 			this->LbQuantity->TabIndex = 3;
 			this->LbQuantity->Text = L"Quantit�";
 			// 
 			// LbVAT
 			// 
 			this->LbVAT->AutoSize = true;
-			this->LbVAT->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbVAT->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbVAT->Location = System::Drawing::Point(24, 356);
 			this->LbVAT->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbVAT->Name = L"LbVAT";
-			this->LbVAT->Size = System::Drawing::Size(39, 19);
+			this->LbVAT->Size = System::Drawing::Size(40, 20);
 			this->LbVAT->TabIndex = 4;
 			this->LbVAT->Text = L"TVA";
 			// 
 			// LbPriceWithoutTax
 			// 
 			this->LbPriceWithoutTax->AutoSize = true;
-			this->LbPriceWithoutTax->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbPriceWithoutTax->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbPriceWithoutTax->Location = System::Drawing::Point(22, 280);
 			this->LbPriceWithoutTax->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbPriceWithoutTax->Name = L"LbPriceWithoutTax";
-			this->LbPriceWithoutTax->Size = System::Drawing::Size(61, 19);
+			this->LbPriceWithoutTax->Size = System::Drawing::Size(59, 20);
 			this->LbPriceWithoutTax->TabIndex = 5;
 			this->LbPriceWithoutTax->Text = L"Prix HT";
 			// 
 			// LbPriceWithTaxes
 			// 
 			this->LbPriceWithTaxes->AutoSize = true;
-			this->LbPriceWithTaxes->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbPriceWithTaxes->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbPriceWithTaxes->Location = System::Drawing::Point(22, 430);
 			this->LbPriceWithTaxes->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbPriceWithTaxes->Name = L"LbPriceWithTaxes";
-			this->LbPriceWithTaxes->Size = System::Drawing::Size(68, 19);
+			this->LbPriceWithTaxes->Size = System::Drawing::Size(67, 20);
 			this->LbPriceWithTaxes->TabIndex = 6;
 			this->LbPriceWithTaxes->Text = L"Prix TTC";
 			// 
 			// TboxName
 			// 
-			this->TboxName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TboxName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->TboxName->Location = System::Drawing::Point(24, 162);
 			this->TboxName->Margin = System::Windows::Forms::Padding(4);
@@ -202,7 +202,7 @@ namespace A2ProjetBloc2 {
 			// 
 			// BtnAddArticle
 			// 
-			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnAddArticle->Location = System::Drawing::Point(27, 758);
 			this->BtnAddArticle->Margin = System::Windows::Forms::Padding(4);
@@ -215,7 +215,7 @@ namespace A2ProjetBloc2 {
 			// 
 			// BtnCancel
 			// 
-			this->BtnCancel->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnCancel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnCancel->Location = System::Drawing::Point(198, 758);
 			this->BtnCancel->Margin = System::Windows::Forms::Padding(4);
@@ -229,39 +229,39 @@ namespace A2ProjetBloc2 {
 			// NudPriceVAT
 			// 
 			this->NudPriceVAT->DecimalPlaces = 2;
-			this->NudPriceVAT->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->NudPriceVAT->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->NudPriceVAT->Location = System::Drawing::Point(28, 391);
 			this->NudPriceVAT->Margin = System::Windows::Forms::Padding(4);
 			this->NudPriceVAT->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
 			this->NudPriceVAT->Name = L"NudPriceVAT";
-			this->NudPriceVAT->Size = System::Drawing::Size(272, 25);
+			this->NudPriceVAT->Size = System::Drawing::Size(272, 24);
 			this->NudPriceVAT->TabIndex = 16;
 			this->NudPriceVAT->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 20, 0, 0, 0 });
 			// 
 			// NudPriceWT
 			// 
 			this->NudPriceWT->DecimalPlaces = 2;
-			this->NudPriceWT->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->NudPriceWT->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->NudPriceWT->Location = System::Drawing::Point(28, 312);
 			this->NudPriceWT->Margin = System::Windows::Forms::Padding(4);
 			this->NudPriceWT->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
 			this->NudPriceWT->Name = L"NudPriceWT";
-			this->NudPriceWT->Size = System::Drawing::Size(272, 25);
+			this->NudPriceWT->Size = System::Drawing::Size(272, 24);
 			this->NudPriceWT->TabIndex = 17;
 			this->NudPriceWT->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			// 
 			// NudPriceATI
 			// 
 			this->NudPriceATI->DecimalPlaces = 2;
-			this->NudPriceATI->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->NudPriceATI->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->NudPriceATI->Location = System::Drawing::Point(28, 467);
 			this->NudPriceATI->Margin = System::Windows::Forms::Padding(4);
 			this->NudPriceATI->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
 			this->NudPriceATI->Name = L"NudPriceATI";
-			this->NudPriceATI->Size = System::Drawing::Size(272, 25);
+			this->NudPriceATI->Size = System::Drawing::Size(272, 24);
 			this->NudPriceATI->TabIndex = 18;
 			// 
 			// DtpTreshold
@@ -269,24 +269,24 @@ namespace A2ProjetBloc2 {
 			this->DtpTreshold->Location = System::Drawing::Point(28, 627);
 			this->DtpTreshold->Margin = System::Windows::Forms::Padding(4);
 			this->DtpTreshold->Name = L"DtpTreshold";
-			this->DtpTreshold->Size = System::Drawing::Size(298, 25);
+			this->DtpTreshold->Size = System::Drawing::Size(298, 24);
 			this->DtpTreshold->TabIndex = 19;
 			this->DtpTreshold->Value = System::DateTime(2023, 11, 28, 0, 0, 0, 0);
 			// 
 			// NudStock
 			// 
-			this->NudStock->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->NudStock->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->NudStock->Location = System::Drawing::Point(28, 548);
 			this->NudStock->Margin = System::Windows::Forms::Padding(4);
 			this->NudStock->Name = L"NudStock";
-			this->NudStock->Size = System::Drawing::Size(272, 25);
+			this->NudStock->Size = System::Drawing::Size(272, 24);
 			this->NudStock->TabIndex = 20;
 			this->NudStock->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 50, 0, 0, 0 });
 			// 
 			// TboxIDReference
 			// 
-			this->TboxIDReference->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TboxIDReference->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->TboxIDReference->Location = System::Drawing::Point(22, 99);
 			this->TboxIDReference->Margin = System::Windows::Forms::Padding(4);
@@ -297,18 +297,18 @@ namespace A2ProjetBloc2 {
 			// LbIdArticle
 			// 
 			this->LbIdArticle->AutoSize = true;
-			this->LbIdArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbIdArticle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbIdArticle->Location = System::Drawing::Point(22, 76);
 			this->LbIdArticle->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbIdArticle->Name = L"LbIdArticle";
-			this->LbIdArticle->Size = System::Drawing::Size(160, 19);
+			this->LbIdArticle->Size = System::Drawing::Size(158, 20);
 			this->LbIdArticle->TabIndex = 22;
 			this->LbIdArticle->Text = L"Référence catalogue";
 			// 
 			// TboxKind
 			// 
-			this->TboxKind->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TboxKind->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->TboxKind->Location = System::Drawing::Point(24, 235);
 			this->TboxKind->Margin = System::Windows::Forms::Padding(4);
@@ -319,35 +319,35 @@ namespace A2ProjetBloc2 {
 			// LbKind
 			// 
 			this->LbKind->AutoSize = true;
-			this->LbKind->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbKind->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbKind->Location = System::Drawing::Point(20, 212);
 			this->LbKind->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbKind->Name = L"LbKind";
-			this->LbKind->Size = System::Drawing::Size(45, 19);
+			this->LbKind->Size = System::Drawing::Size(43, 20);
 			this->LbKind->TabIndex = 23;
 			this->LbKind->Text = L"Type";
 			// 
 			// NudTresholdLimit
 			// 
-			this->NudTresholdLimit->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			this->NudTresholdLimit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->NudTresholdLimit->Location = System::Drawing::Point(28, 703);
 			this->NudTresholdLimit->Margin = System::Windows::Forms::Padding(4);
 			this->NudTresholdLimit->Name = L"NudTresholdLimit";
-			this->NudTresholdLimit->Size = System::Drawing::Size(272, 25);
+			this->NudTresholdLimit->Size = System::Drawing::Size(272, 24);
 			this->NudTresholdLimit->TabIndex = 26;
 			this->NudTresholdLimit->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			// 
 			// LbTresholdLimit
 			// 
 			this->LbTresholdLimit->AutoSize = true;
-			this->LbTresholdLimit->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->LbTresholdLimit->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->LbTresholdLimit->Location = System::Drawing::Point(26, 671);
 			this->LbTresholdLimit->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbTresholdLimit->Name = L"LbTresholdLimit";
-			this->LbTresholdLimit->Size = System::Drawing::Size(245, 19);
+			this->LbTresholdLimit->Size = System::Drawing::Size(232, 20);
 			this->LbTresholdLimit->TabIndex = 25;
 			this->LbTresholdLimit->Text = L"Limite avant approvisionnement";
 			// 
@@ -377,12 +377,13 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbTresholdDate);
 			this->Controls->Add(this->LbName);
 			this->Controls->Add(this->Title);
-			this->Font = (gcnew System::Drawing::Font(L"Orkney", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"AddArticle";
 			this->Text = L"AddArticle";
+			this->Load += gcnew System::EventHandler(this, &AddArticle::AddArticle_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceVAT))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceWT))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceATI))->EndInit();
@@ -409,6 +410,8 @@ private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventA
 	this->article->setRestockingDate(this->DtpTreshold->Value.ToString("yyyy-MM-dd"));
 	this->article->setRestockingLimit((int)this->NudTresholdLimit->Value);
 	this->Close();
+}
+private: System::Void AddArticle_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
