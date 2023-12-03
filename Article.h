@@ -7,12 +7,13 @@ private:
 	String^ idArticle;
 	String^ name;
 	String^ kind;
-	int stock;
-	int restockLimit;
+	long long stock;
+	long long restockLimit;
 	Decimal^ priceWT;
-	Decimal^ VAT;
+	int VAT;
 	Decimal^ priceATI;
 	String^ restockingDate; 
+	bool deleteState;
 
 public:
 	void setIdArticle(String^ idArticle) {
@@ -39,10 +40,10 @@ public:
 	Decimal^ getPriceWT() {
 		return this->priceWT;
 	}
-	void setVAT(Decimal^ VAT) {
+	void setVAT(int VAT) {
 		this->VAT = VAT;
 	}
-	Decimal^ getVAT() {
+	int getVAT() {
 		return this->VAT;
 	}
 	void setPriceATI(Decimal^ priceATI) {
@@ -51,16 +52,16 @@ public:
 	Decimal^ getPriceATI() {
 		return this->priceATI;
 	}
-	void setStock(int stock) {
+	void setStock(long long stock) {
 		this->stock = stock;
 	}
-	int getStock() {
+	long long getStock() {
 		return this->stock;
 	}	
-	void setRestockingLimit(int restockLimit) {
+	void setRestockingLimit(long long restockLimit) {
 		this->restockLimit = restockLimit;
 	}
-	int getRestockingLimit() {
+	long long getRestockingLimit() {
 		return this->restockLimit;
 	}
 	void setRestockingDate(String^ restockingDate) {
@@ -70,7 +71,12 @@ public:
 		return this->restockingDate;
 	}
 
-
+	void setDel(bool deleted) {
+		this->deleteState = deleted;
+	}
+	bool getDel() {
+		return this->deleteState;
+	}
 	String^ ToString() override {
 		return "User id: " + this->idArticle + " name: " + this->name + " priceWT : " + this->priceWT;
 	}

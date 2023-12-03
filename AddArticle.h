@@ -26,14 +26,15 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::NumericUpDown^ NudTresholdLimit;
 	private: System::Windows::Forms::Label^ LbTresholdLimit;
 
-
-
-
 		 Article^ article;
+		 bool addOrEdit;
 	public:
-		AddArticle(Article^ article)
+		// addOrEdit == 0 : add
+		// addOrEdit == 1 : edit
+		AddArticle(Article^ article, bool addOrEdit)
 		{
 			this->article = article;
+			this->addOrEdit = addOrEdit;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -140,7 +141,7 @@ namespace A2ProjetBloc2 {
 			this->LbTresholdDate->Name = L"LbTresholdDate";
 			this->LbTresholdDate->Size = System::Drawing::Size(228, 19);
 			this->LbTresholdDate->TabIndex = 2;
-			this->LbTresholdDate->Text = L"Date de r�approvisionnement";
+			this->LbTresholdDate->Text = L"Date de réapprovisionnement";
 			// 
 			// LbQuantity
 			// 
@@ -152,7 +153,7 @@ namespace A2ProjetBloc2 {
 			this->LbQuantity->Name = L"LbQuantity";
 			this->LbQuantity->Size = System::Drawing::Size(75, 19);
 			this->LbQuantity->TabIndex = 3;
-			this->LbQuantity->Text = L"Quantit�";
+			this->LbQuantity->Text = L"Quantité";
 			// 
 			// LbVAT
 			// 
@@ -198,7 +199,7 @@ namespace A2ProjetBloc2 {
 			this->TboxName->Margin = System::Windows::Forms::Padding(4);
 			this->TboxName->Name = L"TboxName";
 			this->TboxName->Size = System::Drawing::Size(270, 26);
-			this->TboxName->TabIndex = 7;
+			this->TboxName->TabIndex = 2;
 			// 
 			// BtnAddArticle
 			// 
@@ -208,8 +209,7 @@ namespace A2ProjetBloc2 {
 			this->BtnAddArticle->Margin = System::Windows::Forms::Padding(4);
 			this->BtnAddArticle->Name = L"BtnAddArticle";
 			this->BtnAddArticle->Size = System::Drawing::Size(120, 44);
-			this->BtnAddArticle->TabIndex = 13;
-			this->BtnAddArticle->Text = L"Ajouter";
+			this->BtnAddArticle->TabIndex = 10;
 			this->BtnAddArticle->UseVisualStyleBackColor = true;
 			this->BtnAddArticle->Click += gcnew System::EventHandler(this, &AddArticle::BtnAddArticle_Click);
 			// 
@@ -221,7 +221,7 @@ namespace A2ProjetBloc2 {
 			this->BtnCancel->Margin = System::Windows::Forms::Padding(4);
 			this->BtnCancel->Name = L"BtnCancel";
 			this->BtnCancel->Size = System::Drawing::Size(120, 44);
-			this->BtnCancel->TabIndex = 14;
+			this->BtnCancel->TabIndex = 11;
 			this->BtnCancel->Text = L"Annuler";
 			this->BtnCancel->UseVisualStyleBackColor = true;
 			this->BtnCancel->Click += gcnew System::EventHandler(this, &AddArticle::BtnCancel_Click);
@@ -236,7 +236,7 @@ namespace A2ProjetBloc2 {
 			this->NudPriceVAT->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
 			this->NudPriceVAT->Name = L"NudPriceVAT";
 			this->NudPriceVAT->Size = System::Drawing::Size(272, 25);
-			this->NudPriceVAT->TabIndex = 16;
+			this->NudPriceVAT->TabIndex = 5;
 			this->NudPriceVAT->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 20, 0, 0, 0 });
 			// 
 			// NudPriceWT
@@ -249,7 +249,7 @@ namespace A2ProjetBloc2 {
 			this->NudPriceWT->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
 			this->NudPriceWT->Name = L"NudPriceWT";
 			this->NudPriceWT->Size = System::Drawing::Size(272, 25);
-			this->NudPriceWT->TabIndex = 17;
+			this->NudPriceWT->TabIndex = 4;
 			this->NudPriceWT->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			// 
 			// NudPriceATI
@@ -260,10 +260,10 @@ namespace A2ProjetBloc2 {
 			this->NudPriceATI->Location = System::Drawing::Point(28, 467);
 			this->NudPriceATI->Margin = System::Windows::Forms::Padding(4);
 			this->NudPriceATI->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9999, 0, 0, 0 });
-			 this->NudPriceATI->Value = NudPriceWT->Value * (NudPriceVAT->Value/100);
 			this->NudPriceATI->Name = L"NudPriceATI";
 			this->NudPriceATI->Size = System::Drawing::Size(272, 25);
-			this->NudPriceATI->TabIndex = 18;
+			this->NudPriceATI->TabIndex = 6;
+			this->NudPriceATI->ThousandsSeparator = true;
 			// 
 			// DtpTreshold
 			// 
@@ -271,7 +271,7 @@ namespace A2ProjetBloc2 {
 			this->DtpTreshold->Margin = System::Windows::Forms::Padding(4);
 			this->DtpTreshold->Name = L"DtpTreshold";
 			this->DtpTreshold->Size = System::Drawing::Size(298, 25);
-			this->DtpTreshold->TabIndex = 19;
+			this->DtpTreshold->TabIndex = 8;
 			this->DtpTreshold->Value = System::DateTime(2023, 11, 28, 0, 0, 0, 0);
 			// 
 			// NudStock
@@ -282,7 +282,7 @@ namespace A2ProjetBloc2 {
 			this->NudStock->Margin = System::Windows::Forms::Padding(4);
 			this->NudStock->Name = L"NudStock";
 			this->NudStock->Size = System::Drawing::Size(272, 25);
-			this->NudStock->TabIndex = 20;
+			this->NudStock->TabIndex = 7;
 			this->NudStock->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 50, 0, 0, 0 });
 			// 
 			// TboxIDReference
@@ -293,7 +293,7 @@ namespace A2ProjetBloc2 {
 			this->TboxIDReference->Margin = System::Windows::Forms::Padding(4);
 			this->TboxIDReference->Name = L"TboxIDReference";
 			this->TboxIDReference->Size = System::Drawing::Size(270, 26);
-			this->TboxIDReference->TabIndex = 21;
+			this->TboxIDReference->TabIndex = 1;
 			// 
 			// LbIdArticle
 			// 
@@ -315,7 +315,7 @@ namespace A2ProjetBloc2 {
 			this->TboxKind->Margin = System::Windows::Forms::Padding(4);
 			this->TboxKind->Name = L"TboxKind";
 			this->TboxKind->Size = System::Drawing::Size(270, 26);
-			this->TboxKind->TabIndex = 24;
+			this->TboxKind->TabIndex = 3;
 			// 
 			// LbKind
 			// 
@@ -337,7 +337,7 @@ namespace A2ProjetBloc2 {
 			this->NudTresholdLimit->Margin = System::Windows::Forms::Padding(4);
 			this->NudTresholdLimit->Name = L"NudTresholdLimit";
 			this->NudTresholdLimit->Size = System::Drawing::Size(272, 25);
-			this->NudTresholdLimit->TabIndex = 26;
+			this->NudTresholdLimit->TabIndex = 9;
 			this->NudTresholdLimit->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			// 
 			// LbTresholdLimit
@@ -351,6 +351,17 @@ namespace A2ProjetBloc2 {
 			this->LbTresholdLimit->Size = System::Drawing::Size(245, 19);
 			this->LbTresholdLimit->TabIndex = 25;
 			this->LbTresholdLimit->Text = L"Limite avant approvisionnement";
+			//
+			// paramètre si modification de profil existant
+			//
+			if (this->addOrEdit) {
+				this->TboxIDReference->ReadOnly = true;
+				this->BtnAddArticle->Text = L"Modifier";
+			}
+			else {
+				this->TboxIDReference->ReadOnly = false;
+				this->BtnAddArticle->Text = L"Ajouter";
+			}
 			// 
 			// AddArticle
 			// 
@@ -400,15 +411,18 @@ private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^
 	this->Close();
 }
 private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
+	// la ligne suivante permet de paramétrer le type de convention d'écriture des nombre à virgule avec un point à la place de la virgule
+	System::Threading::Thread::CurrentThread->CurrentCulture = System::Globalization::CultureInfo::InvariantCulture;
+
 	this->article->setIdArticle(this->TboxIDReference->Text);
 	this->article->setName(this->TboxName->Text);
 	this->article->setKind(this->TboxKind->Text);
 	this->article->setPriceWT((Decimal^)this->NudPriceWT->Value);
-	this->article->setVAT((Decimal^)this->NudPriceVAT->Value);
-	this->article->setPriceATI((Decimal^)this->NudPriceATI->Value);
-	this->article->setStock((int)this->NudStock->Value);
+	this->article->setVAT((int)this->NudPriceVAT->Value);
+	this->article->setPriceATI(this->NudPriceATI->Value);
+	this->article->setStock((long long)this->NudStock->Value);
 	this->article->setRestockingDate(this->DtpTreshold->Value.ToString("yyyy-MM-dd"));
-	this->article->setRestockingLimit((int)this->NudTresholdLimit->Value);
+	this->article->setRestockingLimit((long long)this->NudTresholdLimit->Value);
 	this->Close();
 }
 };
