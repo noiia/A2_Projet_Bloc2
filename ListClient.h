@@ -1,6 +1,8 @@
 #pragma once
 #include "BDD.h"
 #include "AddClient.h"
+#include "Article.h"
+#include "ClientRepository.h"
 
 namespace A2ProjetBloc2 {
 
@@ -17,6 +19,7 @@ namespace A2ProjetBloc2 {
 	public ref class ListClient : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
+		ClientRepository^ clientRepository;
 	public:
 		ListClient(BDD^ mabdd)
 		{
@@ -24,6 +27,50 @@ namespace A2ProjetBloc2 {
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
+			DataGridViewTextBoxColumn^ dgvtbcIdClient = gcnew DataGridViewTextBoxColumn();
+			dgvtbcIdClient->Name = "ID Client";
+			this->DGVListClient->Columns->Add(dgvtbcIdClient);
+			DataGridViewTextBoxColumn^ dgvtbcFirstName = gcnew DataGridViewTextBoxColumn();
+			dgvtbcFirstName->Name = "FirstName";
+			this->DGVListClient->Columns->Add(dgvtbcFirstName);
+			DataGridViewTextBoxColumn^ dgvtbcLastName = gcnew DataGridViewTextBoxColumn();
+			dgvtbcLastName->Name = "LastName";
+			this->DGVListClient->Columns->Add(dgvtbcLastName);
+			DataGridViewTextBoxColumn^ dgvtbcBirthDay = gcnew DataGridViewTextBoxColumn();
+			dgvtbcBirthDay->Name = "BirthDay";
+			this->DGVListClient->Columns->Add(dgvtbcBirthDay);
+			DataGridViewTextBoxColumn^ dgvtbcTypeClient = gcnew DataGridViewTextBoxColumn();
+			dgvtbcTypeClient->Name = "TypeClient";
+			this->DGVListClient->Columns->Add(dgvtbcTypeClient);
+
+			clientRepository = gcnew ClientRepository(mabdd);
+			this->reload();
+
+		}
+		void reload() {
+			System::Collections::Generic::List<Client^>^ clients = clientRepository->getClient();
+			this->DGVListClient->Rows->Clear();
+			for each (Client ^ c in clients) {
+				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+				DataGridViewTextBoxCell^ dgvcIdClient = gcnew DataGridViewTextBoxCell();
+				dgvcIdClient->Value = c->getID_Client();
+				dgvr->Cells->Add(dgvcIdClient);
+				DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
+				dgvcFirstName->Value = c->getFirstName();
+				dgvr->Cells->Add(dgvcFirstName);
+				DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
+				dgvcLastName->Value = c->getLastName();
+				dgvr->Cells->Add(dgvcLastName);
+				DataGridViewTextBoxCell^ dgvcBirthDay = gcnew DataGridViewTextBoxCell();
+				dgvcBirthDay->Value = Convert::ToString(c->getBirthday());
+				dgvr->Cells->Add(dgvcBirthDay);
+				DataGridViewTextBoxCell^ dgvcTypeClient = gcnew DataGridViewTextBoxCell();
+				dgvcTypeClient->Value = c->getTypeClient();
+				dgvr->Cells->Add(dgvcTypeClient);
+
+				dgvr->Tag = c;
+				this->DGVListClient->Rows->Add(dgvr);
+			}
 		}
 
 	protected:
@@ -39,9 +86,10 @@ namespace A2ProjetBloc2 {
 		}
 	private: System::Windows::Forms::Button^ BtnModify;
 	private: System::Windows::Forms::Button^ BtnAddClient;
+	private: System::Windows::Forms::DataGridView^ DGVListClient;
 	protected:
 
-	private: System::Windows::Forms::DataGridView^ DGVSearchStaff;
+
 	private: System::Windows::Forms::Label^ Title;
 
 	private:
@@ -59,9 +107,9 @@ namespace A2ProjetBloc2 {
 		{
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
 			this->BtnAddClient = (gcnew System::Windows::Forms::Button());
-			this->DGVSearchStaff = (gcnew System::Windows::Forms::DataGridView());
+			this->DGVListClient = (gcnew System::Windows::Forms::DataGridView());
 			this->Title = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVListClient))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// BtnModify
@@ -87,13 +135,13 @@ namespace A2ProjetBloc2 {
 			this->BtnAddClient->UseVisualStyleBackColor = true;
 			this->BtnAddClient->Click += gcnew System::EventHandler(this, &ListClient::BtnAddClient_Click);
 			// 
-			// DGVSearchStaff
+			// DGVListClient
 			// 
-			this->DGVSearchStaff->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVSearchStaff->Location = System::Drawing::Point(26, 56);
-			this->DGVSearchStaff->Name = L"DGVSearchStaff";
-			this->DGVSearchStaff->Size = System::Drawing::Size(603, 526);
-			this->DGVSearchStaff->TabIndex = 25;
+			this->DGVListClient->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->DGVListClient->Location = System::Drawing::Point(26, 56);
+			this->DGVListClient->Name = L"DGVListClient";
+			this->DGVListClient->Size = System::Drawing::Size(603, 526);
+			this->DGVListClient->TabIndex = 25;
 			// 
 			// Title
 			// 
@@ -113,19 +161,27 @@ namespace A2ProjetBloc2 {
 			this->ClientSize = System::Drawing::Size(889, 623);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->BtnAddClient);
-			this->Controls->Add(this->DGVSearchStaff);
+			this->Controls->Add(this->DGVListClient);
 			this->Controls->Add(this->Title);
 			this->Name = L"ListClient";
 			this->Text = L"ListClient";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
+			this->Load += gcnew System::EventHandler(this, &ListClient::ListClient_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVListClient))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void BtnAddClient_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddClient^ addClientForm = gcnew AddClient(mabdd);
+		Client^ client = gcnew Client();
+		AddClient^ addClientForm = gcnew AddClient(client);
 		addClientForm->ShowDialog();
+		System::Diagnostics::Debug::WriteLine(client->ToString());
+		clientRepository->insertClient(client);
+		//this->Close();
+		this->reload();
 	}
-};
+	private: System::Void ListClient_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	};
 }

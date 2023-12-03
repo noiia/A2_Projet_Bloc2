@@ -145,6 +145,8 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="BDD.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="ClientRepository.h" />
     <ClInclude Include="ListArticles.h">
       <FileType>CppForm</FileType>
     </ClInclude>
