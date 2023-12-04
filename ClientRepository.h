@@ -36,6 +36,6 @@ public:
     }
 
     void insertClient(Client^ client) {
-        bdd->executeInsert("INSERT INTO [Client] (ID_Client, firstName, name, TypeClient, birthday,del) VALUES (" + client->getID_Client() + "','" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "')");
+        bdd->executeInsert("INSERT INTO [Client] (ID_Client, firstName, name, TypeClient, birthday,del) VALUES (" + client->getID_Client() + "','" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "')",1);
     }
 };
