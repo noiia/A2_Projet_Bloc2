@@ -38,15 +38,17 @@ namespace A2ProjetBloc2 {
 			this->addOrEdit = addOrEdit;
 			System::Diagnostics::Debug::WriteLine("add article " + this->addOrEdit);
 
-		this->TboxIDReference->Text = article->getIdArticle();
-		this->TboxName->Text = article->getName();
-		this->TboxKind->Text = article->getKind();
-		this->NudPriceWT->Value = Convert::ToDecimal(article->getPriceWT());
-		this->NudPriceVAT->Value = article->getVAT();
-		this->NudPriceATI->Value = Convert::ToDecimal(article->getPriceATI());
-		this->NudStock->Value = article->getStock();
-		this->DtpTreshold->Value = Convert::ToDateTime(article->getRestockingDate());
-		this->NudTresholdLimit->Value = article->getRestockingLimit();
+			if (addOrEdit) {
+				this->TboxIDReference->Text = article->getIdArticle();
+				this->TboxName->Text = article->getName();
+				this->TboxKind->Text = article->getKind();
+				this->NudPriceWT->Value = Convert::ToDecimal(article->getPriceWT());
+				this->NudPriceVAT->Value = article->getVAT();
+				this->NudPriceATI->Value = Convert::ToDecimal(article->getPriceATI());
+				this->NudStock->Value = article->getStock();
+				this->DtpTreshold->Value = Convert::ToDateTime(article->getRestockingDate());
+				this->NudTresholdLimit->Value = article->getRestockingLimit();
+			}
 		}
 
 	protected:
@@ -362,7 +364,7 @@ namespace A2ProjetBloc2 {
 			// paramètre si modification de profil existant
 			//
 			System::Diagnostics::Debug::WriteLine("before if else " + this->addOrEdit);
-			if (addOrEdit) {
+			if (this->addOrEdit) {
 				System::Diagnostics::Debug::WriteLine(this->addOrEdit);
 				this->Title->Text = L"Modifier un nouvel article";
 				this->TboxIDReference->ReadOnly = true;

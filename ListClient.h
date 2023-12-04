@@ -1,4 +1,6 @@
 #pragma once
+#include <thread>
+#include <mutex>
 #include "BDD.h"
 #include "AddClient.h"
 #include "Article.h"
@@ -12,6 +14,7 @@ namespace A2ProjetBloc2 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Threading;
 
 	/// <summary>
 	/// Description résumée de ListClient
@@ -20,6 +23,9 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		ClientRepository^ clientRepository;
+		Thread^ reloadThread;
+		System::Threading::Mutex^ reloadMutex;
+
 	public:
 		ListClient(BDD^ mabdd)
 		{
@@ -48,29 +54,38 @@ namespace A2ProjetBloc2 {
 
 		}
 		void reload() {
-			System::Collections::Generic::List<Client^>^ clients = clientRepository->getClient();
-			this->DGVListClient->Rows->Clear();
-			for each (Client ^ c in clients) {
-				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-				DataGridViewTextBoxCell^ dgvcIdClient = gcnew DataGridViewTextBoxCell();
-				dgvcIdClient->Value = c->getID_Client();
-				dgvr->Cells->Add(dgvcIdClient);
-				DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
-				dgvcFirstName->Value = c->getFirstName();
-				dgvr->Cells->Add(dgvcFirstName);
-				DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
-				dgvcLastName->Value = c->getLastName();
-				dgvr->Cells->Add(dgvcLastName);
-				DataGridViewTextBoxCell^ dgvcBirthDay = gcnew DataGridViewTextBoxCell();
-				dgvcBirthDay->Value = Convert::ToString(c->getBirthday());
-				dgvr->Cells->Add(dgvcBirthDay);
-				DataGridViewTextBoxCell^ dgvcTypeClient = gcnew DataGridViewTextBoxCell();
-				dgvcTypeClient->Value = c->getTypeClient();
-				dgvr->Cells->Add(dgvcTypeClient);
-
-				dgvr->Tag = c;
-				this->DGVListClient->Rows->Add(dgvr);
+			if (reloadMutex != nullptr) {
+				reloadMutex->WaitOne();
+				System::Collections::Generic::List<Client^>^ clients = clientRepository->getClient();
+				this->DGVListClient->Rows->Clear();
+				for each (Client ^ c in clients) {
+					if (c->getDel() == false) {
+						DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+						DataGridViewTextBoxCell^ dgvcIdClient = gcnew DataGridViewTextBoxCell();
+						dgvcIdClient->Value = c->getID_Client();
+						dgvr->Cells->Add(dgvcIdClient);
+						DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
+						dgvcFirstName->Value = c->getFirstName();
+						dgvr->Cells->Add(dgvcFirstName);
+						DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
+						dgvcLastName->Value = c->getLastName();
+						dgvr->Cells->Add(dgvcLastName);
+						DataGridViewTextBoxCell^ dgvcBirthDay = gcnew DataGridViewTextBoxCell();
+						dgvcBirthDay->Value = Convert::ToString(c->getBirthday());
+						dgvr->Cells->Add(dgvcBirthDay);
+						DataGridViewTextBoxCell^ dgvcTypeClient = gcnew DataGridViewTextBoxCell();
+						dgvcTypeClient->Value = c->getTypeClient();
+						dgvr->Cells->Add(dgvcTypeClient);
+						dgvr->Tag = c;
+						this->DGVListClient->Rows->Add(dgvr);
+					}
+				}
+				reloadMutex->ReleaseMutex();
 			}
+		}
+		void launchReloadThread() {
+			reloadThread = gcnew Thread(gcnew ThreadStart(this, &ListClient::reload));
+			reloadThread->Start();
 		}
 
 	protected:
@@ -122,6 +137,7 @@ namespace A2ProjetBloc2 {
 			this->BtnModify->TabIndex = 27;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
+			this->BtnModify->Click += gcnew System::EventHandler(this, &ListClient::BtnModify_Click);
 			// 
 			// BtnAddClient
 			// 
@@ -182,6 +198,19 @@ namespace A2ProjetBloc2 {
 		this->reload();
 	}
 	private: System::Void ListClient_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+
+	private: System::Void AddClient_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
+		Client^ client = gcnew Client();
+		client = (Client^)DGVListClient->SelectedRows[0]->Tag;
+		AddClient^ addClientForm = gcnew AddClient(client);
+		addClientForm->ShowDialog();
+		System::Diagnostics::Debug::WriteLine(client->ToString());
+		clientRepository->editClient(client);
+		//this->Close();
+		this->reload();
 	}
 	};
 }
