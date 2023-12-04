@@ -21,10 +21,10 @@ namespace A2ProjetBloc2 {
 		 System::Windows::Forms::NumericUpDown^ NudStock;
 		 System::Windows::Forms::TextBox^ TboxIDReference;
 		 System::Windows::Forms::Label^ LbIdArticle;
-	private: System::Windows::Forms::TextBox^ TboxKind;
-	private: System::Windows::Forms::Label^ LbKind;
-	private: System::Windows::Forms::NumericUpDown^ NudTresholdLimit;
-	private: System::Windows::Forms::Label^ LbTresholdLimit;
+		 System::Windows::Forms::TextBox^ TboxKind;
+		 System::Windows::Forms::Label^ LbKind;
+		 System::Windows::Forms::NumericUpDown^ NudTresholdLimit;
+		 System::Windows::Forms::Label^ LbTresholdLimit;
 
 		 Article^ article;
 		 bool addOrEdit;
@@ -36,16 +36,17 @@ namespace A2ProjetBloc2 {
 			InitializeComponent();
 			this->article = article;
 			this->addOrEdit = addOrEdit;
+			System::Diagnostics::Debug::WriteLine("add article " + this->addOrEdit);
 
-		///this->TboxIDReference->Text = article->getIdArticle();
-		///this->TboxName->Text = article->getName();
-		///this->TboxKind->Text = article->getKind();
-		///this->NudPriceWT->Value = (NumericUpDown^)article->getPriceWT();
-		///this->NudPriceVAT->Value = article->getVAT();
-		///this->NudPriceATI->Value = (NumericUpDown^)article->getPriceATI();
-		///this->NudStock->Value = article->getStock();
-		///this->DtpTreshold->Value = (DateTimePicker^)article->getRestockingDate();
-		///this->NudTresholdLimit->Value = article->getRestockingLimit();
+		this->TboxIDReference->Text = article->getIdArticle();
+		this->TboxName->Text = article->getName();
+		this->TboxKind->Text = article->getKind();
+		this->NudPriceWT->Value = Convert::ToDecimal(article->getPriceWT());
+		this->NudPriceVAT->Value = article->getVAT();
+		this->NudPriceATI->Value = Convert::ToDecimal(article->getPriceATI());
+		this->NudStock->Value = article->getStock();
+		this->DtpTreshold->Value = Convert::ToDateTime(article->getRestockingDate());
+		this->NudTresholdLimit->Value = article->getRestockingLimit();
 		}
 
 	protected:
@@ -124,7 +125,6 @@ namespace A2ProjetBloc2 {
 			this->Title->Name = L"Title";
 			this->Title->Size = System::Drawing::Size(299, 28);
 			this->Title->TabIndex = 0;
-			this->Title->Text = L"Ajouter un nouvel article";
 			// 
 			// LbName
 			// 
@@ -361,11 +361,15 @@ namespace A2ProjetBloc2 {
 			//
 			// paramètre si modification de profil existant
 			//
-			if (this->addOrEdit) {
+			System::Diagnostics::Debug::WriteLine("before if else " + this->addOrEdit);
+			if (addOrEdit) {
+				System::Diagnostics::Debug::WriteLine(this->addOrEdit);
+				this->Title->Text = L"Modifier un nouvel article";
 				this->TboxIDReference->ReadOnly = true;
 				this->BtnAddArticle->Text = L"Modifier";
 			}
 			else {
+				this->Title->Text = L"Ajouter un nouvel article";
 				this->TboxIDReference->ReadOnly = false;
 				this->BtnAddArticle->Text = L"Ajouter";
 			}
@@ -428,7 +432,9 @@ private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventA
 	this->article->setVAT((int)this->NudPriceVAT->Value);
 	this->article->setPriceATI(this->NudPriceATI->Value);
 	this->article->setStock((long long)this->NudStock->Value);
-	this->article->setRestockingDate(this->DtpTreshold->Value.ToString("yyyy-MM-dd"));
+	String^ dateString = this->DtpTreshold->Value.ToString("yyyy-MM-dd");
+	DateTime restockingDate = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+	this->article->setRestockingDate(restockingDate);
 	this->article->setRestockingLimit((long long)this->NudTresholdLimit->Value);
 	this->Close();
 }

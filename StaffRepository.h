@@ -17,7 +17,7 @@ public:
 	}
 
 	List<Staff^>^ getStaff() {
-		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Article]");
+		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Staff]");
 
 		List<Staff^>^ list = gcnew List<Staff^>();
 

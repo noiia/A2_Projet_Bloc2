@@ -12,7 +12,7 @@ private:
 	Decimal^ priceWT;
 	int VAT;
 	Decimal^ priceATI;
-	String^ restockingDate; 
+	DateTime^ restockingDate; 
 	bool deleteState;
 
 public:
@@ -64,10 +64,10 @@ public:
 	long long getRestockingLimit() {
 		return this->restockLimit;
 	}
-	void setRestockingDate(String^ restockingDate) {
+	void setRestockingDate(DateTime^ restockingDate) {
 		this->restockingDate = restockingDate;
 	}
-	String^ getRestockingDate() {
+	DateTime^ getRestockingDate() {
 		return this->restockingDate;
 	}
 

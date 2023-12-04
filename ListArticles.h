@@ -22,7 +22,6 @@ namespace A2ProjetBloc2 {
 	public ref class ListArticles : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
-		int delStateValue = 0;
 		Article^ sharedA;
 		Thread^ reloadThread;
 		System::Threading::Mutex^ reloadMutex;
@@ -32,6 +31,7 @@ namespace A2ProjetBloc2 {
 	public:
 		ListArticles(BDD^ mabdd)
 		{
+			this->mabdd = mabdd;
 			InitializeComponent();
 
 			reloadMutex = gcnew System::Threading::Mutex();
@@ -58,7 +58,9 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
 			dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
 			this->DGVSearchArticle->Columns->Add(dgvtbcTresholdDate);
+
 			articleRepository = gcnew ArticleRepository(mabdd);
+			
 			this->reload();
 			
 		}
@@ -90,7 +92,8 @@ namespace A2ProjetBloc2 {
 					dgvcRestockingLimit->Value = Convert::ToString(a->getRestockingLimit());
 					dgvr->Cells->Add(dgvcRestockingLimit);
 					DataGridViewTextBoxCell^ dgvcRestockingDate = gcnew DataGridViewTextBoxCell();
-					dgvcRestockingDate->Value = a->getRestockingDate();
+					DateTime^ restockingDate = a->getRestockingDate();
+					dgvcRestockingDate->Value = restockingDate->ToString("yyyy-MM-dd");
 					dgvr->Cells->Add(dgvcRestockingDate);
 					dgvr->Tag = a;
 					this->DGVSearchArticle->Rows->Add(dgvr);
@@ -143,7 +146,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(691, 418);
+			this->BtnModify->Location = System::Drawing::Point(833, 372);
 			this->BtnModify->Name = L"BtnModify";
 			this->BtnModify->Size = System::Drawing::Size(135, 48);
 			this->BtnModify->TabIndex = 27;
@@ -155,7 +158,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddArticle->Location = System::Drawing::Point(691, 81);
+			this->BtnAddArticle->Location = System::Drawing::Point(833, 56);
 			this->BtnAddArticle->Name = L"BtnAddArticle";
 			this->BtnAddArticle->Size = System::Drawing::Size(135, 48);
 			this->BtnAddArticle->TabIndex = 26;
@@ -168,7 +171,7 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchArticle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->DGVSearchArticle->Location = System::Drawing::Point(26, 56);
 			this->DGVSearchArticle->Name = L"DGVSearchArticle";
-			this->DGVSearchArticle->Size = System::Drawing::Size(603, 526);
+			this->DGVSearchArticle->Size = System::Drawing::Size(756, 526);
 			this->DGVSearchArticle->TabIndex = 25;
 			this->DGVSearchArticle->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
 			// 
@@ -187,7 +190,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(691, 510);
+			this->BtnDelete->Location = System::Drawing::Point(833, 464);
 			this->BtnDelete->Name = L"BtnDelete";
 			this->BtnDelete->Size = System::Drawing::Size(135, 48);
 			this->BtnDelete->TabIndex = 28;
@@ -200,7 +203,7 @@ namespace A2ProjetBloc2 {
 			this->CboxDeletedLines->AutoSize = true;
 			this->CboxDeletedLines->Font = (gcnew System::Drawing::Font(L"Orkney", 10.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->CboxDeletedLines->Location = System::Drawing::Point(691, 564);
+			this->CboxDeletedLines->Location = System::Drawing::Point(833, 539);
 			this->CboxDeletedLines->Name = L"CboxDeletedLines";
 			this->CboxDeletedLines->Size = System::Drawing::Size(150, 38);
 			this->CboxDeletedLines->TabIndex = 29;
@@ -212,7 +215,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(889, 623);
+			this->ClientSize = System::Drawing::Size(1009, 623);
 			this->Controls->Add(this->CboxDeletedLines);
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
@@ -230,9 +233,8 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
 		Article^ newArticle = gcnew Article();
-		AddArticle^ addArticleForm = gcnew AddArticle(newArticle,0);
+		AddArticle^ addArticleForm = gcnew AddArticle(newArticle, false);
 		addArticleForm->ShowDialog();
-		System::Diagnostics::Debug::WriteLine(newArticle->ToString());
 		articleRepository->insertArticle(newArticle);
 		this->reload();
 	}
@@ -252,9 +254,13 @@ namespace A2ProjetBloc2 {
 	}
 
 	private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddArticle^ formModifArticle = gcnew AddArticle(sharedA,1);
+		AddArticle^ formModifArticle = gcnew AddArticle(sharedA, true);
 		formModifArticle->ShowDialog();
 		articleRepository->editArticle(sharedA);
+
+		int selected = this->DGVSearchArticle->SelectedRows[0]->Index;
+		this->reload();
+		this->DGVSearchArticle->Rows[selected]->Selected = true;
 	}
 
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {

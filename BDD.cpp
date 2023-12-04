@@ -7,11 +7,8 @@ BDD::BDD()
 {
     try
     {
-        // Chaine de connexion
         String^ connectString = "Data Source=127.0.0.1,1433;Initial Catalog = TurboStock ;User ID=sa;Password=Test$Test1";
-        // Objet connection
         connection = gcnew SqlConnection(connectString);
-        // Ouverture
         connection->Open();
         System::Diagnostics::Debug::WriteLine("Connexion ok");
     }
@@ -55,8 +52,6 @@ int BDD::executeInsert(String^ sql, bool geneID)
         try {
             Object^ result = command->ExecuteScalar();
             if (result != nullptr) {
-                return Convert::ToInt32(result);
-
                 try {
                     return Convert::ToInt32(result);
                 }
@@ -77,6 +72,7 @@ int BDD::executeInsert(String^ sql, bool geneID)
         }
     }
     else {
-        return 0;
+        int affectedrows = command->ExecuteNonQuery();
+        return affectedrows;
     }
 }
