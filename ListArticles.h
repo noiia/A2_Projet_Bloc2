@@ -43,6 +43,9 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcName = gcnew DataGridViewTextBoxColumn();
 			dgvtbcName->Name = "Nom";
 			this->DGVSearchArticle->Columns->Add(dgvtbcName);
+			DataGridViewTextBoxColumn^ dgvtbcType = gcnew DataGridViewTextBoxColumn();
+			dgvtbcType->Name = "Type";
+			this->DGVSearchArticle->Columns->Add(dgvtbcType);
 			DataGridViewTextBoxColumn^ dgvtbcPriceWT = gcnew DataGridViewTextBoxColumn();
 			dgvtbcPriceWT->Name = "Prix HT";
 			this->DGVSearchArticle->Columns->Add(dgvtbcPriceWT);
@@ -52,6 +55,9 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcPriceATI = gcnew DataGridViewTextBoxColumn();
 			dgvtbcPriceATI->Name = "Prix TTC";
 			this->DGVSearchArticle->Columns->Add(dgvtbcPriceATI);
+			DataGridViewTextBoxColumn^ dgvtbcStock = gcnew DataGridViewTextBoxColumn();
+			dgvtbcStock->Name = "Stock";
+			this->DGVSearchArticle->Columns->Add(dgvtbcStock);
 			DataGridViewTextBoxColumn^ dgvtbcTresholdLimit = gcnew DataGridViewTextBoxColumn();
 			dgvtbcTresholdLimit->Name = "Limite avant réapprovisionnement";
 			this->DGVSearchArticle->Columns->Add(dgvtbcTresholdLimit);
@@ -79,6 +85,9 @@ namespace A2ProjetBloc2 {
 					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
 					dgvcName->Value = a->getName();
 					dgvr->Cells->Add(dgvcName);
+					DataGridViewTextBoxCell^ dgvcType = gcnew DataGridViewTextBoxCell();
+					dgvcType->Value = a->getKind();
+					dgvr->Cells->Add(dgvcType);
 					DataGridViewTextBoxCell^ dgvcPriceWT = gcnew DataGridViewTextBoxCell();
 					dgvcPriceWT->Value = Convert::ToString(a->getPriceWT());
 					dgvr->Cells->Add(dgvcPriceWT);
@@ -88,6 +97,9 @@ namespace A2ProjetBloc2 {
 					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
 					dgvcPriceATI->Value = Convert::ToString(a->getPriceATI());
 					dgvr->Cells->Add(dgvcPriceATI);
+					DataGridViewTextBoxCell^ dgvcStock = gcnew DataGridViewTextBoxCell();
+					dgvcStock->Value = Convert::ToString(a->getStock());
+					dgvr->Cells->Add(dgvcStock);
 					DataGridViewTextBoxCell^ dgvcRestockingLimit = gcnew DataGridViewTextBoxCell();
 					dgvcRestockingLimit->Value = Convert::ToString(a->getRestockingLimit());
 					dgvr->Cells->Add(dgvcRestockingLimit);
@@ -146,7 +158,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(833, 372);
+			this->BtnModify->Location = System::Drawing::Point(1017, 372);
 			this->BtnModify->Name = L"BtnModify";
 			this->BtnModify->Size = System::Drawing::Size(135, 48);
 			this->BtnModify->TabIndex = 27;
@@ -158,7 +170,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddArticle->Location = System::Drawing::Point(833, 56);
+			this->BtnAddArticle->Location = System::Drawing::Point(1017, 56);
 			this->BtnAddArticle->Name = L"BtnAddArticle";
 			this->BtnAddArticle->Size = System::Drawing::Size(135, 48);
 			this->BtnAddArticle->TabIndex = 26;
@@ -171,7 +183,7 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchArticle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->DGVSearchArticle->Location = System::Drawing::Point(26, 56);
 			this->DGVSearchArticle->Name = L"DGVSearchArticle";
-			this->DGVSearchArticle->Size = System::Drawing::Size(756, 526);
+			this->DGVSearchArticle->Size = System::Drawing::Size(944, 526);
 			this->DGVSearchArticle->TabIndex = 25;
 			this->DGVSearchArticle->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
 			// 
@@ -180,7 +192,7 @@ namespace A2ProjetBloc2 {
 			this->Title->AutoSize = true;
 			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(351, 9);
+			this->Title->Location = System::Drawing::Point(497, 9);
 			this->Title->Name = L"Title";
 			this->Title->Size = System::Drawing::Size(211, 28);
 			this->Title->TabIndex = 24;
@@ -190,7 +202,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(833, 464);
+			this->BtnDelete->Location = System::Drawing::Point(1017, 464);
 			this->BtnDelete->Name = L"BtnDelete";
 			this->BtnDelete->Size = System::Drawing::Size(135, 48);
 			this->BtnDelete->TabIndex = 28;
@@ -203,7 +215,7 @@ namespace A2ProjetBloc2 {
 			this->CboxDeletedLines->AutoSize = true;
 			this->CboxDeletedLines->Font = (gcnew System::Drawing::Font(L"Orkney", 10.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->CboxDeletedLines->Location = System::Drawing::Point(833, 539);
+			this->CboxDeletedLines->Location = System::Drawing::Point(1017, 539);
 			this->CboxDeletedLines->Name = L"CboxDeletedLines";
 			this->CboxDeletedLines->Size = System::Drawing::Size(150, 38);
 			this->CboxDeletedLines->TabIndex = 29;
@@ -215,7 +227,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1009, 623);
+			this->ClientSize = System::Drawing::Size(1215, 623);
 			this->Controls->Add(this->CboxDeletedLines);
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);

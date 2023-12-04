@@ -43,12 +43,12 @@ int BDD::executeNonQuery(String^ sql)
     return affectedrows;
 }
 
-int BDD::executeInsert(String^ sql, bool geneID)
+int BDD::executeInsert(String^ sql, int geneID)
 {
     System::Diagnostics::Debug::WriteLine("REQSQL: " + sql);
     SqlCommand^ command = gcnew SqlCommand(sql + ";SELECT @@IDENTITY", this->connection);
     // Execution
-    if (geneID) {
+    if (geneID == 1) {
         try {
             Object^ result = command->ExecuteScalar();
             if (result != nullptr) {
@@ -71,8 +71,11 @@ int BDD::executeInsert(String^ sql, bool geneID)
             return -1;
         }
     }
-    else {
+    else if (geneID == 2){
         int affectedrows = command->ExecuteNonQuery();
         return affectedrows;
+    }
+    else {
+        return 0;
     }
 }

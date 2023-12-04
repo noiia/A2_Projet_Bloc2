@@ -34,6 +34,9 @@ namespace A2ProjetBloc2 {
 		AddArticle(Article^ article, bool addOrEdit)
 		{
 			InitializeComponent();
+			this->NudPriceWT->ValueChanged += gcnew System::EventHandler(this, &AddArticle::UpdatePriceATI);
+			this->NudPriceVAT->ValueChanged += gcnew System::EventHandler(this, &AddArticle::UpdatePriceATI);
+
 			this->article = article;
 			this->addOrEdit = addOrEdit;
 			System::Diagnostics::Debug::WriteLine("add article " + this->addOrEdit);
@@ -55,13 +58,21 @@ namespace A2ProjetBloc2 {
 		/// <summary>
 		/// Nettoyage des ressources utilis�es.
 		/// </summary>
-		~AddArticle()
+		~AddArticle() override
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
+	public :
+		virtual void Dispose() new {
+		if (components) {
+			delete components;
+		}
+		System::Windows::Forms::Form::Dispose(true);
+	}
+
 	private: System::Windows::Forms::Label^ Title;
 			 System::Windows::Forms::Label^ LbName;
 			 System::Windows::Forms::Label^ LbTresholdDate;
@@ -422,6 +433,7 @@ namespace A2ProjetBloc2 {
 	}
 private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();
+	this->Dispose();
 }
 private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
 	// la ligne suivante permet de paramétrer le type de convention d'écriture des nombre à virgule avec un point à la place de la virgule
@@ -440,5 +452,11 @@ private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventA
 	this->article->setRestockingLimit((long long)this->NudTresholdLimit->Value);
 	this->Close();
 }
+	private: System::Void UpdatePriceATI(System::Object^ sender, System::EventArgs^ e) {
+		Decimal priceWT = this->NudPriceWT->Value;
+		Decimal priceVAT = this->NudPriceVAT->Value;
+		Decimal priceATI = priceWT * (1 + (priceVAT / 100));
+		this->NudPriceATI->Value = priceATI;
+	}
 };
 }
