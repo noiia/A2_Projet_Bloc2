@@ -22,11 +22,13 @@ namespace A2ProjetBloc2 {
 	public ref class ListArticles : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
+		int delStateValue = 0;
 		Article^ sharedA;
 		Thread^ reloadThread;
 		System::Threading::Mutex^ reloadMutex;
 		private: System::Windows::Forms::Button^ BtnDelete;
-			   ArticleRepository^ articleRepository;
+	private: System::Windows::Forms::CheckBox^ CboxDeletedLines;
+		   ArticleRepository^ articleRepository;
 	public:
 		ListArticles(BDD^ mabdd)
 		{
@@ -56,43 +58,42 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
 			dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
 			this->DGVSearchArticle->Columns->Add(dgvtbcTresholdDate);
-
 			articleRepository = gcnew ArticleRepository(mabdd);
 			this->reload();
 			
 		}
+
+		
 		void reload() {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
-				System::Collections::Generic::List<Article^>^ articles = articleRepository->getArticle();
+				System::Collections::Generic::List<Article^>^ articles = articleRepository->getArticle(this->CboxDeletedLines->Checked);
 				this->DGVSearchArticle->Rows->Clear();
 				for each (Article ^ a in articles) {
-					if (a->getDel() == false) {
-						DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-						DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
-						dgvcIdArticle->Value = a->getIdArticle();
-						dgvr->Cells->Add(dgvcIdArticle);
-						DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
-						dgvcName->Value = a->getName();
-						dgvr->Cells->Add(dgvcName);
-						DataGridViewTextBoxCell^ dgvcPriceWT = gcnew DataGridViewTextBoxCell();
-						dgvcPriceWT->Value = Convert::ToString(a->getPriceWT());
-						dgvr->Cells->Add(dgvcPriceWT);
-						DataGridViewTextBoxCell^ dgvcVAT = gcnew DataGridViewTextBoxCell();
-						dgvcVAT->Value = Convert::ToString(a->getVAT());
-						dgvr->Cells->Add(dgvcVAT);
-						DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
-						dgvcPriceATI->Value = Convert::ToString(a->getPriceATI());
-						dgvr->Cells->Add(dgvcPriceATI);
-						DataGridViewTextBoxCell^ dgvcRestockingLimit = gcnew DataGridViewTextBoxCell();
-						dgvcRestockingLimit->Value = Convert::ToString(a->getRestockingLimit());
-						dgvr->Cells->Add(dgvcRestockingLimit);
-						DataGridViewTextBoxCell^ dgvcRestockingDate = gcnew DataGridViewTextBoxCell();
-						dgvcRestockingDate->Value = a->getRestockingDate();
-						dgvr->Cells->Add(dgvcRestockingDate);
-						dgvr->Tag = a;
-						this->DGVSearchArticle->Rows->Add(dgvr);
-					}
+					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
+					dgvcIdArticle->Value = a->getIdArticle();
+					dgvr->Cells->Add(dgvcIdArticle);
+					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
+					dgvcName->Value = a->getName();
+					dgvr->Cells->Add(dgvcName);
+					DataGridViewTextBoxCell^ dgvcPriceWT = gcnew DataGridViewTextBoxCell();
+					dgvcPriceWT->Value = Convert::ToString(a->getPriceWT());
+					dgvr->Cells->Add(dgvcPriceWT);
+					DataGridViewTextBoxCell^ dgvcVAT = gcnew DataGridViewTextBoxCell();
+					dgvcVAT->Value = Convert::ToString(a->getVAT());
+					dgvr->Cells->Add(dgvcVAT);
+					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
+					dgvcPriceATI->Value = Convert::ToString(a->getPriceATI());
+					dgvr->Cells->Add(dgvcPriceATI);
+					DataGridViewTextBoxCell^ dgvcRestockingLimit = gcnew DataGridViewTextBoxCell();
+					dgvcRestockingLimit->Value = Convert::ToString(a->getRestockingLimit());
+					dgvr->Cells->Add(dgvcRestockingLimit);
+					DataGridViewTextBoxCell^ dgvcRestockingDate = gcnew DataGridViewTextBoxCell();
+					dgvcRestockingDate->Value = a->getRestockingDate();
+					dgvr->Cells->Add(dgvcRestockingDate);
+					dgvr->Tag = a;
+					this->DGVSearchArticle->Rows->Add(dgvr);
 				}
 				reloadMutex->ReleaseMutex();
 			}
@@ -134,6 +135,7 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchArticle = (gcnew System::Windows::Forms::DataGridView());
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->BtnDelete = (gcnew System::Windows::Forms::Button());
+			this->CboxDeletedLines = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -193,11 +195,25 @@ namespace A2ProjetBloc2 {
 			this->BtnDelete->UseVisualStyleBackColor = true;
 			this->BtnDelete->Click += gcnew System::EventHandler(this, &ListArticles::BtnDelete_Click);
 			// 
+			// CboxDeletedLines
+			// 
+			this->CboxDeletedLines->AutoSize = true;
+			this->CboxDeletedLines->Font = (gcnew System::Drawing::Font(L"Orkney", 10.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->CboxDeletedLines->Location = System::Drawing::Point(691, 564);
+			this->CboxDeletedLines->Name = L"CboxDeletedLines";
+			this->CboxDeletedLines->Size = System::Drawing::Size(150, 38);
+			this->CboxDeletedLines->TabIndex = 29;
+			this->CboxDeletedLines->Text = L"Afficher les lignes \n supprimées";
+			this->CboxDeletedLines->UseVisualStyleBackColor = true;
+			this->CboxDeletedLines->CheckedChanged += gcnew System::EventHandler(this, &ListArticles::CboxDeletedLines_CheckedChanged);
+			// 
 			// ListArticles
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(889, 623);
+			this->Controls->Add(this->CboxDeletedLines);
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->BtnAddArticle);
@@ -225,7 +241,7 @@ namespace A2ProjetBloc2 {
 		if (e->RowIndex >= 0) {
 			DataGridViewRow^ sharedDgvrRow = DGVSearchArticle->Rows[e->RowIndex];
 			sharedA = (Article^)sharedDgvrRow->Tag;
-			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA);
+			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
 
 		}
 	}
@@ -240,5 +256,9 @@ namespace A2ProjetBloc2 {
 		formModifArticle->ShowDialog();
 		articleRepository->editArticle(sharedA);
 	}
+
+	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		this->reload();
+}
 };
 }

@@ -33,12 +33,19 @@ namespace A2ProjetBloc2 {
 		// addOrEdit == 1 : edit
 		AddArticle(Article^ article, bool addOrEdit)
 		{
+			InitializeComponent();
 			this->article = article;
 			this->addOrEdit = addOrEdit;
-			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
+
+		///this->TboxIDReference->Text = article->getIdArticle();
+		///this->TboxName->Text = article->getName();
+		///this->TboxKind->Text = article->getKind();
+		///this->NudPriceWT->Value = (NumericUpDown^)article->getPriceWT();
+		///this->NudPriceVAT->Value = article->getVAT();
+		///this->NudPriceATI->Value = (NumericUpDown^)article->getPriceATI();
+		///this->NudStock->Value = article->getStock();
+		///this->DtpTreshold->Value = (DateTimePicker^)article->getRestockingDate();
+		///this->NudTresholdLimit->Value = article->getRestockingLimit();
 		}
 
 	protected:

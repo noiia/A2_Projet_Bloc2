@@ -13,11 +13,10 @@ private:
 	BDD^ bdd;
 public:
 	ArticleRepository(BDD^ bdd) :bdd(bdd) {
-
 	}
 
-	List<Article^>^ getArticle() {
-		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Article]");
+	List<Article^>^ getArticle(bool delState) {
+		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Article]" + (delState ? "" : "WHERE Del = 0"));
 
 		List<Article^>^ list = gcnew List<Article^>();
 

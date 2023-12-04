@@ -43,7 +43,7 @@ public:
 	}
 
 	void insertStaff(Staff^ staff) {
-		int idStaff = bdd->executeInsert("INSERT INTO [Staff] (LastName, FirstName, Del) VALUES ('" + staff->getLastName() + "', '" + staff->getFirstName() + "', '" + false + "')");
+		int idStaff = bdd->executeInsert("INSERT INTO [Staff] (LastName, FirstName, Del) VALUES ('" + staff->getLastName() + "', '" + staff->getFirstName() + "', '" + false + "')",1);
 		staff->setIdStaff(idStaff);
 		//Enregistrer ses adresses "')");
 	}
