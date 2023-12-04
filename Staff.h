@@ -4,20 +4,20 @@ using namespace System;
 ref class Staff
 {
 private:
-	int idStaff;
+	int ID_Staff;
 	String^ lastName;
 	String^ firstName;
 	String^ hiringDate;
 	String^ Supervisor;
 	String^ address;
-	bool^ del;
+	bool del;
 
 public:
 	void setIdStaff(int idStaff) {
-		this->idStaff = idStaff;
+		this->ID_Staff = idStaff;
 	}
 	int getIdStaff() {
-		return this->idStaff;
+		return this->ID_Staff;
 	}
 	void setLastName(String^ lastName) {
 		this->lastName = lastName;
@@ -54,7 +54,14 @@ public:
 		return this->address;
 	}
 
+	void setDel(bool deleted) {
+		this->del = deleted;
+	}
+	bool getDel() {
+		return this->del;
+	}
+
 	String^ ToString() override {
-		return " Staff id: " + this->idStaff + "lastName: " + this->lastName + "firstName" + this->firstName;
+		return " Staff id: " + this->ID_Staff + "lastName: " + this->lastName + "firstName" + this->firstName;
 	}
 };

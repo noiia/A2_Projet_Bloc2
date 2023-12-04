@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+#include <thread>
+#include <mutex>
 #include "BDD.h"
 #include "AddStaff.h"
 #include "StaffRepository.h"
@@ -11,6 +14,7 @@ namespace A2ProjetBloc2 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Threading;
 
 	/// <summary>
 	/// Description résumée de ListStaff
@@ -18,15 +22,20 @@ namespace A2ProjetBloc2 {
 	public ref class ListStaff : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
-		StaffRepository^ staffRepository;
+		Staff^ sharedS;
+		Thread^ reloadThread;
+	private: System::Threading::Mutex^ reloadMutex;
+	private: System::Windows::Forms::Button^ BtnDelete;
+		   StaffRepository^ staffRepository;
+
 	public:
 		ListStaff(BDD^ mabdd)
 		{
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
 
+			reloadMutex = gcnew System::Threading::Mutex();
+
+			DGVSearchStaff->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			DataGridViewTextBoxColumn^ dgvtbcLastName = gcnew DataGridViewTextBoxColumn();
 			dgvtbcLastName->Name = "Nom";
 			this->DGVSearchStaff->Columns->Add(dgvtbcLastName);
@@ -45,27 +54,36 @@ namespace A2ProjetBloc2 {
 		}
 
 		void reload() {
-			System::Collections::Generic::List<Staff^>^ staff = staffRepository->getStaff();
-			this->DGVSearchStaff->Rows->Clear();
-			for each (Staff ^ s in staff) {
-				DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-				DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
-				dgvcLastName->Value = s->getLastName();
-				dgvr->Cells->Add(dgvcLastName);
-				DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
-				dgvcFirstName->Value = s->getFirstName();
-				dgvr->Cells->Add(dgvcFirstName);
-				DataGridViewTextBoxCell^ dgvcAddress = gcnew DataGridViewTextBoxCell();
-				dgvcAddress->Value = s->getAddress();
-				dgvr->Cells->Add(dgvcAddress);
-				DataGridViewTextBoxCell^ dgvcSupervisor = gcnew DataGridViewTextBoxCell();
-				dgvcSupervisor->Value = s->getSupervisor();
-				dgvr->Cells->Add(dgvcSupervisor);
+			if (reloadMutex != nullptr) {
+				reloadMutex->WaitOne();
+				System::Collections::Generic::List<Staff^>^ staff = staffRepository->getStaff();
+				this->DGVSearchStaff->Rows->Clear();
+				for each (Staff ^ s in staff) {
+					if (s->getDel() == false) {
+						DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+						DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
+						dgvcLastName->Value = s->getLastName();
+						dgvr->Cells->Add(dgvcLastName);
+						DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
+						dgvcFirstName->Value = s->getFirstName();
+						dgvr->Cells->Add(dgvcFirstName);
+						DataGridViewTextBoxCell^ dgvcAddress = gcnew DataGridViewTextBoxCell();
+						dgvcAddress->Value = s->getAddress();
+						dgvr->Cells->Add(dgvcAddress);
+						DataGridViewTextBoxCell^ dgvcSupervisor = gcnew DataGridViewTextBoxCell();
+						dgvcSupervisor->Value = s->getSupervisor();
+						dgvr->Cells->Add(dgvcSupervisor);
 
-				dgvr->Tag = s;
-				this->DGVSearchStaff->Rows->Add(dgvr);
+						dgvr->Tag = s;
+						this->DGVSearchStaff->Rows->Add(dgvr);
+					}
+				}
+				reloadMutex->ReleaseMutex();
 			}
-
+		}
+		void lauchReloadThread() {
+			reloadThread = gcnew Thread(gcnew ThreadStart(this, &ListStaff::reload));
+			reloadThread->Start();
 		}
 
 	protected:
@@ -168,15 +186,38 @@ namespace A2ProjetBloc2 {
 			this->PerformLayout();
 
 		}
+
 #pragma endregion
 	private: System::Void BtnAddStaff_Click(System::Object^ sender, System::EventArgs^ e) {
 		Staff^ newStaff = gcnew Staff();
-		AddStaff^ addStaff = gcnew AddStaff(newStaff);
-		addStaff->ShowDialog();
+		AddStaff^ addStaffForm = gcnew AddStaff(newStaff, 0);
+		addStaffForm->ShowDialog();
 		System::Diagnostics::Debug::WriteLine(newStaff->ToString());
 		staffRepository->insertStaff(newStaff);
 		this->reload();
 	}
+
+	private: System::Void DGVSearchStaff_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (e->RowIndex >= 0) {
+			DataGridViewRow^ sharedDgvrRow = DGVSearchStaff->Rows[e->RowIndex];
+			sharedS = (Staff^)sharedDgvrRow->Tag;
+			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedS);
+
+		}
+	}
+
+	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+		System::Diagnostics::Debug::WriteLine(sharedS + " voilà s");
+		staffRepository->deleteStaff(sharedS);
+		this->reload();
+	}
+
+	private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
+		AddStaff^ formModifStaff = gcnew AddStaff(sharedS, 1);
+		formModifStaff->ShowDialog();
+		staffRepository->editStaff(sharedS);
+	}
+
 	private: System::Void ListStaff_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};

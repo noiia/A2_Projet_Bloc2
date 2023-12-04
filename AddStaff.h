@@ -15,10 +15,12 @@ namespace A2ProjetBloc2 {
 	public ref class AddStaff : public System::Windows::Forms::Form
 	{
 		Staff^ staff;
+		bool addOrEdit;
 	public:
-		AddStaff(Staff^ staff)
+		AddStaff(Staff^ staff, bool addOrEdit)
 		{
 			this->staff = staff;
+			this->addOrEdit = addOrEdit;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
