@@ -1,4 +1,5 @@
 #pragma once
+#include "BDD.h"
 
 namespace A2ProjetBloc2 {
 
@@ -14,8 +15,9 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class AddArticleToCommand : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
 	public:
-		AddArticleToCommand(void)
+		AddArticleToCommand(BDD^ mabdd)
 		{
 			InitializeComponent();
 			//
@@ -35,33 +37,16 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Button^ BtnAddCommand;
-	private: System::Windows::Forms::TextBox^ TboxQuantity;
-	protected:
-
-	private: System::Windows::Forms::TextBox^ TboxReferences;
-
-
-	private: System::Windows::Forms::Label^ LbQuantity;
-	private: System::Windows::Forms::Label^ LbReferences;
-	private: System::Windows::Forms::TextBox^ TboxArticleName;
-
-
-
-	private: System::Windows::Forms::Label^ LbArticleName;
-
-
-
-
-	private: System::Windows::Forms::Label^ LbPriceTxt;
-
-
-	private: System::Windows::Forms::Label^ LbPriceValue;
-
-	private: System::Windows::Forms::Button^ BtnResearchArticle;
-	private: System::Windows::Forms::DataGridView^ DGV;
-
-
-	private:
+			 System::Windows::Forms::TextBox^ TboxQuantity;
+			 System::Windows::Forms::TextBox^ TboxReferences;
+			 System::Windows::Forms::Label^ LbQuantity;
+			 System::Windows::Forms::Label^ LbReferences;
+			 System::Windows::Forms::TextBox^ TboxArticleName;
+			 System::Windows::Forms::Label^ LbArticleName;
+			 System::Windows::Forms::Label^ LbPriceTxt;
+			 System::Windows::Forms::Label^ LbPriceValue;
+			 System::Windows::Forms::Button^ BtnResearchArticle;
+			 System::Windows::Forms::DataGridView^ DGV;
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
@@ -191,6 +176,7 @@ namespace A2ProjetBloc2 {
 			this->BtnResearchArticle->TabIndex = 29;
 			this->BtnResearchArticle->Text = L"Rechercher";
 			this->BtnResearchArticle->UseVisualStyleBackColor = true;
+			this->BtnResearchArticle->Click += gcnew System::EventHandler(this, &AddArticleToCommand::BtnResearchArticle_Click);
 			// 
 			// DGV
 			// 
@@ -224,5 +210,8 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
-	};
+	private: System::Void BtnResearchArticle_Click(System::Object^ sender, System::EventArgs^ e) {
+		//articleRepository->editArticle(sharedA); // faut reprendre là et envoyer une requête pour filtrer en fonction des données en entrée
+	}
+};
 }

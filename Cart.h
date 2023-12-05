@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "BDD.h"
+#include "AddArticleToCommand.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -85,6 +86,7 @@ namespace A2ProjetBloc2 {
 			this->BtnAddCommand->TabIndex = 13;
 			this->BtnAddCommand->Text = L"Ajouter";
 			this->BtnAddCommand->UseVisualStyleBackColor = true;
+			this->BtnAddCommand->Click += gcnew System::EventHandler(this, &Cart::BtnAddCommand_Click);
 			// 
 			// BtnDelete
 			// 
@@ -146,5 +148,9 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
-	};
+	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
+		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd);
+		formAddArticleToCommand->ShowDialog();
+	}
+};
 }
