@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <thread>
 #include <mutex>
 #include "BDD.h"
@@ -16,7 +16,7 @@ namespace A2ProjetBloc2 {
 	using namespace System::Threading;
 
 	/// <summary>
-	/// Description résumée de ListClient
+	/// Description rï¿½sumï¿½e de ListClient
 	/// </summary>
 	public ref class ListClient : public System::Windows::Forms::Form
 	{
@@ -94,7 +94,7 @@ namespace A2ProjetBloc2 {
 
 	protected:
 		/// <summary>
-		/// Nettoyage des ressources utilisées.
+		/// Nettoyage des ressources utilisï¿½es.
 		/// </summary>
 		~ListClient()
 		{
@@ -113,14 +113,14 @@ namespace A2ProjetBloc2 {
 
 	private:
 		/// <summary>
-		/// Variable nécessaire au concepteur.
+		/// Variable nï¿½cessaire au concepteur.
 		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette méthode avec l'éditeur de code.
+		/// Mï¿½thode requise pour la prise en charge du concepteur - ne modifiez pas
+		/// le contenu de cette mï¿½thode avec l'ï¿½diteur de code.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -232,7 +232,7 @@ namespace A2ProjetBloc2 {
 		if (e->RowIndex >= 0) {
 			DataGridViewRow^ sharedDgvrRow = DGVListClient->Rows[e->RowIndex];
 			sharedC = (Client^)sharedDgvrRow->Tag;
-			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedC->ToString());
+			System::Diagnostics::Debug::WriteLine("cliquÃ© sur " + sharedC->ToString());
 		}
 	}
 
@@ -246,7 +246,7 @@ namespace A2ProjetBloc2 {
 		this->DGVListClient->Rows[selected]->Selected = true;
 	}
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::Diagnostics::Debug::WriteLine(sharedC + " voilà c");
+		System::Diagnostics::Debug::WriteLine(sharedC + " voilÃ  c");
 		clientRepository->deleteClient(sharedC);
 		this->reload();
 	}

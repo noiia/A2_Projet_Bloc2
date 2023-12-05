@@ -7,7 +7,7 @@ using namespace  System::Collections::Generic;
 using namespace System;
 using namespace System::Data;
 
-ref class ClientRepository 
+ref class ClientRepository
 {
 private:
     BDD^ bdd;
@@ -18,8 +18,8 @@ public:
         DataSet^ ds = bdd->executeQuery("SELECT * FROM [Client]" + (delState ? "" : " WHERE Del = 0"));
 
         List<Client^>^ list = gcnew List<Client^>();
-        
-        for each (DataRow ^ row in ds->Tables[0]->Rows) 
+
+        for each (DataRow ^ row in ds->Tables[0]->Rows)
         {
             Client^ c = gcnew Client();
             c->setID_Client((int)row[0]);
@@ -40,6 +40,6 @@ public:
     }
 
     void insertClient(Client^ client) {
-        bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Birthday, Del) VALUES ('"+ client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "')",1);
+        bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Birthday, Del) VALUES ('" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "')", 1);
     }
 };
