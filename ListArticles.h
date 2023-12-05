@@ -23,6 +23,7 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		Article^ sharedA;
+		bool delOrRestore;
 		Thread^ reloadThread;
 		System::Threading::Mutex^ reloadMutex;
 		private: System::Windows::Forms::Button^ BtnDelete;
@@ -70,8 +71,6 @@ namespace A2ProjetBloc2 {
 			this->reload();
 			
 		}
-
-		
 		void reload() {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
@@ -109,6 +108,27 @@ namespace A2ProjetBloc2 {
 					dgvr->Cells->Add(dgvcRestockingDate);
 					dgvr->Tag = a;
 					this->DGVSearchArticle->Rows->Add(dgvr);
+
+
+					this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+						static_cast<System::Byte>(0)));
+					this->BtnDelete->Size = System::Drawing::Size(135, 48);
+					this->BtnDelete->TabIndex = 28;
+					this->BtnDelete->UseVisualStyleBackColor = true;
+					this->BtnDelete->Click += gcnew System::EventHandler(this, &ListArticles::BtnDelete_Click);
+
+					if (this->CboxDeletedLines->Checked) {
+						this->BtnDelete->Text = L"Restaurer";
+						this->BtnDelete->Location = System::Drawing::Point(1017, 464);
+						System::Diagnostics::Debug::WriteLine("restaurer");
+						delOrRestore = 0;
+					}
+					else {
+						this->BtnDelete->Text = L"Supprimer";
+						this->BtnDelete->Location = System::Drawing::Point(1017,464);
+							System::Diagnostics::Debug::WriteLine("supprimer");
+						delOrRestore = 1;
+					}
 				}
 				reloadMutex->ReleaseMutex();
 			}
@@ -198,18 +218,6 @@ namespace A2ProjetBloc2 {
 			this->Title->TabIndex = 24;
 			this->Title->Text = L"Liste des articles";
 			// 
-			// BtnDelete
-			// 
-			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(1017, 464);
-			this->BtnDelete->Name = L"BtnDelete";
-			this->BtnDelete->Size = System::Drawing::Size(135, 48);
-			this->BtnDelete->TabIndex = 28;
-			this->BtnDelete->Text = L"Supprimer";
-			this->BtnDelete->UseVisualStyleBackColor = true;
-			this->BtnDelete->Click += gcnew System::EventHandler(this, &ListArticles::BtnDelete_Click);
-			// 
 			// CboxDeletedLines
 			// 
 			this->CboxDeletedLines->AutoSize = true;
@@ -227,6 +235,8 @@ namespace A2ProjetBloc2 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
 			this->ClientSize = System::Drawing::Size(1215, 623);
 			this->Controls->Add(this->CboxDeletedLines);
 			this->Controls->Add(this->BtnDelete);
@@ -261,7 +271,7 @@ namespace A2ProjetBloc2 {
 	}
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Diagnostics::Debug::WriteLine(sharedA + " voilà a");
-		articleRepository->deleteArticle(sharedA);
+		articleRepository->deleteArticle(sharedA, delOrRestore);
 		this->reload();
 	}
 

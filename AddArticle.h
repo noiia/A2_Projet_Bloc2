@@ -14,6 +14,7 @@ namespace A2ProjetBloc2 {
 	/// </summary>
 	public ref class AddArticle : public System::Windows::Forms::Form
 	{
+	private: 
 		 System::Windows::Forms::NumericUpDown^ NudPriceVAT;
 		 System::Windows::Forms::NumericUpDown^ NudPriceWT;
 		 System::Windows::Forms::NumericUpDown^ NudPriceATI;
@@ -25,7 +26,6 @@ namespace A2ProjetBloc2 {
 		 System::Windows::Forms::Label^ LbKind;
 		 System::Windows::Forms::NumericUpDown^ NudTresholdLimit;
 		 System::Windows::Forms::Label^ LbTresholdLimit;
-
 		 Article^ article;
 		 bool addOrEdit;
 	public:
@@ -33,12 +33,12 @@ namespace A2ProjetBloc2 {
 		// addOrEdit == 1 : edit
 		AddArticle(Article^ article, bool addOrEdit)
 		{
+			this->article = article;
+			this->addOrEdit = addOrEdit;
 			InitializeComponent();
 			this->NudPriceWT->ValueChanged += gcnew System::EventHandler(this, &AddArticle::UpdatePriceATI);
 			this->NudPriceVAT->ValueChanged += gcnew System::EventHandler(this, &AddArticle::UpdatePriceATI);
 
-			this->article = article;
-			this->addOrEdit = addOrEdit;
 			System::Diagnostics::Debug::WriteLine("add article " + this->addOrEdit);
 
 			if (addOrEdit) {
@@ -46,7 +46,7 @@ namespace A2ProjetBloc2 {
 				this->TboxName->Text = article->getName();
 				this->TboxKind->Text = article->getKind();
 				this->NudPriceWT->Value = Convert::ToDecimal(article->getPriceWT());
-				this->NudPriceVAT->Value = article->getVAT();
+				this->NudPriceVAT->Value = Convert::ToDecimal(article->getVAT());
 				this->NudPriceATI->Value = Convert::ToDecimal(article->getPriceATI());
 				this->NudStock->Value = article->getStock();
 				this->DtpTreshold->Value = Convert::ToDateTime(article->getRestockingDate());
@@ -65,13 +65,6 @@ namespace A2ProjetBloc2 {
 				delete components;
 			}
 		}
-	public :
-		virtual void Dispose() new {
-		if (components) {
-			delete components;
-		}
-		System::Windows::Forms::Form::Dispose(true);
-	}
 
 	private: System::Windows::Forms::Label^ Title;
 			 System::Windows::Forms::Label^ LbName;
@@ -292,7 +285,7 @@ namespace A2ProjetBloc2 {
 			this->DtpTreshold->Name = L"DtpTreshold";
 			this->DtpTreshold->Size = System::Drawing::Size(298, 25);
 			this->DtpTreshold->TabIndex = 8;
-			this->DtpTreshold->Value = System::DateTime(2023, 11, 28, 0, 0, 0, 0);
+			this->DtpTreshold->Value = System::DateTime(2023, 11, 28);
 			// 
 			// NudStock
 			// 
@@ -375,11 +368,14 @@ namespace A2ProjetBloc2 {
 			// paramètre si modification de profil existant
 			//
 			System::Diagnostics::Debug::WriteLine("before if else " + this->addOrEdit);
+			System::Diagnostics::Debug::WriteLine("before if else " + addOrEdit);
 			if (this->addOrEdit) {
 				System::Diagnostics::Debug::WriteLine(this->addOrEdit);
-				this->Title->Text = L"Modifier un nouvel article";
+				this->Title->Text = L"Modifier l'article";
 				this->TboxIDReference->ReadOnly = true;
-				this->BtnAddArticle->Text = L"Modifier";
+				this->BtnAddArticle->Text = L"Valider";
+				this->BtnAddArticle->Location = System::Drawing::Point(112, 758);
+				this->BtnCancel->Visible = false; 
 			}
 			else {
 				this->Title->Text = L"Ajouter un nouvel article";
@@ -391,6 +387,9 @@ namespace A2ProjetBloc2 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+			this->ControlBox = false;
 			this->ClientSize = System::Drawing::Size(354, 828);
 			this->Controls->Add(this->NudTresholdLimit);
 			this->Controls->Add(this->LbTresholdLimit);
@@ -433,7 +432,7 @@ namespace A2ProjetBloc2 {
 	}
 private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();
-	this->Dispose();
+	//this->Dispose();
 }
 private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
 	// la ligne suivante permet de paramétrer le type de convention d'écriture des nombre à virgule avec un point à la place de la virgule

@@ -7,7 +7,7 @@ BDD::BDD()
 {
     try
     {
-        String^ connectString = "Data Source=127.0.0.1,1433;Initial Catalog = TurboStock ;User ID=sa;Password=Test$Test1";
+        String^ connectString = "Data Source=127.0.0.1,1433;Initial Catalog = TurboStock ;User ID=ProjetPOO;Password=CESI$2023";
         connection = gcnew SqlConnection(connectString);
         connection->Open();
         System::Diagnostics::Debug::WriteLine("Connexion ok");
