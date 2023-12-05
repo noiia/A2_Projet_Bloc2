@@ -43,6 +43,7 @@ namespace A2ProjetBloc2 {
 			 System::Windows::Forms::DataGridView^ dataGridView1;
 			 System::Windows::Forms::Button^ button1;
 			 System::Windows::Forms::Button^ BtnModify;
+	private: System::Windows::Forms::Label^ LbTotal;
 
 		/// <summary>
 		/// Variable n�cessaire au concepteur.
@@ -56,12 +57,14 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Cart::typeid));
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->BtnAddCommand = (gcnew System::Windows::Forms::Button());
 			this->BtnDelete = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
+			this->LbTotal = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -70,7 +73,7 @@ namespace A2ProjetBloc2 {
 			this->Title->AutoSize = true;
 			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(89, 9);
+			this->Title->Location = System::Drawing::Point(101, 9);
 			this->Title->Name = L"Title";
 			this->Title->Size = System::Drawing::Size(359, 28);
 			this->Title->TabIndex = 0;
@@ -80,7 +83,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnAddCommand->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddCommand->Location = System::Drawing::Point(25, 520);
+			this->BtnAddCommand->Location = System::Drawing::Point(25, 453);
 			this->BtnAddCommand->Name = L"BtnAddCommand";
 			this->BtnAddCommand->Size = System::Drawing::Size(111, 42);
 			this->BtnAddCommand->TabIndex = 13;
@@ -92,7 +95,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(292, 520);
+			this->BtnDelete->Location = System::Drawing::Point(231, 520);
 			this->BtnDelete->Name = L"BtnDelete";
 			this->BtnDelete->Size = System::Drawing::Size(111, 42);
 			this->BtnDelete->TabIndex = 14;
@@ -104,7 +107,7 @@ namespace A2ProjetBloc2 {
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Location = System::Drawing::Point(25, 56);
 			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(514, 437);
+			this->dataGridView1->Size = System::Drawing::Size(514, 381);
 			this->dataGridView1->TabIndex = 15;
 			// 
 			// button1
@@ -122,24 +125,37 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(162, 520);
+			this->BtnModify->Location = System::Drawing::Point(25, 520);
 			this->BtnModify->Name = L"BtnModify";
 			this->BtnModify->Size = System::Drawing::Size(111, 42);
 			this->BtnModify->TabIndex = 17;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
 			// 
+			// LbTotal
+			// 
+			this->LbTotal->AutoSize = true;
+			this->LbTotal->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbTotal->Location = System::Drawing::Point(216, 465);
+			this->LbTotal->Name = L"LbTotal";
+			this->LbTotal->Size = System::Drawing::Size(88, 19);
+			this->LbTotal->TabIndex = 18;
+			this->LbTotal->Text = L"Prix total : ";
+			// 
 			// Cart
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(567, 585);
+			this->Controls->Add(this->LbTotal);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnAddCommand);
 			this->Controls->Add(this->Title);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Cart";
 			this->Text = L"AddCommand";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
