@@ -108,69 +108,38 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(CommandHistory::typeid));
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
-			this->BtnAddCommand = (gcnew System::Windows::Forms::Button());
-			this->DGVOrderHistory = (gcnew System::Windows::Forms::DataGridView());
-			this->Title = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVOrderHistory))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// BtnModify
 			// 
 			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(691, 456);
+			this->BtnModify->Location = System::Drawing::Point(1728, 982);
+			this->BtnModify->Margin = System::Windows::Forms::Padding(8, 6, 8, 6);
 			this->BtnModify->Name = L"BtnModify";
-			this->BtnModify->Size = System::Drawing::Size(135, 48);
+			this->BtnModify->Size = System::Drawing::Size(338, 103);
 			this->BtnModify->TabIndex = 27;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
 			// 
-			// BtnAddCommand
+			// CommandHistory
 			// 
-			this->BtnAddCommand->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->BtnAddCommand->Location = System::Drawing::Point(691, 81);
-			this->BtnAddCommand->Name = L"BtnAddCommand";
-			this->BtnAddCommand->Size = System::Drawing::Size(135, 48);
-			this->BtnAddCommand->TabIndex = 26;
-			this->BtnAddCommand->Text = L"Ajouter";
-			this->BtnAddCommand->UseVisualStyleBackColor = true;
-			this->BtnAddCommand->Click += gcnew System::EventHandler(this, &CommandHistory::BtnAddCommand_Click);
-			// 
-			// DGVSearchStaff
-			// 
-			this->DGVOrderHistory->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVOrderHistory->Location = System::Drawing::Point(26, 56);
-			this->DGVOrderHistory->Name = L"DGVSearchStaff";
-			this->DGVOrderHistory->Size = System::Drawing::Size(603, 526);
-			this->DGVOrderHistory->TabIndex = 25;
-			// 
-			// Title
-			// 
-			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(317, 9);
-			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(262, 28);
-			this->Title->TabIndex = 24;
-			this->Title->Text = L"Liste des commandes";
-			// 
-			// ListCommand
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(15, 28);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(889, 623);
+			this->AutoSize = true;
+			this->ClientSize = System::Drawing::Size(1924, 1061);
 			this->Controls->Add(this->BtnModify);
-			this->Controls->Add(this->BtnAddCommand);
-			this->Controls->Add(this->DGVOrderHistory);
-			this->Controls->Add(this->Title);
-			this->Name = L"ListCommand";
+			this->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Location = System::Drawing::Point(317, 9);
+			this->Margin = System::Windows::Forms::Padding(8, 6, 8, 6);
+			this->Name = L"CommandHistory";
 			this->Text = L"ListCommand";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVOrderHistory))->EndInit();
+			this->Click += gcnew System::EventHandler(this, &CommandHistory::BtnAddCommand_Click);
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
