@@ -139,11 +139,12 @@ namespace A2ProjetBloc2 {
 			// 
 			// BtnModify
 			// 
-			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(691, 418);
+			this->BtnModify->Location = System::Drawing::Point(921, 514);
+			this->BtnModify->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnModify->Name = L"BtnModify";
-			this->BtnModify->Size = System::Drawing::Size(135, 48);
+			this->BtnModify->Size = System::Drawing::Size(180, 59);
 			this->BtnModify->TabIndex = 27;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
@@ -153,10 +154,10 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddArticle->Location = System::Drawing::Point(921, 100);
-			this->BtnAddArticle->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->BtnAddArticle->Location = System::Drawing::Point(1228, 123);
+			this->BtnAddArticle->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
 			this->BtnAddArticle->Name = L"BtnAddArticle";
-			this->BtnAddArticle->Size = System::Drawing::Size(180, 59);
+			this->BtnAddArticle->Size = System::Drawing::Size(240, 73);
 			this->BtnAddArticle->TabIndex = 26;
 			this->BtnAddArticle->Text = L"Ajouter";
 			this->BtnAddArticle->UseVisualStyleBackColor = true;
@@ -165,30 +166,34 @@ namespace A2ProjetBloc2 {
 			// DGVSearchArticle
 			// 
 			this->DGVSearchArticle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVSearchArticle->Location = System::Drawing::Point(26, 56);
+			this->DGVSearchArticle->Location = System::Drawing::Point(35, 69);
+			this->DGVSearchArticle->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->DGVSearchArticle->Name = L"DGVSearchArticle";
-			this->DGVSearchArticle->Size = System::Drawing::Size(603, 526);
+			this->DGVSearchArticle->RowHeadersWidth = 51;
+			this->DGVSearchArticle->Size = System::Drawing::Size(804, 647);
 			this->DGVSearchArticle->TabIndex = 25;
 			this->DGVSearchArticle->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
 			// 
 			// Title
 			// 
 			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(351, 9);
+			this->Title->Location = System::Drawing::Point(468, 11);
+			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(211, 28);
+			this->Title->Size = System::Drawing::Size(254, 36);
 			this->Title->TabIndex = 24;
 			this->Title->Text = L"Liste des articles";
 			// 
 			// BtnDelete
 			// 
-			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(691, 510);
+			this->BtnDelete->Location = System::Drawing::Point(921, 628);
+			this->BtnDelete->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnDelete->Name = L"BtnDelete";
-			this->BtnDelete->Size = System::Drawing::Size(135, 48);
+			this->BtnDelete->Size = System::Drawing::Size(180, 59);
 			this->BtnDelete->TabIndex = 28;
 			this->BtnDelete->Text = L"Supprimer";
 			this->BtnDelete->UseVisualStyleBackColor = true;
@@ -196,17 +201,19 @@ namespace A2ProjetBloc2 {
 			// 
 			// ListArticles
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(889, 623);
+			this->ClientSize = System::Drawing::Size(1185, 767);
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->BtnAddArticle);
 			this->Controls->Add(this->DGVSearchArticle);
 			this->Controls->Add(this->Title);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"ListArticles";
 			this->Text = L"TurboStock";
+			this->Load += gcnew System::EventHandler(this, &ListArticles::ListArticles_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -241,5 +248,7 @@ namespace A2ProjetBloc2 {
 		formModifArticle->ShowDialog();
 		articleRepository->editArticle(sharedA);
 	}
+private: System::Void ListArticles_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
