@@ -5,19 +5,19 @@ ref class Client
 {
 private:
 
-	String^ ID_Client;
+	int ID_Client;
 	String^ firstName;
 	String^ lastName;
-	String^ Birthday;
+	DateTime^ Birthday;
 	String^ TypeClient;
 	bool del;
 
 
 public:
-	void setID_Client(String^ ID_Client) {
+	void setID_Client(int ID_Client) {
 		this->ID_Client = ID_Client;
 	}
-	String^ getID_Client() {
+	int getID_Client() {
 		return this->ID_Client;
 	}
 	void setFirstName(String^ firstName) {
@@ -32,10 +32,10 @@ public:
 	String^ getLastName() {
 		return this->lastName;
 	}
-	void setBirthday(String^ Birthday) {
+	void setBirthday(DateTime^ Birthday) {
 		this->Birthday = Birthday;
 	}
-	String^ getBirthday() {
+	DateTime^ getBirthday() {
 		return this->Birthday;
 	}
 	void setTypeClient(String^ TypeClient) {
