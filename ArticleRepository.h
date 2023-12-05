@@ -14,7 +14,6 @@ private:
 public:
 	ArticleRepository(BDD^ bdd) :bdd(bdd) {
 	}
-
 	List<Article^>^ getArticle(bool delState) {
 		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Article]" + (delState ? "" : " WHERE Del = 0"));
 
