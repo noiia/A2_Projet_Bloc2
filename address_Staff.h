@@ -3,11 +3,11 @@ using namespace System;
 
 ref class Address_Staff
 {
-public:
+private:
 	int ID_Address;
 	int  ID_Staff;
 
-private:
+public:
 	void setID_Address(int ID_Adress) {
 		this->ID_Address = ID_Adress;
 	}
