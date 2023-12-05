@@ -24,37 +24,28 @@
     <ClCompile Include="BDD.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="cartReminder.cpp">
+    <ClCompile Include="ListClient.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="fastCatalog.cpp">
+    <ClCompile Include="AddArticle.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="fastClientCatalog.cpp">
+    <ClCompile Include="AddClient.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Order.cpp">
+    <ClCompile Include="Cart.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Payment.cpp">
+    <ClCompile Include="AddStaff.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Recap.cpp">
+    <ClCompile Include="CommandHistory.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="modifUser.cpp">
+    <ClCompile Include="ListStaff.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="newUser.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Profile.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="searchStaff.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="searchUser.cpp">
+    <ClCompile Include="AddArticleToCommand.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,37 +59,43 @@
     <ClInclude Include="BDD.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="cartReminder.h">
+    <ClInclude Include="ListArticles.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="fastCatalog.h">
+    <ClInclude Include="AddArticle.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="fastClientCatalog.h">
+    <ClInclude Include="AddClient.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Order.h">
+    <ClInclude Include="Cart.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Payment.h">
+    <ClInclude Include="AddStaff.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Recap.h">
+    <ClInclude Include="ListClient.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="modifUser.h">
+    <ClInclude Include="CommandHistory.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="newUser.h">
+    <ClInclude Include="ListStaff.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Profile.h">
+    <ClInclude Include="AddArticleToCommand.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="searchStaff.h">
+    <ClInclude Include="Article.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="searchUser.h">
+    <ClInclude Include="ArticleRepository.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientRepository.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -106,5 +103,11 @@
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg">
       <Filter>Fichiers de ressources</Filter>
     </Image>
+    <Image Include="Assets\1486504331-burn-fire-flame-danger-burning-hot_81317.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BDDCreations.sql" />
   </ItemGroup>
 </Project>

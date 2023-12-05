@@ -78,6 +78,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -114,60 +115,57 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddArticle.cpp" />
+    <ClCompile Include="AddArticleToCommand.cpp" />
+    <ClCompile Include="AddClient.cpp" />
+    <ClCompile Include="Cart.cpp" />
+    <ClCompile Include="AddStaff.cpp" />
     <ClCompile Include="BDD.cpp" />
-    <ClCompile Include="cartReminder.cpp" />
-    <ClCompile Include="fastCatalog.cpp" />
-    <ClCompile Include="fastClientCatalog.cpp" />
+    <ClCompile Include="ListClient.cpp" />
+    <ClCompile Include="CommandHistory.cpp" />
+    <ClCompile Include="ListStaff.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="modifUser.cpp" />
-    <ClCompile Include="newUser.cpp" />
-    <ClCompile Include="Order.cpp" />
-    <ClCompile Include="Payment.cpp" />
-    <ClCompile Include="Profile.cpp" />
-    <ClCompile Include="Recap.cpp" />
-    <ClCompile Include="searchStaff.cpp" />
-    <ClCompile Include="searchUser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddArticle.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddArticleToCommand.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddClient.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Article.h" />
+    <ClInclude Include="ArticleRepository.h" />
+    <ClInclude Include="Cart.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddStaff.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="BDD.h" />
-    <ClInclude Include="cartReminder.h">
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="ClientRepository.h" />
+    <ClInclude Include="ListArticles.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="fastCatalog.h">
+    <ClInclude Include="ListClient.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="fastClientCatalog.h">
+    <ClInclude Include="CommandHistory.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ListStaff.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="modifUser.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="newUser.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="Order.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="Payment.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="Profile.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="Recap.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="searchStaff.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="searchUser.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
+    <ClInclude Include="Staff.h" />
+    <ClInclude Include="StaffRepository.h" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -178,43 +176,38 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg" />
+    <Image Include="Assets\1486504331-burn-fire-flame-danger-burning-hot_81317.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="cartReminder.resx">
-      <DependentUpon>cartReminder.h</DependentUpon>
+    <EmbeddedResource Include="AddArticle.resx">
+      <DependentUpon>AddArticle.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fastCatalog.resx">
-      <DependentUpon>fastCatalog.h</DependentUpon>
+    <EmbeddedResource Include="AddArticleToCommand.resx">
+      <DependentUpon>AddArticleToCommand.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fastClientCatalog.resx">
-      <DependentUpon>fastClientCatalog.h</DependentUpon>
+    <EmbeddedResource Include="AddClient.resx">
+      <DependentUpon>AddClient.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cart.resx">
+      <DependentUpon>Cart.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddStaff.resx">
+      <DependentUpon>AddStaff.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListArticles.resx">
+      <DependentUpon>ListArticles.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListClient.resx">
+      <DependentUpon>ListClient.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommandHistory.resx">
+      <DependentUpon>CommandHistory.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListStaff.resx">
+      <DependentUpon>ListStaff.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="modifUser.resx">
-      <DependentUpon>modifUser.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="newUser.resx">
-      <DependentUpon>newUser.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Order.resx">
-      <DependentUpon>Order.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Payment.resx">
-      <DependentUpon>Payment.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Profile.resx">
-      <DependentUpon>Profile.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Recap.resx">
-      <DependentUpon>Recap.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="searchStaff.resx">
-      <DependentUpon>searchStaff.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="searchUser.resx">
-      <DependentUpon>searchUser.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
