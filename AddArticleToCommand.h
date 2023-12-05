@@ -59,6 +59,7 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddArticleToCommand::typeid));
 			this->BtnAddCommand = (gcnew System::Windows::Forms::Button());
 			this->TboxQuantity = (gcnew System::Windows::Forms::TextBox());
 			this->TboxReferences = (gcnew System::Windows::Forms::TextBox());
@@ -202,6 +203,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->TboxReferences);
 			this->Controls->Add(this->LbQuantity);
 			this->Controls->Add(this->LbReferences);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"AddArticleToCommand";
 			this->Text = L"AddArticleToCommand";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGV))->EndInit();
