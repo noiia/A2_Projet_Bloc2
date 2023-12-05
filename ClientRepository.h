@@ -14,7 +14,7 @@ public:
     ClientRepository(BDD^ bdd) :bdd(bdd) {
     }
     List<Client^>^ getClient() {
-        DataSet^ ds = bdd->executeQuery("SELECT * FROM [Client]");
+        DataSet^ ds = bdd->executeQuery("SELECT * FROM [Client] WHERE Del = 0");
         List<Client^>^ list = gcnew List<Client^>();
         for each (DataRow ^ row in ds->Tables[0]->Rows) {
             Client^ c = gcnew Client();
@@ -22,7 +22,7 @@ public:
             c->setFirstName((String^)row[1]);
             c->setLastName((String^)row[2]);
             c->setTypeClient((String^)row[3]);
-            c->setBirthday((DateTime^)row[4]);
+            c->setBirthday(((DateTime^)row[4])->ToString());
             list->Add(c);
         }
         return list;

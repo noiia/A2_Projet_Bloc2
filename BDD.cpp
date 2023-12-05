@@ -7,11 +7,8 @@ BDD::BDD()
 {
     try
     {
-        // Chaine de connexion
-        String^ connectString = "Data Source=127.0.0.1,1433;Initial Catalog = TurboStock ;User ID=sa;Password=Cesi2023*";
-        // Objet connection
+        String^ connectString = "Data Source=127.0.0.1,1433;Initial Catalog = TurboStock ;User ID=ProjetPOO;Password=CESI$2023";
         connection = gcnew SqlConnection(connectString);
-        // Ouverture
         connection->Open();
         System::Diagnostics::Debug::WriteLine("Connexion ok");
     }
@@ -46,17 +43,15 @@ int BDD::executeNonQuery(String^ sql)
     return affectedrows;
 }
 
-int BDD::executeInsert(String^ sql, bool geneID)
+int BDD::executeInsert(String^ sql, int geneID)
 {
     System::Diagnostics::Debug::WriteLine("REQSQL: " + sql);
     SqlCommand^ command = gcnew SqlCommand(sql + ";SELECT @@IDENTITY", this->connection);
     // Execution
-    if (geneID) {
+    if (geneID == 1) {
         try {
             Object^ result = command->ExecuteScalar();
             if (result != nullptr) {
-                return Convert::ToInt32(result);
-
                 try {
                     return Convert::ToInt32(result);
                 }
@@ -75,6 +70,10 @@ int BDD::executeInsert(String^ sql, bool geneID)
             System::Diagnostics::Debug::WriteLine("Erreur lors de l'exécution de la requête : " + ex->Message);
             return -1;
         }
+    }
+    else if (geneID == 2){
+        int affectedrows = command->ExecuteNonQuery();
+        return affectedrows;
     }
     else {
         return 0;

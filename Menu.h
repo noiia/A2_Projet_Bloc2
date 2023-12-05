@@ -151,6 +151,8 @@ namespace A2ProjetBloc2 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
 			this->ClientSize = System::Drawing::Size(571, 409);
 			this->Controls->Add(this->BtnStats);
 			this->Controls->Add(this->BtnArticleForm);
