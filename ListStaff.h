@@ -88,13 +88,13 @@ namespace A2ProjetBloc2 {
 
 					if (this->CBoxDeletedLines->Checked) {
 						this->BtnDelete->Text = L"Restaurer";
-						this->BtnDelete->Location = System::Drawing::Point(1017, 464);
+						this->BtnDelete->Location = System::Drawing::Point(690, 537);
 						System::Diagnostics::Debug::WriteLine("restaurer");
 						delOrRestore = 0;
 					}
 					else {
 						this->BtnDelete->Text = L"Supprimer";
-						this->BtnDelete->Location = System::Drawing::Point(1017, 464);
+						this->BtnDelete->Location = System::Drawing::Point(690, 537);
 						System::Diagnostics::Debug::WriteLine("supprimer");
 						delOrRestore = 1;
 					}
@@ -150,7 +150,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(1017, 409);
+			this->BtnModify->Location = System::Drawing::Point(691, 466);
 			this->BtnModify->Margin = System::Windows::Forms::Padding(9);
 			this->BtnModify->Name = L"BtnModify";
 			this->BtnModify->Size = System::Drawing::Size(135, 48);
@@ -162,7 +162,7 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnAddStaff->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddStaff->Location = System::Drawing::Point(1017, 56);
+			this->BtnAddStaff->Location = System::Drawing::Point(691, 114);
 			this->BtnAddStaff->Margin = System::Windows::Forms::Padding(9);
 			this->BtnAddStaff->Name = L"BtnAddStaff";
 			this->BtnAddStaff->Size = System::Drawing::Size(135, 48);
@@ -175,17 +175,16 @@ namespace A2ProjetBloc2 {
 			// 
 			this->DGVSearchStaff->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->DGVSearchStaff->Location = System::Drawing::Point(26, 56);
-			this->DGVSearchStaff->Margin = System::Windows::Forms::Padding(9);
 			this->DGVSearchStaff->Name = L"DGVSearchStaff";
 			this->DGVSearchStaff->RowHeadersWidth = 51;
-			this->DGVSearchStaff->Size = System::Drawing::Size(944, 526);
+			this->DGVSearchStaff->Size = System::Drawing::Size(603, 526);
 			this->DGVSearchStaff->TabIndex = 25;
 			// 
 			// BtnDelete
 			// 
 			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(1017, 475);
+			this->BtnDelete->Location = System::Drawing::Point(690, 537);
 			this->BtnDelete->Margin = System::Windows::Forms::Padding(9);
 			this->BtnDelete->Name = L"BtnDelete";
 			this->BtnDelete->Size = System::Drawing::Size(135, 48);
@@ -196,18 +195,21 @@ namespace A2ProjetBloc2 {
 			// CBoxDeletedLines
 			// 
 			this->CBoxDeletedLines->AutoSize = true;
-			this->CBoxDeletedLines->Location = System::Drawing::Point(1017, 539);
+			this->CBoxDeletedLines->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->CBoxDeletedLines->Location = System::Drawing::Point(690, 412);
 			this->CBoxDeletedLines->Margin = System::Windows::Forms::Padding(7);
 			this->CBoxDeletedLines->Name = L"CBoxDeletedLines";
-			this->CBoxDeletedLines->Size = System::Drawing::Size(446, 40);
+			this->CBoxDeletedLines->Size = System::Drawing::Size(281, 29);
 			this->CBoxDeletedLines->TabIndex = 29;
 			this->CBoxDeletedLines->Text = L"Afficher les lignes supprimés";
 			this->CBoxDeletedLines->UseVisualStyleBackColor = true;
+			this->CBoxDeletedLines->CheckedChanged += gcnew System::EventHandler(this, &ListStaff::CBoxDeletedLines_CheckedChanged);
 			// 
 			// TitleListStaff
 			// 
 			this->TitleListStaff->AutoSize = true;
-			this->TitleListStaff->Location = System::Drawing::Point(497, 9);
+			this->TitleListStaff->Location = System::Drawing::Point(317, 9);
 			this->TitleListStaff->Name = L"TitleListStaff";
 			this->TitleListStaff->Size = System::Drawing::Size(290, 36);
 			this->TitleListStaff->TabIndex = 30;
@@ -218,7 +220,7 @@ namespace A2ProjetBloc2 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(18, 36);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
-			this->ClientSize = System::Drawing::Size(1215, 623);
+			this->ClientSize = System::Drawing::Size(1157, 623);
 			this->Controls->Add(this->TitleListStaff);
 			this->Controls->Add(this->CBoxDeletedLines);
 			this->Controls->Add(this->BtnDelete);
@@ -273,6 +275,10 @@ namespace A2ProjetBloc2 {
 		int selected = this->DGVSearchStaff->SelectedRows[0]->Index;
 		this->reload();
 		this->DGVSearchStaff->Rows[selected]->Selected = true;
+	}
+	
+	private: System::Void CBoxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		this->reload();
 	}
 
 	private: System::Void ListStaff_Load(System::Object^ sender, System::EventArgs^ e) {

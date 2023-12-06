@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#using <System.dll>
 #include "BDD.h"
 #include "Client.h"
 
@@ -11,6 +13,7 @@ ref class ClientRepository
 {
 private:
     BDD^ bdd;
+    Object^ test = DBNull::Value;
 public:
     ClientRepository(BDD^ bdd) :bdd(bdd) {
     }
@@ -26,8 +29,13 @@ public:
             c->setFirstName((String^)row[1]);
             c->setLastName((String^)row[2]);
             c->setTypeClient((String^)row[3]);
-            c->setBirthday((DateTime^)row[4]);
+            if (row[4] == test) {
+            }
+            else {
+                c->setBirthday((DateTime^)row[4]);
+            }
             list->Add(c);
+
         }
         return list;
     }
@@ -38,8 +46,10 @@ public:
     void deleteClient(Client^ client) {
         bdd->executeNonQuery("UPDATE [Client] SET del = true WHERE [ID_Client] = " + client->getID_Client());
     }
-
     void insertClient(Client^ client) {
         bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Birthday, Del) VALUES ('" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday()->ToString("yyyy-MM-dd") + "','" + false + "')", 1);
+    }
+    void insertClientCompany(Client^ client) {
+        bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Del) VALUES ('" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + false + "')", 1);
     }
 };
