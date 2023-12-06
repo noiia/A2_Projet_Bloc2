@@ -135,11 +135,12 @@ namespace A2ProjetBloc2 {
 			// 
 			// BtnModify
 			// 
-			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(691, 466);
+			this->BtnModify->Location = System::Drawing::Point(921, 574);
+			this->BtnModify->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnModify->Name = L"BtnModify";
-			this->BtnModify->Size = System::Drawing::Size(135, 48);
+			this->BtnModify->Size = System::Drawing::Size(180, 59);
 			this->BtnModify->TabIndex = 27;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
@@ -147,11 +148,12 @@ namespace A2ProjetBloc2 {
 			// 
 			// BtnAddClient
 			// 
-			this->BtnAddClient->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnAddClient->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddClient->Location = System::Drawing::Point(691, 114);
+			this->BtnAddClient->Location = System::Drawing::Point(921, 140);
+			this->BtnAddClient->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnAddClient->Name = L"BtnAddClient";
-			this->BtnAddClient->Size = System::Drawing::Size(135, 48);
+			this->BtnAddClient->Size = System::Drawing::Size(180, 59);
 			this->BtnAddClient->TabIndex = 26;
 			this->BtnAddClient->Text = L"Ajouter";
 			this->BtnAddClient->UseVisualStyleBackColor = true;
@@ -160,29 +162,33 @@ namespace A2ProjetBloc2 {
 			// DGVListClient
 			// 
 			this->DGVListClient->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVListClient->Location = System::Drawing::Point(26, 56);
+			this->DGVListClient->Location = System::Drawing::Point(35, 69);
+			this->DGVListClient->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->DGVListClient->Name = L"DGVListClient";
-			this->DGVListClient->Size = System::Drawing::Size(603, 526);
+			this->DGVListClient->RowHeadersWidth = 51;
+			this->DGVListClient->Size = System::Drawing::Size(804, 647);
 			this->DGVListClient->TabIndex = 25;
 			// 
 			// Title
 			// 
 			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(317, 9);
+			this->Title->Location = System::Drawing::Point(423, 11);
+			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(201, 28);
+			this->Title->Size = System::Drawing::Size(244, 36);
 			this->Title->TabIndex = 24;
 			this->Title->Text = L"Liste des clients";
 			// 
 			// BtnDelete
 			// 
-			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(690, 537);
+			this->BtnDelete->Location = System::Drawing::Point(920, 661);
+			this->BtnDelete->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnDelete->Name = L"BtnDelete";
-			this->BtnDelete->Size = System::Drawing::Size(136, 45);
+			this->BtnDelete->Size = System::Drawing::Size(181, 55);
 			this->BtnDelete->TabIndex = 28;
 			this->BtnDelete->Text = L"Supprimer";
 			this->BtnDelete->UseVisualStyleBackColor = true;
@@ -191,18 +197,19 @@ namespace A2ProjetBloc2 {
 			// CBoxDeletedElements
 			// 
 			this->CBoxDeletedElements->AutoSize = true;
-			this->CBoxDeletedElements->Location = System::Drawing::Point(721, 424);
+			this->CBoxDeletedElements->Location = System::Drawing::Point(961, 522);
+			this->CBoxDeletedElements->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->CBoxDeletedElements->Name = L"CBoxDeletedElements";
-			this->CBoxDeletedElements->Size = System::Drawing::Size(80, 17);
+			this->CBoxDeletedElements->Size = System::Drawing::Size(95, 20);
 			this->CBoxDeletedElements->TabIndex = 29;
 			this->CBoxDeletedElements->Text = L"checkBox1";
 			this->CBoxDeletedElements->UseVisualStyleBackColor = true;
 			// 
 			// ListClient
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(889, 623);
+			this->ClientSize = System::Drawing::Size(1185, 767);
 			this->Controls->Add(this->CBoxDeletedElements);
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
@@ -210,6 +217,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->DGVListClient);
 			this->Controls->Add(this->Title);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->MaximizeBox = false;
 			this->Name = L"ListClient";
 			this->Text = L"ListClient";

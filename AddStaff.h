@@ -15,7 +15,20 @@ namespace A2ProjetBloc2 {
 	public ref class AddStaff : public System::Windows::Forms::Form
 	{
 		Staff^ staff;
-		bool addOrEdit;
+		bool addOrEdit; 
+
+	private: System::Windows::Forms::Label^ LbNumber;
+	private: System::Windows::Forms::Label^ LbStreetName;
+	private: System::Windows::Forms::TextBox^ TbStreetName;
+	private: System::Windows::Forms::TextBox^ TbPostalCode;
+	private: System::Windows::Forms::TextBox^ TbCity;
+	private: System::Windows::Forms::Label^ LbPostalCode;
+	private: System::Windows::Forms::Label^ LbCity;
+	private: System::Windows::Forms::Label^ LbAddressComplementary;
+	private: System::Windows::Forms::TextBox^ TbAddressComplementary;
+	private: System::Windows::Forms::DateTimePicker^ DtpHiringDate;
+	private: System::Windows::Forms::Label^ LbHiringDate;
+
 	public:
 		AddStaff(Staff^ staff, bool addOrEdit)
 		{
@@ -40,23 +53,15 @@ namespace A2ProjetBloc2 {
 		}
 	private: System::Windows::Forms::Label^ Title;
 	private: System::Windows::Forms::Label^ LbLastName;
-
-
 	private: System::Windows::Forms::Label^ LbAddress;
 	private: System::Windows::Forms::Label^ LbFirstName;
-
 	private: System::Windows::Forms::TextBox^ TbLastName;
 	private: System::Windows::Forms::TextBox^ TbFirstName;
-
-
 	private: System::Windows::Forms::Button^ BtnAddStaff;
 	private: System::Windows::Forms::Button^ BtnCancel;
-	private: System::Windows::Forms::TextBox^ Tbaddress;
+	private: System::Windows::Forms::TextBox^ TbNumber;
 	private: System::Windows::Forms::TextBox^ TbSupervisor;
 	private: System::Windows::Forms::Label^ LbSupervisor;
-
-
-
 
 	private:
 		/// <summary>
@@ -79,9 +84,20 @@ namespace A2ProjetBloc2 {
 			this->TbFirstName = (gcnew System::Windows::Forms::TextBox());
 			this->BtnAddStaff = (gcnew System::Windows::Forms::Button());
 			this->BtnCancel = (gcnew System::Windows::Forms::Button());
-			this->Tbaddress = (gcnew System::Windows::Forms::TextBox());
+			this->TbNumber = (gcnew System::Windows::Forms::TextBox());
 			this->TbSupervisor = (gcnew System::Windows::Forms::TextBox());
 			this->LbSupervisor = (gcnew System::Windows::Forms::Label());
+			this->LbNumber = (gcnew System::Windows::Forms::Label());
+			this->LbStreetName = (gcnew System::Windows::Forms::Label());
+			this->TbStreetName = (gcnew System::Windows::Forms::TextBox());
+			this->TbPostalCode = (gcnew System::Windows::Forms::TextBox());
+			this->TbCity = (gcnew System::Windows::Forms::TextBox());
+			this->LbPostalCode = (gcnew System::Windows::Forms::Label());
+			this->LbCity = (gcnew System::Windows::Forms::Label());
+			this->LbAddressComplementary = (gcnew System::Windows::Forms::Label());
+			this->TbAddressComplementary = (gcnew System::Windows::Forms::TextBox());
+			this->DtpHiringDate = (gcnew System::Windows::Forms::DateTimePicker());
+			this->LbHiringDate = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// Title
@@ -89,10 +105,10 @@ namespace A2ProjetBloc2 {
 			this->Title->AutoSize = true;
 			this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(16, 27);
+			this->Title->Location = System::Drawing::Point(485, 9);
 			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(322, 29);
+			this->Title->Size = System::Drawing::Size(394, 36);
 			this->Title->TabIndex = 0;
 			this->Title->Text = L"Ajouter un nouvel employé";
 			// 
@@ -104,20 +120,19 @@ namespace A2ProjetBloc2 {
 			this->LbLastName->Location = System::Drawing::Point(16, 85);
 			this->LbLastName->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbLastName->Name = L"LbLastName";
-			this->LbLastName->Size = System::Drawing::Size(42, 20);
+			this->LbLastName->Size = System::Drawing::Size(53, 25);
 			this->LbLastName->TabIndex = 1;
 			this->LbLastName->Text = L"Nom";
-
 			// 
 			// LbAddress
 			// 
 			this->LbAddress->AutoSize = true;
 			this->LbAddress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbAddress->Location = System::Drawing::Point(16, 265);
+			this->LbAddress->Location = System::Drawing::Point(589, 70);
 			this->LbAddress->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbAddress->Name = L"LbAddress";
-			this->LbAddress->Size = System::Drawing::Size(68, 20);
+			this->LbAddress->Size = System::Drawing::Size(85, 25);
 			this->LbAddress->TabIndex = 4;
 			this->LbAddress->Text = L"Adresse";
 			// 
@@ -129,7 +144,7 @@ namespace A2ProjetBloc2 {
 			this->LbFirstName->Location = System::Drawing::Point(16, 174);
 			this->LbFirstName->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbFirstName->Name = L"LbFirstName";
-			this->LbFirstName->Size = System::Drawing::Size(64, 20);
+			this->LbFirstName->Size = System::Drawing::Size(80, 25);
 			this->LbFirstName->TabIndex = 5;
 			this->LbFirstName->Text = L"Prénom";
 			// 
@@ -140,9 +155,8 @@ namespace A2ProjetBloc2 {
 			this->TbLastName->Location = System::Drawing::Point(21, 112);
 			this->TbLastName->Margin = System::Windows::Forms::Padding(4);
 			this->TbLastName->Name = L"TbLastName";
-			this->TbLastName->Size = System::Drawing::Size(419, 26);
+			this->TbLastName->Size = System::Drawing::Size(419, 30);
 			this->TbLastName->TabIndex = 7;
-
 			// 
 			// TbFirstName
 			// 
@@ -151,7 +165,7 @@ namespace A2ProjetBloc2 {
 			this->TbFirstName->Location = System::Drawing::Point(21, 201);
 			this->TbFirstName->Margin = System::Windows::Forms::Padding(4);
 			this->TbFirstName->Name = L"TbFirstName";
-			this->TbFirstName->Size = System::Drawing::Size(419, 26);
+			this->TbFirstName->Size = System::Drawing::Size(419, 30);
 			this->TbFirstName->TabIndex = 8;
 			// 
 			// BtnAddStaff
@@ -180,48 +194,178 @@ namespace A2ProjetBloc2 {
 			this->BtnCancel->UseVisualStyleBackColor = true;
 			this->BtnCancel->Click += gcnew System::EventHandler(this, &AddStaff::BtnCancel_Click);
 			// 
-			// Tbaddress
+			// TbNumber
 			// 
-			this->Tbaddress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->TbNumber->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Tbaddress->Location = System::Drawing::Point(21, 305);
-			this->Tbaddress->Margin = System::Windows::Forms::Padding(4);
-			this->Tbaddress->Name = L"Tbaddress";
-			this->Tbaddress->Size = System::Drawing::Size(419, 26);
-			this->Tbaddress->TabIndex = 15;
+			this->TbNumber->Location = System::Drawing::Point(594, 145);
+			this->TbNumber->Margin = System::Windows::Forms::Padding(4);
+			this->TbNumber->Name = L"TbNumber";
+			this->TbNumber->Size = System::Drawing::Size(419, 30);
+			this->TbNumber->TabIndex = 15;
 			// 
 			// TbSupervisor
 			// 
 			this->TbSupervisor->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TbSupervisor->Location = System::Drawing::Point(21, 409);
+			this->TbSupervisor->Location = System::Drawing::Point(21, 398);
 			this->TbSupervisor->Margin = System::Windows::Forms::Padding(4);
 			this->TbSupervisor->Name = L"TbSupervisor";
-			this->TbSupervisor->Size = System::Drawing::Size(419, 26);
+			this->TbSupervisor->Size = System::Drawing::Size(419, 30);
 			this->TbSupervisor->TabIndex = 17;
-			this->TbSupervisor->TextChanged += gcnew System::EventHandler(this, &AddStaff::TbTresholdDate_TextChanged);
+			
 			// 
 			// LbSupervisor
 			// 
 			this->LbSupervisor->AutoSize = true;
 			this->LbSupervisor->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LbSupervisor->Location = System::Drawing::Point(16, 382);
+			this->LbSupervisor->Location = System::Drawing::Point(16, 353);
 			this->LbSupervisor->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->LbSupervisor->Name = L"LbSupervisor";
-			this->LbSupervisor->Size = System::Drawing::Size(169, 20);
+			this->LbSupervisor->Size = System::Drawing::Size(209, 25);
 			this->LbSupervisor->TabIndex = 16;
 			this->LbSupervisor->Text = L"Supérieur hiérarchique";
-			this->LbSupervisor->Click += gcnew System::EventHandler(this, &AddStaff::LbTresholdDate_Click);
+			
+			// 
+			// LbNumber
+			// 
+			this->LbNumber->AutoSize = true;
+			this->LbNumber->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbNumber->Location = System::Drawing::Point(589, 117);
+			this->LbNumber->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbNumber->Name = L"LbNumber";
+			this->LbNumber->Size = System::Drawing::Size(81, 25);
+			this->LbNumber->TabIndex = 18;
+			this->LbNumber->Text = L"Numero";
+			// 
+			// LbStreetName
+			// 
+			this->LbStreetName->AutoSize = true;
+			this->LbStreetName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbStreetName->Location = System::Drawing::Point(589, 201);
+			this->LbStreetName->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbStreetName->Name = L"LbStreetName";
+			this->LbStreetName->Size = System::Drawing::Size(120, 25);
+			this->LbStreetName->TabIndex = 19;
+			this->LbStreetName->Text = L"Nom de Rue";
+			// 
+			// TbStreetName
+			// 
+			this->TbStreetName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TbStreetName->Location = System::Drawing::Point(594, 230);
+			this->TbStreetName->Margin = System::Windows::Forms::Padding(4);
+			this->TbStreetName->Name = L"TbStreetName";
+			this->TbStreetName->Size = System::Drawing::Size(419, 30);
+			this->TbStreetName->TabIndex = 20;
+			// 
+			// TbPostalCode
+			// 
+			this->TbPostalCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TbPostalCode->Location = System::Drawing::Point(594, 304);
+			this->TbPostalCode->Margin = System::Windows::Forms::Padding(4);
+			this->TbPostalCode->Name = L"TbPostalCode";
+			this->TbPostalCode->Size = System::Drawing::Size(419, 30);
+			this->TbPostalCode->TabIndex = 21;
+			// 
+			// TbCity
+			// 
+			this->TbCity->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->TbCity->Location = System::Drawing::Point(594, 382);
+			this->TbCity->Margin = System::Windows::Forms::Padding(4);
+			this->TbCity->Name = L"TbCity";
+			this->TbCity->Size = System::Drawing::Size(419, 30);
+			this->TbCity->TabIndex = 22;
+			// 
+			// LbPostalCode
+			// 
+			this->LbPostalCode->AutoSize = true;
+			this->LbPostalCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbPostalCode->Location = System::Drawing::Point(589, 275);
+			this->LbPostalCode->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbPostalCode->Name = L"LbPostalCode";
+			this->LbPostalCode->Size = System::Drawing::Size(119, 25);
+			this->LbPostalCode->TabIndex = 23;
+			this->LbPostalCode->Text = L"Code Postal";
+			// 
+			// LbCity
+			// 
+			this->LbCity->AutoSize = true;
+			this->LbCity->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbCity->Location = System::Drawing::Point(589, 353);
+			this->LbCity->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbCity->Name = L"LbCity";
+			this->LbCity->Size = System::Drawing::Size(49, 25);
+			this->LbCity->TabIndex = 24;
+			this->LbCity->Text = L"Ville";
+			// 
+			// LbAddressComplementary
+			// 
+			this->LbAddressComplementary->AutoSize = true;
+			this->LbAddressComplementary->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->LbAddressComplementary->Location = System::Drawing::Point(589, 432);
+			this->LbAddressComplementary->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbAddressComplementary->Name = L"LbAddressComplementary";
+			this->LbAddressComplementary->Size = System::Drawing::Size(213, 25);
+			this->LbAddressComplementary->TabIndex = 25;
+			this->LbAddressComplementary->Text = L"Complement d\'adresse";
+			// 
+			// TbAddressComplementary
+			// 
+			this->TbAddressComplementary->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->TbAddressComplementary->Location = System::Drawing::Point(594, 461);
+			this->TbAddressComplementary->Margin = System::Windows::Forms::Padding(4);
+			this->TbAddressComplementary->Name = L"TbAddressComplementary";
+			this->TbAddressComplementary->Size = System::Drawing::Size(419, 30);
+			this->TbAddressComplementary->TabIndex = 26;
+			// 
+			// DtpHiringDate
+			// 
+			this->DtpHiringDate->Location = System::Drawing::Point(21, 304);
+			this->DtpHiringDate->Name = L"DtpHiringDate";
+			this->DtpHiringDate->Size = System::Drawing::Size(396, 22);
+			this->DtpHiringDate->TabIndex = 27;
+			// 
+			// LbHiringDate
+			// 
+			this->LbHiringDate->AutoSize = true;
+			this->LbHiringDate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LbHiringDate->Location = System::Drawing::Point(16, 269);
+			this->LbHiringDate->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->LbHiringDate->Name = L"LbHiringDate";
+			this->LbHiringDate->Size = System::Drawing::Size(165, 25);
+			this->LbHiringDate->TabIndex = 28;
+			this->LbHiringDate->Text = L"Date d\'embauche";
 			// 
 			// AddStaff
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(500, 598);
+			this->ClientSize = System::Drawing::Size(1070, 598);
+			this->Controls->Add(this->LbHiringDate);
+			this->Controls->Add(this->DtpHiringDate);
+			this->Controls->Add(this->TbAddressComplementary);
+			this->Controls->Add(this->LbAddressComplementary);
+			this->Controls->Add(this->LbCity);
+			this->Controls->Add(this->LbPostalCode);
+			this->Controls->Add(this->TbCity);
+			this->Controls->Add(this->TbPostalCode);
+			this->Controls->Add(this->TbStreetName);
+			this->Controls->Add(this->LbStreetName);
+			this->Controls->Add(this->LbNumber);
 			this->Controls->Add(this->TbSupervisor);
 			this->Controls->Add(this->LbSupervisor);
-			this->Controls->Add(this->Tbaddress);
+			this->Controls->Add(this->TbNumber);
 			this->Controls->Add(this->BtnCancel);
 			this->Controls->Add(this->BtnAddStaff);
 			this->Controls->Add(this->TbFirstName);
@@ -239,24 +383,22 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
-	private: System::Void LbTresholdDate_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void TbTresholdDate_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
 	private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
+	}
+
+	private: System::Void AddStaff_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 
 	private: System::Void BtnAddStaff_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->staff->setLastName(this->TbLastName->Text);
 		this->staff->setFirstName(this->TbFirstName->Text);
-		this->staff->setAddress(this->Tbaddress->Text);
+		String^ dateString = this->DtpHiringDate->Value.ToString("dd-MM-yyyy");
+		DateTime HiringDate = DateTime::ParseExact(dateString, "dd-MM-yyyy", System::Globalization::CultureInfo::InvariantCulture);
+		this->staff->setHiringDate(HiringDate);
 		//this->staff->setSupervisor(this->TbSupervisor->Text);
 		this->Close();
 
 	}
-
-	private: System::Void AddStaff_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
-	};
+};
 }

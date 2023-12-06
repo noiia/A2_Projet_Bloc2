@@ -417,8 +417,14 @@ namespace A2ProjetBloc2 {
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			   this->Margin = System::Windows::Forms::Padding(4);
 			   this->Name = L"AddArticle";
-			   this->Load += gcnew System::EventHandler(this, &AddArticle::AddArticle_Load);
+			   this->Text = L"AddArticle";
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceVAT))->EndInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceWT))->EndInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudPriceATI))->EndInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudStock))->EndInit();
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudTresholdLimit))->EndInit();
 			   this->ResumeLayout(false);
+			   this->PerformLayout();
 
 		   }
 #pragma endregion

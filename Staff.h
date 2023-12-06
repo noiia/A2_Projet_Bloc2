@@ -7,9 +7,8 @@ private:
 	int ID_Staff;
 	String^ lastName;
 	String^ firstName;
-	String^ hiringDate;
-	String^ Supervisor;
-	String^ address;
+	DateTime^ hiringDate;
+	String^ ID_Supervisor;
 	bool del;
 
 public:
@@ -33,25 +32,18 @@ public:
 		return this->firstName;
 	}
 
-	void setHiringDate(String^ hiringDate) {
+	void setHiringDate(DateTime^ hiringDate) {
 		this->hiringDate = hiringDate;
 	}
-	String^ getHiringDate() {
+	DateTime^ getHiringDate() {
 		return this->hiringDate;
 	}
 
-	void setSupervisor(String^ Supervisor) {
-		this->Supervisor = Supervisor;
+	void setIdSupervisor(String^ ID_Supervisor) {
+		this->ID_Supervisor = ID_Supervisor;
 	}
-	String^ getSupervisor() {
-		return this->Supervisor;
-	}
-
-	void setAddress(String^ address) {
-		this->address = address;
-	}
-	String^ getAddress() {
-		return this->address;
+	String^ getIdSupervisor() {
+		return this->ID_Supervisor;
 	}
 
 	void setDel(bool deleted) {

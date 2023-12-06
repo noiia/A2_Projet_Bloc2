@@ -23,14 +23,22 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		Staff^ sharedS;
+		bool delOrRestore;
 		Thread^ reloadThread;
+		StaffRepository^ staffRepository;
 	private: System::Threading::Mutex^ reloadMutex;
+	private: System::Windows::Forms::CheckBox^ CBoxDeletedLines;
+
+	private: System::Windows::Forms::Label^ TitleListStaff;
+
+
 	private: System::Windows::Forms::Button^ BtnDelete;
-		   StaffRepository^ staffRepository;
+		  
 
 	public:
 		ListStaff(BDD^ mabdd)
 		{
+			this->mabdd = mabdd; 
 			InitializeComponent();
 
 			reloadMutex = gcnew System::Threading::Mutex();
@@ -42,13 +50,13 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcFirstName = gcnew DataGridViewTextBoxColumn();
 			dgvtbcFirstName->Name = "Prenom";
 			this->DGVSearchStaff->Columns->Add(dgvtbcFirstName);
-			DataGridViewTextBoxColumn^ dgvtbcAddress = gcnew DataGridViewTextBoxColumn();
-			dgvtbcAddress->Name = "Adresse";
-			this->DGVSearchStaff->Columns->Add(dgvtbcAddress);
+			DataGridViewTextBoxColumn^ dgvtbcHiringDate = gcnew DataGridViewTextBoxColumn();
+			dgvtbcHiringDate->Name = "Date d'embauche";
+			this->DGVSearchStaff->Columns->Add(dgvtbcHiringDate);
 			DataGridViewTextBoxColumn^ dgvtbcSupervisor = gcnew DataGridViewTextBoxColumn();
-			dgvtbcSupervisor->Name = "Supérieur hierarchique ";
+			dgvtbcSupervisor->Name = "Supérieur hiérarchique";
 			this->DGVSearchStaff->Columns->Add(dgvtbcSupervisor);
-
+			
 			staffRepository = gcnew StaffRepository(mabdd);
 			this->reload();
 		}
@@ -56,28 +64,42 @@ namespace A2ProjetBloc2 {
 		void reload() {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
-				System::Collections::Generic::List<Staff^>^ staff = staffRepository->getStaff();
+				System::Collections::Generic::List<Staff^>^ staff = staffRepository->getStaff(this->CBoxDeletedLines->Checked);
 				this->DGVSearchStaff->Rows->Clear();
 				for each (Staff ^ s in staff) {
-					if (s->getDel() == false) {
-						DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-						DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
-						dgvcLastName->Value = s->getLastName();
-						dgvr->Cells->Add(dgvcLastName);
-						DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
-						dgvcFirstName->Value = s->getFirstName();
-						dgvr->Cells->Add(dgvcFirstName);
-						DataGridViewTextBoxCell^ dgvcAddress = gcnew DataGridViewTextBoxCell();
-						dgvcAddress->Value = s->getAddress();
-						dgvr->Cells->Add(dgvcAddress);
-						DataGridViewTextBoxCell^ dgvcSupervisor = gcnew DataGridViewTextBoxCell();
-						dgvcSupervisor->Value = s->getSupervisor();
-						dgvr->Cells->Add(dgvcSupervisor);
+					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+					DataGridViewTextBoxCell^ dgvcIdStaff = gcnew DataGridViewTextBoxCell();
+					dgvcIdStaff->Value = s->getIdStaff();
+					DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
+					dgvcLastName->Value = s->getLastName();
+					dgvr->Cells->Add(dgvcLastName);
+					DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
+					dgvcFirstName->Value = s->getFirstName();
+					dgvr->Cells->Add(dgvcFirstName);
+					DataGridViewTextBoxCell^ dgvtbcHiringDate = gcnew DataGridViewTextBoxCell();
+					dgvtbcHiringDate->Value = s->getHiringDate();
+					dgvr->Cells->Add(dgvtbcHiringDate);
+					DataGridViewTextBoxCell^ dgvtbcIdSupervisor = gcnew DataGridViewTextBoxCell();
+					dgvtbcIdSupervisor->Value = s->getIdSupervisor();
+					dgvr->Cells->Add(dgvtbcIdSupervisor);
 
-						dgvr->Tag = s;
-						this->DGVSearchStaff->Rows->Add(dgvr);
+					dgvr->Tag = s;
+					this->DGVSearchStaff->Rows->Add(dgvr);
+
+					if (this->CBoxDeletedLines->Checked) {
+						this->BtnDelete->Text = L"Restaurer";
+						this->BtnDelete->Location = System::Drawing::Point(1017, 464);
+						System::Diagnostics::Debug::WriteLine("restaurer");
+						delOrRestore = 0;
+					}
+					else {
+						this->BtnDelete->Text = L"Supprimer";
+						this->BtnDelete->Location = System::Drawing::Point(1017, 464);
+						System::Diagnostics::Debug::WriteLine("supprimer");
+						delOrRestore = 1;
 					}
 				}
+
 				reloadMutex->ReleaseMutex();
 			}
 		}
@@ -118,7 +140,9 @@ namespace A2ProjetBloc2 {
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
 			this->BtnAddStaff = (gcnew System::Windows::Forms::Button());
 			this->DGVSearchStaff = (gcnew System::Windows::Forms::DataGridView());
-			this->Title = (gcnew System::Windows::Forms::Label());
+			this->BtnDelete = (gcnew System::Windows::Forms::Button());
+			this->CBoxDeletedLines = (gcnew System::Windows::Forms::CheckBox());
+			this->TitleListStaff = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -126,10 +150,10 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(921, 561);
-			this->BtnModify->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->BtnModify->Location = System::Drawing::Point(1017, 409);
+			this->BtnModify->Margin = System::Windows::Forms::Padding(9);
 			this->BtnModify->Name = L"BtnModify";
-			this->BtnModify->Size = System::Drawing::Size(180, 59);
+			this->BtnModify->Size = System::Drawing::Size(135, 48);
 			this->BtnModify->TabIndex = 27;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
@@ -138,10 +162,10 @@ namespace A2ProjetBloc2 {
 			// 
 			this->BtnAddStaff->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddStaff->Location = System::Drawing::Point(921, 100);
-			this->BtnAddStaff->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->BtnAddStaff->Location = System::Drawing::Point(1017, 56);
+			this->BtnAddStaff->Margin = System::Windows::Forms::Padding(9);
 			this->BtnAddStaff->Name = L"BtnAddStaff";
-			this->BtnAddStaff->Size = System::Drawing::Size(180, 59);
+			this->BtnAddStaff->Size = System::Drawing::Size(135, 48);
 			this->BtnAddStaff->TabIndex = 26;
 			this->BtnAddStaff->Text = L"Ajouter";
 			this->BtnAddStaff->UseVisualStyleBackColor = true;
@@ -150,34 +174,63 @@ namespace A2ProjetBloc2 {
 			// DGVSearchStaff
 			// 
 			this->DGVSearchStaff->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVSearchStaff->Location = System::Drawing::Point(35, 69);
-			this->DGVSearchStaff->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->DGVSearchStaff->Location = System::Drawing::Point(26, 56);
+			this->DGVSearchStaff->Margin = System::Windows::Forms::Padding(9);
 			this->DGVSearchStaff->Name = L"DGVSearchStaff";
-			this->DGVSearchStaff->Size = System::Drawing::Size(804, 647);
+			this->DGVSearchStaff->RowHeadersWidth = 51;
+			this->DGVSearchStaff->Size = System::Drawing::Size(944, 526);
 			this->DGVSearchStaff->TabIndex = 25;
 			// 
-			// Title
+			// BtnDelete
 			// 
-			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(423, 11);
-			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(239, 29);
-			this->Title->TabIndex = 24;
-			this->Title->Text = L"Liste des employés";
+			this->BtnDelete->Location = System::Drawing::Point(1017, 475);
+			this->BtnDelete->Margin = System::Windows::Forms::Padding(9);
+			this->BtnDelete->Name = L"BtnDelete";
+			this->BtnDelete->Size = System::Drawing::Size(135, 48);
+			this->BtnDelete->TabIndex = 28;
+			this->BtnDelete->Text = L"Supprimer";
+			this->BtnDelete->UseVisualStyleBackColor = true;
+			// 
+			// CBoxDeletedLines
+			// 
+			this->CBoxDeletedLines->AutoSize = true;
+			this->CBoxDeletedLines->Location = System::Drawing::Point(1017, 539);
+			this->CBoxDeletedLines->Margin = System::Windows::Forms::Padding(7);
+			this->CBoxDeletedLines->Name = L"CBoxDeletedLines";
+			this->CBoxDeletedLines->Size = System::Drawing::Size(446, 40);
+			this->CBoxDeletedLines->TabIndex = 29;
+			this->CBoxDeletedLines->Text = L"Afficher les lignes supprimés";
+			this->CBoxDeletedLines->UseVisualStyleBackColor = true;
+			// 
+			// TitleListStaff
+			// 
+			this->TitleListStaff->AutoSize = true;
+			this->TitleListStaff->Location = System::Drawing::Point(497, 9);
+			this->TitleListStaff->Name = L"TitleListStaff";
+			this->TitleListStaff->Size = System::Drawing::Size(290, 36);
+			this->TitleListStaff->TabIndex = 30;
+			this->TitleListStaff->Text = L"Liste des Employés";
 			// 
 			// ListStaff
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(18, 36);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1185, 767);
+			this->AutoSize = true;
+			this->ClientSize = System::Drawing::Size(1215, 623);
+			this->Controls->Add(this->TitleListStaff);
+			this->Controls->Add(this->CBoxDeletedLines);
+			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->BtnAddStaff);
 			this->Controls->Add(this->DGVSearchStaff);
-			this->Controls->Add(this->Title);
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Location = System::Drawing::Point(423, 11);
+			this->Margin = System::Windows::Forms::Padding(9);
+			this->MaximizeBox = false;
 			this->Name = L"ListStaff";
 			this->Text = L"ListStaff";
 			this->Load += gcnew System::EventHandler(this, &ListStaff::ListStaff_Load);
@@ -208,7 +261,7 @@ namespace A2ProjetBloc2 {
 
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Diagnostics::Debug::WriteLine(sharedS + " voilà s");
-		staffRepository->deleteStaff(sharedS);
+		staffRepository->deleteStaff(sharedS, delOrRestore);
 		this->reload();
 	}
 
@@ -224,5 +277,5 @@ namespace A2ProjetBloc2 {
 
 	private: System::Void ListStaff_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
-	};
+};
 }
