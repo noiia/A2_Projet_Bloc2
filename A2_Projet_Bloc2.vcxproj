@@ -121,6 +121,7 @@
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="AddStaff.cpp" />
     <ClCompile Include="BDD.cpp" />
+    <ClCompile Include="InstallmentPayement.cpp" />
     <ClCompile Include="ListClient.cpp" />
     <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="ListStaff.cpp" />
@@ -146,8 +147,11 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="BDD.h" />
+    <ClInclude Include="CHistory.h" />
+    <ClInclude Include="CHistoryRepository.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientRepository.h" />
+    <ClInclude Include="InstallmentPayement.h" />
     <ClInclude Include="ListArticles.h">
       <FileType>CppForm</FileType>
     </ClInclude>

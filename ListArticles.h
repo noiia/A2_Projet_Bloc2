@@ -25,10 +25,10 @@ namespace A2ProjetBloc2 {
 		Article^ sharedA;
 		bool delOrRestore;
 		Thread^ reloadThread;
+		ArticleRepository^ articleRepository;
 		System::Threading::Mutex^ reloadMutex;
-		private: System::Windows::Forms::Button^ BtnDelete;
-	private: System::Windows::Forms::CheckBox^ CboxDeletedLines;
-		   ArticleRepository^ articleRepository;
+		System::Windows::Forms::Button^ BtnDelete;
+		System::Windows::Forms::CheckBox^ CboxDeletedLines;
 	public:
 		ListArticles(BDD^ mabdd)
 		{
@@ -203,9 +203,10 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchArticle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->DGVSearchArticle->Location = System::Drawing::Point(26, 56);
 			this->DGVSearchArticle->Name = L"DGVSearchArticle";
+			this->DGVSearchArticle->ReadOnly = true;
 			this->DGVSearchArticle->Size = System::Drawing::Size(944, 526);
 			this->DGVSearchArticle->TabIndex = 25;
-			this->DGVSearchArticle->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
+			this->DGVSearchArticle->RowEnter += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_RowEnter);
 			// 
 			// Title
 			// 
@@ -217,6 +218,13 @@ namespace A2ProjetBloc2 {
 			this->Title->Size = System::Drawing::Size(211, 28);
 			this->Title->TabIndex = 24;
 			this->Title->Text = L"Liste des articles";
+			// 
+			// BtnDelete
+			// 
+			this->BtnDelete->Location = System::Drawing::Point(0, 0);
+			this->BtnDelete->Name = L"BtnDelete";
+			this->BtnDelete->Size = System::Drawing::Size(75, 23);
+			this->BtnDelete->TabIndex = 30;
 			// 
 			// CboxDeletedLines
 			// 
@@ -235,8 +243,6 @@ namespace A2ProjetBloc2 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
 			this->ClientSize = System::Drawing::Size(1215, 623);
 			this->Controls->Add(this->CboxDeletedLines);
 			this->Controls->Add(this->BtnDelete);
@@ -244,7 +250,9 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->BtnAddArticle);
 			this->Controls->Add(this->DGVSearchArticle);
 			this->Controls->Add(this->Title);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MaximizeBox = false;
 			this->Name = L"ListArticles";
 			this->Text = L"TurboStock";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->EndInit();
@@ -259,15 +267,6 @@ namespace A2ProjetBloc2 {
 		addArticleForm->ShowDialog();
 		articleRepository->insertArticle(newArticle);
 		this->reload();
-	}
-	
-	private: System::Void DGVSearchArticle_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		if (e->RowIndex >= 0) {
-			DataGridViewRow^ sharedDgvrRow = DGVSearchArticle->Rows[e->RowIndex];
-			sharedA = (Article^)sharedDgvrRow->Tag;
-			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
-
-		}
 	}
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Diagnostics::Debug::WriteLine(sharedA + " voilà a");
@@ -287,6 +286,14 @@ namespace A2ProjetBloc2 {
 
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
+}
+private: System::Void DGVSearchArticle_RowEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	if (e->RowIndex >= 0) {
+		DataGridViewRow^ sharedDgvrRow = DGVSearchArticle->Rows[e->RowIndex];
+		sharedA = (Article^)sharedDgvrRow->Tag;
+		System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
+
+	}
 }
 };
 }
