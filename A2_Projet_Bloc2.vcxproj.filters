@@ -131,6 +131,12 @@
     <ClInclude Include="AAtoCRepository.h">
       <Filter>Fichiers d%27en-tête\Repositories</Filter>
     </ClInclude>
+    <ClInclude Include="CartRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg">

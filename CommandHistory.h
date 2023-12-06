@@ -62,7 +62,7 @@ namespace A2ProjetBloc2 {
 		void reload() {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
-				System::Collections::Generic::List<CHistory^>^ commands = cHistoryRepository->getCommand(/*this->CboxDeletedLines->Checked*/);
+				System::Collections::Generic::List<CHistory^>^ commands = cHistoryRepository->getCommand();
 				this->DGVOrderHistory->Rows->Clear();
 				for each (CHistory ^ command in commands) {
 

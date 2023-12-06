@@ -4,6 +4,7 @@
 #include <mutex>
 #include "BDD.h"
 #include "Article.h"
+#include "Command.h"
 #include "AAtoCRepository.h"
 
 namespace A2ProjetBloc2 {
@@ -28,13 +29,15 @@ namespace A2ProjetBloc2 {
 		Thread^ reloadThread;
 		String^ sharedSearchedValue = "";
 		Article^ clickedArticle;
+		Command^ command;
 		bool clicked = false;
 		int research = 0;
 		System::Threading::Mutex^ reloadMutex;
 
 	public:
-		AddArticleToCommand(Article^ article)
+		AddArticleToCommand(BDD^ mabdd,Command^ command)
 		{
+			this->command = command;
 			InitializeComponent();
 			this->NudQuantity->ValueChanged += gcnew System::EventHandler(this, &AddArticleToCommand::CalculTotal);
 			reloadMutex = gcnew System::Threading::Mutex();
@@ -364,7 +367,10 @@ namespace A2ProjetBloc2 {
 
 	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->clickedArticle->getIdArticle();
+		this->command->setIdArticle(this->clickedArticle->getIdArticle());
+		this->command->setReference("");
+		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
+		this->Close();
 	}
 };
 }
