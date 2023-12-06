@@ -154,6 +154,8 @@
     <ClInclude Include="CHistoryRepository.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientRepository.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandRepository.h" />
     <ClInclude Include="InstallmentPayement.h" />
     <ClInclude Include="ListArticles.h">
       <FileType>CppForm</FileType>

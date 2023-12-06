@@ -165,8 +165,11 @@ namespace A2ProjetBloc2 {
 		}
 #pragma endregion
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd);
+		Article^ addArticle = gcnew Article();
+		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(addArticle);
 		formAddArticleToCommand->ShowDialog();
+		articleRepository->insertArticle(newArticle);
+		this->reload();
 	}
 };
 }

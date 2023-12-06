@@ -15,8 +15,8 @@ private:
 public:
 	AAtoCRepository(BDD^ bdd) : bdd(bdd) {
 	}
-	List<Article^>^ getArticle(bool delState) {
-		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Article]" + (delState ? "" : " WHERE Del = 0"));
+	List<Article^>^ getArticle(String^ researchValue, int research) {
+		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Article] " + (research == 1 ? " WHERE ID_Article = '" + researchValue + "' AND " : (research == 2 ? " WHERE NameArticle = '" + researchValue + "' AND " : " WHERE")) + " Del = 0");
 
 		List<Article^>^ list = gcnew List<Article^>();
 
@@ -34,10 +34,6 @@ public:
 			article->setRestockingDate((DateTime^)row[5]);
 			list->Add(article);
 		}
-
 		return list;
-	}
-	void searchArticle(Address^ address) {
-		bdd->executeNonQuery("SELECT * FROM [Address] Where ");
 	}
 };
