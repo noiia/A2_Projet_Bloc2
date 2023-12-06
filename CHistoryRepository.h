@@ -21,7 +21,7 @@ public:
 		CHistory^ cmd = nullptr;
 		for each (DataRow ^ row in ds->Tables[0]->Rows)
 		{
-			if (cmd == nullptr || cmd->getIdCommand() == row["Reference"]) {
+			if (cmd == nullptr || !cmd->getIdCommand()->Equals(row["Reference"])) {
 				cmd = gcnew CHistory();
 				cmd->setIdCommand((String^)row["Reference"]);
 				cmd->setOrderDate((DateTime^)row["OrderDate"]);

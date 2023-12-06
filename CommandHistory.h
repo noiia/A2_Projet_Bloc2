@@ -221,6 +221,7 @@ namespace A2ProjetBloc2 {
 			   this->BtnAddCommand->TabIndex = 30;
 			   this->BtnAddCommand->Text = L"Nouvelle commande";
 			   this->BtnAddCommand->UseVisualStyleBackColor = true;
+			   this->BtnAddCommand->Click += gcnew System::EventHandler(this, &CommandHistory::BtnAddCommand_Click);
 			   // 
 			   // CommandHistory
 			   // 
@@ -265,6 +266,5 @@ namespace A2ProjetBloc2 {
 
 		}
 	}
-
 };
 }

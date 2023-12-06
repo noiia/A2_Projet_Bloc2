@@ -129,6 +129,7 @@
     <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AAtoCRepository.h" />
     <ClInclude Include="AddArticle.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -138,6 +139,8 @@
     <ClInclude Include="AddClient.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Address.h" />
+    <ClInclude Include="AddressesRepository.h" />
     <ClInclude Include="Article.h" />
     <ClInclude Include="ArticleRepository.h" />
     <ClInclude Include="Cart.h">
