@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -17,7 +17,7 @@ namespace A2ProjetBloc2 {
 	using namespace System::Threading;
 
 	/// <summary>
-	/// Description résumée de ListClient
+	/// Description rÃ©sumÃ©e de ListClient
 	/// </summary>
 	public ref class ListArticles : public System::Windows::Forms::Form
 	{
@@ -26,7 +26,7 @@ namespace A2ProjetBloc2 {
 		bool delOrRestore;
 		Thread^ reloadThread;
 		System::Threading::Mutex^ reloadMutex;
-		private: System::Windows::Forms::Button^ BtnDelete;
+	private: System::Windows::Forms::Button^ BtnDelete;
 	private: System::Windows::Forms::CheckBox^ CboxDeletedLines;
 		   ArticleRepository^ articleRepository;
 	public:
@@ -39,7 +39,7 @@ namespace A2ProjetBloc2 {
 
 			DGVSearchArticle->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
-			dgvtbcIdArticle->Name = "Références";
+			dgvtbcIdArticle->Name = "RÃ©fÃ©rences";
 			this->DGVSearchArticle->Columns->Add(dgvtbcIdArticle);
 			DataGridViewTextBoxColumn^ dgvtbcName = gcnew DataGridViewTextBoxColumn();
 			dgvtbcName->Name = "Nom";
@@ -60,16 +60,16 @@ namespace A2ProjetBloc2 {
 			dgvtbcStock->Name = "Stock";
 			this->DGVSearchArticle->Columns->Add(dgvtbcStock);
 			DataGridViewTextBoxColumn^ dgvtbcTresholdLimit = gcnew DataGridViewTextBoxColumn();
-			dgvtbcTresholdLimit->Name = "Limite avant réapprovisionnement";
+			dgvtbcTresholdLimit->Name = "Limite avant rÃ©approvisionnement";
 			this->DGVSearchArticle->Columns->Add(dgvtbcTresholdLimit);
 			DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
-			dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
+			dgvtbcTresholdDate->Name = "Date de rÃ©approvisionnement";
 			this->DGVSearchArticle->Columns->Add(dgvtbcTresholdDate);
 
 			articleRepository = gcnew ArticleRepository(mabdd);
-			
+
 			this->reload();
-			
+
 		}
 		void reload() {
 			if (reloadMutex != nullptr) {
@@ -125,8 +125,8 @@ namespace A2ProjetBloc2 {
 					}
 					else {
 						this->BtnDelete->Text = L"Supprimer";
-						this->BtnDelete->Location = System::Drawing::Point(1017,464);
-							System::Diagnostics::Debug::WriteLine("supprimer");
+						this->BtnDelete->Location = System::Drawing::Point(1017, 464);
+						System::Diagnostics::Debug::WriteLine("supprimer");
 						delOrRestore = 1;
 					}
 				}
@@ -139,7 +139,7 @@ namespace A2ProjetBloc2 {
 		}
 	protected:
 		/// <summary>
-		/// Nettoyage des ressources utilisées.
+		/// Nettoyage des ressources utilisÃ©es.
 		/// </summary>
 		~ListArticles()
 		{
@@ -149,109 +149,124 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Button^ BtnModify;
-			 System::Windows::Forms::Button^ BtnAddArticle;
-			 System::Windows::Forms::DataGridView^ DGVSearchArticle;
-			 System::Windows::Forms::Label^ Title;			
-		/// <summary>
-		/// Variable nécessaire au concepteur.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+		   System::Windows::Forms::Button^ BtnAddArticle;
+		   System::Windows::Forms::DataGridView^ DGVSearchArticle;
+		   System::Windows::Forms::Label^ Title;
+		   /// <summary>
+		   /// Variable nÃ©cessaire au concepteur.
+		   /// </summary>
+		   System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette méthode avec l'éditeur de code.
-		/// </summary>
-		void InitializeComponent(void)
-		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ListArticles::typeid));
-			this->BtnModify = (gcnew System::Windows::Forms::Button());
-			this->BtnAddArticle = (gcnew System::Windows::Forms::Button());
-			this->DGVSearchArticle = (gcnew System::Windows::Forms::DataGridView());
-			this->Title = (gcnew System::Windows::Forms::Label());
-			this->BtnDelete = (gcnew System::Windows::Forms::Button());
-			this->CboxDeletedLines = (gcnew System::Windows::Forms::CheckBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->BeginInit();
-			this->SuspendLayout();
-			// 
-			// BtnModify
-			// 
-			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(1017, 372);
-			this->BtnModify->Name = L"BtnModify";
-			this->BtnModify->Size = System::Drawing::Size(135, 48);
-			this->BtnModify->TabIndex = 27;
-			this->BtnModify->Text = L"Modifier";
-			this->BtnModify->UseVisualStyleBackColor = true;
-			this->BtnModify->Click += gcnew System::EventHandler(this, &ListArticles::BtnModify_Click);
-			// 
-			// BtnAddArticle
-			// 
-			this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->BtnAddArticle->Location = System::Drawing::Point(1017, 56);
-			this->BtnAddArticle->Name = L"BtnAddArticle";
-			this->BtnAddArticle->Size = System::Drawing::Size(135, 48);
-			this->BtnAddArticle->TabIndex = 26;
-			this->BtnAddArticle->Text = L"Ajouter";
-			this->BtnAddArticle->UseVisualStyleBackColor = true;
-			this->BtnAddArticle->Click += gcnew System::EventHandler(this, &ListArticles::BtnAddArticle_Click);
-			// 
-			// DGVSearchArticle
-			// 
-			this->DGVSearchArticle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVSearchArticle->Location = System::Drawing::Point(26, 56);
-			this->DGVSearchArticle->Name = L"DGVSearchArticle";
-			this->DGVSearchArticle->Size = System::Drawing::Size(944, 526);
-			this->DGVSearchArticle->TabIndex = 25;
-			this->DGVSearchArticle->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
-			// 
-			// Title
-			// 
-			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(497, 9);
-			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(211, 28);
-			this->Title->TabIndex = 24;
-			this->Title->Text = L"Liste des articles";
-			// 
-			// CboxDeletedLines
-			// 
-			this->CboxDeletedLines->AutoSize = true;
-			this->CboxDeletedLines->Font = (gcnew System::Drawing::Font(L"Orkney", 10.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->CboxDeletedLines->Location = System::Drawing::Point(1017, 539);
-			this->CboxDeletedLines->Name = L"CboxDeletedLines";
-			this->CboxDeletedLines->Size = System::Drawing::Size(150, 38);
-			this->CboxDeletedLines->TabIndex = 29;
-			this->CboxDeletedLines->Text = L"Afficher les lignes \n supprimées";
-			this->CboxDeletedLines->UseVisualStyleBackColor = true;
-			this->CboxDeletedLines->CheckedChanged += gcnew System::EventHandler(this, &ListArticles::CboxDeletedLines_CheckedChanged);
-			// 
-			// ListArticles
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-			this->ClientSize = System::Drawing::Size(1215, 623);
-			this->Controls->Add(this->CboxDeletedLines);
-			this->Controls->Add(this->BtnDelete);
-			this->Controls->Add(this->BtnModify);
-			this->Controls->Add(this->BtnAddArticle);
-			this->Controls->Add(this->DGVSearchArticle);
-			this->Controls->Add(this->Title);
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Name = L"ListArticles";
-			this->Text = L"TurboStock";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->EndInit();
-			this->ResumeLayout(false);
-			this->PerformLayout();
+		   /// <summary>
+		   /// MÃ©thode requise pour la prise en charge du concepteur - ne modifiez pas
+		   /// le contenu de cette mÃ©thode avec l'Ã©diteur de code.
+		   /// </summary>
+		   void InitializeComponent(void)
+		   {
+			   System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ListArticles::typeid));
+			   this->BtnModify = (gcnew System::Windows::Forms::Button());
+			   this->BtnAddArticle = (gcnew System::Windows::Forms::Button());
+			   this->DGVSearchArticle = (gcnew System::Windows::Forms::DataGridView());
+			   this->Title = (gcnew System::Windows::Forms::Label());
+			   this->BtnDelete = (gcnew System::Windows::Forms::Button());
+			   this->CboxDeletedLines = (gcnew System::Windows::Forms::CheckBox());
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->BeginInit();
+			   this->SuspendLayout();
+			   // 
+			   // BtnModify
+			   // 
+			   this->BtnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->BtnModify->Location = System::Drawing::Point(1356, 458);
+			   this->BtnModify->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->BtnModify->Name = L"BtnModify";
+			   this->BtnModify->Size = System::Drawing::Size(180, 59);
+			   this->BtnModify->TabIndex = 27;
+			   this->BtnModify->Text = L"Modifier";
+			   this->BtnModify->UseVisualStyleBackColor = true;
+			   this->BtnModify->Click += gcnew System::EventHandler(this, &ListArticles::BtnModify_Click);
+			   // 
+			   // BtnAddArticle
+			   // 
+			   this->BtnAddArticle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->BtnAddArticle->Location = System::Drawing::Point(1356, 69);
+			   this->BtnAddArticle->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->BtnAddArticle->Name = L"BtnAddArticle";
+			   this->BtnAddArticle->Size = System::Drawing::Size(180, 59);
+			   this->BtnAddArticle->TabIndex = 26;
+			   this->BtnAddArticle->Text = L"Ajouter";
+			   this->BtnAddArticle->UseVisualStyleBackColor = true;
+			   this->BtnAddArticle->Click += gcnew System::EventHandler(this, &ListArticles::BtnAddArticle_Click);
+			   // 
+			   // DGVSearchArticle
+			   // 
+			   this->DGVSearchArticle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			   this->DGVSearchArticle->Location = System::Drawing::Point(35, 69);
+			   this->DGVSearchArticle->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->DGVSearchArticle->Name = L"DGVSearchArticle";
+			   this->DGVSearchArticle->RowHeadersWidth = 51;
+			   this->DGVSearchArticle->Size = System::Drawing::Size(1259, 647);
+			   this->DGVSearchArticle->TabIndex = 25;
+			   this->DGVSearchArticle->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
+			   // 
+			   // Title
+			   // 
+			   this->Title->AutoSize = true;
+			   this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->Title->Location = System::Drawing::Point(663, 11);
+			   this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			   this->Title->Name = L"Title";
+			   this->Title->Size = System::Drawing::Size(254, 36);
+			   this->Title->TabIndex = 24;
+			   this->Title->Text = L"Liste des articles";
+			   // 
+			   // BtnDelete
+			   // 
+			   this->BtnDelete->Location = System::Drawing::Point(0, 0);
+			   this->BtnDelete->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->BtnDelete->Name = L"BtnDelete";
+			   this->BtnDelete->Size = System::Drawing::Size(100, 28);
+			   this->BtnDelete->TabIndex = 30;
+			   // 
+			   // CboxDeletedLines
+			   // 
+			   this->CboxDeletedLines->AutoSize = true;
+			   this->CboxDeletedLines->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.5F, System::Drawing::FontStyle::Regular,
+				   System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			   this->CboxDeletedLines->Location = System::Drawing::Point(1356, 663);
+			   this->CboxDeletedLines->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->CboxDeletedLines->Name = L"CboxDeletedLines";
+			   this->CboxDeletedLines->Size = System::Drawing::Size(178, 48);
+			   this->CboxDeletedLines->TabIndex = 29;
+			   this->CboxDeletedLines->Text = L"Afficher les lignes \n supprimÃ©es";
+			   this->CboxDeletedLines->UseVisualStyleBackColor = true;
+			   this->CboxDeletedLines->CheckedChanged += gcnew System::EventHandler(this, &ListArticles::CboxDeletedLines_CheckedChanged);
+			   // 
+			   // ListArticles
+			   // 
+			   this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			   this->ClientSize = System::Drawing::Size(1620, 767);
+			   this->Controls->Add(this->CboxDeletedLines);
+			   this->Controls->Add(this->BtnDelete);
+			   this->Controls->Add(this->BtnModify);
+			   this->Controls->Add(this->BtnAddArticle);
+			   this->Controls->Add(this->DGVSearchArticle);
+			   this->Controls->Add(this->Title);
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			   this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			   this->MaximizeBox = false;
+			   this->Name = L"ListArticles";
+			   this->Text = L"TurboStock";
+			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->EndInit();
+			   this->ResumeLayout(false);
+			   this->PerformLayout();
 
-		}
+		   }
 #pragma endregion
 	private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
 		Article^ newArticle = gcnew Article();
@@ -260,17 +275,17 @@ namespace A2ProjetBloc2 {
 		articleRepository->insertArticle(newArticle);
 		this->reload();
 	}
-	
+
 	private: System::Void DGVSearchArticle_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 		if (e->RowIndex >= 0) {
 			DataGridViewRow^ sharedDgvrRow = DGVSearchArticle->Rows[e->RowIndex];
 			sharedA = (Article^)sharedDgvrRow->Tag;
-			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
+			System::Diagnostics::Debug::WriteLine("cliquÃ© sur " + sharedA->ToString());
 
 		}
 	}
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::Diagnostics::Debug::WriteLine(sharedA + " voilà a");
+		System::Diagnostics::Debug::WriteLine(sharedA + " voilÃ  a");
 		articleRepository->deleteArticle(sharedA, delOrRestore);
 		this->reload();
 	}
@@ -287,6 +302,6 @@ namespace A2ProjetBloc2 {
 
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
-}
-};
+	}
+	};
 }

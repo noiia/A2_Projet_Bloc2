@@ -12,38 +12,45 @@ namespace A2ProjetBloc2 {
 	/// <summary>
 	/// Description r�sum�e de AddStaff
 	/// </summary>
+	
 	public ref class AddStaff : public System::Windows::Forms::Form
 	{
 		Staff^ staff;
 		bool addOrEdit; 
 
 	private: System::Windows::Forms::Label^ LbNumber;
-	private: System::Windows::Forms::Label^ LbStreetName;
-	private: System::Windows::Forms::TextBox^ TbStreetName;
-	private: System::Windows::Forms::TextBox^ TbPostalCode;
-	private: System::Windows::Forms::TextBox^ TbCity;
-	private: System::Windows::Forms::Label^ LbPostalCode;
-	private: System::Windows::Forms::Label^ LbCity;
-	private: System::Windows::Forms::Label^ LbAddressComplementary;
-	private: System::Windows::Forms::TextBox^ TbAddressComplementary;
-	private: System::Windows::Forms::DateTimePicker^ DtpHiringDate;
-	private: System::Windows::Forms::Label^ LbHiringDate;
+			 System::Windows::Forms::Label^ LbStreetName;
+			 System::Windows::Forms::TextBox^ TbStreetName;
+			 System::Windows::Forms::TextBox^ TbPostalCode;
+			 System::Windows::Forms::TextBox^ TbCity;
+			 System::Windows::Forms::Label^ LbPostalCode;
+			 System::Windows::Forms::Label^ LbCity;
+			 System::Windows::Forms::Label^ LbAddressComplementary;
+			 System::Windows::Forms::TextBox^ TbAddressComplementary;
+			 System::Windows::Forms::DateTimePicker^ DtpHiringDate;
+			 System::Windows::Forms::Label^ LbHiringDate;
 
 	public:
 		AddStaff(Staff^ staff, bool addOrEdit)
 		{
 			this->staff = staff;
 			this->addOrEdit = addOrEdit;
+
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
+
+
+			System::Diagnostics::Debug::WriteLine("add article " + this->addOrEdit);
+			if (addOrEdit) {
+				this->TbFirstName->Text = staff->getFirstName();
+				this->TbLastName->Text = staff->getLastName();
+				this->DtpHiringDate->Value = Convert::ToDateTime(staff->getHiringDate());
+			///Ajouter plus tard les adresses ici 	
+			}
+			
 		}
 
 	protected:
-		/// <summary>
-		/// Nettoyage des ressources utilis�es.
-		/// </summary>
+		
 		~AddStaff()
 		{
 			if (components)
@@ -52,28 +59,23 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Label^ Title;
-	private: System::Windows::Forms::Label^ LbLastName;
-	private: System::Windows::Forms::Label^ LbAddress;
-	private: System::Windows::Forms::Label^ LbFirstName;
-	private: System::Windows::Forms::TextBox^ TbLastName;
-	private: System::Windows::Forms::TextBox^ TbFirstName;
-	private: System::Windows::Forms::Button^ BtnAddStaff;
-	private: System::Windows::Forms::Button^ BtnCancel;
-	private: System::Windows::Forms::TextBox^ TbNumber;
-	private: System::Windows::Forms::TextBox^ TbSupervisor;
-	private: System::Windows::Forms::Label^ LbSupervisor;
+			 System::Windows::Forms::Label^ LbLastName;
+			 System::Windows::Forms::Label^ LbAddress;
+			 System::Windows::Forms::Label^ LbFirstName;
+			 System::Windows::Forms::TextBox^ TbLastName;
+			 System::Windows::Forms::TextBox^ TbFirstName;
+			 System::Windows::Forms::Button^ BtnAddStaff;
+			 System::Windows::Forms::Button^ BtnCancel;
+			 System::Windows::Forms::TextBox^ TbNumber;
+			 System::Windows::Forms::TextBox^ TbSupervisor;
+			 System::Windows::Forms::Label^ LbSupervisor;
 
 	private:
-		/// <summary>
-		/// Variable n�cessaire au concepteur.
-		/// </summary>
+		
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// M�thode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette m�thode avec l'�diteur de code.
-		/// </summary>
+		
 		void InitializeComponent(void)
 		{
 			this->Title = (gcnew System::Windows::Forms::Label());
@@ -345,10 +347,35 @@ namespace A2ProjetBloc2 {
 			this->LbHiringDate->Name = L"LbHiringDate";
 			this->LbHiringDate->Size = System::Drawing::Size(165, 25);
 			this->LbHiringDate->TabIndex = 28;
-			this->LbHiringDate->Text = L"Date d\'embauche";
+			this->LbHiringDate->Text = L"Date d'embauche";
+
+
+			//
+			// paramètre si modification de profil existant
+			//
+			System::Diagnostics::Debug::WriteLine("before if else " + this->addOrEdit);
+			System::Diagnostics::Debug::WriteLine("before if else " + addOrEdit);
+			if (this->addOrEdit) {
+				System::Diagnostics::Debug::WriteLine(this->addOrEdit);
+				this->Title->Text = L"Modifier un membre";
+				this->BtnAddStaff->Text = L"Valider";
+				this->BtnAddStaff->Location = System::Drawing::Point(112, 480);
+				this->BtnCancel->Visible = false;
+			}
+			else {
+				this->Title->Text = L"Ajouter un nouveau membre";
+				this->BtnAddStaff->Text = L"Ajouter";
+			}
+
+
+
+
+
 			// 
 			// AddStaff
 			// 
+			this->MaximizeBox = false;
+			this->ControlBox = false;
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1070, 598);
@@ -393,8 +420,8 @@ namespace A2ProjetBloc2 {
 	private: System::Void BtnAddStaff_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->staff->setLastName(this->TbLastName->Text);
 		this->staff->setFirstName(this->TbFirstName->Text);
-		String^ dateString = this->DtpHiringDate->Value.ToString("dd-MM-yyyy");
-		DateTime HiringDate = DateTime::ParseExact(dateString, "dd-MM-yyyy", System::Globalization::CultureInfo::InvariantCulture);
+		String^ dateString = this->DtpHiringDate->Value.ToString("yyyy-MM-dd");
+		DateTime HiringDate = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 		this->staff->setHiringDate(HiringDate);
 		//this->staff->setSupervisor(this->TbSupervisor->Text);
 		this->Close();

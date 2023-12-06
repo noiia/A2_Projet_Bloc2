@@ -77,7 +77,8 @@ namespace A2ProjetBloc2 {
 					dgvcFirstName->Value = s->getFirstName();
 					dgvr->Cells->Add(dgvcFirstName);
 					DataGridViewTextBoxCell^ dgvtbcHiringDate = gcnew DataGridViewTextBoxCell();
-					dgvtbcHiringDate->Value = s->getHiringDate();
+					DateTime^ hiringDate = s->getHiringDate();
+					dgvtbcHiringDate->Value = hiringDate->ToString("yyyy-MM-dd");
 					dgvr->Cells->Add(dgvtbcHiringDate);
 					DataGridViewTextBoxCell^ dgvtbcIdSupervisor = gcnew DataGridViewTextBoxCell();
 					dgvtbcIdSupervisor->Value = s->getIdSupervisor();
@@ -137,6 +138,7 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ListStaff::typeid));
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
 			this->BtnAddStaff = (gcnew System::Windows::Forms::Button());
 			this->DGVSearchStaff = (gcnew System::Windows::Forms::DataGridView());
@@ -157,6 +159,7 @@ namespace A2ProjetBloc2 {
 			this->BtnModify->TabIndex = 27;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
+			this->BtnModify->Click += gcnew System::EventHandler(this, &ListStaff::BtnModify_Click);
 			// 
 			// BtnAddStaff
 			// 
@@ -176,13 +179,15 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchStaff->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->DGVSearchStaff->Location = System::Drawing::Point(26, 56);
 			this->DGVSearchStaff->Name = L"DGVSearchStaff";
+			this->DGVSearchStaff->ReadOnly = true;
 			this->DGVSearchStaff->RowHeadersWidth = 51;
-			this->DGVSearchStaff->Size = System::Drawing::Size(603, 526);
+			this->DGVSearchStaff->Size = System::Drawing::Size(652, 526);
 			this->DGVSearchStaff->TabIndex = 25;
+			this->DGVSearchStaff->RowEnter += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListStaff::DGVSearchStaff_RowEnter);
 			// 
 			// BtnDelete
 			// 
-			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnDelete->Location = System::Drawing::Point(690, 537);
 			this->BtnDelete->Margin = System::Windows::Forms::Padding(9);
@@ -191,6 +196,7 @@ namespace A2ProjetBloc2 {
 			this->BtnDelete->TabIndex = 28;
 			this->BtnDelete->Text = L"Supprimer";
 			this->BtnDelete->UseVisualStyleBackColor = true;
+			this->BtnDelete->Click += gcnew System::EventHandler(this, &ListStaff::BtnDelete_Click);
 			// 
 			// CBoxDeletedLines
 			// 
@@ -200,7 +206,7 @@ namespace A2ProjetBloc2 {
 			this->CBoxDeletedLines->Location = System::Drawing::Point(690, 412);
 			this->CBoxDeletedLines->Margin = System::Windows::Forms::Padding(7);
 			this->CBoxDeletedLines->Name = L"CBoxDeletedLines";
-			this->CBoxDeletedLines->Size = System::Drawing::Size(281, 29);
+			this->CBoxDeletedLines->Size = System::Drawing::Size(229, 24);
 			this->CBoxDeletedLines->TabIndex = 29;
 			this->CBoxDeletedLines->Text = L"Afficher les lignes supprimés";
 			this->CBoxDeletedLines->UseVisualStyleBackColor = true;
@@ -211,15 +217,16 @@ namespace A2ProjetBloc2 {
 			this->TitleListStaff->AutoSize = true;
 			this->TitleListStaff->Location = System::Drawing::Point(317, 9);
 			this->TitleListStaff->Name = L"TitleListStaff";
-			this->TitleListStaff->Size = System::Drawing::Size(290, 36);
+			this->TitleListStaff->Size = System::Drawing::Size(241, 29);
 			this->TitleListStaff->TabIndex = 30;
 			this->TitleListStaff->Text = L"Liste des Employés";
 			// 
 			// ListStaff
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(18, 36);
+			this->AutoScaleDimensions = System::Drawing::SizeF(15, 29);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
+			this->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
 			this->ClientSize = System::Drawing::Size(1157, 623);
 			this->Controls->Add(this->TitleListStaff);
 			this->Controls->Add(this->CBoxDeletedLines);
@@ -230,12 +237,12 @@ namespace A2ProjetBloc2 {
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Location = System::Drawing::Point(423, 11);
 			this->Margin = System::Windows::Forms::Padding(9);
 			this->MaximizeBox = false;
 			this->Name = L"ListStaff";
 			this->Text = L"ListStaff";
-			this->Load += gcnew System::EventHandler(this, &ListStaff::ListStaff_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchStaff))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -250,15 +257,6 @@ namespace A2ProjetBloc2 {
 		System::Diagnostics::Debug::WriteLine(newStaff->ToString());
 		staffRepository->insertStaff(newStaff);
 		this->reload();
-	}
-
-	private: System::Void DGVSearchStaff_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		if (e->RowIndex >= 0) {
-			DataGridViewRow^ sharedDgvrRow = DGVSearchStaff->Rows[e->RowIndex];
-			sharedS = (Staff^)sharedDgvrRow->Tag;
-			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedS);
-
-		}
 	}
 
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -280,8 +278,13 @@ namespace A2ProjetBloc2 {
 	private: System::Void CBoxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
 	}
-
-	private: System::Void ListStaff_Load(System::Object^ sender, System::EventArgs^ e) {
+		   	
+	private: System::Void DGVSearchStaff_RowEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	if (e->RowIndex >= 0) {
+		DataGridViewRow^ sharedDgvrRow = DGVSearchStaff->Rows[e->RowIndex];
+		sharedS = (Staff^)sharedDgvrRow->Tag;
+		System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedS->ToString());
 	}
+}
 };
 }

@@ -35,7 +35,7 @@ public:
 	}
 
 	void editStaff(Staff^ staff) {
-		bdd->executeNonQuery("UPDATE [Staff] SET LastNameStaff = '" + staff->getLastName() + "' WHERE [ID_Staff] = " + staff->getIdStaff());
+		bdd->executeNonQuery("UPDATE [Staff] SET FirstName = '" + staff->getFirstName() + "', LastName = '" + staff->getLastName() + "', HiringDate = '" + staff->getHiringDate()+ "', Del = '" + false + "' WHERE ID_Staff = '" + staff->getIdStaff() + "'");
 	}
 
 	void deleteStaff(Staff^ staff, int delOrRestore) {
@@ -43,7 +43,7 @@ public:
 	}
 
 	void insertStaff(Staff^ staff) {
-		bdd->executeInsert("INSERT INTO [Staff] (FirstName, LastName, HiringDate, Del) VALUES ('" + staff->getFirstName() + "','" + staff->getLastName() + "','" + staff->getHiringDate()->ToString("dd-MM-yyyy") + "','" + false + "')", 1);
+		bdd->executeInsert("INSERT INTO [Staff] (FirstName, LastName, HiringDate, Del) VALUES ('" + staff->getFirstName() + "','" + staff->getLastName() + "','" + staff->getHiringDate() + "','" + false + "')", 1);
 	}
 };
 	
