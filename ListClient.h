@@ -4,6 +4,7 @@
 #include "BDD.h"
 #include "AddClient.h"
 #include "ClientRepository.h"
+#include "AddressRepository.h"
 
 namespace A2ProjetBloc2 {
 
@@ -22,6 +23,8 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		Client^ sharedC;
+		Address^ sharedA;
+		AddressRepository^ addressRepository;
 		ClientRepository^ clientRepository;
 		Thread^ reloadThread;
 	private: System::Windows::Forms::Button^ BtnDelete;
@@ -41,20 +44,74 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcIdClient = gcnew DataGridViewTextBoxColumn();
 			dgvtbcIdClient->Name = "ID Client";
 			this->DGVListClient->Columns->Add(dgvtbcIdClient);
+
 			DataGridViewTextBoxColumn^ dgvtbcFirstName = gcnew DataGridViewTextBoxColumn();
 			dgvtbcFirstName->Name = "FirstName";
 			this->DGVListClient->Columns->Add(dgvtbcFirstName);
+
 			DataGridViewTextBoxColumn^ dgvtbcLastName = gcnew DataGridViewTextBoxColumn();
 			dgvtbcLastName->Name = "LastName";
 			this->DGVListClient->Columns->Add(dgvtbcLastName);
+
 			DataGridViewTextBoxColumn^ dgvtbcBirthDay = gcnew DataGridViewTextBoxColumn();
 			dgvtbcBirthDay->Name = "BirthDay";
 			this->DGVListClient->Columns->Add(dgvtbcBirthDay);
+
 			DataGridViewTextBoxColumn^ dgvtbcTypeClient = gcnew DataGridViewTextBoxColumn();
 			dgvtbcTypeClient->Name = "TypeClient";
 			this->DGVListClient->Columns->Add(dgvtbcTypeClient);
 
+			DataGridViewTextBoxColumn^ dgvtbcIdAddress = gcnew DataGridViewTextBoxColumn();
+			dgvtbcIdAddress->Name = "ID Address";
+			this->DGVListClient->Columns->Add(dgvtbcIdAddress);
+
+			DataGridViewTextBoxColumn^ dgvtbcNumberDelivery = gcnew DataGridViewTextBoxColumn();
+			dgvtbcNumberDelivery->Name = "NumberDelivery";
+			this->DGVListClient->Columns->Add(dgvtbcNumberDelivery);
+
+			DataGridViewTextBoxColumn^ dgvtbcStreetDelivery = gcnew DataGridViewTextBoxColumn();
+			dgvtbcStreetDelivery->Name = "StreetDelivery";
+			this->DGVListClient->Columns->Add(dgvtbcStreetDelivery);
+
+			DataGridViewTextBoxColumn^ dgvtbcCityDelivery = gcnew DataGridViewTextBoxColumn();
+			dgvtbcCityDelivery->Name = "CityDelivery";
+			this->DGVListClient->Columns->Add(dgvtbcCityDelivery);
+
+			DataGridViewTextBoxColumn^ dgvtbcPostalCodeDelivery = gcnew DataGridViewTextBoxColumn();
+			dgvtbcPostalCodeDelivery->Name = "PostalCodeDelivery";
+			this->DGVListClient->Columns->Add(dgvtbcPostalCodeDelivery);
+
+			DataGridViewTextBoxColumn^ dgvtbcAdditionDelivery	 = gcnew DataGridViewTextBoxColumn();
+			dgvtbcAdditionDelivery	->Name = "AdditionDelivery";
+			this->DGVListClient->Columns->Add(dgvtbcAdditionDelivery	);
+
+			DataGridViewTextBoxColumn^ dgvtbcIdBilling = gcnew DataGridViewTextBoxColumn();
+			dgvtbcIdBilling->Name = "ID Address";
+			this->DGVListClient->Columns->Add(dgvtbcIdBilling);
+
+			DataGridViewTextBoxColumn^ dgvtbcNumberBilling = gcnew DataGridViewTextBoxColumn();
+			dgvtbcNumberBilling->Name = "NumberBilling";
+			this->DGVListClient->Columns->Add(dgvtbcNumberBilling);
+
+			DataGridViewTextBoxColumn^ dgvtbcStreetBilling = gcnew DataGridViewTextBoxColumn();
+			dgvtbcStreetBilling->Name = "StreetBilling";
+			this->DGVListClient->Columns->Add(dgvtbcStreetBilling);
+
+			DataGridViewTextBoxColumn^ dgvtbcCityBilling = gcnew DataGridViewTextBoxColumn();
+			dgvtbcCityBilling->Name = "CityBilling";
+			this->DGVListClient->Columns->Add(dgvtbcCityBilling);
+
+			DataGridViewTextBoxColumn^ dgvtbcPostalCodeBilling = gcnew DataGridViewTextBoxColumn();
+			dgvtbcPostalCodeBilling->Name = "PostalCodeBilling";
+			this->DGVListClient->Columns->Add(dgvtbcPostalCodeBilling);
+
+			DataGridViewTextBoxColumn^ dgvtbcAdditionBilling = gcnew DataGridViewTextBoxColumn();
+			dgvtbcAdditionBilling->Name = "AdditionBilling";
+			this->DGVListClient->Columns->Add(dgvtbcAdditionBilling);
+
+
 			clientRepository = gcnew ClientRepository(mabdd);
+			addressRepository = gcnew AddressRepository(mabdd);
 			this->reload();
 
 		}
@@ -62,6 +119,7 @@ namespace A2ProjetBloc2 {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
 				System::Collections::Generic::List<Client^>^ clients = clientRepository->getClient(this->CBoxDeletedElements->Checked);
+				System::Collections::Generic::List<Address^>^ address = addressRepository->getAddress(this->CBoxDeletedElements->Checked);
 				this->DGVListClient->Rows->Clear();
 				for each (Client ^ c in clients) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
@@ -82,6 +140,59 @@ namespace A2ProjetBloc2 {
 					dgvcTypeClient->Value = c->getTypeClient();
 					dgvr->Cells->Add(dgvcTypeClient);
 					dgvr->Tag = c;
+					this->DGVListClient->Rows->Add(dgvr);
+				}
+				for each (Address ^ address in address) {
+					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+					DataGridViewTextBoxCell^ dgvcIDAddressDelivery = gcnew DataGridViewTextBoxCell();
+					dgvcIDAddressDelivery->Value = address->getID_Address();
+					dgvr->Cells->Add(dgvcIDAddressDelivery);
+					
+					DataGridViewTextBoxCell^ dgvcNumberDelivery = gcnew DataGridViewTextBoxCell();
+					dgvcNumberDelivery->Value = address->getNumber();
+					dgvr->Cells->Add(dgvcNumberDelivery);
+
+					DataGridViewTextBoxCell^ dgvcStreetDelivery = gcnew DataGridViewTextBoxCell();
+					dgvcStreetDelivery->Value = address->getNameStreet();
+					dgvr->Cells->Add(dgvcStreetDelivery);
+
+					DataGridViewTextBoxCell^ dgvcCityDelivery = gcnew DataGridViewTextBoxCell();
+					dgvcCityDelivery->Value = address->getNameCity();
+					dgvr->Cells->Add(dgvcCityDelivery);
+
+					DataGridViewTextBoxCell^ dgvcPostalCodeDelivery = gcnew DataGridViewTextBoxCell();
+					dgvcPostalCodeDelivery->Value = address->getPostalCode();
+					dgvr->Cells->Add(dgvcPostalCodeDelivery);
+
+					DataGridViewTextBoxCell^ dgvcAdditionDelivery = gcnew DataGridViewTextBoxCell();
+					dgvcAdditionDelivery->Value = address->getAddition();
+					dgvr->Cells->Add(dgvcAdditionDelivery);
+
+					DataGridViewTextBoxCell^ dgvcIDAddressBilling = gcnew DataGridViewTextBoxCell();
+					dgvcIDAddressBilling->Value = address->getID_Address();
+					dgvr->Cells->Add(dgvcIDAddressBilling);
+
+					DataGridViewTextBoxCell^ dgvcNumberBilling = gcnew DataGridViewTextBoxCell();
+					dgvcNumberBilling->Value = address->getNumber();
+					dgvr->Cells->Add(dgvcNumberBilling);
+
+					DataGridViewTextBoxCell^ dgvcStreetBilling = gcnew DataGridViewTextBoxCell();
+					dgvcStreetBilling->Value = address->getNameStreet();
+					dgvr->Cells->Add(dgvcStreetBilling);
+
+					DataGridViewTextBoxCell^ dgvcCityBilling = gcnew DataGridViewTextBoxCell();
+					dgvcCityBilling->Value = address->getNameCity();
+					dgvr->Cells->Add(dgvcCityBilling);
+
+					DataGridViewTextBoxCell^ dgvcPostalCodeBilling = gcnew DataGridViewTextBoxCell();
+					dgvcPostalCodeBilling->Value = address->getPostalCode();
+					dgvr->Cells->Add(dgvcPostalCodeBilling);
+
+					DataGridViewTextBoxCell^ dgvcAdditionBilling = gcnew DataGridViewTextBoxCell();
+					dgvcAdditionBilling->Value = address->getAddition();
+					dgvr->Cells->Add(dgvcAdditionBilling);
+
+					dgvr->Tag = address;
 					this->DGVListClient->Rows->Add(dgvr);
 				}
 				reloadMutex->ReleaseMutex();
@@ -213,6 +324,7 @@ namespace A2ProjetBloc2 {
 			this->MaximizeBox = false;
 			this->Name = L"ListClient";
 			this->Text = L"ListClient";
+			this->Load += gcnew System::EventHandler(this, &ListClient::ListClient_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVListClient))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -221,10 +333,13 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void BtnAddClient_Click(System::Object^ sender, System::EventArgs^ e) {
 		Client^ client = gcnew Client();
-		AddClient^ addClientForm = gcnew AddClient(client);
+		Address^ address = gcnew Address();
+		AddClient^ addClientForm = gcnew AddClient(client,address);
 		addClientForm->ShowDialog();
 		System::Diagnostics::Debug::WriteLine(client->ToString());
+		System::Diagnostics::Debug::WriteLine(address->ToString());
 		clientRepository->insertClient(client);
+		addressRepository->insertAddress(address);
 		//this->Close();
 		this->reload();
 	}
@@ -233,11 +348,14 @@ namespace A2ProjetBloc2 {
 			DataGridViewRow^ sharedDgvrRow = DGVListClient->Rows[e->RowIndex];
 			sharedC = (Client^)sharedDgvrRow->Tag;
 			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedC->ToString());
+			DataGridViewRow^ shareDgvrRow = DGVListClient->Rows[e->RowIndex];
+			sharedA = (Address^)shareDgvrRow->Tag;
+			System::Diagnostics::Debug::WriteLine(sharedA->ToString());
 		}
 	}
 
 	private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddClient^ formModifClient = gcnew AddClient(sharedC);
+		AddClient^ formModifClient = gcnew AddClient(sharedC,sharedA);
 		formModifClient->ShowDialog();
 		clientRepository->editClient(sharedC);
 
@@ -251,5 +369,7 @@ namespace A2ProjetBloc2 {
 		this->reload();
 	}
 
-	};
+	private: System::Void ListClient_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

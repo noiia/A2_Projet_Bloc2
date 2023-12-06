@@ -50,4 +50,5 @@ public:
 	bool getDel() {
 		return this->del;
 	}
+
 };

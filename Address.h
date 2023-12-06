@@ -5,11 +5,11 @@ ref class Address
 {
 private:
 	int ID_Adress;
-	String^ number;
-	String^ addition;
-	String^ nameStreet;
-	String^ nameCity;
-	String^ postalCode;
+	String^ Number;
+	String^ Addition;
+	String^ NameStreet;
+	String^ NameCity;
+	String^ PostalCode;
 	bool del;
 
 public:
@@ -19,35 +19,35 @@ public:
 	int getID_Address() {
 		return this->ID_Adress;
 	}
-	void setNumber(String^ number) {
-		this->number = number;
+	void setNumber(String^ Number) {
+		this->Number = Number;
 	}
 	String^ getNumber() {
-		return this->number;
+		return this->Number;
 	}
-	void setAddition(String^ addition) {
-		this->addition = addition;
+	void setAddition(String^ Addition) {
+		this->Addition = Addition;
 	}
 	String^ getAddition() {
-		return this->addition;
+		return this->Addition;
 	}
-	void setNameStreet(String^ nameStreet) {
-		this->nameStreet = nameStreet;
+	void setNameStreet(String^ NameStreet) {
+		this->NameStreet = NameStreet;
 	}
 	String^ getNameStreet() {
-		return this->nameStreet;
+		return this->NameStreet;
 	}
-	void setNameCity(String^ nameCity) {
-		this->nameCity = nameCity;
+	void setNameCity(String^ NameCity) {
+		this->NameCity = NameCity;
 	}
 	String^ getNameCity() {
-		return this->nameCity;
+		return this->NameCity;
 	}
-	void setPostalCode(String^ postalCode) {
-		this->postalCode = postalCode;
+	void setPostalCode(String^ PostalCode) {
+		this->PostalCode = PostalCode;
 	}
 	String^ getPostalCode() {
-		return this->postalCode;
+		return this->PostalCode;
 	}
 
 };

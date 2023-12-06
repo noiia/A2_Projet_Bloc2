@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Client.h"
+#include"Address.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -16,10 +17,12 @@ namespace A2ProjetBloc2 {
 	{
 	private:
 		Client^ client;
+		Address^ address;
 	public:
-		AddClient(Client^ client)
+		AddClient(Client^ client, Address^ address)
 		{
 			this->client = client;
+			this->address = address;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -61,6 +64,15 @@ namespace A2ProjetBloc2 {
 		   System::Windows::Forms::TextBox^ TbStreetDelivery;
 		   System::Windows::Forms::Label^ LbPostalCodeDelivery;
 		   System::Windows::Forms::TextBox^ TbPostalCodeDelivery;
+	private: System::Windows::Forms::Label^ lbCityDelivery;
+	private: System::Windows::Forms::TextBox^ tbCityDelivery;
+
+	private: System::Windows::Forms::Label^ lbCityBilling;
+	private: System::Windows::Forms::TextBox^ tbCityBilling;
+	private: System::Windows::Forms::Label^ lbAdditionDelivery;
+	private: System::Windows::Forms::TextBox^ tbAdditionDelivery;
+	private: System::Windows::Forms::Label^ lbAdditionBilling;
+	private: System::Windows::Forms::TextBox^ tbAdditionBilling;
 
 		   /// <summary>
 		   /// Variable n cessaire au concepteur.
@@ -99,8 +111,14 @@ namespace A2ProjetBloc2 {
 			   this->TbStreetDelivery = (gcnew System::Windows::Forms::TextBox());
 			   this->LbPostalCodeDelivery = (gcnew System::Windows::Forms::Label());
 			   this->TbPostalCodeDelivery = (gcnew System::Windows::Forms::TextBox());
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->MaximizeBox = false;
+			   this->lbCityDelivery = (gcnew System::Windows::Forms::Label());
+			   this->tbCityDelivery = (gcnew System::Windows::Forms::TextBox());
+			   this->lbCityBilling = (gcnew System::Windows::Forms::Label());
+			   this->tbCityBilling = (gcnew System::Windows::Forms::TextBox());
+			   this->lbAdditionDelivery = (gcnew System::Windows::Forms::Label());
+			   this->tbAdditionDelivery = (gcnew System::Windows::Forms::TextBox());
+			   this->lbAdditionBilling = (gcnew System::Windows::Forms::Label());
+			   this->tbAdditionBilling = (gcnew System::Windows::Forms::TextBox());
 			   this->SuspendLayout();
 			   // 
 			   // Title
@@ -123,7 +141,7 @@ namespace A2ProjetBloc2 {
 			   this->LbFirstName->Name = L"LbFirstName";
 			   this->LbFirstName->Size = System::Drawing::Size(65, 19);
 			   this->LbFirstName->TabIndex = 5;
-			   this->LbFirstName->Text = L"PrÃ©nom";
+			   this->LbFirstName->Text = L"Prenom";
 			   // 
 			   // TbFirstName
 			   // 
@@ -229,7 +247,7 @@ namespace A2ProjetBloc2 {
 			   this->DtpBirthdate->Name = L"DtpBirthdate";
 			   this->DtpBirthdate->Size = System::Drawing::Size(315, 27);
 			   this->DtpBirthdate->TabIndex = 32;
-			   this->DtpBirthdate->Value = System::DateTime(2023, 11, 28);
+			   this->DtpBirthdate->Value = System::DateTime(2023, 11, 28, 0, 0, 0, 0);
 			   // 
 			   // LbBillingAddress
 			   // 
@@ -287,7 +305,7 @@ namespace A2ProjetBloc2 {
 			   this->LbDeliveryAddress->AutoSize = true;
 			   this->LbDeliveryAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->LbDeliveryAddress->Location = System::Drawing::Point(440, 316);
+			   this->LbDeliveryAddress->Location = System::Drawing::Point(807, 69);
 			   this->LbDeliveryAddress->Name = L"LbDeliveryAddress";
 			   this->LbDeliveryAddress->Size = System::Drawing::Size(160, 19);
 			   this->LbDeliveryAddress->TabIndex = 40;
@@ -298,7 +316,7 @@ namespace A2ProjetBloc2 {
 			   this->LbNumberDelivery->AutoSize = true;
 			   this->LbNumberDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->LbNumberDelivery->Location = System::Drawing::Point(440, 354);
+			   this->LbNumberDelivery->Location = System::Drawing::Point(807, 97);
 			   this->LbNumberDelivery->Name = L"LbNumberDelivery";
 			   this->LbNumberDelivery->Size = System::Drawing::Size(69, 19);
 			   this->LbNumberDelivery->TabIndex = 41;
@@ -308,7 +326,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->TbNumberDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->TbNumberDelivery->Location = System::Drawing::Point(445, 376);
+			   this->TbNumberDelivery->Location = System::Drawing::Point(811, 119);
 			   this->TbNumberDelivery->Name = L"TbNumberDelivery";
 			   this->TbNumberDelivery->Size = System::Drawing::Size(315, 27);
 			   this->TbNumberDelivery->TabIndex = 42;
@@ -318,7 +336,7 @@ namespace A2ProjetBloc2 {
 			   this->LbStreetDelivery->AutoSize = true;
 			   this->LbStreetDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->LbStreetDelivery->Location = System::Drawing::Point(440, 427);
+			   this->LbStreetDelivery->Location = System::Drawing::Point(807, 163);
 			   this->LbStreetDelivery->Name = L"LbStreetDelivery";
 			   this->LbStreetDelivery->Size = System::Drawing::Size(96, 19);
 			   this->LbStreetDelivery->TabIndex = 43;
@@ -328,7 +346,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->TbStreetDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->TbStreetDelivery->Location = System::Drawing::Point(444, 449);
+			   this->TbStreetDelivery->Location = System::Drawing::Point(811, 185);
 			   this->TbStreetDelivery->Name = L"TbStreetDelivery";
 			   this->TbStreetDelivery->Size = System::Drawing::Size(315, 27);
 			   this->TbStreetDelivery->TabIndex = 44;
@@ -338,7 +356,7 @@ namespace A2ProjetBloc2 {
 			   this->LbPostalCodeDelivery->AutoSize = true;
 			   this->LbPostalCodeDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->LbPostalCodeDelivery->Location = System::Drawing::Point(441, 504);
+			   this->LbPostalCodeDelivery->Location = System::Drawing::Point(807, 230);
 			   this->LbPostalCodeDelivery->Name = L"LbPostalCodeDelivery";
 			   this->LbPostalCodeDelivery->Size = System::Drawing::Size(95, 19);
 			   this->LbPostalCodeDelivery->TabIndex = 45;
@@ -348,16 +366,104 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->TbPostalCodeDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->TbPostalCodeDelivery->Location = System::Drawing::Point(444, 526);
+			   this->TbPostalCodeDelivery->Location = System::Drawing::Point(811, 252);
 			   this->TbPostalCodeDelivery->Name = L"TbPostalCodeDelivery";
 			   this->TbPostalCodeDelivery->Size = System::Drawing::Size(315, 27);
 			   this->TbPostalCodeDelivery->TabIndex = 46;
+			   // 
+			   // lbCityDelivery
+			   // 
+			   this->lbCityDelivery->AutoSize = true;
+			   this->lbCityDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->lbCityDelivery->Location = System::Drawing::Point(440, 296);
+			   this->lbCityDelivery->Name = L"lbCityDelivery";
+			   this->lbCityDelivery->Size = System::Drawing::Size(43, 19);
+			   this->lbCityDelivery->TabIndex = 47;
+			   this->lbCityDelivery->Text = L"Ville";
+			   // 
+			   // tbCityDelivery
+			   // 
+			   this->tbCityDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->tbCityDelivery->Location = System::Drawing::Point(444, 318);
+			   this->tbCityDelivery->Name = L"tbCityDelivery";
+			   this->tbCityDelivery->Size = System::Drawing::Size(315, 27);
+			   this->tbCityDelivery->TabIndex = 48;
+			   // 
+			   // lbCityBilling
+			   // 
+			   this->lbCityBilling->AutoSize = true;
+			   this->lbCityBilling->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->lbCityBilling->Location = System::Drawing::Point(807, 296);
+			   this->lbCityBilling->Name = L"lbCityBilling";
+			   this->lbCityBilling->Size = System::Drawing::Size(43, 19);
+			   this->lbCityBilling->TabIndex = 49;
+			   this->lbCityBilling->Text = L"Ville";
+			   // 
+			   // tbCityBilling
+			   // 
+			   this->tbCityBilling->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->tbCityBilling->Location = System::Drawing::Point(811, 318);
+			   this->tbCityBilling->Name = L"tbCityBilling";
+			   this->tbCityBilling->Size = System::Drawing::Size(315, 27);
+			   this->tbCityBilling->TabIndex = 50;
+			   // 
+			   // lbAdditionDelivery
+			   // 
+			   this->lbAdditionDelivery->AutoSize = true;
+			   this->lbAdditionDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->lbAdditionDelivery->Location = System::Drawing::Point(440, 365);
+			   this->lbAdditionDelivery->Name = L"lbAdditionDelivery";
+			   this->lbAdditionDelivery->Size = System::Drawing::Size(182, 19);
+			   this->lbAdditionDelivery->TabIndex = 51;
+			   this->lbAdditionDelivery->Text = L"Complement d\'adresse";
+			   // 
+			   // tbAdditionDelivery
+			   // 
+			   this->tbAdditionDelivery->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->tbAdditionDelivery->Location = System::Drawing::Point(444, 387);
+			   this->tbAdditionDelivery->Name = L"tbAdditionDelivery";
+			   this->tbAdditionDelivery->Size = System::Drawing::Size(315, 27);
+			   this->tbAdditionDelivery->TabIndex = 52;
+			   // 
+			   // lbAdditionBilling
+			   // 
+			   this->lbAdditionBilling->AutoSize = true;
+			   this->lbAdditionBilling->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->lbAdditionBilling->Location = System::Drawing::Point(807, 365);
+			   this->lbAdditionBilling->Name = L"lbAdditionBilling";
+			   this->lbAdditionBilling->Size = System::Drawing::Size(182, 19);
+			   this->lbAdditionBilling->TabIndex = 53;
+			   this->lbAdditionBilling->Text = L"Complement d\'adresse";
+			   // 
+			   // tbAdditionBilling
+			   // 
+			   this->tbAdditionBilling->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->tbAdditionBilling->Location = System::Drawing::Point(811, 387);
+			   this->tbAdditionBilling->Name = L"tbAdditionBilling";
+			   this->tbAdditionBilling->Size = System::Drawing::Size(315, 27);
+			   this->tbAdditionBilling->TabIndex = 54;
 			   // 
 			   // AddClient
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->ClientSize = System::Drawing::Size(878, 606);
+			   this->ClientSize = System::Drawing::Size(1153, 482);
+			   this->Controls->Add(this->tbAdditionBilling);
+			   this->Controls->Add(this->lbAdditionBilling);
+			   this->Controls->Add(this->tbAdditionDelivery);
+			   this->Controls->Add(this->lbAdditionDelivery);
+			   this->Controls->Add(this->tbCityBilling);
+			   this->Controls->Add(this->lbCityBilling);
+			   this->Controls->Add(this->tbCityDelivery);
+			   this->Controls->Add(this->lbCityDelivery);
 			   this->Controls->Add(this->TbPostalCodeDelivery);
 			   this->Controls->Add(this->LbPostalCodeDelivery);
 			   this->Controls->Add(this->TbStreetDelivery);
@@ -382,7 +488,9 @@ namespace A2ProjetBloc2 {
 			   this->Controls->Add(this->LbFirstName);
 			   this->Controls->Add(this->LbLastName);
 			   this->Controls->Add(this->Title);
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			   this->MaximizeBox = false;
 			   this->Name = L"AddClient";
 			   this->Text = L"AddClient";
 			   this->Load += gcnew System::EventHandler(this, &AddClient::AddClient_Load);
@@ -402,8 +510,17 @@ namespace A2ProjetBloc2 {
 		String^ dateString = this->DtpBirthdate->Value.ToString("yyyy-MM-dd");
 		DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 		this->client->setBirthday(Birthday);
-		//this->client->setTypeClient(this->)
+		this->address->setNumber(this->TbNumberBilling->Text);
+		this->address->setNameStreet(this->TbStreetBilling->Text);
+		this->address->setPostalCode(this->TbPostalCodeBilling->Text);
+		this->address->setNameCity(this->tbCityBilling->Text);
+		this->address->setAddition(this->tbAdditionBilling->Text);
+		this->address->setNumber(this->TbNumberDelivery->Text);
+		this->address->setNameStreet(this->TbStreetDelivery->Text);
+		this->address->setPostalCode(this->TbPostalCodeDelivery->Text);
+		this->address->setNameCity(this->tbCityDelivery->Text);
+		this->address->setAddition(this->tbAdditionDelivery->Text);
 		this->Close();
 	}
-	};
+};
 }
