@@ -1,5 +1,9 @@
 #pragma once
-
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include "BDD.h"
+#include "Command.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -8,19 +12,143 @@ namespace A2ProjetBloc2 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	using namespace System::Threading;
 	/// <summary>
 	/// Description résumée de AddAddressToCommand
 	/// </summary>
 	public ref class AddAddressToCommand : public System::Windows::Forms::Form
 	{
+		BDD^ mabdd;
+		AAtoCRepository^ articleToCommand;
+		Article^ article;
+		Thread^ reloadThread;
+		String^ sharedSearchedValue = "";
+		Article^ clickedArticle;
+		Command^ command;
+		bool clicked = false;
+		int research = 0;
+	private: System::Windows::Forms::Label^ LbOr;
+		   System::Threading::Mutex^ reloadMutex;
 	public:
-		AddAddressToCommand(void)
+		AddAddressToCommand(BDD^ mabdd, Command^ command)
 		{
+			this->mabdd = mabdd;
+			this->command = command;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
+			reloadMutex = gcnew System::Threading::Mutex();
+
+			DGVDelivery->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
+			dgvtbcIdArticle->Name = "Références";
+			this->DGVDelivery->Columns->Add(dgvtbcIdArticle);
+			DataGridViewTextBoxColumn^ dgvtbcName = gcnew DataGridViewTextBoxColumn();
+			dgvtbcName->Name = "Nom";
+			this->DGVDelivery->Columns->Add(dgvtbcName);
+			DataGridViewTextBoxColumn^ dgvtbcType = gcnew DataGridViewTextBoxColumn();
+			dgvtbcType->Name = "Type";
+			this->DGVDelivery->Columns->Add(dgvtbcType);
+			DataGridViewTextBoxColumn^ dgvtbcPriceWT = gcnew DataGridViewTextBoxColumn();
+			dgvtbcPriceWT->Name = "Prix HT";
+			this->DGVDelivery->Columns->Add(dgvtbcPriceWT);
+			DataGridViewTextBoxColumn^ dgvtbcVAT = gcnew DataGridViewTextBoxColumn();
+			dgvtbcVAT->Name = "TVA";
+			this->DGVDelivery->Columns->Add(dgvtbcVAT);
+			DataGridViewTextBoxColumn^ dgvtbcPriceATI = gcnew DataGridViewTextBoxColumn();
+			dgvtbcPriceATI->Name = "Prix TTC";
+			this->DGVDelivery->Columns->Add(dgvtbcPriceATI);
+			DataGridViewTextBoxColumn^ dgvtbcStock = gcnew DataGridViewTextBoxColumn();
+			dgvtbcStock->Name = "Stock";
+			this->DGVDelivery->Columns->Add(dgvtbcStock);
+			DataGridViewTextBoxColumn^ dgvtbcTresholdLimit = gcnew DataGridViewTextBoxColumn();
+			dgvtbcTresholdLimit->Name = "Limite avant réapprovisionnement";
+			this->DGVDelivery->Columns->Add(dgvtbcTresholdLimit);
+			DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
+			dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
+			this->DGVDelivery->Columns->Add(dgvtbcTresholdDate);
+			
+			
+			DGVBilling->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
+			dgvtbcIdArticle->Name = "Références";
+			this->DGVBilling->Columns->Add(dgvtbcIdArticle);
+			DataGridViewTextBoxColumn^ dgvtbcName = gcnew DataGridViewTextBoxColumn();
+			dgvtbcName->Name = "Nom";
+			this->DGVBilling->Columns->Add(dgvtbcName);
+			DataGridViewTextBoxColumn^ dgvtbcType = gcnew DataGridViewTextBoxColumn();
+			dgvtbcType->Name = "Type";
+			this->DGVBilling->Columns->Add(dgvtbcType);
+			DataGridViewTextBoxColumn^ dgvtbcPriceWT = gcnew DataGridViewTextBoxColumn();
+			dgvtbcPriceWT->Name = "Prix HT";
+			this->DGVBilling->Columns->Add(dgvtbcPriceWT);
+			DataGridViewTextBoxColumn^ dgvtbcVAT = gcnew DataGridViewTextBoxColumn();
+			dgvtbcVAT->Name = "TVA";
+			this->DGVBilling->Columns->Add(dgvtbcVAT);
+			DataGridViewTextBoxColumn^ dgvtbcPriceATI = gcnew DataGridViewTextBoxColumn();
+			dgvtbcPriceATI->Name = "Prix TTC";
+			this->DGVBilling->Columns->Add(dgvtbcPriceATI);
+			DataGridViewTextBoxColumn^ dgvtbcStock = gcnew DataGridViewTextBoxColumn();
+			dgvtbcStock->Name = "Stock";
+			this->DGVBilling->Columns->Add(dgvtbcStock);
+			DataGridViewTextBoxColumn^ dgvtbcTresholdLimit = gcnew DataGridViewTextBoxColumn();
+			dgvtbcTresholdLimit->Name = "Limite avant réapprovisionnement";
+			this->DGVBilling->Columns->Add(dgvtbcTresholdLimit);
+			DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
+			dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
+			this->DGVBilling->Columns->Add(dgvtbcTresholdDate);
+
+			articleToCommand = gcnew AAtoCRepository(mabdd);
+
+			this->reload();
+
+		}
+		void reload() {
+			if (reloadMutex != nullptr) {
+				reloadMutex->WaitOne();
+				System::Diagnostics::Debug::WriteLine(sharedSearchedValue);
+				System::Collections::Generic::List<Article^>^ articles = articleToCommand->getArticle(sharedSearchedValue, research);
+				this->DGVDelivery->Rows->Clear();
+				for each (Article ^ a in articles) {
+					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
+					dgvcIdArticle->Value = a->getIdArticle();
+					dgvr->Cells->Add(dgvcIdArticle);
+					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
+					dgvcName->Value = a->getName();
+					dgvr->Cells->Add(dgvcName);
+					DataGridViewTextBoxCell^ dgvcType = gcnew DataGridViewTextBoxCell();
+					dgvcType->Value = a->getKind();
+					dgvr->Cells->Add(dgvcType);
+					DataGridViewTextBoxCell^ dgvcPriceWT = gcnew DataGridViewTextBoxCell();
+					dgvcPriceWT->Value = Convert::ToString(a->getPriceWT());
+					dgvr->Cells->Add(dgvcPriceWT);
+					DataGridViewTextBoxCell^ dgvcVAT = gcnew DataGridViewTextBoxCell();
+					dgvcVAT->Value = Convert::ToString(a->getVAT());
+					dgvr->Cells->Add(dgvcVAT);
+					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
+					dgvcPriceATI->Value = Convert::ToString(a->getPriceATI());
+					dgvr->Cells->Add(dgvcPriceATI);
+					DataGridViewTextBoxCell^ dgvcStock = gcnew DataGridViewTextBoxCell();
+					dgvcStock->Value = Convert::ToString(a->getStock());
+					dgvr->Cells->Add(dgvcStock);
+					DataGridViewTextBoxCell^ dgvcRestockingLimit = gcnew DataGridViewTextBoxCell();
+					dgvcRestockingLimit->Value = Convert::ToString(a->getRestockingLimit());
+					dgvr->Cells->Add(dgvcRestockingLimit);
+					DataGridViewTextBoxCell^ dgvcRestockingDate = gcnew DataGridViewTextBoxCell();
+					DateTime^ restockingDate = a->getRestockingDate();
+					dgvcRestockingDate->Value = restockingDate->ToString("yyyy-MM-dd");
+					dgvr->Cells->Add(dgvcRestockingDate);
+					dgvr->Tag = a;
+					this->DGVDelivery->Rows->Add(dgvr);
+				}
+				reloadMutex->ReleaseMutex();
+			}
+		}
+		void launchReloadThread() {
+			reloadThread = gcnew Thread(gcnew ThreadStart(this, &AddAddressToCommand::reload));
+			reloadThread->Start();
 		}
 
 	protected:
@@ -35,19 +163,13 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::DataGridView^ DGVDelivery;
-	private: System::Windows::Forms::DataGridView^ DGVBilling;
-	protected:
-
-	protected:
-
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ LbDeliveryRef;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ LbBillingRef;
-	private: System::Windows::Forms::Button^ BtnAddAddress;
-	private: System::Windows::Forms::CheckBox^ CBoxSameAddress;
-
-	private:
+			 System::Windows::Forms::DataGridView^ DGVBilling;
+			 System::Windows::Forms::Label^ label1;
+			 System::Windows::Forms::Label^ LbDeliveryRef;
+			 System::Windows::Forms::Label^ label3;
+			 System::Windows::Forms::Label^ LbBillingRef;
+			 System::Windows::Forms::Button^ BtnAddAddress;
+			 System::Windows::Forms::CheckBox^ CBoxSameAddress;
 		/// <summary>
 		/// Variable nécessaire au concepteur.
 		/// </summary>
