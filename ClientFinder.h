@@ -3,7 +3,9 @@
 #include <thread>
 #include <mutex>
 #include "Client.h"
-#include "ClientRepository.h"
+#include "Cart.h"
+#include "ClientFinderRepository.h"
+#include "Command.h"
 #include "BDD.h"
 
 namespace A2ProjetBloc2 {
@@ -24,14 +26,21 @@ namespace A2ProjetBloc2 {
 	private:
 		BDD^ mabdd;
 		Thread^ reloadThread;
-		ClientRepository^ clientToCommand;
-		System::Threading::Mutex^ reloadMutex;
+		Client^ clickedClient;
+		bool clicked;
+		ClientFinderRepository^ clientToCommand;
 		String^ sharedSearchedValue;
 		String^ sharedSearchedValue2;
 		int research;
+		Command^ command;
+
+		System::Threading::Mutex^ reloadMutex;
+
 	public:
-		ClientFinder(BDD^ mabdd)
+		ClientFinder(BDD^ mabdd, Command^ command)
 		{
+			this->command = command;
+			this->mabdd = mabdd;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -39,35 +48,23 @@ namespace A2ProjetBloc2 {
 			reloadMutex = gcnew System::Threading::Mutex();
 
 			DGVSearchClient->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
-			dgvtbcIdArticle->Name = "Références";
-			this->DGVSearchClient->Columns->Add(dgvtbcIdArticle);
-			DataGridViewTextBoxColumn^ dgvtbcName = gcnew DataGridViewTextBoxColumn();
-			dgvtbcName->Name = "Nom";
-			this->DGVSearchClient->Columns->Add(dgvtbcName);
-			DataGridViewTextBoxColumn^ dgvtbcType = gcnew DataGridViewTextBoxColumn();
-			dgvtbcType->Name = "Type";
-			this->DGVSearchClient->Columns->Add(dgvtbcType);
-			DataGridViewTextBoxColumn^ dgvtbcPriceWT = gcnew DataGridViewTextBoxColumn();
-			dgvtbcPriceWT->Name = "Prix HT";
-			this->DGVSearchClient->Columns->Add(dgvtbcPriceWT);
-			DataGridViewTextBoxColumn^ dgvtbcVAT = gcnew DataGridViewTextBoxColumn();
-			dgvtbcVAT->Name = "TVA";
-			this->DGVSearchClient->Columns->Add(dgvtbcVAT);
-			DataGridViewTextBoxColumn^ dgvtbcPriceATI = gcnew DataGridViewTextBoxColumn();
-			dgvtbcPriceATI->Name = "Prix TTC";
-			this->DGVSearchClient->Columns->Add(dgvtbcPriceATI);
-			DataGridViewTextBoxColumn^ dgvtbcStock = gcnew DataGridViewTextBoxColumn();
-			dgvtbcStock->Name = "Stock";
-			this->DGVSearchClient->Columns->Add(dgvtbcStock);
-			DataGridViewTextBoxColumn^ dgvtbcTresholdLimit = gcnew DataGridViewTextBoxColumn();
-			dgvtbcTresholdLimit->Name = "Limite avant réapprovisionnement";
-			this->DGVSearchClient->Columns->Add(dgvtbcTresholdLimit);
-			DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
-			dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
-			this->DGVSearchClient->Columns->Add(dgvtbcTresholdDate);
+			DataGridViewTextBoxColumn^ dgvtbcIdClient = gcnew DataGridViewTextBoxColumn();
+			dgvtbcIdClient->Name = "Références";
+			this->DGVSearchClient->Columns->Add(dgvtbcIdClient);
+			DataGridViewTextBoxColumn^ dgvtbcLastName = gcnew DataGridViewTextBoxColumn();
+			dgvtbcLastName->Name = "Nom";
+			this->DGVSearchClient->Columns->Add(dgvtbcLastName);
+			DataGridViewTextBoxColumn^ dgvtbcFirstName = gcnew DataGridViewTextBoxColumn();
+			dgvtbcFirstName->Name = "Prénom";
+			this->DGVSearchClient->Columns->Add(dgvtbcFirstName);
+			DataGridViewTextBoxColumn^ dgvtbcTypeClient = gcnew DataGridViewTextBoxColumn();
+			dgvtbcTypeClient->Name = "Type de clients";
+			this->DGVSearchClient->Columns->Add(dgvtbcTypeClient);
+			DataGridViewTextBoxColumn^ dgvtbcBirthday = gcnew DataGridViewTextBoxColumn();
+			dgvtbcBirthday->Name = "Anniversaire du client";
+			this->DGVSearchClient->Columns->Add(dgvtbcBirthday);
 
-			clientToCommand = gcnew ClientRepository(mabdd);
+			clientToCommand = gcnew ClientFinderRepository(mabdd);
 
 			this->reload();
 
@@ -76,38 +73,31 @@ namespace A2ProjetBloc2 {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
 				System::Diagnostics::Debug::WriteLine(sharedSearchedValue);
-				System::Collections::Generic::List<Client^>^ clients = clientToCommand->getClient(sharedSearchedValue,sharedSearchedValue2, research);
+				System::Collections::Generic::List<Client^>^ clients = clientToCommand->getClient(sharedSearchedValue, sharedSearchedValue2, research);
 				this->DGVSearchClient->Rows->Clear();
 				for each (Client ^ c in clients) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
-					dgvcIdArticle->Value = c->getIdClient();
-					dgvr->Cells->Add(dgvcIdArticle);
-					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
-					dgvcName->Value = c->getName();
-					dgvr->Cells->Add(dgvcName);
-					DataGridViewTextBoxCell^ dgvcType = gcnew DataGridViewTextBoxCell();
-					dgvcType->Value = c->getKind();
-					dgvr->Cells->Add(dgvcType);
-					DataGridViewTextBoxCell^ dgvcPriceWT = gcnew DataGridViewTextBoxCell();
-					dgvcPriceWT->Value = Convert::ToString(c->getPriceWT());
-					dgvr->Cells->Add(dgvcPriceWT);
-					DataGridViewTextBoxCell^ dgvcVAT = gcnew DataGridViewTextBoxCell();
-					dgvcVAT->Value = Convert::ToString(c->getVAT());
-					dgvr->Cells->Add(dgvcVAT);
-					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
-					dgvcPriceATI->Value = Convert::ToString(c->getPriceATI());
-					dgvr->Cells->Add(dgvcPriceATI);
-					DataGridViewTextBoxCell^ dgvcStock = gcnew DataGridViewTextBoxCell();
-					dgvcStock->Value = Convert::ToString(c->getStock());
-					dgvr->Cells->Add(dgvcStock);
-					DataGridViewTextBoxCell^ dgvcRestockingLimit = gcnew DataGridViewTextBoxCell();
-					dgvcRestockingLimit->Value = Convert::ToString(c->getRestockingLimit());
-					dgvr->Cells->Add(dgvcRestockingLimit);
-					DataGridViewTextBoxCell^ dgvcRestockingDate = gcnew DataGridViewTextBoxCell();
-					DateTime^ restockingDate = c->getRestockingDate();
-					dgvcRestockingDate->Value = restockingDate->ToString("yyyy-MM-dd");
-					dgvr->Cells->Add(dgvcRestockingDate);
+					DataGridViewTextBoxCell^ dgvcIdClient = gcnew DataGridViewTextBoxCell();
+					dgvcIdClient->Value = c->getID_Client();
+					dgvr->Cells->Add(dgvcIdClient);
+					DataGridViewTextBoxCell^ dgvcLastName = gcnew DataGridViewTextBoxCell();
+					dgvcLastName->Value = c->getLastName();
+					dgvr->Cells->Add(dgvcLastName);
+					DataGridViewTextBoxCell^ dgvcFirstName = gcnew DataGridViewTextBoxCell();
+					dgvcFirstName->Value = c->getFirstName();
+					dgvr->Cells->Add(dgvcFirstName);
+					DataGridViewTextBoxCell^ dgvcTypeClient = gcnew DataGridViewTextBoxCell();
+					dgvcTypeClient->Value = Convert::ToString(c->getTypeClient());
+					dgvr->Cells->Add(dgvcTypeClient);
+					DataGridViewTextBoxCell^ dgvcBirthday = gcnew DataGridViewTextBoxCell();
+					DateTime^ Birthday = c->getBirthday();
+					if (Birthday != nullptr) {
+						dgvcBirthday->Value = Birthday->ToString("yyyy-MM-dd");
+					}
+					else {
+						dgvcBirthday->Value = "";
+					}
+					dgvr->Cells->Add(dgvcBirthday);
 					dgvr->Tag = c;
 					this->DGVSearchClient->Rows->Add(dgvr);
 				}
@@ -179,6 +169,8 @@ namespace A2ProjetBloc2 {
 			   this->DGVSearchClient->ReadOnly = true;
 			   this->DGVSearchClient->Size = System::Drawing::Size(604, 430);
 			   this->DGVSearchClient->TabIndex = 0;
+			   this->DGVSearchClient->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &ClientFinder::DGVSearchClient_CellMouseDoubleClick);
+
 			   // 
 			   // Title
 			   // 
@@ -212,6 +204,8 @@ namespace A2ProjetBloc2 {
 			   this->BtnResearchClient->TabIndex = 37;
 			   this->BtnResearchClient->Text = L"Rechercher";
 			   this->BtnResearchClient->UseVisualStyleBackColor = true;
+			   this->BtnResearchClient->Click += gcnew System::EventHandler(this, &ClientFinder::BtnResearchClient_Click);
+
 			   // 
 			   // TboxLastName
 			   // 
@@ -243,6 +237,8 @@ namespace A2ProjetBloc2 {
 			   this->BtnAddCommand->TabIndex = 34;
 			   this->BtnAddCommand->Text = L"Ajouter";
 			   this->BtnAddCommand->UseVisualStyleBackColor = true;
+			   this->BtnAddCommand->Click += gcnew System::EventHandler(this, &ClientFinder::BtnAddClient_Click);
+
 			   // 
 			   // TboxIDClient
 			   // 
@@ -299,6 +295,8 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			   this->MaximizeBox = false;
 			   this->ClientSize = System::Drawing::Size(1015, 589);
 			   this->Controls->Add(this->LbOr);
 			   this->Controls->Add(this->TboxFirstName);
@@ -320,11 +318,23 @@ namespace A2ProjetBloc2 {
 
 		   }
 #pragma endregion
-	private: System::Void BtnResearchArticle_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void BtnResearchClient_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->TboxIDClient->Text != "" && (this->TboxFirstName->Text == "" && this->TboxLastName->Text == "")) {
 			System::Diagnostics::Debug::WriteLine(this->TboxIDClient->Text);
 			sharedSearchedValue = this->TboxIDClient->Text;
 			research = 1;
+			this->reload();
+		}
+		else if (this->TboxIDClient->Text == "" && (this->TboxFirstName->Text == "" && this->TboxLastName->Text != "")) {
+			System::Diagnostics::Debug::WriteLine(this->TboxLastName->Text);
+			sharedSearchedValue = this->TboxLastName->Text;
+			research = 2;
+			this->reload();
+		}
+		else if (this->TboxIDClient->Text == "" && (this->TboxFirstName->Text != "" && this->TboxLastName->Text == "")) {
+			System::Diagnostics::Debug::WriteLine(this->TboxFirstName->Text);
+			sharedSearchedValue2 = this->TboxFirstName->Text;
+			research = 3;
 			this->reload();
 		}
 		else if (this->TboxIDClient->Text == "" && (this->TboxFirstName->Text != "" && this->TboxLastName->Text != "")) {
@@ -332,28 +342,31 @@ namespace A2ProjetBloc2 {
 			System::Diagnostics::Debug::WriteLine(this->TboxLastName->Text);
 			sharedSearchedValue = this->TboxLastName->Text;
 			sharedSearchedValue2 = this->TboxFirstName->Text;
-			research = 2;
+			research = 4;
 			this->reload();
 		}
 		else {
 			research = 0;
 		}
 	}
-	private: System::Void DGVArticle_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+	private: System::Void DGVSearchClient_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
 		if (e->RowIndex >= 0) {
-			DataGridViewRow^ sharedDgvrRow = DGVArticle->Rows[e->RowIndex];
-			clickedArticle = (Article^)sharedDgvrRow->Tag;
-			this->LbRefSelected->Text = "Référence sélectionnée : " + clickedArticle->getIdArticle();
+			DataGridViewRow^ sharedDgvrRow = DGVSearchClient->Rows[e->RowIndex];
+			clickedClient = (Client^)sharedDgvrRow->Tag;
+			this->LbClientSelected->Text = "Client sélectionnée :\n " + clickedClient->getID_Client() + "\n" + clickedClient->getLastName() + "\n" + clickedClient->getFirstName() + "\n" + clickedClient->getTypeClient();
 			clicked = true;
-			this->NudQuantity->Maximum = clickedArticle->getStock();
 		}
 
 	}
-	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->command->setIdArticle(this->clickedArticle->getIdArticle());
-		this->command->setReference("");
-		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
-		this->Close();
+	private: System::Void BtnAddClient_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (clicked) {
+			this->command->setIdClient(this->clickedClient->getID_Client());
+			this->command->setLastNameClient(this->clickedClient->getLastName());
+			this->command->setFirstNameClient(this->clickedClient->getFirstName());
+			//this->command->setReference("");
+			//this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
+			this->Close();
+		}
 	}
 	};
 }
