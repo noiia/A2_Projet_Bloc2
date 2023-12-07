@@ -539,6 +539,7 @@ namespace A2ProjetBloc2 {
 			String^ dateString = this->DtpBirthdate->Value.ToString("yyyy-MM-dd");
 			DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 			this->client->setBirthday(Birthday);
+
 		}
 
 		this->Close();

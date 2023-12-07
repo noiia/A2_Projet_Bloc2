@@ -142,10 +142,6 @@
     </ClInclude>
     <ClInclude Include="Address.h" />
     <ClInclude Include="AddressRepository.h" />
-    <ClInclude Include="address_Client.h" />
-    <ClInclude Include="address_ClientRepository.h" />
-    <ClInclude Include="address_Staff.h" />
-    <ClInclude Include="address_StaffRepository.h" />
     <ClInclude Include="Article.h" />
     <ClInclude Include="ArticleRepository.h" />
     <ClInclude Include="Cart.h">
