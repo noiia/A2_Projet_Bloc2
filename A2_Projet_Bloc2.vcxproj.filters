@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Entity">
+      <UniqueIdentifier>{91b26eb1-6605-40a4-9114-6579e88b869a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Repositories">
+      <UniqueIdentifier>{6ebe223d-7a74-4b44-885c-5556e634ccc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -46,6 +52,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="AddArticleToCommand.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InstallmentPayement.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientFinder.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,17 +98,53 @@
     <ClInclude Include="AddArticleToCommand.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="InstallmentPayement.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="Article.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="ArticleRepository.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientRepository.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Client.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Staff.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="CHistory.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ArticleRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="CHistoryRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="StaffRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressesRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="Address.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="AAtoCRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="CartRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Fichiers d%27en-tête\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientFinder.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientFinderRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
     </ClInclude>
     <ClInclude Include="Staff.h">
       <Filter>Fichiers d%27en-tête</Filter>

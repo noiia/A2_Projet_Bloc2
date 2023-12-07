@@ -367,8 +367,6 @@ namespace A2ProjetBloc2 {
 			//
 			// paramètre si modification de profil existant
 			//
-			System::Diagnostics::Debug::WriteLine("before if else " + this->addOrEdit);
-			System::Diagnostics::Debug::WriteLine("before if else " + addOrEdit);
 			if (this->addOrEdit) {
 				System::Diagnostics::Debug::WriteLine(this->addOrEdit);
 				this->Title->Text = L"Modifier l'article";
@@ -432,7 +430,6 @@ namespace A2ProjetBloc2 {
 	}
 private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Close();
-	//this->Dispose();
 }
 private: System::Void BtnAddArticle_Click(System::Object^ sender, System::EventArgs^ e) {
 	// la ligne suivante permet de paramétrer le type de convention d'écriture des nombre à virgule avec un point à la place de la virgule
