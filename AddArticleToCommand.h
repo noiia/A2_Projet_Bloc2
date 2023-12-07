@@ -32,7 +32,8 @@ namespace A2ProjetBloc2 {
 		Command^ command;
 		bool clicked = false;
 		int research = 0;
-		System::Threading::Mutex^ reloadMutex;
+	private: System::Windows::Forms::Label^ LbOr;
+		   System::Threading::Mutex^ reloadMutex;
 
 	public:
 		AddArticleToCommand(BDD^ mabdd,Command^ command)
@@ -172,6 +173,7 @@ namespace A2ProjetBloc2 {
 			   this->DGVArticle = (gcnew System::Windows::Forms::DataGridView());
 			   this->LbRefSelected = (gcnew System::Windows::Forms::Label());
 			   this->NudQuantity = (gcnew System::Windows::Forms::NumericUpDown());
+			   this->LbOr = (gcnew System::Windows::Forms::Label());
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVArticle))->BeginInit();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudQuantity))->BeginInit();
 			   this->SuspendLayout();
@@ -223,7 +225,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->TboxArticleName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->TboxArticleName->Location = System::Drawing::Point(40, 129);
+			   this->TboxArticleName->Location = System::Drawing::Point(40, 146);
 			   this->TboxArticleName->Name = L"TboxArticleName";
 			   this->TboxArticleName->Size = System::Drawing::Size(315, 26);
 			   this->TboxArticleName->TabIndex = 24;
@@ -233,7 +235,7 @@ namespace A2ProjetBloc2 {
 			   this->LbArticleName->AutoSize = true;
 			   this->LbArticleName->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->LbArticleName->Location = System::Drawing::Point(36, 107);
+			   this->LbArticleName->Location = System::Drawing::Point(36, 124);
 			   this->LbArticleName->Name = L"LbArticleName";
 			   this->LbArticleName->Size = System::Drawing::Size(126, 19);
 			   this->LbArticleName->TabIndex = 23;
@@ -302,13 +304,23 @@ namespace A2ProjetBloc2 {
 			   this->NudQuantity->Size = System::Drawing::Size(315, 20);
 			   this->NudQuantity->TabIndex = 32;
 			   // 
+			   // LbOr
+			   // 
+			   this->LbOr->AutoSize = true;
+			   this->LbOr->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->LbOr->Location = System::Drawing::Point(179, 87);
+			   this->LbOr->Name = L"LbOr";
+			   this->LbOr->Size = System::Drawing::Size(32, 19);
+			   this->LbOr->TabIndex = 42;
+			   this->LbOr->Text = L"Ou";
+			   // 
 			   // AddArticleToCommand
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->ClientSize = System::Drawing::Size(955, 571);
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->MaximizeBox = false;
+			   this->Controls->Add(this->LbOr);
 			   this->Controls->Add(this->NudQuantity);
 			   this->Controls->Add(this->LbRefSelected);
 			   this->Controls->Add(this->DGVArticle);
@@ -321,7 +333,9 @@ namespace A2ProjetBloc2 {
 			   this->Controls->Add(this->TboxReferences);
 			   this->Controls->Add(this->LbQuantity);
 			   this->Controls->Add(this->LbReferences);
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			   this->MaximizeBox = false;
 			   this->Name = L"AddArticleToCommand";
 			   this->Text = L"AddArticleToCommand";
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVArticle))->EndInit();

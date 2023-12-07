@@ -59,33 +59,34 @@ namespace A2ProjetBloc2 {
 				reloadMutex->WaitOne();
 				System::Collections::Generic::List<Command^>^ articles = cartRepository->getArticle();
 				this->DGVCart->Rows->Clear();
-				for each (Command ^ c in articles) {
+				for each (Command ^ a in articles) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
 
 					DataGridViewTextBoxCell^ dgvcReference = gcnew DataGridViewTextBoxCell();
-					dgvcReference->Value = c->getReference();
+					dgvcReference->Value = a->getReference();
 					dgvr->Cells->Add(dgvcReference);
-					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
-					dgvcIdArticle->Value = c->getIdArticle();
-					dgvr->Cells->Add(dgvcIdArticle);
 					DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
-					dgvcQuantity->Value = c->getQuantity();
+					dgvcQuantity->Value = a->getQuantity();
 					dgvr->Cells->Add(dgvcQuantity);
 
 					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
+					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
 					Decimal^ PriceATI = Decimal(0);
-					for each (Article ^ art in c->getArticle())
+					String^ Name;
+					for each (Article ^ art in a->getArticle()) {
 						PriceATI = (Decimal^)art->getPriceATI();
+						Name = (String^)art->getName();
+					}
 					dgvcPriceATI->Value = PriceATI + "";
+					dgvcName->Value = Name;
+					dgvr->Cells->Add(dgvcPriceATI);
+					dgvr->Cells->Add(dgvcName);
 
 					DataGridViewTextBoxCell^ dgvcTotal = gcnew DataGridViewTextBoxCell();
-					dgvcTotal->Value = c->getQuantity() * Convert::ToSingle(PriceATI);
+					dgvcTotal->Value = a->getQuantity() * Convert::ToSingle(PriceATI);
 					dgvr->Cells->Add(dgvcTotal);
 
-					
-
-
-					dgvr->Tag = c;
+					dgvr->Tag = a;
 					this->DGVCart->Rows->Add(dgvr);
 
 				}
@@ -241,6 +242,7 @@ namespace A2ProjetBloc2 {
 		Command^ addArticle = gcnew Command();
 		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle);
 		formAddArticleToCommand->ShowDialog();
+		System::Diagnostics::Debug::WriteLine(addArticle);
 		cartRepository->insertArticle(addArticle);
 		this->reload();
 	}

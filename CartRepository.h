@@ -26,13 +26,12 @@ public:
 				cmd->setReference((String^)row["Reference"]);
 				cmd->setIdArticle((String^)row["ID_Article"]);
 				cmd->setQuantity((int)row["QuantityArticle"]);
-
-				//TODO addresse livraison + factu
 				list->Add(cmd);
 			}
 
 			if (!row->IsNull("PriceATI")) {
 				Article^ article = gcnew Article();
+				article->setName((String^)row["NameArticle"]);
 				article->setPriceATI((Decimal^)row["PriceATI"]);
 				cmd->getArticle()->Add(article);
 			}
