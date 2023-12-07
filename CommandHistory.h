@@ -3,6 +3,8 @@
 #include <thread>
 #include <mutex>
 #include "BDD.h"
+#include "ClientFinder.h"
+#include "CommandAddress.h"
 #include "Cart.h"
 #include "CHistoryRepository.h"
 
@@ -228,6 +230,8 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(9, 17);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			   this->MaximizeBox = false;
 			   this->AutoSize = true;
 			   this->ClientSize = System::Drawing::Size(1100, 700);
 			   this->Controls->Add(this->BtnAddCommand);
@@ -248,8 +252,16 @@ namespace A2ProjetBloc2 {
 		   }
 #pragma endregion
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
-		Cart^ cartForm = gcnew Cart(mabdd);
-		cartForm->ShowDialog();
+		Command^ addClient = gcnew Command();
+		ClientFinder^ clientFinderForm = gcnew ClientFinder(mabdd, addClient);
+		clientFinderForm->ShowDialog();
+		int tempo = addClient->getIdClient();
+		if (tempo > 0) {
+			CommandAddress^ cartCommandAddress = gcnew CommandAddress(mabdd, addClient);
+			cartCommandAddress->ShowDialog();
+			Cart^ cartForm = gcnew Cart(mabdd, addClient);
+			cartForm->ShowDialog();
+		}
 	}
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();

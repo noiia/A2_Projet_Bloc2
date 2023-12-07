@@ -319,6 +319,8 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			   this->MaximizeBox = false;
 			   this->ClientSize = System::Drawing::Size(955, 571);
 			   this->Controls->Add(this->LbOr);
 			   this->Controls->Add(this->NudQuantity);
@@ -382,7 +384,7 @@ namespace A2ProjetBloc2 {
 	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->command->setIdArticle(this->clickedArticle->getIdArticle());
-		this->command->setReference("");
+		this->command->setReference("0sfesf");
 		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
 		this->Close();
 	}

@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddAddressToCommand.cpp" />
     <ClCompile Include="AddArticle.cpp" />
     <ClCompile Include="AddArticleToCommand.cpp" />
     <ClCompile Include="AddClient.cpp" />
@@ -131,6 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAtoCRepository.h" />
+    <ClInclude Include="AddAddressToCommand.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddAddressToCommandRepository.h" />
     <ClInclude Include="AddArticle.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -193,6 +198,9 @@
     <Image Include="Assets\1486504331-burn-fire-flame-danger-burning-hot_81317.ico" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddAddressToCommand.resx">
+      <DependentUpon>AddAddressToCommand.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddArticle.resx">
       <DependentUpon>AddArticle.h</DependentUpon>
     </EmbeddedResource>
