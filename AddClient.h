@@ -511,12 +511,12 @@ namespace A2ProjetBloc2 {
 
 	private: System::Void CbCompany_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		if (CbCompany->Checked) {
+			TbFirstName->Enabled = false;
 			DtpBirthdate->Enabled = false;
-			this->client->setTypeClient("Entreprise");
 		}
-		else {
+		else if (CbCompany->Checked == false) {
+			TbFirstName->Enabled = true;
 			DtpBirthdate->Enabled = true;
-			this->client->setTypeClient("Particulier");
 		}
 	}
 	private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -525,11 +525,22 @@ namespace A2ProjetBloc2 {
 	private: System::Void AddClient_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void BtnAddClient_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->client->setFirstName(this->TbFirstName->Text);
-		this->client->setLastName(this->TbLastName->Text);
-		String^ dateString = this->DtpBirthdate->Value.ToString("yyyy-MM-dd");
-		DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-		this->client->setBirthday(Birthday);
+		if (CbCompany->Checked != false) {
+			this->client->setTypeClient("Entreprise");
+			this->client->setLastName(this->TbLastName->Text);
+		}
+		else
+		{
+			DtpBirthdate->Enabled = true;
+			TbFirstName->Enabled = true;	
+			this->client->setFirstName(this->TbFirstName->Text);
+			this->client->setLastName(this->TbLastName->Text);
+			this->client->setTypeClient("Particulier");
+			String^ dateString = this->DtpBirthdate->Value.ToString("yyyy-MM-dd");
+			DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+			this->client->setBirthday(Birthday);
+		}
+
 		this->Close();
 		
 	}

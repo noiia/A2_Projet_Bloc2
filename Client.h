@@ -1,5 +1,6 @@
 #pragma once
 #include "address.h"
+
 using namespace System;
 using namespace System::Collections::Generic;
 
@@ -15,6 +16,7 @@ private:
 	String^ TypeClient;
 	bool del;
 	List<Address^>^ address = gcnew List<Address^>();
+
 
 
 public:
@@ -56,5 +58,7 @@ public:
 	}
 	List<Address^>^ getAddress() {
 		return this->address;
+	}
+
 	}
 };

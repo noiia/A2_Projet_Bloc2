@@ -86,7 +86,6 @@ namespace A2ProjetBloc2 {
 					DateTime^ birthday = c->getBirthday();
 					dgvcBirthDay->Value = birthday->ToString("yyyy-MM-dd");
 					dgvr->Cells->Add(dgvcBirthDay);
-
 					DataGridViewTextBoxCell^ dgvcTypeClient = gcnew DataGridViewTextBoxCell();
 					dgvcTypeClient->Value = c->getTypeClient();
 					dgvr->Cells->Add(dgvcTypeClient);
