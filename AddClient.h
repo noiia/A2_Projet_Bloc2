@@ -233,17 +233,19 @@ namespace A2ProjetBloc2 {
 			this->TbLastName->Size = System::Drawing::Size(315, 27);
 			this->TbLastName->TabIndex = 7;
 			// 
-			// CbCompany
-			// 
+			  // CbCompany
+			  // 
 			this->CbCompany->AutoSize = true;
-			this->CbCompany->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->CbCompany->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->CbCompany->Location = System::Drawing::Point(59, 280);
+			this->CbCompany->Location = System::Drawing::Point(79, 345);
+			this->CbCompany->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->CbCompany->Name = L"CbCompany";
-			this->CbCompany->Size = System::Drawing::Size(215, 23);
+			this->CbCompany->Size = System::Drawing::Size(249, 29);
 			this->CbCompany->TabIndex = 31;
 			this->CbCompany->Text = L"etes-vous une entreprise";
 			this->CbCompany->UseVisualStyleBackColor = true;
+			this->CbCompany->CheckedChanged += gcnew System::EventHandler(this, &AddClient::CbCompany_CheckedChanged);
 			// 
 			// DtpBirthdate
 			// 
@@ -506,6 +508,17 @@ namespace A2ProjetBloc2 {
 
 		}
 #pragma endregion
+
+	private: System::Void CbCompany_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (CbCompany->Checked) {
+			DtpBirthdate->Enabled = false;
+			this->client->setTypeClient("Entreprise");
+		}
+		else {
+			DtpBirthdate->Enabled = true;
+			this->client->setTypeClient("Particulier");
+		}
+	}
 	private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
@@ -518,6 +531,7 @@ namespace A2ProjetBloc2 {
 		DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 		this->client->setBirthday(Birthday);
 		this->Close();
+		
 	}
 	};
 }

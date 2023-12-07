@@ -54,7 +54,7 @@ public:
     }
 
     void insertClient(Client^ client) {
-        bdd->executeInsert("INSERT INTO [Client] (ID_Client, FirstName, LastName, TypeClient, Birthday, Del) VALUES ('" + client->getID_Client() + "','" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "');", 1);
+        bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Birthday, Del) VALUES ('" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "');", 1);
 		//for each (Address ^ a in client->getAddress())
             //bdd->executeInsert("INSERT INTO [Address] (ID_Address, Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + a->getID_Address() + "','" + a->getNumber() + "', '" + a->getAddition() + "', '" + a->getNameStreet() + "', '" + a->getNameCity() + "', '" + a->getPostalCode() + false + "')", 1);
     }
