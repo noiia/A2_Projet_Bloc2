@@ -122,7 +122,6 @@
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="AddStaff.cpp" />
     <ClCompile Include="BDD.cpp" />
-    <ClCompile Include="ClientFinder.cpp" />
     <ClCompile Include="InstallmentPayement.cpp" />
     <ClCompile Include="ListClient.cpp" />
     <ClCompile Include="CommandHistory.cpp" />
@@ -159,10 +158,6 @@
     <ClInclude Include="CHistory.h" />
     <ClInclude Include="CHistoryRepository.h" />
     <ClInclude Include="Client.h" />
-    <ClInclude Include="ClientFinder.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="ClientFinderRepository.h" />
     <ClInclude Include="ClientRepository.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CartRepository.h" />
@@ -215,9 +210,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddStaff.resx">
       <DependentUpon>AddStaff.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientFinder.resx">
-      <DependentUpon>ClientFinder.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListArticles.resx">
       <DependentUpon>ListArticles.h</DependentUpon>

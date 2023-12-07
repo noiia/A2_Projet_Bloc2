@@ -84,9 +84,8 @@ namespace A2ProjetBloc2 {
 
 					DataGridViewTextBoxCell^ dgvcPaiement = gcnew DataGridViewTextBoxCell();
 					Decimal totalPaye = Decimal(0);
-					for each (InstallmentPayment ^ ip in command->getPayments()) {
-						totalPaye = Decimal::Add(totalPaye, ip->getAmount());
-					}
+					for each (InstallmentPayment ^ ip in command->getPayments())
+						totalPaye = Decimal::Add(totalPaye,ip->getAmount());
 					dgvcPaiement->Value = totalPaye + "";
 					dgvr->Cells->Add(dgvcPaiement);
 					/*
