@@ -9,27 +9,29 @@ namespace A2ProjetBloc2 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Description r sum e de AddClient
-	/// </summary>
+	
 	public ref class AddClient : public System::Windows::Forms::Form
 	{
-	private:
 		Client^ client;
+		bool addOrEdit;
+
 	public:
-		AddClient(Client^ client)
+		AddClient(Client^ client, bool addOrEdit)
 		{
 			this->client = client;
+			this->addOrEdit = addOrEdit;
+
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
-		}
+
+			System::Diagnostics::Debug::WriteLine("add article " + this->addOrEdit);
+			if (addOrEdit) {
+				this->TbFirstName->Text = client->getFirstName();
+				this->TbLastName->Text = client->getLastName(); 
+				}
+	}
 
 	protected:
-		/// <summary>
-		/// Nettoyage des ressources utilis es.
-		/// </summary>
+		
 		~AddClient() override
 		{
 			if (components)
@@ -375,9 +377,27 @@ namespace A2ProjetBloc2 {
 			   this->TbPostalCodeDelivery->Name = L"TbPostalCodeDelivery";
 			   this->TbPostalCodeDelivery->Size = System::Drawing::Size(419, 30);
 			   this->TbPostalCodeDelivery->TabIndex = 46;
+			   //
+			   // paramètre si modification de profil existant
+			   //
+			   System::Diagnostics::Debug::WriteLine("before if else " + this->addOrEdit);
+			   System::Diagnostics::Debug::WriteLine("before if else " + addOrEdit);
+			   if (this->addOrEdit) {
+				   System::Diagnostics::Debug::WriteLine(this->addOrEdit);
+				   this->Title->Text = L"Modicifation info Client";
+				   this->BtnAddClient->Text = L"Valider";
+				   this->BtnAddClient->Location = System::Drawing::Point(112, 480);
+				   this->BtnCancel->Visible = false;
+			   }
+			   else {
+				   this->Title->Text = L"Ajouter un nouveau Client";
+				   this->BtnAddClient->Text = L"Ajouter";
+			   }
 			   // 
 			   // AddClient
 			   // 
+			   this->MaximizeBox = false;
+			   this->ControlBox = false;
 			   this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->ClientSize = System::Drawing::Size(1171, 746);
@@ -411,7 +431,6 @@ namespace A2ProjetBloc2 {
 			   this->MaximizeBox = false;
 			   this->Name = L"AddClient";
 			   this->Text = L"AddClient";
-			   this->Load += gcnew System::EventHandler(this, &AddClient::AddClient_Load);
 			   this->ResumeLayout(false);
 			   this->PerformLayout();
 
@@ -431,8 +450,7 @@ namespace A2ProjetBloc2 {
 	private: System::Void BtnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Close();
 	}
-	private: System::Void AddClient_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
+	
 	private: System::Void BtnAddClient_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->client->setFirstName(this->TbFirstName->Text);
 		this->client->setLastName(this->TbLastName->Text);

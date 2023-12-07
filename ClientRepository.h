@@ -14,6 +14,7 @@ ref class ClientRepository
 private:
     BDD^ bdd;
     Object^ test = DBNull::Value;
+    
 public:
     ClientRepository(BDD^ bdd) :bdd(bdd) {
     }
@@ -24,27 +25,27 @@ public:
 
         for each (DataRow ^ row in ds->Tables[0]->Rows)
         {
-            Client^ c = gcnew Client();
-            c->setID_Client((int)row[0]);
-            c->setFirstName((String^)row[1]);
-            c->setLastName((String^)row[2]);
-            c->setTypeClient((String^)row[3]);
+            Client^ client = gcnew Client();
+            client->setID_Client((int)row[0]);
+            client->setFirstName((String^)row[1]);
+            client->setLastName((String^)row[2]);
+            client->setTypeClient((String^)row[3]);
             if (row[4] == test) {
             }
             else {
-                c->setBirthday((DateTime^)row[4]);
+                client->setBirthday((DateTime^)row[4]);
             }
-            list->Add(c);
+            list->Add(client);
 
         }
         return list;
     }
     void editClient(Client^ client) {
-        bdd->executeNonQuery("UPDATE [Client] SET FirstName = '" + client->getFirstName() + "' WHERE [ID_Client] = " + client->getID_Client());
+        bdd->executeNonQuery("UPDATE [Client] SET FirstName = '" + client->getFirstName() + "', LastName = '" + client->getLastName() +"', BirthDay = '" + client->getBirthday() +"', TypeClient ='" + client->getTypeClient() +"', Del = '" + false +"' WHERE [ID_Client] = '" + client->getID_Client() + "'");
     }
 
-    void deleteClient(Client^ client) {
-        bdd->executeNonQuery("UPDATE [Client] SET del = true WHERE [ID_Client] = " + client->getID_Client());
+    void deleteClient(Client^ client, int delOrRestore) {
+        bdd->executeNonQuery("UPDATE [Client] SET Del = " + delOrRestore + " WHERE [ID_Client] = '" + client->getID_Client() + "'");
     }
     void insertClient(Client^ client) {
         bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Birthday, Del) VALUES ('" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday()->ToString("yyyy-MM-dd") + "','" + false + "')", 1);

@@ -121,7 +121,6 @@
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="AddStaff.cpp" />
     <ClCompile Include="BDD.cpp" />
-    <ClCompile Include="ClientDetails.cpp" />
     <ClCompile Include="ListClient.cpp" />
     <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="ListStaff.cpp" />

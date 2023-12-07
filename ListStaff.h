@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -17,7 +17,7 @@ namespace A2ProjetBloc2 {
 	using namespace System::Threading;
 
 	/// <summary>
-	/// Description résumée de ListStaff
+	/// Description rï¿½sumï¿½e de ListStaff
 	/// </summary>
 	public ref class ListStaff : public System::Windows::Forms::Form
 	{
@@ -33,12 +33,12 @@ namespace A2ProjetBloc2 {
 
 
 	private: System::Windows::Forms::Button^ BtnDelete;
-		  
+
 
 	public:
 		ListStaff(BDD^ mabdd)
 		{
-			this->mabdd = mabdd; 
+			this->mabdd = mabdd;
 			InitializeComponent();
 
 			reloadMutex = gcnew System::Threading::Mutex();
@@ -54,9 +54,9 @@ namespace A2ProjetBloc2 {
 			dgvtbcHiringDate->Name = "Date d'embauche";
 			this->DGVSearchStaff->Columns->Add(dgvtbcHiringDate);
 			DataGridViewTextBoxColumn^ dgvtbcSupervisor = gcnew DataGridViewTextBoxColumn();
-			dgvtbcSupervisor->Name = "Supérieur hiérarchique";
+			dgvtbcSupervisor->Name = "SupÃ©rieur hiÃ©rarchique";
 			this->DGVSearchStaff->Columns->Add(dgvtbcSupervisor);
-			
+
 			staffRepository = gcnew StaffRepository(mabdd);
 			this->reload();
 		}
@@ -111,7 +111,7 @@ namespace A2ProjetBloc2 {
 
 	protected:
 		/// <summary>
-		/// Nettoyage des ressources utilisées.
+		/// Nettoyage des ressources utilisï¿½es.
 		/// </summary>
 		~ListStaff()
 		{
@@ -127,14 +127,14 @@ namespace A2ProjetBloc2 {
 
 	private:
 		/// <summary>
-		/// Variable nécessaire au concepteur.
+		/// Variable nï¿½cessaire au concepteur.
 		/// </summary>
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette méthode avec l'éditeur de code.
+		/// Mï¿½thode requise pour la prise en charge du concepteur - ne modifiez pas
+		/// le contenu de cette mï¿½thode avec l'ï¿½diteur de code.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -208,7 +208,7 @@ namespace A2ProjetBloc2 {
 			this->CBoxDeletedLines->Name = L"CBoxDeletedLines";
 			this->CBoxDeletedLines->Size = System::Drawing::Size(229, 24);
 			this->CBoxDeletedLines->TabIndex = 29;
-			this->CBoxDeletedLines->Text = L"Afficher les lignes supprimés";
+			this->CBoxDeletedLines->Text = L"Afficher les lignes supprimÃ©s";
 			this->CBoxDeletedLines->UseVisualStyleBackColor = true;
 			this->CBoxDeletedLines->CheckedChanged += gcnew System::EventHandler(this, &ListStaff::CBoxDeletedLines_CheckedChanged);
 			// 
@@ -219,7 +219,7 @@ namespace A2ProjetBloc2 {
 			this->TitleListStaff->Name = L"TitleListStaff";
 			this->TitleListStaff->Size = System::Drawing::Size(241, 29);
 			this->TitleListStaff->TabIndex = 30;
-			this->TitleListStaff->Text = L"Liste des Employés";
+			this->TitleListStaff->Text = L"Liste des EmployÃ©s";
 			// 
 			// ListStaff
 			// 
@@ -260,7 +260,7 @@ namespace A2ProjetBloc2 {
 	}
 
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::Diagnostics::Debug::WriteLine(sharedS + " voilà s");
+		System::Diagnostics::Debug::WriteLine(sharedS + " voilÃ© s");
 		staffRepository->deleteStaff(sharedS, delOrRestore);
 		this->reload();
 	}
@@ -274,17 +274,17 @@ namespace A2ProjetBloc2 {
 		this->reload();
 		this->DGVSearchStaff->Rows[selected]->Selected = true;
 	}
-	
+
 	private: System::Void CBoxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
 	}
-		   	
+
 	private: System::Void DGVSearchStaff_RowEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-	if (e->RowIndex >= 0) {
-		DataGridViewRow^ sharedDgvrRow = DGVSearchStaff->Rows[e->RowIndex];
-		sharedS = (Staff^)sharedDgvrRow->Tag;
-		System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedS->ToString());
+		if (e->RowIndex >= 0) {
+			DataGridViewRow^ sharedDgvrRow = DGVSearchStaff->Rows[e->RowIndex];
+			sharedS = (Staff^)sharedDgvrRow->Tag;
+			System::Diagnostics::Debug::WriteLine("cliquÃ© sur " + sharedS->ToString());
+		}
 	}
-}
-};
+	};
 }

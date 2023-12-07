@@ -8,7 +8,7 @@ private:
 	String^ lastName;
 	String^ firstName;
 	DateTime^ hiringDate;
-	String^ ID_Supervisor;
+	int ID_Supervisor;
 	bool del;
 
 public:
@@ -39,10 +39,10 @@ public:
 		return this->hiringDate;
 	}
 
-	void setIdSupervisor(String^ ID_Supervisor) {
+	void setIdSupervisor(int ID_Supervisor) {
 		this->ID_Supervisor = ID_Supervisor;
 	}
-	String^ getIdSupervisor() {
+	int getIdSupervisor() {
 		return this->ID_Supervisor;
 	}
 

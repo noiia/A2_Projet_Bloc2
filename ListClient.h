@@ -4,7 +4,7 @@
 #include "BDD.h"
 #include "AddClient.h"
 #include "ClientRepository.h"
-#include "ClientDetails.h"
+
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -35,10 +35,10 @@ namespace A2ProjetBloc2 {
 		{
 			this->mabdd = mabdd;
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
+			
+
 			reloadMutex = gcnew System::Threading::Mutex();
+
 			DGVListClient->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			DataGridViewTextBoxColumn^ dgvtbcIdClient = gcnew DataGridViewTextBoxColumn();
 			dgvtbcIdClient->Name = "ID Client";
@@ -134,9 +134,6 @@ namespace A2ProjetBloc2 {
 	private: System::Windows::Forms::Button^ BtnModify;
 	private: System::Windows::Forms::Button^ BtnAddClient;
 	private: System::Windows::Forms::DataGridView^ DGVListClient;
-	protected:
-
-
 	private: System::Windows::Forms::Label^ Title;
 
 	private:
@@ -163,11 +160,12 @@ namespace A2ProjetBloc2 {
 			// 
 			// BtnModify
 			// 
-			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnModify->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModify->Location = System::Drawing::Point(691, 466);
+			this->BtnModify->Location = System::Drawing::Point(921, 574);
+			this->BtnModify->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnModify->Name = L"BtnModify";
-			this->BtnModify->Size = System::Drawing::Size(135, 48);
+			this->BtnModify->Size = System::Drawing::Size(180, 59);
 			this->BtnModify->TabIndex = 27;
 			this->BtnModify->Text = L"Modifier";
 			this->BtnModify->UseVisualStyleBackColor = true;
@@ -175,11 +173,12 @@ namespace A2ProjetBloc2 {
 			// 
 			// BtnAddClient
 			// 
-			this->BtnAddClient->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnAddClient->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnAddClient->Location = System::Drawing::Point(691, 114);
+			this->BtnAddClient->Location = System::Drawing::Point(921, 140);
+			this->BtnAddClient->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnAddClient->Name = L"BtnAddClient";
-			this->BtnAddClient->Size = System::Drawing::Size(135, 48);
+			this->BtnAddClient->Size = System::Drawing::Size(180, 59);
 			this->BtnAddClient->TabIndex = 26;
 			this->BtnAddClient->Text = L"Ajouter";
 			this->BtnAddClient->UseVisualStyleBackColor = true;
@@ -188,29 +187,33 @@ namespace A2ProjetBloc2 {
 			// DGVListClient
 			// 
 			this->DGVListClient->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVListClient->Location = System::Drawing::Point(26, 56);
+			this->DGVListClient->Location = System::Drawing::Point(35, 69);
+			this->DGVListClient->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->DGVListClient->Name = L"DGVListClient";
-			this->DGVListClient->Size = System::Drawing::Size(603, 526);
+			this->DGVListClient->Size = System::Drawing::Size(804, 647);
 			this->DGVListClient->TabIndex = 25;
+			this->DGVListClient->RowEnter += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListClient::DGVListClient_RowEnter);
 			// 
 			// Title
 			// 
 			this->Title->AutoSize = true;
-			this->Title->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->Title->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Title->Location = System::Drawing::Point(317, 9);
+			this->Title->Location = System::Drawing::Point(423, 11);
+			this->Title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Title->Name = L"Title";
-			this->Title->Size = System::Drawing::Size(201, 28);
+			this->Title->Size = System::Drawing::Size(202, 29);
 			this->Title->TabIndex = 24;
 			this->Title->Text = L"Liste des clients";
 			// 
 			// BtnDelete
 			// 
-			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnDelete->Location = System::Drawing::Point(690, 537);
+			this->BtnDelete->Location = System::Drawing::Point(920, 661);
+			this->BtnDelete->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->BtnDelete->Name = L"BtnDelete";
-			this->BtnDelete->Size = System::Drawing::Size(136, 45);
+			this->BtnDelete->Size = System::Drawing::Size(181, 55);
 			this->BtnDelete->TabIndex = 28;
 			this->BtnDelete->Text = L"Supprimer";
 			this->BtnDelete->UseVisualStyleBackColor = true;
@@ -219,9 +222,10 @@ namespace A2ProjetBloc2 {
 			// CBoxDeletedElements
 			// 
 			this->CBoxDeletedElements->AutoSize = true;
-			this->CBoxDeletedElements->Location = System::Drawing::Point(676, 425);
+			this->CBoxDeletedElements->Location = System::Drawing::Point(901, 523);
+			this->CBoxDeletedElements->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->CBoxDeletedElements->Name = L"CBoxDeletedElements";
-			this->CBoxDeletedElements->Size = System::Drawing::Size(173, 17);
+			this->CBoxDeletedElements->Size = System::Drawing::Size(215, 20);
 			this->CBoxDeletedElements->TabIndex = 29;
 			this->CBoxDeletedElements->Text = L"Afficher les éléments supprimés";
 			this->CBoxDeletedElements->UseVisualStyleBackColor = true;
@@ -229,9 +233,9 @@ namespace A2ProjetBloc2 {
 			// 
 			// ListClient
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(889, 623);
+			this->ClientSize = System::Drawing::Size(1185, 767);
 			this->Controls->Add(this->CBoxDeletedElements);
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
@@ -239,6 +243,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->DGVListClient);
 			this->Controls->Add(this->Title);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->MaximizeBox = false;
 			this->Name = L"ListClient";
 			this->Text = L"ListClient";
@@ -250,7 +255,7 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void BtnAddClient_Click(System::Object^ sender, System::EventArgs^ e) {
 		Client^ client = gcnew Client();
-		AddClient^ addClientForm = gcnew AddClient(client);
+		AddClient^ addClientForm = gcnew AddClient(client, false);
 		addClientForm->ShowDialog();
 		System::Diagnostics::Debug::WriteLine(client->ToString());
 		if (client->getTypeClient() == "Entreprise") {
@@ -263,28 +268,9 @@ namespace A2ProjetBloc2 {
 		this->reload();
 	}
 
-	private: System::Void DGVListClient_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		if (e->RowIndex >= 0) {
-			DataGridViewRow^ sharedDgvrRow = DGVListClient->Rows[e->RowIndex];
-			sharedC = (Client^)sharedDgvrRow->Tag;
-			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedC->ToString());
-		}
-	}
-
-		   //private: System::Void DGVListClient_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		   //	if (e->RowIndex >= 0) {
-		   //		DataGridViewRow^ sharedDgvrRow = DGVListClient->Rows[e->RowIndex];
-		   //		sharedC = (Client^)sharedDgvrRow->Tag;
-		   //		System::Diagnostics::Debug::WriteLine("Double-clic sur " + sharedC->ToString());
-		   //
-		   //		// Ouvrir le formulaire ClientDetails avec les données du client
-		   //		ClientDetails^ clientDetailsForm = gcnew ClientDetails(sharedC);
-		   //		clientDetailsForm->ShowDialog();
-		   //	}
-		   //}
-
+	
 	private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
-		AddClient^ formModifClient = gcnew AddClient(sharedC);
+		AddClient^ formModifClient = gcnew AddClient(sharedC, true);
 		formModifClient->ShowDialog();
 		clientRepository->editClient(sharedC);
 
@@ -294,12 +280,19 @@ namespace A2ProjetBloc2 {
 	}
 	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
 		System::Diagnostics::Debug::WriteLine(sharedC + " voilà c");
-		clientRepository->deleteClient(sharedC);
+		clientRepository->deleteClient(sharedC, delOrRestore);
 		this->reload();
 	}
 
 	private: System::Void CBoxDeletedElements_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
 	}
-	};
+	private: System::Void DGVListClient_RowEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		if (e->RowIndex >= 0) {
+			DataGridViewRow^ sharedDgvrRow = DGVListClient->Rows[e->RowIndex];
+			sharedC = (Client^)sharedDgvrRow->Tag;
+			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedC->ToString());
+		}
+	}
+};
 }
