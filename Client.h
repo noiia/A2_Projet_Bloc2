@@ -59,6 +59,4 @@ public:
 	List<Address^>^ getAddress() {
 		return this->address;
 	}
-
-	}
 };
