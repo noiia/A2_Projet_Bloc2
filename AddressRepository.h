@@ -33,10 +33,11 @@ public:
 		}
 		return list;
 	}
-	void editClient(Address^ address) {
-		bdd->executeNonQuery("UPDATE [Address] SET ID_Client = '" + address->getID_Address() + "', Number = '" + address->getNumber() + "', Addition = '" + address->getAddition() + "', NameStreet = '" + address->getNameStreet() +"', NameCity = '" + address->getNameCity() + "', PostalCode = '" + address->getPostalCode() + "', Del = '" + false + "' WHERE ID_Address = '" + address->getID_Address() + "'");
+	void editAddress(Address^ address) {
+		bdd->executeNonQuery("UPDATE [Address] SET Number = '" + address->getNumber() + "', Addition = '" + address->getAddition() + "', NameStreet = '" + address->getNameStreet() +"', NameCity = '" + address->getNameCity() + "', PostalCode = '" + address->getPostalCode() + "', Del = '" + false + "' WHERE ID_Address = '" + address->getID_Address() + "'");
 	}
+	
 	void insertAddress(Address^ address) {
-		bdd->executeInsert("INSERT INTO [Address] (ID_Address, Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getID_Address() + "','" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
+		bdd->executeInsert("INSERT INTO [Address] (Number, Addition, NameStreet , NameCity, PostalCode) VALUES('" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
 	}
 };

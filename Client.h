@@ -1,5 +1,8 @@
 #pragma once
+#include "address.h"
 using namespace System;
+using namespace System::Collections::Generic;
+
 
 ref class Client
 {
@@ -11,6 +14,7 @@ private:
 	DateTime^ Birthday;
 	String^ TypeClient;
 	bool del;
+	List<Address^>^ address = gcnew List<Address^>();
 
 
 public:
@@ -50,5 +54,7 @@ public:
 	bool getDel() {
 		return this->del;
 	}
-
+	List<Address^>^ getAddress() {
+		return this->address;
+	}
 };
