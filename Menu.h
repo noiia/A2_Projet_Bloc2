@@ -24,7 +24,7 @@ namespace A2ProjetBloc2 {
 	public ref class Menu : public System::Windows::Forms::Form
 	{
 		BDD^ mabdd;
-	public:
+		public:
 		Menu(BDD^ mabdd)
 		{
 			this->mabdd = mabdd;

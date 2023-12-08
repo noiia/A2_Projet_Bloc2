@@ -1,5 +1,7 @@
 #pragma once
+#include "address.h"
 using namespace System;
+using namespace System::Collections::Generic;
 
 ref class Staff
 {
@@ -10,6 +12,7 @@ private:
 	DateTime^ hiringDate;
 	int ID_Supervisor;
 	bool del;
+	List<Address^>^ addressStaff = gcnew List<Address^>();
 
 public:
 	void setIdStaff(int idStaff) {
@@ -51,6 +54,13 @@ public:
 	}
 	bool getDel() {
 		return this->del;
+	}
+
+	List<Address^>^ getAddressStaff() {
+		return this->addressStaff;
+	}
+	void addAddressDelivery(Address^ address) {
+		this->addressStaff->Add(address);
 	}
 
 	String^ ToString() override {

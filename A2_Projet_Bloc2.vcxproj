@@ -137,6 +137,8 @@
     <ClInclude Include="AddClient.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Address.h" />
+    <ClInclude Include="AddressRepository.h" />
     <ClInclude Include="Article.h" />
     <ClInclude Include="ArticleRepository.h" />
     <ClInclude Include="Cart.h">
