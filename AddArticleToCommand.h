@@ -240,7 +240,7 @@ namespace A2ProjetBloc2 {
 			   this->LbArticleName->Size = System::Drawing::Size(126, 19);
 			   this->LbArticleName->TabIndex = 23;
 			   this->LbArticleName->Text = L"Nom de l\'article";
-			   // 
+			   //  
 			   // LbPriceTxt
 			   // 
 			   this->LbPriceTxt->AutoSize = true;

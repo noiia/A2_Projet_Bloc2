@@ -25,7 +25,8 @@ namespace A2ProjetBloc2 {
 		Thread^ reloadThread;
 		String^ sharedSearchedValue = "";
 		String^ sharedSearchedValue2 = "";
-		Article^ clickedArticle;
+		Address^ clickedDeliveryAddress;
+		Address^ clickedBillingAddress;
 		Command^ command;
 		bool clicked = false;
 		int research = 0;
@@ -177,6 +178,7 @@ namespace A2ProjetBloc2 {
 		   /// </summary>
 		   void InitializeComponent(void)
 		   {
+			   System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddAddressToCommand::typeid));
 			   this->DGVDelivery = (gcnew System::Windows::Forms::DataGridView());
 			   this->DGVBilling = (gcnew System::Windows::Forms::DataGridView());
 			   this->label1 = (gcnew System::Windows::Forms::Label());
@@ -197,7 +199,7 @@ namespace A2ProjetBloc2 {
 			   this->DGVDelivery->Location = System::Drawing::Point(41, 70);
 			   this->DGVDelivery->Name = L"DGVDelivery";
 			   this->DGVDelivery->ReadOnly = true;
-			   this->DGVDelivery->Size = System::Drawing::Size(925, 136);
+			   this->DGVDelivery->Size = System::Drawing::Size(644, 136);
 			   this->DGVDelivery->TabIndex = 31;
 			   this->DGVDelivery->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &AddAddressToCommand::DGVDelivery_CellMouseDoubleClick);
 			   // 
@@ -209,7 +211,7 @@ namespace A2ProjetBloc2 {
 			   this->DGVBilling->Location = System::Drawing::Point(41, 304);
 			   this->DGVBilling->Name = L"DGVBilling";
 			   this->DGVBilling->ReadOnly = true;
-			   this->DGVBilling->Size = System::Drawing::Size(925, 145);
+			   this->DGVBilling->Size = System::Drawing::Size(644, 145);
 			   this->DGVBilling->TabIndex = 32;
 			   this->DGVBilling->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &AddAddressToCommand::DGVBilling_CellMouseDoubleClick);
 			   // 
@@ -218,7 +220,7 @@ namespace A2ProjetBloc2 {
 			   this->label1->AutoSize = true;
 			   this->label1->Font = (gcnew System::Drawing::Font(L"Orkney", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->label1->Location = System::Drawing::Point(191, 27);
+			   this->label1->Location = System::Drawing::Point(61, 25);
 			   this->label1->Name = L"label1";
 			   this->label1->Size = System::Drawing::Size(187, 23);
 			   this->label1->TabIndex = 33;
@@ -240,7 +242,7 @@ namespace A2ProjetBloc2 {
 			   this->label3->AutoSize = true;
 			   this->label3->Font = (gcnew System::Drawing::Font(L"Orkney", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->label3->Location = System::Drawing::Point(191, 270);
+			   this->label3->Location = System::Drawing::Point(61, 268);
 			   this->label3->Name = L"label3";
 			   this->label3->Size = System::Drawing::Size(207, 23);
 			   this->label3->TabIndex = 35;
@@ -251,7 +253,7 @@ namespace A2ProjetBloc2 {
 			   this->LbBillingRef->AutoSize = true;
 			   this->LbBillingRef->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->LbBillingRef->Location = System::Drawing::Point(105, 493);
+			   this->LbBillingRef->Location = System::Drawing::Point(105, 469);
 			   this->LbBillingRef->Name = L"LbBillingRef";
 			   this->LbBillingRef->Size = System::Drawing::Size(192, 19);
 			   this->LbBillingRef->TabIndex = 36;
@@ -261,30 +263,32 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->BtnAddAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->BtnAddAddress->Location = System::Drawing::Point(789, 509);
+			   this->BtnAddAddress->Location = System::Drawing::Point(513, 521);
 			   this->BtnAddAddress->Name = L"BtnAddAddress";
 			   this->BtnAddAddress->Size = System::Drawing::Size(144, 39);
 			   this->BtnAddAddress->TabIndex = 37;
 			   this->BtnAddAddress->Text = L"Ajouter";
 			   this->BtnAddAddress->UseVisualStyleBackColor = true;
+			   this->BtnAddAddress->Click += gcnew System::EventHandler(this, &AddAddressToCommand::BtnAddAddress_Click);
 			   // 
 			   // CBoxSameAddress
 			   // 
 			   this->CBoxSameAddress->AutoSize = true;
 			   this->CBoxSameAddress->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->CBoxSameAddress->Location = System::Drawing::Point(829, 248);
+			   this->CBoxSameAddress->Location = System::Drawing::Point(503, 270);
 			   this->CBoxSameAddress->Name = L"CBoxSameAddress";
 			   this->CBoxSameAddress->Size = System::Drawing::Size(137, 23);
 			   this->CBoxSameAddress->TabIndex = 38;
 			   this->CBoxSameAddress->Text = L"Même adresse";
 			   this->CBoxSameAddress->UseVisualStyleBackColor = true;
+			   this->CBoxSameAddress->CheckedChanged += gcnew System::EventHandler(this, &AddAddressToCommand::CBoxSameAddress_CheckedChanged);
 			   // 
 			   // AddAddressToCommand
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->ClientSize = System::Drawing::Size(998, 584);
+			   this->ClientSize = System::Drawing::Size(722, 584);
 			   this->Controls->Add(this->CBoxSameAddress);
 			   this->Controls->Add(this->BtnAddAddress);
 			   this->Controls->Add(this->LbBillingRef);
@@ -293,8 +297,9 @@ namespace A2ProjetBloc2 {
 			   this->Controls->Add(this->label1);
 			   this->Controls->Add(this->DGVBilling);
 			   this->Controls->Add(this->DGVDelivery);
+			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			   this->Name = L"AddAddressToCommand";
-			   this->Text = L"AddAddressToCommand";
+			   this->Text = L"Adresses";
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVDelivery))->EndInit();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVBilling))->EndInit();
 			   this->ResumeLayout(false);
@@ -303,8 +308,54 @@ namespace A2ProjetBloc2 {
 		   }
 #pragma endregion
 	private: System::Void DGVDelivery_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+		if (e->RowIndex >= 0) {
+			DataGridViewRow^ sharedDgvrRow = DGVDelivery->Rows[e->RowIndex];
+			clickedDeliveryAddress = (Address^)sharedDgvrRow->Tag;
+			this->LbDeliveryRef->Text = "Référence sélectionnée : " + clickedDeliveryAddress->getNumber() + " " + clickedDeliveryAddress->getNameStreet() + " " + clickedDeliveryAddress->getNameCity() + " " + clickedDeliveryAddress->getPostalCode() + " " + clickedDeliveryAddress->getAddition();
+			clicked = true;
+			if (this->CBoxSameAddress->Checked) {
+				this->LbBillingRef->Text = this->LbDeliveryRef->Text;
+			}
+		}
 	}
 	private: System::Void DGVBilling_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+		if (e->RowIndex >= 0) {
+			DataGridViewRow^ sharedDgvrRow = DGVBilling->Rows[e->RowIndex];
+			clickedBillingAddress = (Address^)sharedDgvrRow->Tag;
+			this->LbBillingRef->Text = "Référence sélectionnée : " + clickedBillingAddress->getNumber() + " " + clickedBillingAddress->getNameStreet() + " " + clickedBillingAddress->getNameCity() + " " + clickedBillingAddress->getPostalCode()+ " " + clickedBillingAddress->getAddition();
+			clicked = true;
+		}
 	}
-	};
+	private: System::Void CBoxSameAddress_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (this->CBoxSameAddress->Checked) {
+			this->DGVBilling->Enabled = false;
+			this->LbBillingRef->Text = this->LbDeliveryRef->Text;
+		}
+		else {
+			this->DGVBilling->Enabled = true;
+		}
+	}
+private: System::Void BtnAddAddress_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->command->setNumberDelivery(clickedDeliveryAddress->getNumber());
+	this->command->setNameStreetDelivery(clickedDeliveryAddress->getNameStreet());
+	this->command->setNameCityDelivery(clickedDeliveryAddress->getNameCity());
+	this->command->setPostalCodeDelivery(clickedDeliveryAddress->getPostalCode());
+	this->command->setAdditionDelivery(clickedDeliveryAddress->getAddition());
+	if (!this->CBoxSameAddress->Checked) {
+		this->command->setNumberBilling(clickedBillingAddress->getNumber());
+		this->command->setNameStreetBilling(clickedBillingAddress->getNameStreet());
+		this->command->setNameCityBilling(clickedBillingAddress->getNameCity());
+		this->command->setPostalCodeBilling(clickedBillingAddress->getPostalCode());
+		this->command->setAdditionBilling(clickedBillingAddress->getAddition());
+	}
+	else {
+		this->command->setNumberBilling(clickedDeliveryAddress->getNumber());
+		this->command->setNameStreetBilling(clickedDeliveryAddress->getNameStreet());
+		this->command->setNameCityBilling(clickedDeliveryAddress->getNameCity());
+		this->command->setPostalCodeBilling(clickedDeliveryAddress->getPostalCode());
+		this->command->setAdditionBilling(clickedDeliveryAddress->getAddition());
+	}
+	this->Close();
+}
+};
 }

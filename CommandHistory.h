@@ -6,6 +6,7 @@
 #include "ClientFinder.h"
 #include "AddAddressToCommand.h"
 #include "Cart.h"
+#include "Command.h"
 #include "CHistoryRepository.h"
 
 namespace A2ProjetBloc2 {
@@ -26,6 +27,7 @@ namespace A2ProjetBloc2 {
 		BDD^ mabdd;
 		bool delOrRestore;
 		CHistory^ sharedComHist;
+		Command^ addClient
 		CHistoryRepository^ cHistoryRepository;
 		System::Threading::Mutex^ reloadMutex;
 		System::Windows::Forms::CheckBox^ CboxDeletedLines;
@@ -250,18 +252,27 @@ namespace A2ProjetBloc2 {
 			   this->PerformLayout();
 
 		   }
+		   
 #pragma endregion
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
-		Command^ addClient = gcnew Command();
+		addClient = gcnew Command();
 		ClientFinder^ clientFinderForm = gcnew ClientFinder(mabdd, addClient);
 		clientFinderForm->ShowDialog();
 		int tempo = addClient->getIdClient();
 		if (tempo > 0) {
 			AddAddressToCommand^ cartCommandAddress = gcnew AddAddressToCommand(mabdd, addClient);
 			cartCommandAddress->ShowDialog();
+			System::Diagnostics::Debug::WriteLine(addClient->getNameCityDelivery());
 			Cart^ cartForm = gcnew Cart(mabdd, addClient);
 			cartForm->ShowDialog();
 		}
+	}
+	String^ generateCommandReference() {
+		addClient->getFirstNameClient();
+		addClient->getLastNameClient();
+		//addClient->getOrderDate();
+		addClient->getNameCityDelivery();
+
 	}
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
