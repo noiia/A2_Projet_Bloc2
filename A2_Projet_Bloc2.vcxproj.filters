@@ -60,6 +60,9 @@
     <ClCompile Include="ClientFinder.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="AddAddressToCommand.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -146,6 +149,15 @@
     <ClInclude Include="ClientFinderRepository.h">
       <Filter>Fichiers d%27en-tête\Repositories</Filter>
     </ClInclude>
+    <ClInclude Include="AddAddressToCommand.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressToCommandRepository.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandAddress.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\logo_flamme.jpg">
@@ -157,5 +169,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BDDCreations.sql" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

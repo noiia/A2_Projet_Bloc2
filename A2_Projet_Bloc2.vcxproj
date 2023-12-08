@@ -136,7 +136,6 @@
     <ClInclude Include="AddAddressToCommand.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="AddAddressToCommandRepository.h" />
     <ClInclude Include="AddArticle.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -148,6 +147,7 @@
     </ClInclude>
     <ClInclude Include="Address.h" />
     <ClInclude Include="AddressesRepository.h" />
+    <ClInclude Include="AddressToCommandRepository.h" />
     <ClInclude Include="Article.h" />
     <ClInclude Include="ArticleRepository.h" />
     <ClInclude Include="Cart.h">

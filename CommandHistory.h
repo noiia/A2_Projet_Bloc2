@@ -4,7 +4,7 @@
 #include <mutex>
 #include "BDD.h"
 #include "ClientFinder.h"
-#include "CommandAddress.h"
+#include "AddAddressToCommand.h"
 #include "Cart.h"
 #include "CHistoryRepository.h"
 
@@ -257,8 +257,8 @@ namespace A2ProjetBloc2 {
 		clientFinderForm->ShowDialog();
 		int tempo = addClient->getIdClient();
 		if (tempo > 0) {
-		//CommandAddress^ cartCommandAddress = gcnew CommandAddress(mabdd, addClient);
-		//cartCommandAddress->ShowDialog();
+			AddAddressToCommand^ cartCommandAddress = gcnew AddAddressToCommand(mabdd, addClient);
+			cartCommandAddress->ShowDialog();
 			Cart^ cartForm = gcnew Cart(mabdd, addClient);
 			cartForm->ShowDialog();
 		}
