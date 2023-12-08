@@ -27,7 +27,7 @@ namespace A2ProjetBloc2 {
 		BDD^ mabdd;
 		bool delOrRestore;
 		CHistory^ sharedComHist;
-		Command^ addClient
+		Command^ addClient;
 		CHistoryRepository^ cHistoryRepository;
 		System::Threading::Mutex^ reloadMutex;
 		System::Windows::Forms::CheckBox^ CboxDeletedLines;
@@ -272,7 +272,9 @@ namespace A2ProjetBloc2 {
 		addClient->getLastNameClient();
 		//addClient->getOrderDate();
 		addClient->getNameCityDelivery();
-
+		// ajouter le numéro incrémentiel de la commande
+		String^ generatedValue;
+		return generatedValue;
 	}
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
