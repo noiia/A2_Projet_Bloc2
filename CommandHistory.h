@@ -254,6 +254,11 @@ namespace A2ProjetBloc2 {
 		   }
 		   
 #pragma endregion
+	String^ generateCommandReference() {
+		// ajouter le numéro incrémentiel de la commande
+		String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + /*addClient->getOrderDate()*/ "" + addClient->getNameCityDelivery()->Substring(0, 3);
+		return generatedValue;
+	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		addClient = gcnew Command();
 		ClientFinder^ clientFinderForm = gcnew ClientFinder(mabdd, addClient);
@@ -262,19 +267,10 @@ namespace A2ProjetBloc2 {
 		if (tempo > 0) {
 			AddAddressToCommand^ cartCommandAddress = gcnew AddAddressToCommand(mabdd, addClient);
 			cartCommandAddress->ShowDialog();
-			System::Diagnostics::Debug::WriteLine(addClient->getNameCityDelivery());
+			System::Diagnostics::Debug::WriteLine(generateCommandReference());
 			Cart^ cartForm = gcnew Cart(mabdd, addClient);
 			cartForm->ShowDialog();
 		}
-	}
-	String^ generateCommandReference() {
-		addClient->getFirstNameClient();
-		addClient->getLastNameClient();
-		//addClient->getOrderDate();
-		addClient->getNameCityDelivery();
-		// ajouter le numéro incrémentiel de la commande
-		String^ generatedValue;
-		return generatedValue;
 	}
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
