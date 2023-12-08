@@ -58,8 +58,8 @@ public:
     void insertClient(Client^ client) {
         bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Birthday, Del) VALUES ('" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "');", 1);
 		for each (Address ^ address in client->getAddressDelivery())
-            bdd->executeInsert("INSERT INTO [Address] (ID_Address, Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getID_Address() + "','" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
+            bdd->executeInsert("INSERT INTO [Address] (Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
         for each (Address ^ address in client->getAddressBilling())
-            bdd->executeInsert("INSERT INTO [Address] (ID_Address, Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getID_Address() + "','" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
+            bdd->executeInsert("INSERT INTO [Address] (Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
     }
 };

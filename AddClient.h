@@ -539,6 +539,8 @@ namespace A2ProjetBloc2 {
 			String^ dateString = this->DtpBirthdate->Value.ToString("yyyy-MM-dd");
 			DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 			this->client->setBirthday(Birthday);
+			this->client->setAddressBilling(this->address->setNameCity(this->tbCityBilling->Text),this->address->setNumber(this->TbNumberBilling->Text),this->address->setNameStreet(this->TbStreetBilling->Text),this ->address->setPostalCode(this->TbPostalCodeBilling->Text), this->address->setAddition(this->tbAdditionBilling->Text));
+			this->client->setAddressDelivery(this->address->setNameCity(this->tbCityDelivery->Text),this->address->setNumber(this->TbNumberDelivery->Text),this->address->setNameStreet(this->TbStreetDelivery->Text),this ->address->setPostalCode(this->TbPostalCodeDelivery->Text), this->address->setAddition(this->tbAdditionDelivery->Text));
 
 		}
 

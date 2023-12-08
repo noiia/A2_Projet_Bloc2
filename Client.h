@@ -57,6 +57,12 @@ public:
 	List<Address^>^ getAddressDelivery() {
 		return this->addressDelivery;
 	}
+	List<Address^>^ setAddressBilling() {
+		return this->addressBilling;
+	}
+	List<Address^>^ setAddressDelivery() {
+		return this->addressDelivery;
+	}
 	List<Address^>^ getAddressBilling() {
 		return this->addressBilling;
 	}
