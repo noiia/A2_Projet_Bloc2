@@ -25,7 +25,9 @@ public:
 			Address^ address = gcnew Address();
 			address->setID_Address((int)row[0]);
 			address->setNumber((String^)row[1]);
-			address->setAddition((String^)row[2]);
+			if (!row->IsNull("Addition")) {
+				address->setAddition((String^)row[2]);
+			}
 			address->setNameStreet((String^)row[3]);
 			address->setNameCity((String^)row[4]);
 			address->setPostalCode((String^)row[5]);

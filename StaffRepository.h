@@ -24,11 +24,12 @@ public:
 		for each (DataRow ^ row in ds->Tables[0]->Rows)
 		{
 			Staff^ staff = gcnew Staff();
-			staff->setDel((bool)row[4]);
 			staff->setIdStaff((int)row[0]);
 			staff->setFirstName((String^)row[1]);
 			staff->setLastName((String^)row[2]);
-			staff->setHiringDate(((DateTime^)row[3])->ToString());
+			if (!row->IsNull("HiringDate")) {
+				staff->setHiringDate(((DateTime^)row[3])->ToString("yyyy-MM-dd"));
+			}
 			list->Add(staff);
 		}
 

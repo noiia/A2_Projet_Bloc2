@@ -32,6 +32,7 @@ public:
 	DateTime^ getOrderDate() {
 		return this->orderDate;
 	}
+
 	List<InstallmentPayment^>^ getPayments() {
 		return this->payments;
 	}

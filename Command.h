@@ -12,6 +12,8 @@ private:
 	int IdClient;
 	String^ FirstNameClient;
 	String^ LastNameClient;
+	DateTime^ issueDate;
+	DateTime^ deliveryDate;
 	String^ addressDeliveryClient;
 	String^ addressBillingClient;
 	int quantity;
@@ -66,6 +68,18 @@ public:
 	}
 	String^ getLastNameClient() {
 		return this->LastNameClient;
+	}
+	void setIssueDate(DateTime^ issueDate) {
+		this->issueDate = issueDate;
+	}
+	DateTime^ getIssueDate() {
+		return this->issueDate;
+	}
+	void setDeliveryDate(DateTime^ deliveryDate) {
+		this->deliveryDate = deliveryDate;
+	}
+	DateTime^ getDeliveryDate() {
+		return this->deliveryDate;
 	}
 
 	void setID_AddressDelivery(int ID_AddressDelivery) {

@@ -255,8 +255,14 @@ namespace A2ProjetBloc2 {
 		   
 #pragma endregion
 	String^ generateCommandReference() {
+		int value = 1;
 		// ajouter le numéro incrémentiel de la commande
-		String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + /*addClient->getOrderDate()*/ "" + addClient->getNameCityDelivery()->Substring(0, 3);
+		String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
+		while (cHistoryRepository->searchCommand(generatedValue) == true) {
+			value++;
+			String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
+			Diagnostics::Debug::WriteLine(generatedValue);
+		}
 		return generatedValue;
 	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {

@@ -78,4 +78,12 @@ public:
 		for each (InstallmentPayment ^ ip in cHistory->getPayments())
 			bdd->executeInsert("INSERT INTO [InstallmentPayment] (Reference, InstallmentNumber, BalancePaymentDate, DatePayment, ModePayment, Amount Del) VALUES ('" + cHistory->getIdCommand() + "', '" + ip->getInstallmentNumber() + "', '" + ip->getBalancePaymentDate() + "', '" + ip->getPaymentDate() + "', '" + ip->getPaymentMode() + "', '" + ip->getAmount() + "', '" + false + "');", 2);
 	}
+	bool searchCommand(String^ reference) {
+		if (bdd->executeInsert("SELECT * FROM [Ordering] WHERE Reference = '" + reference + "'", 1)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 };

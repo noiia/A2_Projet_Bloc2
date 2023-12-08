@@ -33,6 +33,7 @@ namespace A2ProjetBloc2 {
 		bool clicked = false;
 		int research = 0;
 	private: System::Windows::Forms::Label^ LbOr;
+
 		   System::Threading::Mutex^ reloadMutex;
 
 	public:
@@ -182,7 +183,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->BtnAddCommand->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->BtnAddCommand->Location = System::Drawing::Point(790, 496);
+			   this->BtnAddCommand->Location = System::Drawing::Point(786, 503);
 			   this->BtnAddCommand->Name = L"BtnAddCommand";
 			   this->BtnAddCommand->Size = System::Drawing::Size(111, 42);
 			   this->BtnAddCommand->TabIndex = 22;
@@ -240,7 +241,7 @@ namespace A2ProjetBloc2 {
 			   this->LbArticleName->Size = System::Drawing::Size(126, 19);
 			   this->LbArticleName->TabIndex = 23;
 			   this->LbArticleName->Text = L"Nom de l\'article";
-			   //  
+			   // 
 			   // LbPriceTxt
 			   // 
 			   this->LbPriceTxt->AutoSize = true;
@@ -319,9 +320,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->MaximizeBox = false;
-			   this->ClientSize = System::Drawing::Size(955, 571);
+			   this->ClientSize = System::Drawing::Size(961, 571);
 			   this->Controls->Add(this->LbOr);
 			   this->Controls->Add(this->NudQuantity);
 			   this->Controls->Add(this->LbRefSelected);
@@ -388,5 +387,5 @@ namespace A2ProjetBloc2 {
 		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
 		this->Close();
 	}
-	};
+};
 }
