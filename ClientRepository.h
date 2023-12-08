@@ -15,10 +15,15 @@ public:
     ClientRepository(BDD^ bdd) :bdd(bdd) {
     }
     List<Client^>^ getClient(bool delState) {
-        DataSet^ ds = bdd->executeQuery("SELECT c.*, a.*, ac.* FROM [Client] c LEFT JOIN [address_Client] ac ON c.ID_Client = c.ID_Client LEFT JOIN [Address] a ON ac.ID_Address = a.ID_Address" + (/*delState*/false ? "" : " WHERE c.Del = 0" , "a.Del = 0"));
+        DataSet^ ds = bdd->executeQuery("SELECT c.*, a.*, ac.* FROM [Client] c LEFT JOIN [address_Client] ac ON c.ID_Client = c.ID_Client LEFT JOIN [Address] a ON ac.ID_Address = a.ID_Address" + (/*delState*/false ? "" : " WHERE c.Del = 0"));
 
         List<Client^>^ list = gcnew List<Client^>();
+        List<Client^>^ listAddressDelivery = gcnew List<Client^>();;
+        List<Client^>^ listAddressBilling = gcnew List<Client^>();;
         Client^ c = nullptr;
+        Client^ listAddressDelivery = nullptr;
+        Client^ listAddressBilling = nullptr;
+
         for each (DataRow ^ row in ds->Tables[0]->Rows)
         {
                 c = gcnew Client();
@@ -27,23 +32,20 @@ public:
 				c->setLastName((String^)row["LastName"]);
 				c->setTypeClient((String^)row["TypeClient"]);
 				c->setBirthday((DateTime^)row["Birthday"]);
-				list->Add(c);
-
-                Address^ address = gcnew Address();
-                if ((String^)row["TypeAdrress"] == "Delivery"){
-					c->addAddressDelivery(address);
-				}
-				else{
-                    c->addAddressBilling(address);
-				}
-                address->setID_Address((int)row["ID_Address"]);
-                address->setNumber((String^)row["Number"]);
-                address->setNameStreet((String^)row["NameStreet"]);
-                address->setNameCity((String^)row["NameCity"]);
-                address->setPostalCode((String^)row["PostalCode"]);
-                address->setAddition((String^)row["Addition"]);
-				
-        
+                c->setID_AddressDelivery((int)row["ID_Address"]);
+                c->setNumberDelivery((String^)row["Number"]);
+                c->setNameStreetDelivery((String^)row["NameStreet"]);
+                c->setNameCityDelivery((String^)row["NameCity"]);
+                c->setPostalCodeDelivery((String^)row["PostalCode"]);
+                c->setAdditionDelivery((String^)row["Addition"]);
+                c->setID_AddressBilling((int)row["ID_Address"]);
+                c->setNumberBilling((String^)row["Number"]);
+                c->setNameStreetBilling((String^)row["NameStreet"]);
+                c->setNameCityBilling((String^)row["NameCity"]);
+                c->setPostalCodeBilling((String^)row["PostalCode"]);
+                c->setAdditionBilling((String^)row["Addition"]);
+                list->Add(c);
+			
         }
 		return list;
     }
@@ -57,9 +59,9 @@ public:
 
     void insertClient(Client^ client) {
         bdd->executeInsert("INSERT INTO [Client] (FirstName, LastName, TypeClient, Birthday, Del) VALUES ('" + client->getFirstName() + "','" + client->getLastName() + "','" + client->getTypeClient() + "','" + client->getBirthday() + "','" + false + "');", 1);
-		for each (Address ^ address in client->getAddressDelivery())
-            bdd->executeInsert("INSERT INTO [Address] (Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
-        for each (Address ^ address in client->getAddressBilling())
-            bdd->executeInsert("INSERT INTO [Address] (Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
+		//for each (Address ^ address in client->getAddressDelivery())
+            //bdd->executeInsert("INSERT INTO [Address] (Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
+        //for each (Address ^ address in client->getAddressBilling())
+            //bdd->executeInsert("INSERT INTO [Address] (Number, Adddition, NameStreet , NameCity, PostalCode) VALUES('" + address->getNumber() + "', '" + address->getAddition() + "', '" + address->getNameStreet() + "', '" + address->getNameCity() + "', '" + address->getPostalCode() + false + "')", 1);
     }
 };
