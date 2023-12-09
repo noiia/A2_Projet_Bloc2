@@ -25,7 +25,7 @@ private:
 	String^ NameStreetBilling;
 	String^ NameCityBilling;
 	String^ PostalCodeBilling;
-	String^ TypeAddrress;
+	String^ TypeAddress;
 	
 public:
 	void setID_Client(int ID_Client) {
@@ -131,10 +131,10 @@ public:
 	String^ getPostalCodeBilling() {
 		return this->PostalCodeBilling;
 	}
-	void setTypeAddrress(String^ TypeAddrress) {
-		this->TypeAddrress = TypeAddrress;
+	void setTypeAddress(String^ TypeAddress) {
+		this->TypeAddress = TypeAddress;
 	}
-	String^ getTypeAddrress() {
-		return this->TypeAddrress;
+	String^ getTypeAddress() {
+		return this->TypeAddress;
 	}
 };

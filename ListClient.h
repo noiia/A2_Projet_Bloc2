@@ -56,6 +56,7 @@ namespace A2ProjetBloc2 {
 			dgvtbcTypeClient->Name = "TypeClient";
 			this->DGVListClient->Columns->Add(dgvtbcTypeClient);
 
+			
 			DataGridViewTextBoxColumn^ dgvtbcNumberBilling = gcnew DataGridViewTextBoxColumn();
 			dgvtbcNumberBilling->Name = "NumberBilling";
 			this->DGVListClient->Columns->Add(dgvtbcNumberBilling);
@@ -95,14 +96,7 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcAdditionDelivery = gcnew DataGridViewTextBoxColumn();
 			dgvtbcAdditionDelivery->Name = "AdditionBilling";
 			this->DGVListClient->Columns->Add(dgvtbcAdditionDelivery);
-
-
-
-
-
-
-
-
+			
 
 
 			clientRepository = gcnew ClientRepository(mabdd);
@@ -133,10 +127,7 @@ namespace A2ProjetBloc2 {
 					dgvcBirthDay->Value = birthday->ToString("yyyy-MM-dd");
 					dgvr->Cells->Add(dgvcBirthDay);
 
-					DataGridViewTextBoxCell^ dgvcTypeClient = gcnew DataGridViewTextBoxCell();
-					dgvcTypeClient->Value = c->getTypeClient();
-					dgvr->Cells->Add(dgvcTypeClient);
-
+					
 					DataGridViewTextBoxCell^ dgvcNumberBilling = gcnew DataGridViewTextBoxCell();
 					dgvcNumberBilling->Value = c->getNumberBilling();
 					dgvr->Cells->Add(dgvcNumberBilling);
@@ -202,12 +193,9 @@ namespace A2ProjetBloc2 {
 			}
 		}
 	private: System::Windows::Forms::Button^ BtnModify;
-	private: System::Windows::Forms::Button^ BtnAddClient;
-	private: System::Windows::Forms::DataGridView^ DGVListClient;
-	protected:
-
-
-	private: System::Windows::Forms::Label^ Title;
+				System::Windows::Forms::Button^ BtnAddClient;
+				System::Windows::Forms::DataGridView^ DGVListClient;
+				System::Windows::Forms::Label^ Title;
 
 	private:
 		/// <summary>
@@ -260,6 +248,7 @@ namespace A2ProjetBloc2 {
 			this->DGVListClient->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->DGVListClient->Location = System::Drawing::Point(26, 56);
 			this->DGVListClient->Name = L"DGVListClient";
+			this->DGVListClient->ReadOnly = true;
 			this->DGVListClient->Size = System::Drawing::Size(603, 526);
 			this->DGVListClient->TabIndex = 25;
 			// 
@@ -289,12 +278,15 @@ namespace A2ProjetBloc2 {
 			// CBoxDeletedElements
 			// 
 			this->CBoxDeletedElements->AutoSize = true;
-			this->CBoxDeletedElements->Location = System::Drawing::Point(721, 424);
+			this->CBoxDeletedElements->Font = (gcnew System::Drawing::Font(L"Orkney", 9.749999F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->CBoxDeletedElements->Location = System::Drawing::Point(701, 410);
 			this->CBoxDeletedElements->Name = L"CBoxDeletedElements";
-			this->CBoxDeletedElements->Size = System::Drawing::Size(80, 17);
+			this->CBoxDeletedElements->Size = System::Drawing::Size(155, 20);
 			this->CBoxDeletedElements->TabIndex = 29;
-			this->CBoxDeletedElements->Text = L"checkBox1";
+			this->CBoxDeletedElements->Text = L"Adresses supprimées";
 			this->CBoxDeletedElements->UseVisualStyleBackColor = true;
+			this->CBoxDeletedElements->CheckedChanged += gcnew System::EventHandler(this, &ListClient::CBoxDeletedElements_CheckedChanged);
 			// 
 			// ListClient
 			// 
@@ -322,9 +314,7 @@ namespace A2ProjetBloc2 {
 		Client^ client = gcnew Client();
 		AddClient^ addClientForm = gcnew AddClient(client, false);
 		addClientForm->ShowDialog();
-		System::Diagnostics::Debug::WriteLine(client->ToString());;
 		clientRepository->insertClient(client);
-		//this->Close();
 		this->reload();
 	}
 	private: System::Void DGVListClient_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
@@ -352,5 +342,8 @@ namespace A2ProjetBloc2 {
 
 	private: System::Void ListClient_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void CBoxDeletedElements_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	this->reload();
+}
 };
 }

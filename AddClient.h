@@ -526,13 +526,13 @@ namespace A2ProjetBloc2 {
 	private: System::Void AddClient_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void BtnAddClient_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (CbCompany->Checked != false) {
+		if (this->CbCompany->Checked) {
 			this->client->setTypeClient("Entreprise");
 			this->client->setLastName(this->TbLastName->Text);
 
 
 
-			this->client->setTypeAddrress("Adress de Livraison");
+			this->client->setTypeAddress("Adresse de Livraison");
 			this->client->setNameCityDelivery(this->tbCityBilling->Text);
 			this->client->setNumberDelivery(this->TbNumberBilling->Text);
 			this->client->setNameStreetDelivery(this->TbStreetBilling->Text);
@@ -541,7 +541,7 @@ namespace A2ProjetBloc2 {
 
 
 
-			this->client->setTypeAddrress("Adress de Facturation");
+			this->client->setTypeAddress("Adresse de Facturation");
 			this->client->setNameCityBilling(this->tbCityDelivery->Text);
 			this->client->setNumberBilling(this->TbNumberDelivery->Text);
 			this->client->setNameStreetBilling(this->TbStreetDelivery->Text);
@@ -558,6 +558,7 @@ namespace A2ProjetBloc2 {
 			String^ dateString = this->DtpBirthdate->Value.ToString("yyyy-MM-dd");
 			DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 			this->client->setBirthday(Birthday);
+
 			this->client->setNameCityDelivery(this->tbCityBilling->Text);
 			this->client->setNumberDelivery(this->TbNumberBilling->Text);
 			this->client->setNameStreetDelivery(this->TbStreetBilling->Text);
