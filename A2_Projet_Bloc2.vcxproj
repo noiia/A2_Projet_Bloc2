@@ -130,6 +130,7 @@
     <ClCompile Include="ListStaff.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PaymentForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAtoCRepository.h" />
@@ -185,6 +186,9 @@
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="PaymentForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Staff.h" />
     <ClInclude Include="StaffRepository.h" />
   </ItemGroup>
@@ -235,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentForm.resx">
+      <DependentUpon>PaymentForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

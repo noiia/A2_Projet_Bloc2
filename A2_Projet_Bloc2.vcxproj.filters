@@ -63,6 +63,9 @@
     <ClCompile Include="AddAddressToCommand.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="PaymentForm.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="AddressToCommandRepository.h">
       <Filter>Fichiers d%27en-tête\Repositories</Filter>
+    </ClInclude>
+    <ClInclude Include="PaymentForm.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

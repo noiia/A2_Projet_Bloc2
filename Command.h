@@ -9,6 +9,7 @@ ref class Command
 private:
 	String^ reference;
 	String^ idArticle;
+
 	int IdClient;
 	String^ FirstNameClient;
 	String^ LastNameClient;
@@ -17,18 +18,27 @@ private:
 	String^ addressDeliveryClient;
 	String^ addressBillingClient;
 	int quantity;
+
 	int ID_AddressDelivery;
 	String^ NumberDelivery;
 	String^ AdditionDelivery;
 	String^ NameStreetDelivery;
 	String^ NameCityDelivery;
 	String^ PostalCodeDelivery;
+
 	int ID_AddressBilling;
 	String^ NumberBilling;
 	String^ AdditionBilling;
 	String^ NameStreetBilling;
 	String^ NameCityBilling;
 	String^ PostalCodeBilling;
+
+	String^ paymentMode;
+	int numberOfPayment;
+	DateTime^ firstPayment;
+	DateTime^ secondPayment;
+	DateTime^ thirdPayment;
+
 	List<Article^>^ articles = gcnew List<Article^>();
 	List<Client^>^ clients = gcnew List<Client^>();
 public:
@@ -154,6 +164,37 @@ public:
 	}
 	String^ getPostalCodeBilling() {
 		return this->PostalCodeBilling;
+	}
+
+	void setPaymentMode(String^ paymentMode) {
+		this->paymentMode = paymentMode;
+	}
+	String^ getPaymentMode() {
+		return this->paymentMode;
+	}
+	void setNumberOfPayment(int numberOfPayment) {
+		this->numberOfPayment = numberOfPayment;
+	}
+	int getNumberOfPayment() {
+		return this->numberOfPayment;
+	}
+	void setFirstPayment(DateTime^ firstPayment) {
+		this->firstPayment = firstPayment;
+	}
+	DateTime^ getFirstPayment() {
+		return this->firstPayment;
+	}
+	void setSecondPayment(DateTime^ secondPayment) {
+		this->secondPayment = secondPayment;
+	}
+	DateTime^ getSecondPayment() {
+		return this->secondPayment;
+	}
+	void setThirdPayment(DateTime^ thirdPayment) {
+		this->thirdPayment = thirdPayment;
+	}
+	DateTime^ getThirdPayment() {
+		return this->thirdPayment;
 	}
 
 	List<Article^>^ getArticle() {

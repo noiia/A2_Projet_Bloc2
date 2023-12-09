@@ -271,7 +271,6 @@ namespace A2ProjetBloc2 {
 		if (tempo > 0) {
 			AddAddressToCommand^ cartCommandAddress = gcnew AddAddressToCommand(mabdd, addClient);
 			cartCommandAddress->ShowDialog();
-			System::Diagnostics::Debug::WriteLine(generateCommandReference());
 			addClient->setReference(generateCommandReference());
 			cHistoryRepository->insertOrdering(addClient);
 			Diagnostics::Debug::WriteLine(addClient);

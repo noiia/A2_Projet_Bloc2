@@ -6,6 +6,7 @@
 #include "AddArticleToCommand.h"
 #include "CartRepository.h"
 #include "Command.h"
+#include "PaymentForm.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -23,9 +24,12 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		CartRepository^ cartRepository;
+		Command^ sharedA;
 		Thread^ reloadThread;
 		Command^ command;
-		System::Threading::Mutex^ reloadMutex;
+	private: System::Windows::Forms::Button^ BtnReturn;
+
+		   System::Threading::Mutex^ reloadMutex;
 	public:
 		Cart(BDD^ mabdd, Command^ command)
 		{
@@ -146,6 +150,7 @@ namespace A2ProjetBloc2 {
 			   this->BtnPayCart = (gcnew System::Windows::Forms::Button());
 			   this->BtnModify = (gcnew System::Windows::Forms::Button());
 			   this->LbTotal = (gcnew System::Windows::Forms::Label());
+			   this->BtnReturn = (gcnew System::Windows::Forms::Button());
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVCart))->BeginInit();
 			   this->SuspendLayout();
 			   // 
@@ -156,9 +161,8 @@ namespace A2ProjetBloc2 {
 				   static_cast<System::Byte>(0)));
 			   this->Title->Location = System::Drawing::Point(101, 9);
 			   this->Title->Name = L"Title";
-			   this->Title->Size = System::Drawing::Size(359, 56);
+			   this->Title->Size = System::Drawing::Size(0, 28);
 			   this->Title->TabIndex = 0;
-			   this->Title->Text = L"Créer une nouvelle commande\n pour : " + this->command->getLastNameClient() + " " + this->command->getFirstNameClient();
 			   // 
 			   // BtnAddArticle
 			   // 
@@ -176,7 +180,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->BtnDelete->Location = System::Drawing::Point(227, 546);
+			   this->BtnDelete->Location = System::Drawing::Point(424, 479);
 			   this->BtnDelete->Name = L"BtnDelete";
 			   this->BtnDelete->Size = System::Drawing::Size(111, 42);
 			   this->BtnDelete->TabIndex = 14;
@@ -193,6 +197,7 @@ namespace A2ProjetBloc2 {
 			   this->DGVCart->ReadOnly = true;
 			   this->DGVCart->Size = System::Drawing::Size(514, 381);
 			   this->DGVCart->TabIndex = 15;
+			   this->DGVCart->CellMouseClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &Cart::DGVCart_CellMouseClick);
 			   // 
 			   // BtnPayCart
 			   // 
@@ -204,34 +209,49 @@ namespace A2ProjetBloc2 {
 			   this->BtnPayCart->TabIndex = 16;
 			   this->BtnPayCart->Text = L"Payer";
 			   this->BtnPayCart->UseVisualStyleBackColor = true;
+			   this->BtnPayCart->Click += gcnew System::EventHandler(this, &Cart::BtnPayCart_Click);
 			   // 
 			   // BtnModify
 			   // 
 			   this->BtnModify->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->BtnModify->Location = System::Drawing::Point(21, 546);
+			   this->BtnModify->Location = System::Drawing::Point(220, 479);
 			   this->BtnModify->Name = L"BtnModify";
 			   this->BtnModify->Size = System::Drawing::Size(111, 42);
 			   this->BtnModify->TabIndex = 17;
 			   this->BtnModify->Text = L"Modifier";
 			   this->BtnModify->UseVisualStyleBackColor = true;
+			   this->BtnModify->Click += gcnew System::EventHandler(this, &Cart::BtnModify_Click);
 			   // 
 			   // LbTotal
 			   // 
 			   this->LbTotal->AutoSize = true;
 			   this->LbTotal->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->LbTotal->Location = System::Drawing::Point(212, 491);
+			   this->LbTotal->Location = System::Drawing::Point(188, 558);
 			   this->LbTotal->Name = L"LbTotal";
 			   this->LbTotal->Size = System::Drawing::Size(88, 19);
 			   this->LbTotal->TabIndex = 18;
 			   this->LbTotal->Text = L"Prix total : ";
+			   // 
+			   // BtnReturn
+			   // 
+			   this->BtnReturn->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->BtnReturn->Location = System::Drawing::Point(21, 546);
+			   this->BtnReturn->Name = L"BtnReturn";
+			   this->BtnReturn->Size = System::Drawing::Size(111, 42);
+			   this->BtnReturn->TabIndex = 19;
+			   this->BtnReturn->Text = L"Retour";
+			   this->BtnReturn->UseVisualStyleBackColor = true;
+			   this->BtnReturn->Click += gcnew System::EventHandler(this, &Cart::BtnReturn_Click);
 			   // 
 			   // Cart
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->ClientSize = System::Drawing::Size(567, 615);
+			   this->Controls->Add(this->BtnReturn);
 			   this->Controls->Add(this->LbTotal);
 			   this->Controls->Add(this->BtnModify);
 			   this->Controls->Add(this->BtnPayCart);
@@ -258,5 +278,29 @@ namespace A2ProjetBloc2 {
 		cartRepository->insertArticle(addArticle);
 		this->reload();
 	}
-	};
+	private: System::Void BtnPayCart_Click(System::Object^ sender, System::EventArgs^ e) {
+		PaymentForm^ formPayment = gcnew PaymentForm(mabdd, command);
+		formPayment->ShowDialog();
+	}
+	private: System::Void BtnReturn_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (this->DGVCart->RowCount < 1) {
+			cartRepository->dropCommand(command);
+		}
+		this->Close();
+	}
+private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
+	AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, sharedA, command->getReference());
+	formAddArticleToCommand->ShowDialog();
+	System::Diagnostics::Debug::WriteLine(sharedA);
+	cartRepository->editCommand(sharedA);
+	this->reload();
+}
+private: System::Void DGVCart_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+	if (e->RowIndex >= 0) {
+		DataGridViewRow^ sharedDgvrRow = DGVCart->Rows[e->RowIndex];
+		sharedA = (Command^)sharedDgvrRow->Tag;
+		System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
+	}
+}
+};
 }
