@@ -25,14 +25,12 @@ namespace A2ProjetBloc2 {
 		CartRepository^ cartRepository;
 		Thread^ reloadThread;
 		Command^ command;
-		String^ generateCommandReference;
 		System::Threading::Mutex^ reloadMutex;
 	public:
-		Cart(BDD^ mabdd, Command^ command, String^ generateCommandReference)
+		Cart(BDD^ mabdd, Command^ command)
 		{
 			this->command = command;
 			this->mabdd = mabdd;
-			this->generateCommandReference = generateCommandReference;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -43,6 +41,9 @@ namespace A2ProjetBloc2 {
 			DataGridViewTextBoxColumn^ dgvtbcReference = gcnew DataGridViewTextBoxColumn();
 			dgvtbcReference->Name = "Références";
 			this->DGVCart->Columns->Add(dgvtbcReference);
+			DataGridViewTextBoxColumn^ dgvtbcNameArticle = gcnew DataGridViewTextBoxColumn();
+			dgvtbcNameArticle->Name = "Nom de l'article";
+			this->DGVCart->Columns->Add(dgvtbcNameArticle);
 			DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
 			dgvtbcIdArticle->Name = "IdArticle";
 			this->DGVCart->Columns->Add(dgvtbcIdArticle);
@@ -62,30 +63,34 @@ namespace A2ProjetBloc2 {
 		void reload() {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
-				System::Collections::Generic::List<Command^>^ articles = cartRepository->getArticle();
-				this->DGVCart->Rows->Clear();
+				System::Collections::Generic::List<Command^>^ articles = cartRepository->getArticle(command->getReference());
+				//this->DGVCart->Rows->Clear();
 				for each (Command ^ a in articles) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
 
 					DataGridViewTextBoxCell^ dgvcReference = gcnew DataGridViewTextBoxCell();
 					dgvcReference->Value = a->getReference();
 					dgvr->Cells->Add(dgvcReference);
-					DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
-					dgvcQuantity->Value = a->getQuantity();
-					dgvr->Cells->Add(dgvcQuantity);
-
 					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
 					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
+					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
 					Decimal^ PriceATI = Decimal(0);
 					String^ Name;
+					String^ IdArticle;
 					for each (Article ^ art in a->getArticle()) {
 						PriceATI = (Decimal^)art->getPriceATI();
 						Name = (String^)art->getName();
+						IdArticle = (String^)art->getIdArticle();
 					}
-					dgvcPriceATI->Value = PriceATI + "";
+					dgvcPriceATI->Value = PriceATI;
 					dgvcName->Value = Name;
-					dgvr->Cells->Add(dgvcPriceATI);
 					dgvr->Cells->Add(dgvcName);
+					dgvcIdArticle->Value = IdArticle;
+					dgvr->Cells->Add(dgvcIdArticle);
+					DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
+					dgvcQuantity->Value = a->getQuantity();
+					dgvr->Cells->Add(dgvcQuantity);
+					dgvr->Cells->Add(dgvcPriceATI);
 
 					DataGridViewTextBoxCell^ dgvcTotal = gcnew DataGridViewTextBoxCell();
 					dgvcTotal->Value = a->getQuantity() * Convert::ToSingle(PriceATI);
@@ -247,7 +252,7 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		Command^ addArticle = gcnew Command();
-		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle, generateCommandReference);
+		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle, command->getReference());
 		formAddArticleToCommand->ShowDialog();
 		System::Diagnostics::Debug::WriteLine(addArticle);
 		cartRepository->insertArticle(addArticle);

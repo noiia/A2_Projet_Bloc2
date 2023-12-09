@@ -254,13 +254,13 @@ namespace A2ProjetBloc2 {
 		   
 #pragma endregion
 	String^ generateCommandReference() {
-		int value = 1;
+		int value = -1;
 		String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
-		while (cHistoryRepository->referenceAlreadyExist(generatedValue)) {
+		do {
 			value++;
 			generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
 			Diagnostics::Debug::WriteLine(generatedValue);
-		}
+		} while (cHistoryRepository->referenceAlreadyExist(generatedValue));
 		return generatedValue;
 	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -273,8 +273,9 @@ namespace A2ProjetBloc2 {
 			cartCommandAddress->ShowDialog();
 			System::Diagnostics::Debug::WriteLine(generateCommandReference());
 			addClient->setReference(generateCommandReference());
-			CHistoryRepository->insertOrdering(addClient);
-			Cart^ cartForm = gcnew Cart(mabdd, addClient, generateCommandReference());
+			cHistoryRepository->insertOrdering(addClient);
+			Diagnostics::Debug::WriteLine(addClient);
+			Cart^ cartForm = gcnew Cart(mabdd, addClient);
 			cartForm->ShowDialog();
 		}
 	}

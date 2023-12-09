@@ -14,8 +14,8 @@ private:
 public:
 	CartRepository(BDD^ bdd) : bdd(bdd) {
 	}
-	List<Command^>^ getArticle() {
-		DataSet^ ds = bdd->executeQuery("SELECT ao.*,art.* FROM [Article_Order] ao LEFT JOIN [Article] art ON ao.[ID_Article] = art.[ID_Article]");
+	List<Command^>^ getArticle(String^ referenceCommand) {
+		DataSet^ ds = bdd->executeQuery("SELECT ao.*,art.* FROM [Article_Order] ao LEFT JOIN [Article] art ON ao.[ID_Article] = art.[ID_Article] WHERE Reference = '" + referenceCommand + "'");
 
 		List<Command^>^ list = gcnew List<Command^>();
 		Command^ cmd = nullptr;

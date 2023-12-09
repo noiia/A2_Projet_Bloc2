@@ -58,10 +58,11 @@ public:
 	void insertArticle(CHistory^ cHistory) {
 		bdd->executeInsert("INSERT INTO [Ordering] (Reference, OrderDate, DeliveryDate, Del) VALUES ('" + cHistory->getIdCommand() + "', '" + cHistory->getOrderDate() + "', '" + cHistory->getDeliveryDate() + "', '" + false + "');", 1);
 		for each (InstallmentPayment ^ ip in cHistory->getPayments())
-			bdd->executeInsert("INSERT INTO [InstallmentPayment] (Reference, InstallmentNumber, BalancePaymentDate, DatePayment, ModePayment, Amount Del) VALUES ('" + cHistory->getIdCommand() + "', '" + ip->getInstallmentNumber() + "', '" + ip->getBalancePaymentDate() + "', '" + ip->getPaymentDate() + "', '" + ip->getPaymentMode() + "', '" + ip->getAmount() + "', '" + false + "');", 2);
+			bdd->executeInsert("INSERT INTO [InstallmentPayment] (Reference, InstallmentNumber, BalancePaymentDate, DatePayment, ModePayment, Amount Del) VALUES ('" + cHistory->getIdCommand() + "', '" + ip->getInstallmentNumber() + "', '" + ip->getBalancePaymentDate() + "', '" + ip->getPaymentDate() + "', '" + ip->getPaymentMode() + "', '" + ip->getAmount() + "', '" + 0 + "');", 2);
 	}
 	bool referenceAlreadyExist(String^ reference) {
-		int valueInBDD = bdd->executeNonQuery("SELECT COUNT(*) FROM [Ordering] WHERE Reference = '" + reference + "'");
+		int valueInBDD = bdd->searchQuery("SELECT COUNT(*) FROM [Ordering] WHERE Reference = '" + reference + "'");
+
 		if (valueInBDD > 0) {
 			return true;
 		}
@@ -70,6 +71,6 @@ public:
 		}
 	}
 	void insertOrdering(Command^ command) {
-		bdd->executeInsert("INSERT INTO [Ordering] (Reference, OrderDate, DeliveryDate, ID_Address_Delivery, ID_Address_Order, Del) VALUES ('" + command->getReference() + "', '" + command->getOrderDate() + "', '" + command->getDeliveryDate() + "', '" + command->getIdAddressDelivery() + "', '" + command->getIdAddressOrder()  + "', '" + false + "');", 1);
+		bdd->executeInsert("INSERT INTO [Ordering] (Reference, OrderDate, DeliveryDate, ID_Address_Delivery, ID_Address_Order, Del) VALUES ('" + command->getReference() + "', '" + command->getOrderDate() + "', '" + command->getDeliveryDate() + "', '" + command->getID_AddressDelivery() + "', '" + command->getID_AddressBilling()  + "', '" + 0 + "');", 2);
 	}
 };

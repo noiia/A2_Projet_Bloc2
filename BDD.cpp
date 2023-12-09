@@ -34,6 +34,13 @@ System::Data::DataSet^ BDD::executeQuery(String^ sql)
     return ds;
 }
 
+int BDD::searchQuery(String^ sql) {
+    System::Diagnostics::Debug::WriteLine("REQSQL: " + sql);
+    SqlCommand^ command = gcnew SqlCommand(sql, this->connection);
+    int existingValue = Convert::ToInt32(command->ExecuteScalar());
+    return existingValue;
+}
+
 int BDD::executeNonQuery(String^ sql)
 {
     System::Diagnostics::Debug::WriteLine("REQSQL: " + sql);
