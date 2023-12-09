@@ -14,18 +14,18 @@ private:
 	DateTime^ Birthday;
 	String^ TypeClient;
 	bool del;
-	int ID_AddressDelivery;
+	int ID_Address;
 	String^ NumberDelivery;
 	String^ AdditionDelivery;
 	String^ NameStreetDelivery;
 	String^ NameCityDelivery;
 	String^ PostalCodeDelivery;
-	int ID_AddressBilling;
 	String^ NumberBilling;
 	String^ AdditionBilling;
 	String^ NameStreetBilling;
 	String^ NameCityBilling;
 	String^ PostalCodeBilling;
+	String^ TypeAddrress;
 	
 public:
 	void setID_Client(int ID_Client) {
@@ -64,11 +64,11 @@ public:
 	bool getDel() {
 		return this->del;
 	}
-	void setID_AddressDelivery(int ID_AddressDelivery) {
-		this->ID_AddressDelivery = ID_AddressDelivery;
+	void setID_Address(int ID_Address) {
+		this->ID_Address = ID_Address;
 	}
-	int getID_AddressDelivery() {
-		return this->ID_AddressDelivery;
+	int getID_Address() {
+		return this->ID_Address;
 	}
 	void setNumberDelivery(String^ NumberDelivery) {
 		this->NumberDelivery = NumberDelivery;
@@ -101,13 +101,6 @@ public:
 		return this->PostalCodeDelivery;
 	}
 	
-	
-	void setID_AddressBilling(int ID_AddressBilling) {
-		this->ID_AddressBilling = ID_AddressBilling;
-	}
-	int getID_AddressBilling() {
-		return this->ID_AddressBilling;
-	}
 	void setNumberBilling(String^ NumberBilling) {
 		this->NumberBilling = NumberBilling;
 	}
@@ -138,7 +131,10 @@ public:
 	String^ getPostalCodeBilling() {
 		return this->PostalCodeBilling;
 	}
-
-
-
+	void setTypeAddrress(String^ TypeAddrress) {
+		this->TypeAddrress = TypeAddrress;
+	}
+	String^ getTypeAddrress() {
+		return this->TypeAddrress;
+	}
 };

@@ -529,6 +529,24 @@ namespace A2ProjetBloc2 {
 		if (CbCompany->Checked != false) {
 			this->client->setTypeClient("Entreprise");
 			this->client->setLastName(this->TbLastName->Text);
+
+
+
+			this->client->setTypeAddrress("Adress de Livraison");
+			this->client->setNameCityDelivery(this->tbCityBilling->Text);
+			this->client->setNumberDelivery(this->TbNumberBilling->Text);
+			this->client->setNameStreetDelivery(this->TbStreetBilling->Text);
+			this->client->setPostalCodeDelivery(this->TbPostalCodeBilling->Text);
+			this->client->setAdditionDelivery(this->tbAdditionBilling->Text);
+
+
+
+			this->client->setTypeAddrress("Adress de Facturation");
+			this->client->setNameCityBilling(this->tbCityDelivery->Text);
+			this->client->setNumberBilling(this->TbNumberDelivery->Text);
+			this->client->setNameStreetBilling(this->TbStreetDelivery->Text);
+			this->client->setPostalCodeBilling(this->TbPostalCodeDelivery->Text);
+			this->client->setAdditionBilling(this->tbAdditionDelivery->Text);
 		}
 		else
 		{
