@@ -336,12 +336,14 @@ namespace A2ProjetBloc2 {
 		}
 	}
 private: System::Void BtnAddAddress_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->command->setID_AddressDelivery(clickedDeliveryAddress->getID_Address());
 	this->command->setNumberDelivery(clickedDeliveryAddress->getNumber());
 	this->command->setNameStreetDelivery(clickedDeliveryAddress->getNameStreet());
 	this->command->setNameCityDelivery(clickedDeliveryAddress->getNameCity());
 	this->command->setPostalCodeDelivery(clickedDeliveryAddress->getPostalCode());
 	this->command->setAdditionDelivery(clickedDeliveryAddress->getAddition());
 	if (!this->CBoxSameAddress->Checked) {
+		this->command->setID_AddressBilling(clickedBillingAddress->getID_Address());
 		this->command->setNumberBilling(clickedBillingAddress->getNumber());
 		this->command->setNameStreetBilling(clickedBillingAddress->getNameStreet());
 		this->command->setNameCityBilling(clickedBillingAddress->getNameCity());
@@ -349,6 +351,7 @@ private: System::Void BtnAddAddress_Click(System::Object^ sender, System::EventA
 		this->command->setAdditionBilling(clickedBillingAddress->getAddition());
 	}
 	else {
+		this->command->setID_AddressDelivery(clickedDeliveryAddress->getID_Address());
 		this->command->setNumberBilling(clickedDeliveryAddress->getNumber());
 		this->command->setNameStreetBilling(clickedDeliveryAddress->getNameStreet());
 		this->command->setNameCityBilling(clickedDeliveryAddress->getNameCity());

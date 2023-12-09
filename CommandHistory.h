@@ -8,7 +8,6 @@
 #include "Cart.h"
 #include "Command.h"
 #include "CHistoryRepository.h"
-
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -256,11 +255,10 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	String^ generateCommandReference() {
 		int value = 1;
-		// ajouter le numéro incrémentiel de la commande
 		String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
-		while (cHistoryRepository->searchCommand(generatedValue) == true) {
+		while (cHistoryRepository->referenceAlreadyExist(generatedValue)) {
 			value++;
-			String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
+			generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
 			Diagnostics::Debug::WriteLine(generatedValue);
 		}
 		return generatedValue;
@@ -274,7 +272,9 @@ namespace A2ProjetBloc2 {
 			AddAddressToCommand^ cartCommandAddress = gcnew AddAddressToCommand(mabdd, addClient);
 			cartCommandAddress->ShowDialog();
 			System::Diagnostics::Debug::WriteLine(generateCommandReference());
-			Cart^ cartForm = gcnew Cart(mabdd, addClient);
+			addClient->setReference(generateCommandReference());
+			CHistoryRepository->insertOrdering(addClient);
+			Cart^ cartForm = gcnew Cart(mabdd, addClient, generateCommandReference());
 			cartForm->ShowDialog();
 		}
 	}

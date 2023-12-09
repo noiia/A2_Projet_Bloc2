@@ -30,6 +30,7 @@ namespace A2ProjetBloc2 {
 		String^ sharedSearchedValue = "";
 		Article^ clickedArticle;
 		Command^ command;
+		String^ commandReference;
 		bool clicked = false;
 		int research = 0;
 	private: System::Windows::Forms::Label^ LbOr;
@@ -37,9 +38,10 @@ namespace A2ProjetBloc2 {
 		   System::Threading::Mutex^ reloadMutex;
 
 	public:
-		AddArticleToCommand(BDD^ mabdd, Command^ command)
+		AddArticleToCommand(BDD^ mabdd, Command^ command, String^ commandReference)
 		{
 			this->command = command;
+			this->commandReference = commandReference;
 			InitializeComponent();
 			this->NudQuantity->ValueChanged += gcnew System::EventHandler(this, &AddArticleToCommand::CalculTotal);
 			reloadMutex = gcnew System::Threading::Mutex();
@@ -383,7 +385,7 @@ namespace A2ProjetBloc2 {
 	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->command->setIdArticle(this->clickedArticle->getIdArticle());
-		this->command->setReference("0sfesf");
+		this->command->setReference(commandReference);
 		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
 		this->Close();
 	}

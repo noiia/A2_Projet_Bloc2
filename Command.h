@@ -12,7 +12,7 @@ private:
 	int IdClient;
 	String^ FirstNameClient;
 	String^ LastNameClient;
-	DateTime^ issueDate;
+	DateTime^ orderDate;
 	DateTime^ deliveryDate;
 	String^ addressDeliveryClient;
 	String^ addressBillingClient;
@@ -69,11 +69,11 @@ public:
 	String^ getLastNameClient() {
 		return this->LastNameClient;
 	}
-	void setIssueDate(DateTime^ issueDate) {
-		this->issueDate = issueDate;
+	void setOrderDate(DateTime^ orderDate) {
+		this->orderDate = orderDate;
 	}
-	DateTime^ getIssueDate() {
-		return this->issueDate;
+	DateTime^ getOrderDate() {
+		return this->orderDate;
 	}
 	void setDeliveryDate(DateTime^ deliveryDate) {
 		this->deliveryDate = deliveryDate;

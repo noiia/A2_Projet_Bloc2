@@ -25,12 +25,14 @@ namespace A2ProjetBloc2 {
 		CartRepository^ cartRepository;
 		Thread^ reloadThread;
 		Command^ command;
+		String^ generateCommandReference;
 		System::Threading::Mutex^ reloadMutex;
 	public:
-		Cart(BDD^ mabdd, Command^ command)
+		Cart(BDD^ mabdd, Command^ command, String^ generateCommandReference)
 		{
 			this->command = command;
 			this->mabdd = mabdd;
+			this->generateCommandReference = generateCommandReference;
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -245,7 +247,7 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		Command^ addArticle = gcnew Command();
-		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle);
+		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle, generateCommandReference);
 		formAddArticleToCommand->ShowDialog();
 		System::Diagnostics::Debug::WriteLine(addArticle);
 		cartRepository->insertArticle(addArticle);

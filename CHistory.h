@@ -9,6 +9,8 @@ private:
 	String^ idCommand;
 	DateTime^ deliveryDate;
 	DateTime^ orderDate;
+	int idAddressDelivery;
+	int idAddressOrder;
 	List<InstallmentPayment^>^ payments = gcnew List<InstallmentPayment^>();
 	//Address^ addresseFacturation;
 	//Address^ addresseLivraison;
@@ -31,6 +33,18 @@ public:
 	}
 	DateTime^ getOrderDate() {
 		return this->orderDate;
+	}
+	void setIdAddressDelivery(int idAddressDelivery) {
+		this->idAddressDelivery = idAddressDelivery;
+	}
+	int getIdAddressDelivery() {
+		return idAddressDelivery;
+	}
+	void setIdAddressOrder(int idAddressOrder) {
+		this->idAddressOrder = idAddressOrder;
+	}
+	int getIdAddressOrder() {
+		return idAddressOrder;
 	}
 
 	List<InstallmentPayment^>^ getPayments() {

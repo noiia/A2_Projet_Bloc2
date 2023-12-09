@@ -36,7 +36,8 @@ namespace A2ProjetBloc2 {
 
 		System::Threading::Mutex^ reloadMutex;
 	    System::Windows::Forms::DateTimePicker^ DtpDelivery;
-	    System::Windows::Forms::DateTimePicker^ DtpIssueDate;
+	private: System::Windows::Forms::DateTimePicker^ DtpOrderDate;
+
 	    System::Windows::Forms::Label^ LbDeliveryDate;
 	private: System::Windows::Forms::Label^ LbTitle2;
 		   System::Windows::Forms::Label^ LbIssueDate;
@@ -163,7 +164,7 @@ namespace A2ProjetBloc2 {
 			   this->LbFirstNameClient = (gcnew System::Windows::Forms::Label());
 			   this->LbOr = (gcnew System::Windows::Forms::Label());
 			   this->DtpDelivery = (gcnew System::Windows::Forms::DateTimePicker());
-			   this->DtpIssueDate = (gcnew System::Windows::Forms::DateTimePicker());
+			   this->DtpOrderDate = (gcnew System::Windows::Forms::DateTimePicker());
 			   this->LbDeliveryDate = (gcnew System::Windows::Forms::Label());
 			   this->LbIssueDate = (gcnew System::Windows::Forms::Label());
 			   this->LbTitle2 = (gcnew System::Windows::Forms::Label());
@@ -306,12 +307,12 @@ namespace A2ProjetBloc2 {
 			   this->DtpDelivery->Size = System::Drawing::Size(200, 20);
 			   this->DtpDelivery->TabIndex = 43;
 			   // 
-			   // DtpIssueDate
+			   // DtpOrderDate
 			   // 
-			   this->DtpIssueDate->Location = System::Drawing::Point(1024, 226);
-			   this->DtpIssueDate->Name = L"DtpIssueDate";
-			   this->DtpIssueDate->Size = System::Drawing::Size(200, 20);
-			   this->DtpIssueDate->TabIndex = 44;
+			   this->DtpOrderDate->Location = System::Drawing::Point(1024, 226);
+			   this->DtpOrderDate->Name = L"DtpOrderDate";
+			   this->DtpOrderDate->Size = System::Drawing::Size(200, 20);
+			   this->DtpOrderDate->TabIndex = 44;
 			   // 
 			   // LbDeliveryDate
 			   // 
@@ -366,7 +367,7 @@ namespace A2ProjetBloc2 {
 			   this->Controls->Add(this->DGVSearchClient);
 			   this->Controls->Add(this->LbIssueDate);
 			   this->Controls->Add(this->LbDeliveryDate);
-			   this->Controls->Add(this->DtpIssueDate);
+			   this->Controls->Add(this->DtpOrderDate);
 			   this->Controls->Add(this->DtpDelivery);
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
@@ -424,9 +425,9 @@ namespace A2ProjetBloc2 {
 			this->command->setIdClient(this->clickedClient->getID_Client());
 			this->command->setLastNameClient(this->clickedClient->getLastName());
 			this->command->setFirstNameClient(this->clickedClient->getFirstName());
-			String^ issueDateString = this->DtpIssueDate->Value.ToString("yyyy-MM-dd");
-			DateTime issueDate = DateTime::ParseExact(issueDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-			this->command->setIssueDate(issueDate);
+			String^ OrderDateString = this->DtpOrderDate->Value.ToString("yyyy-MM-dd");
+			DateTime OrderDate = DateTime::ParseExact(OrderDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+			this->command->setOrderDate(OrderDate);
 			String^ deliveryDateString = this->DtpDelivery->Value.ToString("yyyy-MM-dd");
 			DateTime deliveryDate = DateTime::ParseExact(deliveryDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 			this->command->setDeliveryDate(deliveryDate);
