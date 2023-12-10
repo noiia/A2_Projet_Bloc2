@@ -9,6 +9,7 @@ ref class Command
 private:
 	String^ reference;
 	String^ idArticle;
+	int idArticleInCart;
 
 	int IdClient;
 	String^ FirstNameClient;
@@ -54,6 +55,14 @@ public:
 	String^ getIdArticle() {
 		return this->idArticle;
 	}
+	void setIdArticleInCart(int idArticleInCart) {
+		this->idArticleInCart = idArticleInCart;
+	}
+	int getIdArticleInCart() {
+		return this->idArticleInCart;
+	}
+
+
 	void setQuantity(int quantity) {
 		this->quantity = quantity;
 	}

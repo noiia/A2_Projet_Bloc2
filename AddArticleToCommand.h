@@ -25,7 +25,6 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		AAtoCRepository^ articleToCommand;
-		Article^ article;
 		Thread^ reloadThread;
 		String^ sharedSearchedValue = "";
 		Article^ clickedArticle;
@@ -38,10 +37,16 @@ namespace A2ProjetBloc2 {
 		   System::Threading::Mutex^ reloadMutex;
 
 	public:
-		AddArticleToCommand(BDD^ mabdd, Command^ command, String^ commandReference)
+		AddArticleToCommand(BDD^ mabdd, Command^ command, String^ commandReference, bool addOrEdit)
 		{
+			if (addOrEdit) {
+				Diagnostics::Debug::WriteLine(this->command->getIdArticleInCart());
+				this->TboxReferences->Text = command->getIdArticle();
+				this->NudQuantity->Value = command->getQuantity();
+			}
 			this->command = command;
 			this->commandReference = commandReference;
+			this->mabdd = mabdd;
 			InitializeComponent();
 			this->NudQuantity->ValueChanged += gcnew System::EventHandler(this, &AddArticleToCommand::CalculTotal);
 			reloadMutex = gcnew System::Threading::Mutex();
@@ -385,6 +390,7 @@ namespace A2ProjetBloc2 {
 	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->command->setIdArticle(this->clickedArticle->getIdArticle());
+		Diagnostics::Debug::WriteLine(this->command->getIdArticle());
 		this->command->setReference(commandReference);
 		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
 		this->Close();

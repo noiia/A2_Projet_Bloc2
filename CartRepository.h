@@ -40,12 +40,15 @@ public:
 	}
 
 	void insertArticle(Command^ command) {
-		bdd->executeInsert("INSERT INTO [Article_Order] (Reference, ID_Article, QuantityArticle) VALUES ('" + command->getReference() + "', '" + command->getIdArticle() + "', '" + command->getQuantity() + "');", 1);
+		command->setIdArticleInCart(bdd->executeInsert("INSERT INTO [Article_Order] (Reference, ID_Article, QuantityArticle) VALUES ('" + command->getReference() + "', '" + command->getIdArticle() + "', '" + command->getQuantity() + "');", 1));
 	}
 	void editCommand(Command^ command) {
-		bdd->executeQuery("DELETE FROM [Article_Order] WHERE ID_Article = '" + command->getIdArticle() + "'");
+		bdd->executeQuery("UPDATE FROM [Article_Order] WHERE ID_Article = '" + command->getIdArticle() + "' SET QuantityArticle = " + command->getQuantity() + "'");
 	}
 	void dropCommand(Command^ command) {
 		bdd->executeQuery("DELETE FROM [Ordering] WHERE Reference = '" + command->getReference() + "'");
+	}
+	void delArticle(Command^ command) {
+		bdd->executeQuery("DELETE FROM [Article_Order] WHERE [ID_Article] = '" + command->getIdArticle() + "'");
 	}
 };

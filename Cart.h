@@ -68,7 +68,7 @@ namespace A2ProjetBloc2 {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
 				System::Collections::Generic::List<Command^>^ articles = cartRepository->getArticle(command->getReference());
-				//this->DGVCart->Rows->Clear();
+				this->DGVCart->Rows->Clear();
 				for each (Command ^ a in articles) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
 
@@ -186,6 +186,7 @@ namespace A2ProjetBloc2 {
 			   this->BtnDelete->TabIndex = 14;
 			   this->BtnDelete->Text = L"Supprimer";
 			   this->BtnDelete->UseVisualStyleBackColor = true;
+			   this->BtnDelete->Click += gcnew System::EventHandler(this, &Cart::BtnDelete_Click);
 			   // 
 			   // DGVCart
 			   // 
@@ -251,6 +252,7 @@ namespace A2ProjetBloc2 {
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			   this->ClientSize = System::Drawing::Size(567, 615);
+			   this->ControlBox = false;
 			   this->Controls->Add(this->BtnReturn);
 			   this->Controls->Add(this->LbTotal);
 			   this->Controls->Add(this->BtnModify);
@@ -272,7 +274,7 @@ namespace A2ProjetBloc2 {
 #pragma endregion
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		Command^ addArticle = gcnew Command();
-		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle, command->getReference());
+		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle, command->getReference(), false);
 		formAddArticleToCommand->ShowDialog();
 		System::Diagnostics::Debug::WriteLine(addArticle);
 		cartRepository->insertArticle(addArticle);
@@ -288,19 +290,24 @@ namespace A2ProjetBloc2 {
 		}
 		this->Close();
 	}
-private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
-	AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, sharedA, command->getReference());
-	formAddArticleToCommand->ShowDialog();
-	System::Diagnostics::Debug::WriteLine(sharedA);
-	cartRepository->editCommand(sharedA);
-	this->reload();
-}
-private: System::Void DGVCart_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
-	if (e->RowIndex >= 0) {
-		DataGridViewRow^ sharedDgvrRow = DGVCart->Rows[e->RowIndex];
-		sharedA = (Command^)sharedDgvrRow->Tag;
-		System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
+	private: System::Void BtnModify_Click(System::Object^ sender, System::EventArgs^ e) {
+		Diagnostics::Debug::WriteLine(this->command->getIdArticleInCart());
+		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, sharedA, command->getReference(), true);
+		formAddArticleToCommand->ShowDialog();
+		System::Diagnostics::Debug::WriteLine(sharedA);
+		cartRepository->editCommand(sharedA);
+		this->reload();
 	}
-}
-};
+	private: System::Void DGVCart_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+		if (e->RowIndex >= 0) {
+			DataGridViewRow^ sharedDgvrRow = DGVCart->Rows[e->RowIndex];
+			sharedA = (Command^)sharedDgvrRow->Tag;
+			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
+		}
+	}
+	private: System::Void BtnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+		cartRepository->delArticle(sharedA);
+		this->reload();
+	}
+	};
 }
