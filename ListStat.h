@@ -35,7 +35,7 @@ namespace A2ProjetBloc2 {
 		{
 			String^ query = "SELECT AVG(PriceATI) AS PanierMoyenApresRemise FROM Article_Order JOIN Article ON Article_Order.ID_Article = Article.ID_Article;";
 			DataSet^ ds = mabdd->executeQuery(query);
-			String^ s = ds->Tables[0]->Rows[0]->ItemArray[0]->ToString();
+			String^ s = String::Format("{0:F2} €", ds->Tables[0]->Rows[0]->ItemArray[0]);
 			LbAverageCart->Text = L"Prix panier moyen (après remise) : " + s;
 		}
 
@@ -43,7 +43,7 @@ namespace A2ProjetBloc2 {
 		{
 			String^ query = "SELECT SUM(PriceWT * QuantityStock) AS ValeurCommercialeStock FROM Article;";
 			DataSet^ ds = mabdd->executeQuery(query);
-			String^ s = ds->Tables[0]->Rows[0]->ItemArray[0]->ToString();
+			String^ s = String::Format("{0:F2} €", ds->Tables[0]->Rows[0]->ItemArray[0]);
 			LbSotckCommercialValue->Text = L"Valeur commerciale du stock : " + s;
 		}
 
@@ -51,7 +51,7 @@ namespace A2ProjetBloc2 {
 		{
 			String^ query = "SELECT SUM(PriceATI * QuantityStock) AS ValeurAchatStock FROM Article;";
 			DataSet^ ds = mabdd->executeQuery(query);
-			String^ s = ds->Tables[0]->Rows[0]->ItemArray[0]->ToString();
+			String^ s = String::Format("{0:F2} €", ds->Tables[0]->Rows[0]->ItemArray[0]);
 			LbStockSellValue->Text = L"Valeur d'achat du stock : " + s;
 		}
 
@@ -90,6 +90,7 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ListStats::typeid));
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->LbAverageCart = (gcnew System::Windows::Forms::Label());
 			this->DGVTop10LessBuyArticles = (gcnew System::Windows::Forms::DataGridView());
@@ -230,7 +231,6 @@ namespace A2ProjetBloc2 {
 			this->BtnSalesOverMonth->TabIndex = 39;
 			this->BtnSalesOverMonth->Text = L"Chiffre d\'affaires sur un mois";
 			this->BtnSalesOverMonth->UseVisualStyleBackColor = true;
-			//this->BtnSalesOverMonth->Click += gcnew System::EventHandler(this, &ListStats::BtnSalesOverMonth_Click);
 			// 
 			// ListStats
 			// 
@@ -249,7 +249,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->LbAverageCart);
 			this->Controls->Add(this->Title);
 			this->Name = L"ListStats";
-			this->Text = L"Stats";
+			this->Text = L"Statistiques";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVTop10LessBuyArticles))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();

@@ -133,6 +133,7 @@ namespace A2ProjetBloc2 {
 			this->BtnArticleForm->TabIndex = 5;
 			this->BtnArticleForm->Text = L"Liste des Articles";
 			this->BtnArticleForm->UseVisualStyleBackColor = true;
+			this->BtnArticleForm->Click += gcnew System::EventHandler(this, &Menu::BtnArticleForm_Click);
 			// 
 			// BtnStats
 			// 
@@ -187,5 +188,9 @@ namespace A2ProjetBloc2 {
 		ListStats^ listStatsForm = gcnew ListStats(mabdd);
 		listStatsForm->ShowDialog();
 	}
+private: System::Void BtnArticleForm_Click(System::Object^ sender, System::EventArgs^ e) {
+	ListArticles^ listArticlesForm = gcnew ListArticles(mabdd);
+	listArticlesForm->ShowDialog();
+}
 };
 }

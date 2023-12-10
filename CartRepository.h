@@ -15,15 +15,14 @@ public:
 	CartRepository(BDD^ bdd) : bdd(bdd) {
 	}
 	List<Command^>^ getArticle(String^ referenceCommand) {
-		DataSet^ ds = bdd->executeQuery("SELECT ao.*,art.* FROM [Article_Order] ao LEFT JOIN [Article] art ON ao.[ID_Article] = art.[ID_Article] WHERE Reference = '" + referenceCommand + "'");
+		DataSet^ ds = bdd->executeQuery("SELECT ao.ID_Article, art.NameArticle, ao.QuantityArticle , art.PriceATI FROM [Article_Order] ao LEFT JOIN [Article] art ON ao.[ID_Article] = art.[ID_Article] WHERE Reference = '" + referenceCommand + "'");
 
 		List<Command^>^ list = gcnew List<Command^>();
 		Command^ cmd = nullptr;
 		for each (DataRow ^ row in ds->Tables[0]->Rows)
 		{
-			if (cmd == nullptr || !cmd->getReference()->Equals(row["Reference"])) {
+			if (!row->IsNull("ID_Article")) {
 				cmd = gcnew Command();
-				cmd->setReference((String^)row["Reference"]);
 				cmd->setIdArticle((String^)row["ID_Article"]);
 				cmd->setQuantity((int)row["QuantityArticle"]);
 				list->Add(cmd);

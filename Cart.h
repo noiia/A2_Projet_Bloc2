@@ -42,9 +42,6 @@ namespace A2ProjetBloc2 {
 			reloadMutex = gcnew System::Threading::Mutex();
 
 			DGVCart->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
-			DataGridViewTextBoxColumn^ dgvtbcReference = gcnew DataGridViewTextBoxColumn();
-			dgvtbcReference->Name = "Références";
-			this->DGVCart->Columns->Add(dgvtbcReference);
 			DataGridViewTextBoxColumn^ dgvtbcNameArticle = gcnew DataGridViewTextBoxColumn();
 			dgvtbcNameArticle->Name = "Nom de l'article";
 			this->DGVCart->Columns->Add(dgvtbcNameArticle);
@@ -71,10 +68,6 @@ namespace A2ProjetBloc2 {
 				this->DGVCart->Rows->Clear();
 				for each (Command ^ a in articles) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-
-					DataGridViewTextBoxCell^ dgvcReference = gcnew DataGridViewTextBoxCell();
-					dgvcReference->Value = a->getReference();
-					dgvr->Cells->Add(dgvcReference);
 					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
 					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
 					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
@@ -163,6 +156,7 @@ namespace A2ProjetBloc2 {
 			   this->Title->Name = L"Title";
 			   this->Title->Size = System::Drawing::Size(0, 28);
 			   this->Title->TabIndex = 0;
+			   this->Title->Text = "Commande " + command->getReference();
 			   // 
 			   // BtnAddArticle
 			   // 
@@ -276,7 +270,6 @@ namespace A2ProjetBloc2 {
 		Command^ addArticle = gcnew Command();
 		AddArticleToCommand^ formAddArticleToCommand = gcnew AddArticleToCommand(mabdd, addArticle, command->getReference(), false);
 		formAddArticleToCommand->ShowDialog();
-		System::Diagnostics::Debug::WriteLine(addArticle);
 		cartRepository->insertArticle(addArticle);
 		this->reload();
 	}

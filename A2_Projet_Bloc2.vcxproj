@@ -261,6 +261,9 @@
     <EmbeddedResource Include="ListStaff.resx">
       <DependentUpon>ListStaff.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListStat.resx">
+      <DependentUpon>ListStat.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.h</DependentUpon>
     </EmbeddedResource>
