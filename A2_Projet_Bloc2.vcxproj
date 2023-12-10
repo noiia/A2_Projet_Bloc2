@@ -120,6 +120,7 @@
     <ClCompile Include="AddArticle.cpp" />
     <ClCompile Include="AddArticleToCommand.cpp" />
     <ClCompile Include="AddClient.cpp" />
+    <ClCompile Include="ArticleBeforeRestockingTreshold.cpp" />
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="AddStaff.cpp" />
     <ClCompile Include="BDD.cpp" />
@@ -128,9 +129,14 @@
     <ClCompile Include="ListClient.cpp" />
     <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="ListStaff.cpp" />
+    <ClCompile Include="ListStat.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PaymentForm.cpp" />
+    <ClCompile Include="SalesOverMonth.cpp" />
+    <ClCompile Include="Top10BestBuyArticles.cpp" />
+    <ClCompile Include="Top10LessBuyArticles.cpp" />
+    <ClCompile Include="TotalValuePurchaseClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AAtoCRepository.h" />
@@ -150,6 +156,9 @@
     <ClInclude Include="AddressesRepository.h" />
     <ClInclude Include="AddressToCommandRepository.h" />
     <ClInclude Include="Article.h" />
+    <ClInclude Include="ArticlesBelowRestockingTreshold.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="ArticleRepository.h" />
     <ClInclude Include="Cart.h">
       <FileType>CppForm</FileType>
@@ -182,6 +191,9 @@
     <ClInclude Include="ListStaff.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="ListStat.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h">
       <FileType>CppForm</FileType>
@@ -189,8 +201,20 @@
     <ClInclude Include="PaymentForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="SalesOverMonth.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Staff.h" />
     <ClInclude Include="StaffRepository.h" />
+    <ClInclude Include="Top10BestBuyArticles.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Top10LessBuyArticles.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="TotalValuePurchaseClient.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -242,6 +266,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PaymentForm.resx">
       <DependentUpon>PaymentForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesOverMonth.resx">
+      <DependentUpon>SalesOverMonth.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TotalValuePurchaseClient.resx">
+      <DependentUpon>TotalValuePurchaseClient.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@
 #include "CommandHistory.h"
 #include "ListClient.h"
 #include "ListStaff.h"
+#include "ListStat.h"
 
 namespace A2ProjetBloc2 {
 
@@ -91,7 +92,7 @@ namespace A2ProjetBloc2 {
 			this->BtnStaffList->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnStaffList->Location = System::Drawing::Point(74, 115);
-			this->BtnStaffList->Name = L"BtnEquipeList";
+			this->BtnStaffList->Name = L"BtnStaffList";
 			this->BtnStaffList->Size = System::Drawing::Size(184, 61);
 			this->BtnStaffList->TabIndex = 1;
 			this->BtnStaffList->Text = L"Liste des Employés";
@@ -132,7 +133,6 @@ namespace A2ProjetBloc2 {
 			this->BtnArticleForm->TabIndex = 5;
 			this->BtnArticleForm->Text = L"Liste des Articles";
 			this->BtnArticleForm->UseVisualStyleBackColor = true;
-			this->BtnArticleForm->Click += gcnew System::EventHandler(this, &Menu::BtnNewArticleForm_Click);
 			// 
 			// BtnStats
 			// 
@@ -144,13 +144,12 @@ namespace A2ProjetBloc2 {
 			this->BtnStats->TabIndex = 6;
 			this->BtnStats->Text = L"Statistiques";
 			this->BtnStats->UseVisualStyleBackColor = true;
+			this->BtnStats->Click += gcnew System::EventHandler(this, &Menu::BtnStats_Click);
 			// 
 			// Menu
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
 			this->ClientSize = System::Drawing::Size(571, 409);
 			this->Controls->Add(this->BtnStats);
 			this->Controls->Add(this->BtnArticleForm);
@@ -158,7 +157,9 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->BtnBuyerList);
 			this->Controls->Add(this->BtnStaffList);
 			this->Controls->Add(this->Title);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MaximizeBox = false;
 			this->Name = L"Menu";
 			this->Text = L"Turbostock";
 			this->ResumeLayout(false);
@@ -182,5 +183,9 @@ namespace A2ProjetBloc2 {
 		ListStaff^ listStaffForm = gcnew ListStaff(mabdd);
 		listStaffForm->ShowDialog();
 		}
-	};
+	private: System::Void BtnStats_Click(System::Object^ sender, System::EventArgs^ e) {
+		ListStats^ listStatsForm = gcnew ListStats(mabdd);
+		listStatsForm->ShowDialog();
+	}
+};
 }
