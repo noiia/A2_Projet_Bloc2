@@ -37,34 +37,34 @@ namespace A2ProjetBloc2 {
 
 			reloadMutex = gcnew System::Threading::Mutex();
 
-			DGVSearchArticle->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			DGVListClient->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
 			dgvtbcIdArticle->Name = "Références";
-			this->DGVSearchArticle->Columns->Add(dgvtbcIdArticle);
+			this->DGVListClient->Columns->Add(dgvtbcIdArticle);
 			DataGridViewTextBoxColumn^ dgvtbcName = gcnew DataGridViewTextBoxColumn();
 			dgvtbcName->Name = "Nom";
-			this->DGVSearchArticle->Columns->Add(dgvtbcName);
+			this->DGVListClient->Columns->Add(dgvtbcName);
 			DataGridViewTextBoxColumn^ dgvtbcType = gcnew DataGridViewTextBoxColumn();
 			dgvtbcType->Name = "Type";
-			this->DGVSearchArticle->Columns->Add(dgvtbcType);
+			this->DGVListClient->Columns->Add(dgvtbcType);
 			DataGridViewTextBoxColumn^ dgvtbcPriceWT = gcnew DataGridViewTextBoxColumn();
 			dgvtbcPriceWT->Name = "Prix HT";
-			this->DGVSearchArticle->Columns->Add(dgvtbcPriceWT);
+			this->DGVListClient->Columns->Add(dgvtbcPriceWT);
 			DataGridViewTextBoxColumn^ dgvtbcVAT = gcnew DataGridViewTextBoxColumn();
 			dgvtbcVAT->Name = "TVA";
-			this->DGVSearchArticle->Columns->Add(dgvtbcVAT);
+			this->DGVListClient->Columns->Add(dgvtbcVAT);
 			DataGridViewTextBoxColumn^ dgvtbcPriceATI = gcnew DataGridViewTextBoxColumn();
 			dgvtbcPriceATI->Name = "Prix TTC";
-			this->DGVSearchArticle->Columns->Add(dgvtbcPriceATI);
+			this->DGVListClient->Columns->Add(dgvtbcPriceATI);
 			DataGridViewTextBoxColumn^ dgvtbcStock = gcnew DataGridViewTextBoxColumn();
 			dgvtbcStock->Name = "Stock";
-			this->DGVSearchArticle->Columns->Add(dgvtbcStock);
+			this->DGVListClient->Columns->Add(dgvtbcStock);
 			DataGridViewTextBoxColumn^ dgvtbcTresholdLimit = gcnew DataGridViewTextBoxColumn();
 			dgvtbcTresholdLimit->Name = "Limite avant réapprovisionnement";
-			this->DGVSearchArticle->Columns->Add(dgvtbcTresholdLimit);
+			this->DGVListClient->Columns->Add(dgvtbcTresholdLimit);
 			DataGridViewTextBoxColumn^ dgvtbcTresholdDate = gcnew DataGridViewTextBoxColumn();
 			dgvtbcTresholdDate->Name = "Date de réapprovisionnement";
-			this->DGVSearchArticle->Columns->Add(dgvtbcTresholdDate);
+			this->DGVListClient->Columns->Add(dgvtbcTresholdDate);
 
 			articleRepository = gcnew ArticleRepository(mabdd);
 			
@@ -75,7 +75,7 @@ namespace A2ProjetBloc2 {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
 				System::Collections::Generic::List<Article^>^ articles = articleRepository->getArticle(this->CboxDeletedLines->Checked);
-				this->DGVSearchArticle->Rows->Clear();
+				this->DGVListClient->Rows->Clear();
 				for each (Article ^ a in articles) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
 					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
@@ -107,7 +107,7 @@ namespace A2ProjetBloc2 {
 					dgvcRestockingDate->Value = restockingDate->ToString("yyyy-MM-dd");
 					dgvr->Cells->Add(dgvcRestockingDate);
 					dgvr->Tag = a;
-					this->DGVSearchArticle->Rows->Add(dgvr);
+					this->DGVListClient->Rows->Add(dgvr);
 
 
 					this->BtnDelete->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -150,7 +150,7 @@ namespace A2ProjetBloc2 {
 		}
 	private: System::Windows::Forms::Button^ BtnModify;
 			 System::Windows::Forms::Button^ BtnAddArticle;
-			 System::Windows::Forms::DataGridView^ DGVSearchArticle;
+			 System::Windows::Forms::DataGridView^ DGVListClient;
 			 System::Windows::Forms::Label^ Title;			
 		/// <summary>
 		/// Variable nécessaire au concepteur.
@@ -167,11 +167,11 @@ namespace A2ProjetBloc2 {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ListArticles::typeid));
 			this->BtnModify = (gcnew System::Windows::Forms::Button());
 			this->BtnAddArticle = (gcnew System::Windows::Forms::Button());
-			this->DGVSearchArticle = (gcnew System::Windows::Forms::DataGridView());
+			this->DGVListClient = (gcnew System::Windows::Forms::DataGridView());
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->BtnDelete = (gcnew System::Windows::Forms::Button());
 			this->CboxDeletedLines = (gcnew System::Windows::Forms::CheckBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVListClient))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// BtnModify
@@ -200,12 +200,12 @@ namespace A2ProjetBloc2 {
 			// 
 			// DGVSearchArticle
 			// 
-			this->DGVSearchArticle->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->DGVSearchArticle->Location = System::Drawing::Point(26, 56);
-			this->DGVSearchArticle->Name = L"DGVSearchArticle";
-			this->DGVSearchArticle->Size = System::Drawing::Size(944, 526);
-			this->DGVSearchArticle->TabIndex = 25;
-			this->DGVSearchArticle->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
+			this->DGVListClient->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->DGVListClient->Location = System::Drawing::Point(26, 56);
+			this->DGVListClient->Name = L"DGVSearchArticle";
+			this->DGVListClient->Size = System::Drawing::Size(944, 526);
+			this->DGVListClient->TabIndex = 25;
+			this->DGVListClient->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
 			// 
 			// Title
 			// 
@@ -242,12 +242,12 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->BtnDelete);
 			this->Controls->Add(this->BtnModify);
 			this->Controls->Add(this->BtnAddArticle);
-			this->Controls->Add(this->DGVSearchArticle);
+			this->Controls->Add(this->DGVListClient);
 			this->Controls->Add(this->Title);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"ListArticles";
 			this->Text = L"TurboStock";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchArticle))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVListClient))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -263,7 +263,7 @@ namespace A2ProjetBloc2 {
 	
 	private: System::Void DGVSearchArticle_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 		if (e->RowIndex >= 0) {
-			DataGridViewRow^ sharedDgvrRow = DGVSearchArticle->Rows[e->RowIndex];
+			DataGridViewRow^ sharedDgvrRow = DGVListClient->Rows[e->RowIndex];
 			sharedA = (Article^)sharedDgvrRow->Tag;
 			System::Diagnostics::Debug::WriteLine("cliqué sur " + sharedA->ToString());
 
@@ -280,9 +280,9 @@ namespace A2ProjetBloc2 {
 		formModifArticle->ShowDialog();
 		articleRepository->editArticle(sharedA);
 
-		int selected = this->DGVSearchArticle->SelectedRows[0]->Index;
+		int selected = this->DGVListClient->SelectedRows[0]->Index;
 		this->reload();
-		this->DGVSearchArticle->Rows[selected]->Selected = true;
+		this->DGVListClient->Rows[selected]->Selected = true;
 	}
 
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
