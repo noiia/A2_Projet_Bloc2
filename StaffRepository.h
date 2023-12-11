@@ -21,7 +21,7 @@ public:
 			FROM Staff s\
 			LEFT JOIN address_Staff astaff ON s.ID_Staff = astaff.ID_Staff\
 			LEFT JOIN Address a ON astaff.ID_Address = a.ID_Address\
-			WHERE s.Del = 0");
+			WHERE s.Del = '" + delState + "'");
 
 
 		List<Staff^>^ list = gcnew List<Staff^>();

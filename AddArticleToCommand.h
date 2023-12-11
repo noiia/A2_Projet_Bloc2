@@ -6,6 +6,7 @@
 #include "Article.h"
 #include "Command.h"
 #include "AAtoCRepository.h"
+#include "CartRepository.h"
 
 namespace A2ProjetBloc2 {
 
@@ -29,6 +30,7 @@ namespace A2ProjetBloc2 {
 		String^ sharedSearchedValue = "";
 		Article^ clickedArticle;
 		Command^ command;
+		CartRepository^ cartRepository;
 		String^ commandReference;
 		bool clicked = false;
 		int research = 0;
@@ -124,6 +126,7 @@ namespace A2ProjetBloc2 {
 					dgvr->Tag = a;
 					this->DGVArticle->Rows->Add(dgvr);
 				}
+				cartRepository = gcnew CartRepository(mabdd);
 				reloadMutex->ReleaseMutex();
 			}
 		}
@@ -393,6 +396,8 @@ namespace A2ProjetBloc2 {
 		Diagnostics::Debug::WriteLine(this->command->getIdArticle());
 		this->command->setReference(commandReference);
 		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
+		this->clickedArticle->setStock(this->clickedArticle->getStock() - Convert::ToInt32(this->NudQuantity->Value));
+		cartRepository->editArticle(clickedArticle);
 		this->Close();
 	}
 };

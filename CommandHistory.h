@@ -8,6 +8,7 @@
 #include "Cart.h"
 #include "Command.h"
 #include "CHistoryRepository.h"
+#include "PaymentForm.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -199,6 +200,7 @@ namespace A2ProjetBloc2 {
 			   this->DGVOrderHistory->ReadOnly = true;
 			   this->DGVOrderHistory->Size = System::Drawing::Size(818, 486);
 			   this->DGVOrderHistory->TabIndex = 25;
+			   this->DGVOrderHistory->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &CommandHistory::DGVOrderHistory_CellMouseDoubleClick);
 			   this->DGVOrderHistory->RowEnter += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CommandHistory::DGVOrderHistory_RowEnter);
 			   // 
 			   // CboxDeletedLines
@@ -231,8 +233,6 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(9, 17);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->MaximizeBox = false;
 			   this->AutoSize = true;
 			   this->ClientSize = System::Drawing::Size(1100, 700);
 			   this->Controls->Add(this->BtnAddCommand);
@@ -241,9 +241,11 @@ namespace A2ProjetBloc2 {
 			   this->Controls->Add(this->DGVOrderHistory);
 			   this->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 10.5F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			   this->Location = System::Drawing::Point(317, 9);
 			   this->Margin = System::Windows::Forms::Padding(8, 6, 8, 6);
+			   this->MaximizeBox = false;
 			   this->Name = L"CommandHistory";
 			   this->Text = L"CommandHistory";
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVOrderHistory))->EndInit();
@@ -277,6 +279,7 @@ namespace A2ProjetBloc2 {
 			Cart^ cartForm = gcnew Cart(mabdd, addClient);
 			cartForm->ShowDialog();
 		}
+		this->reload();
 	}
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
@@ -294,5 +297,7 @@ namespace A2ProjetBloc2 {
 
 		}
 	}
-	};
+	private: System::Void DGVOrderHistory_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+	}
+};
 }

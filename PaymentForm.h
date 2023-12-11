@@ -24,12 +24,17 @@ namespace A2ProjetBloc2 {
 		CartRepository^ cartRepository;
 		Thread^ reloadThread;
 		Command^ command;
-		System::Threading::Mutex^ reloadMutex;
+		float totalAmount;
+	private: System::Windows::Forms::NumericUpDown^ NudFirstMonth;
+	private: System::Windows::Forms::NumericUpDown^ NudSecondMonth;
+	private: System::Windows::Forms::NumericUpDown^ NudThirdMonth;
+		   System::Threading::Mutex^ reloadMutex;
 	public:
 		PaymentForm(BDD^ mabdd, Command^ command)
 		{
 			this->command = command;
 			this->mabdd = mabdd;
+			totalAmount = this->command->getCommandAmount();
 			InitializeComponent();
 			//
 			//TODO: ajoutez ici le code du constructeur
@@ -184,8 +189,14 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 			this->NudNumberOfPayment = (gcnew System::Windows::Forms::NumericUpDown());
 			this->BtnModifyCommand = (gcnew System::Windows::Forms::Button());
 			this->BtnPayment = (gcnew System::Windows::Forms::Button());
+			this->NudFirstMonth = (gcnew System::Windows::Forms::NumericUpDown());
+			this->NudSecondMonth = (gcnew System::Windows::Forms::NumericUpDown());
+			this->NudThirdMonth = (gcnew System::Windows::Forms::NumericUpDown());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVCart))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudNumberOfPayment))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudFirstMonth))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudSecondMonth))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudThirdMonth))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// Title
@@ -261,11 +272,11 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 			// 
 			// DtpSecondPayment
 			// 
+			this->DtpSecondPayment->Enabled = false;
 			this->DtpSecondPayment->Location = System::Drawing::Point(301, 402);
 			this->DtpSecondPayment->Name = L"DtpSecondPayment";
 			this->DtpSecondPayment->Size = System::Drawing::Size(200, 20);
 			this->DtpSecondPayment->TabIndex = 4;
-			this->DtpSecondPayment->Enabled = false;
 			// 
 			// LbThirdPayment
 			// 
@@ -280,11 +291,11 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 			// 
 			// DtpThirdPayment
 			// 
+			this->DtpThirdPayment->Enabled = false;
 			this->DtpThirdPayment->Location = System::Drawing::Point(569, 402);
 			this->DtpThirdPayment->Name = L"DtpThirdPayment";
 			this->DtpThirdPayment->Size = System::Drawing::Size(200, 20);
 			this->DtpThirdPayment->TabIndex = 5;
-			this->DtpThirdPayment->Enabled = false;
 			// 
 			// LbRemember
 			// 
@@ -333,7 +344,7 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 			// 
 			this->BtnModifyCommand->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnModifyCommand->Location = System::Drawing::Point(79, 466);
+			this->BtnModifyCommand->Location = System::Drawing::Point(82, 501);
 			this->BtnModifyCommand->Name = L"BtnModifyCommand";
 			this->BtnModifyCommand->Size = System::Drawing::Size(117, 41);
 			this->BtnModifyCommand->TabIndex = 6;
@@ -345,7 +356,7 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 			// 
 			this->BtnPayment->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->BtnPayment->Location = System::Drawing::Point(601, 466);
+			this->BtnPayment->Location = System::Drawing::Point(604, 501);
 			this->BtnPayment->Name = L"BtnPayment";
 			this->BtnPayment->Size = System::Drawing::Size(117, 41);
 			this->BtnPayment->TabIndex = 7;
@@ -353,11 +364,44 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 			this->BtnPayment->UseVisualStyleBackColor = true;
 			this->BtnPayment->Click += gcnew System::EventHandler(this, &PaymentForm::BtnPayment_Click);
 			// 
+			// NudFirstMonth
+			// 
+			this->NudFirstMonth->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->NudFirstMonth->Location = System::Drawing::Point(38, 448);
+			this->NudFirstMonth->Name = L"NudFirstMonth";
+			this->NudFirstMonth->Size = System::Drawing::Size(199, 26);
+			this->NudFirstMonth->TabIndex = 15;
+			// 
+			// NudSecondMonth
+			// 
+			this->NudSecondMonth->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->NudSecondMonth->Location = System::Drawing::Point(302, 448);
+			this->NudSecondMonth->Name = L"NudSecondMonth";
+			this->NudSecondMonth->Size = System::Drawing::Size(199, 26);
+			this->NudSecondMonth->TabIndex = 16;
+			// 
+			// NudThirdMonth
+			// 
+			this->NudThirdMonth->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->NudThirdMonth->Location = System::Drawing::Point(569, 448);
+			this->NudThirdMonth->Name = L"NudThirdMonth";
+			this->NudThirdMonth->Size = System::Drawing::Size(200, 26);
+			this->NudThirdMonth->TabIndex = 17;
+			this->NudFirstMonth->Maximum = Convert::ToDecimal(999999999);
+			this->NudSecondMonth->Maximum = Convert::ToDecimal(999999999);
+			this->NudThirdMonth->Maximum = Convert::ToDecimal(999999999);
+			// 
 			// PaymentForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(795, 537);
+			this->ClientSize = System::Drawing::Size(795, 569);
+			this->Controls->Add(this->NudThirdMonth);
+			this->Controls->Add(this->NudSecondMonth);
+			this->Controls->Add(this->NudFirstMonth);
 			this->Controls->Add(this->BtnPayment);
 			this->Controls->Add(this->BtnModifyCommand);
 			this->Controls->Add(this->NudNumberOfPayment);
@@ -379,6 +423,9 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 			this->Text = L"PaymentForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVCart))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudNumberOfPayment))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudFirstMonth))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudSecondMonth))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NudThirdMonth))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -390,44 +437,66 @@ private: System::Windows::Forms::NumericUpDown^ NudNumberOfPayment;
 private: System::Void BtnPayment_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->command->setPaymentMode(this->TboxPaymentType->Text);
 	this->command->setNumberOfPayment(Convert::ToSingle(this->NudNumberOfPayment->Value));
-	if (Convert::ToSingle(this->NudNumberOfPayment->Value) == 1) {
-		String^ firstDateString = this->DtpFirstPayment->Value.ToString("yyyy-MM-dd");
-		DateTime firstDate = DateTime::ParseExact(firstDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-		this->command->setFirstPayment(firstDate);
-	}
-	else if (Convert::ToSingle(this->NudNumberOfPayment->Value) == 2) {
-		String^ firstDateString = this->DtpFirstPayment->Value.ToString("yyyy-MM-dd");
-		DateTime firstDate = DateTime::ParseExact(firstDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-		this->command->setFirstPayment(firstDate);
-		String^ secondDateString = this->DtpSecondPayment->Value.ToString("yyyy-MM-dd");
-		DateTime secondDate = DateTime::ParseExact(secondDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-		this->command->setFirstPayment(secondDate);
-	}
-	else if (Convert::ToSingle(this->NudNumberOfPayment->Value) == 3) {
-		String^ firstDateString = this->DtpFirstPayment->Value.ToString("yyyy-MM-dd");
-		DateTime firstDate = DateTime::ParseExact(firstDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-		this->command->setFirstPayment(firstDate);
-		String^ secondDateString = this->DtpSecondPayment->Value.ToString("yyyy-MM-dd");
-		DateTime secondDate = DateTime::ParseExact(secondDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-		this->command->setFirstPayment(secondDate);
-		String^ thirdDateString = this->DtpThirdPayment->Value.ToString("yyyy-MM-dd");
-		DateTime thirdDate = DateTime::ParseExact(thirdDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
-		this->command->setFirstPayment(thirdDate);
-	}
 
+	switch (Convert::ToInt32(this->NudNumberOfPayment->Value)) {
+	case 3:{
+		String ^ thirdDateString = this->DtpThirdPayment->Value.ToString("yyyy-MM-dd");
+		DateTime thirdDate = DateTime::ParseExact(thirdDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+		this->command->setThirdPayment(thirdDate);
+		this->command->setThirdAmount(Convert::ToSingle(this->NudThirdMonth->Value));
+		//fall through
+	}case 2: {
+		String ^ secondDateString = this->DtpSecondPayment->Value.ToString("yyyy-MM-dd");
+		DateTime secondDate = DateTime::ParseExact(secondDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+		this->command->setSecondPayment(secondDate);
+		this->command->setSecondAmount(Convert::ToSingle(this->NudSecondMonth->Value));
+		//fall through
+	}case 1: {
+		String^ firstDateString = this->DtpFirstPayment->Value.ToString("yyyy-MM-dd");
+		DateTime firstDate = DateTime::ParseExact(firstDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+		this->command->setFirstPayment(firstDate);
+		this->command->setFirstAmount(Convert::ToSingle(this->NudFirstMonth->Value));
+		//fall through
+	}
+	default:
+		break;
+	};
 	this->Close();
 }
 private: System::Void NudNumberOfPayment_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (Convert::ToSingle(this->NudNumberOfPayment->Value) == 1) {
-		this->DtpSecondPayment->Enabled = false;
-		this->DtpThirdPayment->Enabled = false;
-	}else if(Convert::ToSingle(this->NudNumberOfPayment->Value) == 2) {
-		this->DtpSecondPayment->Enabled = true;
-		this->DtpThirdPayment->Enabled = false;
-	}else if(Convert::ToSingle(this->NudNumberOfPayment->Value) == 3) {
+	switch (Convert::ToInt32(this->NudNumberOfPayment->Value)) {
+	case 3: {
 		this->DtpSecondPayment->Enabled = true;
 		this->DtpThirdPayment->Enabled = true;
-	}
+		this->NudSecondMonth->Enabled = true;
+		this->NudThirdMonth->Enabled = true;
+		this->NudFirstMonth->Value = Convert::ToDecimal(totalAmount / 3);
+		this->NudSecondMonth->Value = Convert::ToDecimal(totalAmount / 3);
+		this->NudThirdMonth->Value = Convert::ToDecimal(totalAmount / 3);
+		break;
+	}case 2: {
+		this->DtpSecondPayment->Enabled = true;
+		this->NudSecondMonth->Enabled = true;
+		this->NudThirdMonth->Enabled = false;
+		this->DtpThirdPayment->Enabled = false;
+		this->NudFirstMonth->Value = Convert::ToDecimal(totalAmount / 2);
+		this->NudSecondMonth->Value = Convert::ToDecimal(totalAmount / 2);
+		this->NudThirdMonth->Value = 0;
+
+		break;
+	}case 1: {
+		this->NudSecondMonth->Enabled = false;
+		this->DtpThirdPayment->Enabled = false;
+		this->DtpSecondPayment->Enabled = false;
+		this->DtpThirdPayment->Enabled = false;
+		this->NudFirstMonth->Value = Convert::ToDecimal(totalAmount);
+		this->NudSecondMonth->Value = 0;
+		this->NudThirdMonth->Value = 0;
+
+		break;
+	}default:
+		break;
+	};
 }
 };
 }

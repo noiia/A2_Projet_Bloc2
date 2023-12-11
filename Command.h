@@ -36,9 +36,16 @@ private:
 
 	String^ paymentMode;
 	int numberOfPayment;
+	float commandAmount;
+	float firstAmount;
+	float secondAmount;
+	float thirdAmount;
 	DateTime^ firstPayment;
 	DateTime^ secondPayment;
 	DateTime^ thirdPayment;
+	DateTime^ firstPaymentReception;
+	DateTime^ secondPaymentReception;
+	DateTime^ thirdPaymentReception;
 
 	List<Article^>^ articles = gcnew List<Article^>();
 	List<Client^>^ clients = gcnew List<Client^>();
@@ -205,6 +212,49 @@ public:
 	DateTime^ getThirdPayment() {
 		return this->thirdPayment;
 	}
+	void setFirstPaymentReception(DateTime^ firstPaymentReception) {
+		this->firstPaymentReception = firstPaymentReception;
+	}
+	DateTime^ getFirstPaymentReception() {
+		return this->firstPaymentReception;
+	}
+	void setSecondPaymentReception(DateTime^ secondPaymentReception) {
+		this->secondPaymentReception = secondPaymentReception;
+	}
+	DateTime^ getSecondPaymentReception() {
+		return this->secondPaymentReception;
+	}
+	void setThirdPaymentReception(DateTime^ thirdPaymentReception) {
+		this->thirdPaymentReception = thirdPaymentReception;
+	}
+	DateTime^ getThirdPaymentReception() {
+		return this->thirdPaymentReception;
+	}
+	void setFirstAmount(float firstAmount) {
+		this->firstAmount = firstAmount;
+	}
+	float getFirstAmount() {
+		return firstAmount;
+	}
+	void setSecondAmount(float secondAmount) {
+		this->secondAmount = secondAmount;
+	}
+	float getSecondAmount() {
+		return secondAmount;
+	}
+	void setThirdAmount(float thirdAmount) {
+		this->thirdAmount = thirdAmount;
+	}
+	float getThirdAmount() {
+		return thirdAmount;
+	}
+	void setCommandAmount(float commandAmount) {
+		this->commandAmount = commandAmount;
+	}
+	float getCommandAmount() {
+		return commandAmount;
+	}
+
 
 	List<Article^>^ getArticle() {
 		return this->articles;

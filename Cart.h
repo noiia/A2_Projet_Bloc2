@@ -27,6 +27,7 @@ namespace A2ProjetBloc2 {
 		Command^ sharedA;
 		Thread^ reloadThread;
 		Command^ command;
+		float totalCart;
 	private: System::Windows::Forms::Button^ BtnReturn;
 
 		   System::Threading::Mutex^ reloadMutex;
@@ -93,7 +94,9 @@ namespace A2ProjetBloc2 {
 
 					dgvr->Tag = a;
 					this->DGVCart->Rows->Add(dgvr);
-
+					totalCart += Convert::ToSingle(dgvcTotal->Value);
+					this->LbTotal->Text = "Sous-total : " + totalCart + " €";
+					command->setCommandAmount(totalCart);
 				}
 				reloadMutex->ReleaseMutex();
 			}
@@ -274,6 +277,8 @@ namespace A2ProjetBloc2 {
 	private: System::Void BtnPayCart_Click(System::Object^ sender, System::EventArgs^ e) {
 		PaymentForm^ formPayment = gcnew PaymentForm(mabdd, command);
 		formPayment->ShowDialog();
+		cartRepository->insertCommand(this->command->getNumberOfPayment(), command);
+		this->Close();
 	}
 	private: System::Void BtnReturn_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (this->DGVCart->RowCount < 1) {
