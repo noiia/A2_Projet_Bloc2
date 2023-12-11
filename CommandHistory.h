@@ -4,10 +4,12 @@
 #include <mutex>
 #include "BDD.h"
 #include "ClientFinder.h"
-#include "CommandAddress.h"
+#include "AddAddressToCommand.h"
 #include "Cart.h"
+#include "Command.h"
 #include "CHistoryRepository.h"
-
+#include "PaymentForm.h"
+#include "FormVisioCommand.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -26,6 +28,7 @@ namespace A2ProjetBloc2 {
 		BDD^ mabdd;
 		bool delOrRestore;
 		CHistory^ sharedComHist;
+		Command^ addClient;
 		CHistoryRepository^ cHistoryRepository;
 		System::Threading::Mutex^ reloadMutex;
 		System::Windows::Forms::CheckBox^ CboxDeletedLines;
@@ -198,6 +201,7 @@ namespace A2ProjetBloc2 {
 			   this->DGVOrderHistory->ReadOnly = true;
 			   this->DGVOrderHistory->Size = System::Drawing::Size(818, 486);
 			   this->DGVOrderHistory->TabIndex = 25;
+			   this->DGVOrderHistory->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &CommandHistory::DGVOrderHistory_CellMouseDoubleClick);
 			   this->DGVOrderHistory->RowEnter += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CommandHistory::DGVOrderHistory_RowEnter);
 			   // 
 			   // CboxDeletedLines
@@ -230,8 +234,6 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(9, 17);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->MaximizeBox = false;
 			   this->AutoSize = true;
 			   this->ClientSize = System::Drawing::Size(1100, 700);
 			   this->Controls->Add(this->BtnAddCommand);
@@ -240,9 +242,11 @@ namespace A2ProjetBloc2 {
 			   this->Controls->Add(this->DGVOrderHistory);
 			   this->Font = (gcnew System::Drawing::Font(L"Orkney Medium", 10.5F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			   this->Location = System::Drawing::Point(317, 9);
 			   this->Margin = System::Windows::Forms::Padding(8, 6, 8, 6);
+			   this->MaximizeBox = false;
 			   this->Name = L"CommandHistory";
 			   this->Text = L"CommandHistory";
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVOrderHistory))->EndInit();
@@ -250,18 +254,33 @@ namespace A2ProjetBloc2 {
 			   this->PerformLayout();
 
 		   }
+		   
 #pragma endregion
+	String^ generateCommandReference() {
+		int value = -1;
+		String^ generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
+		do {
+			value++;
+			generatedValue = addClient->getFirstNameClient()->Substring(0, 2) + addClient->getLastNameClient()->Substring(0, 2) + addClient->getDeliveryDate()->ToString("yyyy") + addClient->getNameCityDelivery()->Substring(0, 3) + value;
+			Diagnostics::Debug::WriteLine(generatedValue);
+		} while (cHistoryRepository->referenceAlreadyExist(generatedValue));
+		return generatedValue;
+	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
-		Command^ addClient = gcnew Command();
+		addClient = gcnew Command();
 		ClientFinder^ clientFinderForm = gcnew ClientFinder(mabdd, addClient);
 		clientFinderForm->ShowDialog();
 		int tempo = addClient->getIdClient();
 		if (tempo > 0) {
-		//CommandAddress^ cartCommandAddress = gcnew CommandAddress(mabdd, addClient);
-		//cartCommandAddress->ShowDialog();
+			AddAddressToCommand^ cartCommandAddress = gcnew AddAddressToCommand(mabdd, addClient);
+			cartCommandAddress->ShowDialog();
+			addClient->setReference(generateCommandReference());
+			cHistoryRepository->insertOrdering(addClient);
+			Diagnostics::Debug::WriteLine(addClient);
 			Cart^ cartForm = gcnew Cart(mabdd, addClient);
 			cartForm->ShowDialog();
 		}
+		this->reload();
 	}
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
@@ -279,5 +298,9 @@ namespace A2ProjetBloc2 {
 
 		}
 	}
-	};
+	private: System::Void DGVOrderHistory_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+		FormVisioCommand^ cartVisioCommand= gcnew FormVisioCommand(mabdd, sharedComHist->getIdCommand());
+		cartVisioCommand->ShowDialog();
+	}
+};
 }

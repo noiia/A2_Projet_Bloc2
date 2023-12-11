@@ -23,6 +23,7 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		Article^ sharedA;
+		bool clicked;
 		bool delOrRestore;
 		Thread^ reloadThread;
 		ArticleRepository^ articleRepository;
@@ -206,7 +207,7 @@ namespace A2ProjetBloc2 {
 			this->DGVSearchArticle->ReadOnly = true;
 			this->DGVSearchArticle->Size = System::Drawing::Size(944, 526);
 			this->DGVSearchArticle->TabIndex = 25;
-			this->DGVSearchArticle->RowEnter += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ListArticles::DGVSearchArticle_RowEnter);
+			this->DGVSearchArticle->CellMouseClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &ListArticles::DGVSearchArticle_CellMouseClick);
 			// 
 			// Title
 			// 
@@ -287,7 +288,7 @@ namespace A2ProjetBloc2 {
 	private: System::Void CboxDeletedLines_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 		this->reload();
 }
-private: System::Void DGVSearchArticle_RowEnter(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+private: System::Void DGVSearchArticle_CellMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
 	if (e->RowIndex >= 0) {
 		DataGridViewRow^ sharedDgvrRow = DGVSearchArticle->Rows[e->RowIndex];
 		sharedA = (Article^)sharedDgvrRow->Tag;

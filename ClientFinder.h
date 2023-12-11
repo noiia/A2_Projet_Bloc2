@@ -35,6 +35,12 @@ namespace A2ProjetBloc2 {
 		Command^ command;
 
 		System::Threading::Mutex^ reloadMutex;
+	    System::Windows::Forms::DateTimePicker^ DtpDelivery;
+	private: System::Windows::Forms::DateTimePicker^ DtpOrderDate;
+
+	    System::Windows::Forms::Label^ LbDeliveryDate;
+	private: System::Windows::Forms::Label^ LbTitle2;
+		   System::Windows::Forms::Label^ LbIssueDate;
 
 	public:
 		ClientFinder(BDD^ mabdd, Command^ command)
@@ -144,6 +150,7 @@ namespace A2ProjetBloc2 {
 		   /// </summary>
 		   void InitializeComponent(void)
 		   {
+			   System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ClientFinder::typeid));
 			   this->DGVSearchClient = (gcnew System::Windows::Forms::DataGridView());
 			   this->Title = (gcnew System::Windows::Forms::Label());
 			   this->LbClientSelected = (gcnew System::Windows::Forms::Label());
@@ -156,6 +163,11 @@ namespace A2ProjetBloc2 {
 			   this->TboxFirstName = (gcnew System::Windows::Forms::TextBox());
 			   this->LbFirstNameClient = (gcnew System::Windows::Forms::Label());
 			   this->LbOr = (gcnew System::Windows::Forms::Label());
+			   this->DtpDelivery = (gcnew System::Windows::Forms::DateTimePicker());
+			   this->DtpOrderDate = (gcnew System::Windows::Forms::DateTimePicker());
+			   this->LbDeliveryDate = (gcnew System::Windows::Forms::Label());
+			   this->LbIssueDate = (gcnew System::Windows::Forms::Label());
+			   this->LbTitle2 = (gcnew System::Windows::Forms::Label());
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchClient))->BeginInit();
 			   this->SuspendLayout();
 			   // 
@@ -170,14 +182,13 @@ namespace A2ProjetBloc2 {
 			   this->DGVSearchClient->Size = System::Drawing::Size(604, 430);
 			   this->DGVSearchClient->TabIndex = 0;
 			   this->DGVSearchClient->CellMouseDoubleClick += gcnew System::Windows::Forms::DataGridViewCellMouseEventHandler(this, &ClientFinder::DGVSearchClient_CellMouseDoubleClick);
-
 			   // 
 			   // Title
 			   // 
 			   this->Title->AutoSize = true;
 			   this->Title->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->Title->Location = System::Drawing::Point(407, 9);
+			   this->Title->Location = System::Drawing::Point(343, 9);
 			   this->Title->Name = L"Title";
 			   this->Title->Size = System::Drawing::Size(227, 29);
 			   this->Title->TabIndex = 2;
@@ -205,7 +216,6 @@ namespace A2ProjetBloc2 {
 			   this->BtnResearchClient->Text = L"Rechercher";
 			   this->BtnResearchClient->UseVisualStyleBackColor = true;
 			   this->BtnResearchClient->Click += gcnew System::EventHandler(this, &ClientFinder::BtnResearchClient_Click);
-
 			   // 
 			   // TboxLastName
 			   // 
@@ -231,14 +241,13 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->BtnAddCommand->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->BtnAddCommand->Location = System::Drawing::Point(842, 510);
+			   this->BtnAddCommand->Location = System::Drawing::Point(1102, 519);
 			   this->BtnAddCommand->Name = L"BtnAddCommand";
 			   this->BtnAddCommand->Size = System::Drawing::Size(111, 42);
 			   this->BtnAddCommand->TabIndex = 34;
 			   this->BtnAddCommand->Text = L"Ajouter";
 			   this->BtnAddCommand->UseVisualStyleBackColor = true;
 			   this->BtnAddCommand->Click += gcnew System::EventHandler(this, &ClientFinder::BtnAddClient_Click);
-
 			   // 
 			   // TboxIDClient
 			   // 
@@ -291,13 +300,59 @@ namespace A2ProjetBloc2 {
 			   this->LbOr->TabIndex = 41;
 			   this->LbOr->Text = L"Ou";
 			   // 
+			   // DtpDelivery
+			   // 
+			   this->DtpDelivery->Location = System::Drawing::Point(1024, 135);
+			   this->DtpDelivery->Name = L"DtpDelivery";
+			   this->DtpDelivery->Size = System::Drawing::Size(200, 20);
+			   this->DtpDelivery->TabIndex = 43;
+			   // 
+			   // DtpOrderDate
+			   // 
+			   this->DtpOrderDate->Location = System::Drawing::Point(1024, 226);
+			   this->DtpOrderDate->Name = L"DtpOrderDate";
+			   this->DtpOrderDate->Size = System::Drawing::Size(200, 20);
+			   this->DtpOrderDate->TabIndex = 44;
+			   // 
+			   // LbDeliveryDate
+			   // 
+			   this->LbDeliveryDate->AutoSize = true;
+			   this->LbDeliveryDate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->LbDeliveryDate->Location = System::Drawing::Point(1020, 101);
+			   this->LbDeliveryDate->Name = L"LbDeliveryDate";
+			   this->LbDeliveryDate->Size = System::Drawing::Size(133, 19);
+			   this->LbDeliveryDate->TabIndex = 45;
+			   this->LbDeliveryDate->Text = L"Date de livraison";
+			   // 
+			   // LbIssueDate
+			   // 
+			   this->LbIssueDate->AutoSize = true;
+			   this->LbIssueDate->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->LbIssueDate->Location = System::Drawing::Point(1020, 187);
+			   this->LbIssueDate->Name = L"LbIssueDate";
+			   this->LbIssueDate->Size = System::Drawing::Size(253, 19);
+			   this->LbIssueDate->TabIndex = 46;
+			   this->LbIssueDate->Text = L"Date d\'émission de la commande";
+			   // 
+			   // LbTitle2
+			   // 
+			   this->LbTitle2->AutoSize = true;
+			   this->LbTitle2->Font = (gcnew System::Drawing::Font(L"Orkney", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->LbTitle2->Location = System::Drawing::Point(1036, 39);
+			   this->LbTitle2->Name = L"LbTitle2";
+			   this->LbTitle2->Size = System::Drawing::Size(75, 29);
+			   this->LbTitle2->TabIndex = 47;
+			   this->LbTitle2->Text = L"Dates";
+			   // 
 			   // ClientFinder
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->MaximizeBox = false;
-			   this->ClientSize = System::Drawing::Size(1015, 589);
+			   this->ClientSize = System::Drawing::Size(1272, 589);
+			   this->Controls->Add(this->LbTitle2);
 			   this->Controls->Add(this->LbOr);
 			   this->Controls->Add(this->TboxFirstName);
 			   this->Controls->Add(this->LbFirstNameClient);
@@ -310,6 +365,13 @@ namespace A2ProjetBloc2 {
 			   this->Controls->Add(this->LbIdClient);
 			   this->Controls->Add(this->Title);
 			   this->Controls->Add(this->DGVSearchClient);
+			   this->Controls->Add(this->LbIssueDate);
+			   this->Controls->Add(this->LbDeliveryDate);
+			   this->Controls->Add(this->DtpOrderDate);
+			   this->Controls->Add(this->DtpDelivery);
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			   this->MaximizeBox = false;
 			   this->Name = L"ClientFinder";
 			   this->Text = L"ClientFinder";
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVSearchClient))->EndInit();
@@ -363,10 +425,16 @@ namespace A2ProjetBloc2 {
 			this->command->setIdClient(this->clickedClient->getID_Client());
 			this->command->setLastNameClient(this->clickedClient->getLastName());
 			this->command->setFirstNameClient(this->clickedClient->getFirstName());
+			String^ OrderDateString = this->DtpOrderDate->Value.ToString("yyyy-MM-dd");
+			DateTime OrderDate = DateTime::ParseExact(OrderDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+			this->command->setOrderDate(OrderDate);
+			String^ deliveryDateString = this->DtpDelivery->Value.ToString("yyyy-MM-dd");
+			DateTime deliveryDate = DateTime::ParseExact(deliveryDateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
+			this->command->setDeliveryDate(deliveryDate);
 			//this->command->setReference("");
 			//this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
 			this->Close();
 		}
 	}
-	};
+};
 }

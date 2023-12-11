@@ -1,59 +1,36 @@
 #pragma once
+#include "BDD.h"
+#include "Address.h"
 
-namespace A2ProjetBloc2 {
+using namespace  System::Collections::Generic;
 
-	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
+using namespace System;
+using namespace System::Data;
 
-	/// <summary>
-	/// Description résumée de CommandAddress
-	/// </summary>
-	public ref class CommandAddress : public System::Windows::Forms::Form
-	{
-	public:
-		CommandAddress(void)
+ref class AddressRepository
+{
+private:
+	BDD^ bdd;
+
+public:
+	AddressRepository(BDD^ bdd) :bdd(bdd) {
+	}
+	List<Address^>^ getAddress(bool delState) {
+		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Address]" + (delState ? "" : " WHERE Del = 0"));
+
+		List<Address^>^ list = gcnew List<Address^>();
+
+		for each (DataRow ^ row in ds->Tables[0]->Rows)
 		{
-			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
+			Address^ address = gcnew Address();
+			address->setID_Address((int)row[0]);
+			address->setNumber((String^)row[1]);
+			address->setAddition((String^)row[2]);
+			address->setNameStreet((String^)row[3]);
+			address->setNameCity((String^)row[4]);
+			address->setPostalCode((String^)row[5]);
+			list->Add(address);
 		}
-
-	protected:
-		/// <summary>
-		/// Nettoyage des ressources utilisées.
-		/// </summary>
-		~CommandAddress()
-		{
-			if (components)
-			{
-				delete components;
-			}
-		}
-
-	private:
-		/// <summary>
-		/// Variable nécessaire au concepteur.
-		/// </summary>
-		System::ComponentModel::Container ^components;
-
-#pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-		/// le contenu de cette méthode avec l'éditeur de code.
-		/// </summary>
-		void InitializeComponent(void)
-		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"CommandAddress";
-			this->Padding = System::Windows::Forms::Padding(0);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-		}
-#pragma endregion
-	};
-}
+		return list;
+	}
+};

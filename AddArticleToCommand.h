@@ -6,6 +6,7 @@
 #include "Article.h"
 #include "Command.h"
 #include "AAtoCRepository.h"
+#include "CartRepository.h"
 
 namespace A2ProjetBloc2 {
 
@@ -25,20 +26,29 @@ namespace A2ProjetBloc2 {
 	{
 		BDD^ mabdd;
 		AAtoCRepository^ articleToCommand;
-		Article^ article;
 		Thread^ reloadThread;
 		String^ sharedSearchedValue = "";
 		Article^ clickedArticle;
 		Command^ command;
+		CartRepository^ cartRepository;
+		String^ commandReference;
 		bool clicked = false;
 		int research = 0;
 	private: System::Windows::Forms::Label^ LbOr;
+
 		   System::Threading::Mutex^ reloadMutex;
 
 	public:
-		AddArticleToCommand(BDD^ mabdd, Command^ command)
+		AddArticleToCommand(BDD^ mabdd, Command^ command, String^ commandReference, bool addOrEdit)
 		{
+			if (addOrEdit) {
+				Diagnostics::Debug::WriteLine(this->command->getIdArticleInCart());
+				this->TboxReferences->Text = command->getIdArticle();
+				this->NudQuantity->Value = command->getQuantity();
+			}
 			this->command = command;
+			this->commandReference = commandReference;
+			this->mabdd = mabdd;
 			InitializeComponent();
 			this->NudQuantity->ValueChanged += gcnew System::EventHandler(this, &AddArticleToCommand::CalculTotal);
 			reloadMutex = gcnew System::Threading::Mutex();
@@ -116,6 +126,7 @@ namespace A2ProjetBloc2 {
 					dgvr->Tag = a;
 					this->DGVArticle->Rows->Add(dgvr);
 				}
+				cartRepository = gcnew CartRepository(mabdd);
 				reloadMutex->ReleaseMutex();
 			}
 		}
@@ -182,7 +193,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->BtnAddCommand->Font = (gcnew System::Drawing::Font(L"Orkney", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
-			   this->BtnAddCommand->Location = System::Drawing::Point(790, 496);
+			   this->BtnAddCommand->Location = System::Drawing::Point(786, 503);
 			   this->BtnAddCommand->Name = L"BtnAddCommand";
 			   this->BtnAddCommand->Size = System::Drawing::Size(111, 42);
 			   this->BtnAddCommand->TabIndex = 22;
@@ -319,9 +330,7 @@ namespace A2ProjetBloc2 {
 			   // 
 			   this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			   this->MaximizeBox = false;
-			   this->ClientSize = System::Drawing::Size(955, 571);
+			   this->ClientSize = System::Drawing::Size(961, 571);
 			   this->Controls->Add(this->LbOr);
 			   this->Controls->Add(this->NudQuantity);
 			   this->Controls->Add(this->LbRefSelected);
@@ -384,9 +393,12 @@ namespace A2ProjetBloc2 {
 	}
 	private: System::Void BtnAddCommand_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->command->setIdArticle(this->clickedArticle->getIdArticle());
-		this->command->setReference("0sfesf");
+		Diagnostics::Debug::WriteLine(this->command->getIdArticle());
+		this->command->setReference(commandReference);
 		this->command->setQuantity(Convert::ToInt32(this->NudQuantity->Value));
+		this->clickedArticle->setStock(this->clickedArticle->getStock() - Convert::ToInt32(this->NudQuantity->Value));
+		cartRepository->editArticle(clickedArticle);
 		this->Close();
 	}
-	};
+};
 }
