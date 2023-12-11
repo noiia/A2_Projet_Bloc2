@@ -125,6 +125,7 @@
     <ClCompile Include="AddStaff.cpp" />
     <ClCompile Include="BDD.cpp" />
     <ClCompile Include="ClientFinder.cpp" />
+    <ClCompile Include="FormVisioCommand.cpp" />
     <ClCompile Include="InstallmentPayement.cpp" />
     <ClCompile Include="ListClient.cpp" />
     <ClCompile Include="CommandHistory.cpp" />
@@ -178,6 +179,10 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="CartRepository.h" />
     <ClInclude Include="CommandAddress.h" />
+    <ClInclude Include="FormVisioCommand.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="FormVisioCommandRepository.h" />
     <ClInclude Include="InstallmentPayement.h" />
     <ClInclude Include="ListArticles.h">
       <FileType>CppForm</FileType>
@@ -248,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientFinder.resx">
       <DependentUpon>ClientFinder.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVisioCommand.resx">
+      <DependentUpon>FormVisioCommand.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListArticles.resx">
       <DependentUpon>ListArticles.h</DependentUpon>

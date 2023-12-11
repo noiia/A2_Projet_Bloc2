@@ -84,6 +84,9 @@
     <ClCompile Include="SalesOverMonth.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="FormVisioCommand.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
@@ -199,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="SalesOverMonth.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="FormVisioCommand.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="FormVisioCommandRepository.h">
+      <Filter>Fichiers d%27en-tête\Repositories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

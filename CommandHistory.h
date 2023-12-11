@@ -9,6 +9,7 @@
 #include "Command.h"
 #include "CHistoryRepository.h"
 #include "PaymentForm.h"
+#include "FormVisioCommand.h"
 namespace A2ProjetBloc2 {
 
 	using namespace System;
@@ -298,6 +299,8 @@ namespace A2ProjetBloc2 {
 		}
 	}
 	private: System::Void DGVOrderHistory_CellMouseDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^ e) {
+		FormVisioCommand^ cartVisioCommand= gcnew FormVisioCommand(mabdd, sharedComHist->getIdCommand());
+		cartVisioCommand->ShowDialog();
 	}
 };
 }
