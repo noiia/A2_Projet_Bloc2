@@ -91,7 +91,7 @@ namespace A2ProjetBloc2 {
 		void reload() {
 			if (reloadMutex != nullptr) {
 				reloadMutex->WaitOne();
-				System::Collections::Generic::List<Address^>^ addresses = addressToCommandRepository->getAddressToCommand(sharedSearchedValue, sharedSearchedValue2, research);
+				System::Collections::Generic::List<Address^>^ addresses = addressToCommandRepository->getAddressToCommand(sharedSearchedValue, sharedSearchedValue2, research, this->command->getIdClient());
 				this->DGVDelivery->Rows->Clear();
 				for each (Address ^ addr in addresses) {
 					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
