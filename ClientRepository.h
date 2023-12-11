@@ -31,7 +31,7 @@ public:
     ab.NameCity AS bil_NameCity, \
     ab.PostalCode AS bil_PostalCode \
     FROM [Client] c \
-    LEFT JOIN [address_Client] acd ON c.ID_Client = acd.ID_Client AND acd.TypeAddress = 'Adresse de livraison' \
+    LEFT JOIN [address_Client] acd ON c.ID_Client = acd.ID_Client AND acd.TypeAddress = 'Adresse de Livraison' \
     LEFT JOIN [Address] ad ON acd.ID_Address = ad.ID_Address \
     LEFT JOIN [address_Client] acb ON c.ID_Client = acb.ID_Client AND acb.TypeAddress = 'Adresse de Facturation' \
     LEFT JOIN [Address] ab ON acb.ID_Address = ab.ID_Address \

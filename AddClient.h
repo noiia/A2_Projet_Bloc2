@@ -533,20 +533,20 @@ namespace A2ProjetBloc2 {
 
 
 			this->client->setTypeAddressDelivery("Adresse de Livraison");
-			this->client->setNameCityDelivery(this->tbCityBilling->Text);
-			this->client->setNumberDelivery(this->TbNumberBilling->Text);
-			this->client->setNameStreetDelivery(this->TbStreetBilling->Text);
-			this->client->setPostalCodeDelivery(this->TbPostalCodeBilling->Text);
-			this->client->setAdditionDelivery(this->tbAdditionBilling->Text);
+			this->client->setNameCityDelivery(this->tbCityDelivery->Text);
+			this->client->setNumberDelivery(this->TbNumberDelivery->Text);
+			this->client->setNameStreetDelivery(this->TbStreetDelivery->Text);
+			this->client->setPostalCodeDelivery(this->TbPostalCodeDelivery->Text);
+			this->client->setAdditionDelivery(this->tbAdditionDelivery->Text);
 
 
 
 			this->client->setTypeAddressBilling("Adresse de Facturation");
-			this->client->setNameCityBilling(this->tbCityDelivery->Text);
-			this->client->setNumberBilling(this->TbNumberDelivery->Text);
-			this->client->setNameStreetBilling(this->TbStreetDelivery->Text);
-			this->client->setPostalCodeBilling(this->TbPostalCodeDelivery->Text);
-			this->client->setAdditionBilling(this->tbAdditionDelivery->Text);
+			this->client->setNameCityBilling(this->tbCityBilling->Text);
+			this->client->setNumberBilling(this->TbNumberBilling->Text);
+			this->client->setNameStreetBilling(this->TbStreetBilling->Text);
+			this->client->setPostalCodeBilling(this->TbPostalCodeBilling->Text);
+			this->client->setAdditionBilling(this->tbAdditionBilling->Text);
 		}
 		else
 		{
@@ -558,19 +558,19 @@ namespace A2ProjetBloc2 {
 			String^ dateString = this->DtpBirthdate->Value.ToString("yyyy-MM-dd");
 			DateTime Birthday = DateTime::ParseExact(dateString, "yyyy-MM-dd", System::Globalization::CultureInfo::InvariantCulture);
 			this->client->setBirthday(Birthday);
-			this->client->setTypeAddressDelivery("Adresse de livraison");
-			this->client->setNameCityDelivery(this->tbCityBilling->Text);
-			this->client->setNumberDelivery(this->TbNumberBilling->Text);
-			this->client->setNameStreetDelivery(this->TbStreetBilling->Text);
-			this->client->setPostalCodeDelivery(this->TbPostalCodeBilling->Text);
-			this->client->setAdditionDelivery(this->tbAdditionBilling->Text);
+			this->client->setTypeAddressDelivery("Adresse de Livraison");
+			this->client->setNameCityDelivery(this->tbCityDelivery->Text);
+			this->client->setNumberDelivery(this->TbNumberDelivery->Text);
+			this->client->setNameStreetDelivery(this->TbStreetDelivery->Text);
+			this->client->setPostalCodeDelivery(this->TbPostalCodeDelivery->Text);
+			this->client->setAdditionDelivery(this->tbAdditionDelivery->Text);
 
 			this->client->setTypeAddressBilling("Adresse de Facturation");
-			this->client->setNameCityBilling(this->tbCityDelivery->Text);
-			this->client->setNumberBilling(this->TbNumberDelivery->Text);
-			this->client->setNameStreetBilling(this->TbStreetDelivery->Text);
-			this->client->setPostalCodeBilling(this->TbPostalCodeDelivery->Text);
-			this->client->setAdditionBilling(this->tbAdditionDelivery->Text);
+			this->client->setNameCityBilling(this->tbCityBilling->Text);
+			this->client->setNumberBilling(this->TbNumberBilling->Text);
+			this->client->setNameStreetBilling(this->TbStreetBilling->Text);
+			this->client->setPostalCodeBilling(this->TbPostalCodeBilling->Text);
+			this->client->setAdditionBilling(this->tbAdditionBilling->Text);
 		}
 
 		this->Close();
