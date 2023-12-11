@@ -36,17 +36,14 @@ namespace A2ProjetBloc2 {
 			this->command = command;
 			this->mabdd = mabdd;
 			InitializeComponent();
-			//
-			//TODO: ajoutez ici le code du constructeur
-			//
 			reloadMutex = gcnew System::Threading::Mutex();
 
 			DGVCart->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			DataGridViewTextBoxColumn^ dgvtbcNameArticle = gcnew DataGridViewTextBoxColumn();
-			dgvtbcNameArticle->Name = "Nom de l'article";
+			dgvtbcNameArticle->Name = "IdArticle";
 			this->DGVCart->Columns->Add(dgvtbcNameArticle);
 			DataGridViewTextBoxColumn^ dgvtbcIdArticle = gcnew DataGridViewTextBoxColumn();
-			dgvtbcIdArticle->Name = "IdArticle";
+			dgvtbcIdArticle->Name = "Nom de l'article";
 			this->DGVCart->Columns->Add(dgvtbcIdArticle);
 			DataGridViewTextBoxColumn^ dgvtbcQuantity = gcnew DataGridViewTextBoxColumn();
 			dgvtbcQuantity->Name = "Quantité";
@@ -67,30 +64,31 @@ namespace A2ProjetBloc2 {
 				System::Collections::Generic::List<Command^>^ articles = cartRepository->getArticle(command->getReference());
 				this->DGVCart->Rows->Clear();
 				for each (Command ^ a in articles) {
-					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
-					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
-					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
-					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
 					Decimal^ PriceATI = Decimal(0);
 					String^ Name;
 					String^ IdArticle;
 					for each (Article ^ art in a->getArticle()) {
+						IdArticle = (String^)art->getIdArticle();
 						PriceATI = (Decimal^)art->getPriceATI();
 						Name = (String^)art->getName();
-						IdArticle = (String^)art->getIdArticle();
 					}
+					DataGridViewRow^ dgvr = gcnew DataGridViewRow();
+					DataGridViewTextBoxCell^ dgvcIdArticle = gcnew DataGridViewTextBoxCell();
+					DataGridViewTextBoxCell^ dgvcName = gcnew DataGridViewTextBoxCell();
+					DataGridViewTextBoxCell^ dgvcPriceATI = gcnew DataGridViewTextBoxCell();
+					DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
+					DataGridViewTextBoxCell^ dgvcTotal = gcnew DataGridViewTextBoxCell();
+
 					dgvcPriceATI->Value = PriceATI;
 					dgvcName->Value = Name;
-					dgvr->Cells->Add(dgvcName);
 					dgvcIdArticle->Value = IdArticle;
-					dgvr->Cells->Add(dgvcIdArticle);
-					DataGridViewTextBoxCell^ dgvcQuantity = gcnew DataGridViewTextBoxCell();
 					dgvcQuantity->Value = a->getQuantity();
+					dgvcTotal->Value = a->getQuantity() * Convert::ToSingle(PriceATI);
+
+					dgvr->Cells->Add(dgvcIdArticle);
+					dgvr->Cells->Add(dgvcName);
 					dgvr->Cells->Add(dgvcQuantity);
 					dgvr->Cells->Add(dgvcPriceATI);
-
-					DataGridViewTextBoxCell^ dgvcTotal = gcnew DataGridViewTextBoxCell();
-					dgvcTotal->Value = a->getQuantity() * Convert::ToSingle(PriceATI);
 					dgvr->Cells->Add(dgvcTotal);
 
 					dgvr->Tag = a;

@@ -1,5 +1,7 @@
 #pragma once
+#include "address.h"
 using namespace System;
+using namespace System::Collections::Generic;
 
 ref class Staff
 {
@@ -7,10 +9,16 @@ private:
 	int ID_Staff;
 	String^ lastName;
 	String^ firstName;
-	String^ hiringDate;
-	String^ Supervisor;
-	String^ address;
+	DateTime^ hiringDate;
+	int ID_Supervisor;
 	bool del;
+
+	int ID_Address;
+	String^ Number;
+	String^ Addition;
+	String^ NameStreet;
+	String^ NameCity;
+	String^ PostalCode;
 
 public:
 	void setIdStaff(int idStaff) {
@@ -33,25 +41,18 @@ public:
 		return this->firstName;
 	}
 
-	void setHiringDate(String^ hiringDate) {
+	void setHiringDate(DateTime^ hiringDate) {
 		this->hiringDate = hiringDate;
 	}
-	String^ getHiringDate() {
+	DateTime^ getHiringDate() {
 		return this->hiringDate;
 	}
 
-	void setSupervisor(String^ Supervisor) {
-		this->Supervisor = Supervisor;
+	void setIdSupervisor(int ID_Supervisor) {
+		this->ID_Supervisor = ID_Supervisor;
 	}
-	String^ getSupervisor() {
-		return this->Supervisor;
-	}
-
-	void setAddress(String^ address) {
-		this->address = address;
-	}
-	String^ getAddress() {
-		return this->address;
+	int getIdSupervisor() {
+		return this->ID_Supervisor;
 	}
 
 	void setDel(bool deleted) {
@@ -61,7 +62,51 @@ public:
 		return this->del;
 	}
 
-	String^ ToString() override {
-		return " Staff id: " + this->ID_Staff + "lastName: " + this->lastName + "firstName" + this->firstName;
+	void setID_Address(int ID_Address) {
+		this->ID_Address = ID_Address;
 	}
+	int getID_Address() {
+		return this->ID_Address;
+	}
+
+	void setNumber(String^ Number) {
+		this->Number = Number;
+	}
+
+	String^ getNumber() {
+		return this->Number;
+	}
+
+	void setAddition(String^ Addition) {
+		this->Addition = Addition;
+	}
+
+	String^ getAddition() {
+		return this->Addition;
+	}
+
+	void setNameStreet(String^ NameStreet) {
+		this->NameStreet = NameStreet;
+	}
+
+	String^ getNameStreet() {
+		return this->NameStreet;
+	}
+
+	void setNameCity(String^ NameCity) {
+		this->NameCity = NameCity;
+	}
+
+	String^ getNameCity() {
+		return this->NameCity;
+	}
+
+	void setPostalCode(String^ PostalCode) {
+		this->PostalCode = PostalCode;
+	}
+
+	String^ getPostalCode() {
+		return this->PostalCode;
+	}
+
 };

@@ -1,5 +1,8 @@
 #pragma once
+#include "address.h"
 using namespace System;
+using namespace System::Collections::Generic;
+
 
 ref class Client
 {
@@ -8,10 +11,25 @@ private:
 	int ID_Client;
 	String^ firstName;
 	String^ lastName;
+	String^ companyName;
 	DateTime^ Birthday;
 	String^ TypeClient;
 	bool del;
+	int ID_AddressDelivery;
+	int ID_AddressBilling;
 
+	String^ NumberDelivery;
+	String^ AdditionDelivery;
+	String^ NameStreetDelivery;
+	String^ NameCityDelivery;
+	String^ PostalCodeDelivery;
+	String^ NumberBilling;
+	String^ AdditionBilling;
+	String^ NameStreetBilling;
+	String^ NameCityBilling;
+	String^ PostalCodeBilling;
+	String^ TypeAddressDelivery;
+	String^ TypeAddressBilling;
 
 public:
 	void setID_Client(int ID_Client) {
@@ -31,7 +49,14 @@ public:
 	}
 	String^ getLastName() {
 		return this->lastName;
+	}	
+	void setCompanyName(String^ companyName) {
+		this->companyName = companyName;
 	}
+	String^ getCompanyName() {
+		return this->companyName;
+	}
+
 	void setBirthday(DateTime^ Birthday) {
 		this->Birthday = Birthday;
 	}
@@ -49,5 +74,92 @@ public:
 	}
 	bool getDel() {
 		return this->del;
+	}
+	void setID_AddressDelivery(int ID_AddressDelivery) {
+		this->ID_AddressDelivery = ID_AddressDelivery;
+	}
+	int getID_AddressDelivery() {
+		return this->ID_AddressDelivery;
+	}
+	void setID_AddressBilling(int ID_AddressBilling) {
+		this->ID_AddressBilling = ID_AddressBilling;
+	}
+	int getID_AddressBilling() {
+		return this->ID_AddressBilling;
+	}
+
+
+	void setNumberDelivery(String^ NumberDelivery) {
+		this->NumberDelivery = NumberDelivery;
+	}
+	String^ getNumberDelivery() {
+		return this->NumberDelivery;
+	}
+	void setAdditionDelivery(String^ AdditionDelivery) {
+		this->AdditionDelivery = AdditionDelivery;
+	}
+	String^ getAdditionDelivery() {
+		return this->AdditionDelivery;
+	}
+	void setNameStreetDelivery(String^ NameStreetDelivery) {
+		this->NameStreetDelivery = NameStreetDelivery;
+	}
+	String^ getNameStreetDelivery() {
+		return this->NameStreetDelivery;
+	}
+	void setNameCityDelivery(String^ NameCityDelivery) {
+		this->NameCityDelivery = NameCityDelivery;
+	}
+	String^ getNameCityDelivery() {
+		return this->NameCityDelivery;
+	}
+	void setPostalCodeDelivery(String^ PostalCodeDelivery) {
+		this->PostalCodeDelivery = PostalCodeDelivery;
+	}
+	String^ getPostalCodeDelivery() {
+		return this->PostalCodeDelivery;
+	}
+
+	void setNumberBilling(String^ NumberBilling) {
+		this->NumberBilling = NumberBilling;
+	}
+	String^ getNumberBilling() {
+		return this->NumberBilling;
+	}
+	void setAdditionBilling(String^ AdditionBilling) {
+		this->AdditionBilling = AdditionBilling;
+	}
+	String^ getAdditionBilling() {
+		return this->AdditionBilling;
+	}
+	void setNameStreetBilling(String^ NameStreetBilling) {
+		this->NameStreetBilling = NameStreetBilling;
+	}
+	String^ getNameStreetBilling() {
+		return this->NameStreetBilling;
+	}
+	void setNameCityBilling(String^ NameCityBilling) {
+		this->NameCityBilling = NameCityBilling;
+	}
+	String^ getNameCityBilling() {
+		return this->NameCityBilling;
+	}
+	void setPostalCodeBilling(String^ PostalCodeBilling) {
+		this->PostalCodeBilling = PostalCodeBilling;
+	}
+	String^ getPostalCodeBilling() {
+		return this->PostalCodeBilling;
+	}
+	void setTypeAddressDelivery(String^ TypeAddressDelivery) {
+		this->TypeAddressDelivery = TypeAddressDelivery;
+	}
+	String^ getTypeAddressDelivery() {
+		return this->TypeAddressDelivery;
+	}
+	void setTypeAddressBilling(String^ TypeAddressBilling) {
+		this->TypeAddressBilling = TypeAddressBilling;
+	}
+	String^ getTypeAddressBilling() {
+		return this->TypeAddressBilling;
 	}
 };

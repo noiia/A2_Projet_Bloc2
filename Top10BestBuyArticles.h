@@ -26,7 +26,7 @@ namespace A2ProjetBloc2 {
 		void LoadData()
 		{
 
-			String^ query = "SELECT TOP 10 ID_Article, NameArticle, SUM(QuantityArticle) AS QuantiteVendue FROM Article_Order GROUP BY ID_Article, NameArticle ORDER BY QuantiteVendue DESC;";
+			String^ query = "SELECT TOP 10 ID_Article, SUM(QuantityArticle) AS QuantiteVendue FROM Article_Order GROUP BY ID_Article, ID_Article ORDER BY QuantiteVendue DESC";
 
 			DataTable^ dt = mabdd->executeQuery(query)->Tables[0];
 
