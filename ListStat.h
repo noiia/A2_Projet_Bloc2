@@ -90,7 +90,6 @@ namespace A2ProjetBloc2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ListStats::typeid));
 			this->Title = (gcnew System::Windows::Forms::Label());
 			this->LbAverageCart = (gcnew System::Windows::Forms::Label());
 			this->DGVTop10LessBuyArticles = (gcnew System::Windows::Forms::DataGridView());
@@ -250,6 +249,7 @@ namespace A2ProjetBloc2 {
 			this->Controls->Add(this->Title);
 			this->Name = L"ListStats";
 			this->Text = L"Statistiques";
+			this->Load += gcnew System::EventHandler(this, &ListStats::ListStats_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->DGVTop10LessBuyArticles))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -278,5 +278,7 @@ namespace A2ProjetBloc2 {
 		SalesOverMonth^ salesOverMonthForm = gcnew SalesOverMonth(mabdd);
 		salesOverMonthForm->ShowDialog();
 	}
-	};
+	private: System::Void ListStats_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }
