@@ -15,8 +15,8 @@ private:
 public:
 	AddressToCommandRepository(BDD^ bdd) :bdd(bdd) {
 	}
-	List<Address^>^ getAddressToCommand(String^ researchValue, String^ researchValue2, int research) {
-		DataSet^ ds = bdd->executeQuery("SELECT * FROM [Address] " + (research == 1 ? " WHERE ID_Address = '" + researchValue + "' AND Del = 0" : (research == 2 ? " WHERE PostalCode = '" + researchValue + "' AND Del = 0" : (research == 3 ? " WHERE NameStreet = '" + researchValue2 + "' AND Del = 0" : (research == 4 ? " WHERE PostalCode = '" + researchValue + "' AND NameStreet = '" + researchValue2 + "' AND Del = 0" : " WHERE Del = 0")))));
+	List<Address^>^ getAddressToCommand(String^ researchValue, String^ researchValue2, int research, int ID_Client) {
+		DataSet^ ds = bdd->executeQuery("SELECT adr.*, acd.* FROM [Address] adr LEFT JOIN [address_Client] acd ON acd.ID_Address = adr.ID_Address" + (research == 1 ? " WHERE ID_Address = '" + researchValue + "' AND Del = 0" : (research == 2 ? " WHERE PostalCode = '" + researchValue + "' AND Del = 0" : (research == 3 ? " WHERE NameStreet = '" + researchValue2 + "' AND Del = 0" : (research == 4 ? " WHERE PostalCode = '" + researchValue + "' AND NameStreet = '" + researchValue2 + "' AND Del = 0" : " WHERE Del = 0 AND ID_Client = '" + ID_Client + "'")))));
 
 		List<Address^>^ list = gcnew List<Address^>();
 
